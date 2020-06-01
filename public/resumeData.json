@@ -1,0 +1,136 @@
+{
+  "main": {
+    "name":"Ferry Hinardi",
+    "occupation":"(Software Engineering)",
+    "description":"",
+    "image":"profilepic.jpg",
+    "bio":"Ferry Hinardi is a Software Engineer at Traveloka, I'm doing I'm doing some task regarding one of product in Traveloka apps using React and React Native. Before that, i ever become contribution of create some apps: <a href='http://jaztip.com'>Jaztip Apps</a>, <a href='www.maideasy.my'>Maideasy Apps</a>. I'd like doing research some new technology to improve myself. In the end, <i>Technology is a tool that helps people to make some tasks simple and practical.</i>",
+    "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
+    "email": "hinardi93@gmail.com",
+    "phone": "0819-58020882",
+    "address":{
+      "street": "Jl.Perumahan Taman Ratu Indah blk.M2 no. 33, RT.3/RW.4",
+      "city": "Jakarta",
+      "state": "West Jakarta",
+      "zip": "11510"
+    },
+    "website": "http://www.ferryhinardi.com",
+    "resumedownload":"https://drive.google.com/file/d/1v6O21CWWGx7pUQxy56HuCepnLTigjxQ5/view?usp=sharing",
+    "social":[
+      {
+        "name":"facebook",
+        "url":"http://facebook.com/ferry.hinardi",
+        "className":"fa fa-facebook"
+      },
+      {
+        "name":"twitter",
+        "url":"https://twitter.com/FerryHinardi",
+        "className":"fa fa-twitter"
+      },
+      {
+        "name":"linkedin",
+        "url":"https://www.linkedin.com/in/ferryhinardi",
+        "className":"fa fa-linkedin"
+      },
+      {
+        "name":"instagram",
+        "url":"https://www.instagram.com/ferryhinardi",
+        "className":"fa fa-instagram"
+      },
+      {
+        "name":"github",
+        "url":"https://github.com/ferryhinardi",
+        "className":"fa fa-github"
+      }
+    ]
+  },
+  "resume":{
+    "skillmessage":"Here you can create a short write-up of your skills to show off to employers",
+    "education":[
+      {
+        "school":"University?",
+        "degree":"Bina Nusantara",
+        "graduated":"April 2015",
+        "description":"In Binus, I'm join IT Department which help me to face in workplace environment. At that time, i learn how to manage time between school and work."
+      },
+      {
+        "school":"School #1 Maybe College?",
+        "degree":"What did you study 101",
+        "graduated":"March 2003",
+        "description":"Describe your experience at school, what you learned, what useful skills you have acquired etc."
+      }
+    ],
+    "work":[
+      {
+        "company":"Traveloka",
+        "title":"Software Engineer - React Native",
+        "years":"April 2019 - Present",
+        "description":"Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know."
+      },
+      {
+        "company":"Sale Stock",
+        "title":"Front end Engineer",
+        "years":"Juni 2016 - July 2018",
+        "description":"Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know."
+      }
+    ],
+    "skills":[
+      {
+        "name":"Git",
+        "level":"70%"
+      },
+      {
+        "name":"Photoshop",
+        "level":"55%"
+      },
+      {
+        "name":"ReactJs",
+        "level":"80%"
+      },
+      {
+        "name":"CSS",
+        "level":"90%"
+      },
+      {
+        "name":"HTML5",
+        "level":"80%"
+      },
+      {
+        "name":"React Native",
+        "level":"85%"
+      },
+      {
+        "name":"My SQL",
+        "level":"80%"
+      }
+    ]
+  },
+  "portfolio":{
+    "projects": [
+      {
+        "title":"Canadian Wanderlust",
+        "category":"My Travel Blog for my post-university travels",
+        "image":"canadian-wanderlust.jpg",
+        "url":"https://www.canadianwanderlust.com"
+      },
+      {
+        "title":"Fury Fighting Gear",
+        "category":"(offline now) A fighting gear company I started",
+        "image":"fury-fighting-gear.jpg",
+        "url":"http://www.timbakerdev.com"
+      }
+    ]
+  },
+  "testimonials":{
+    "testimonials":[
+      {
+        "text":"Here you should write some nice things that someone has said about you. No lies though, employers can tell when you are lying.",
+        "user":"Kareem Abdul Jabbar"
+      },
+      {
+        "text":"That Tim Baker must be one of the most brilliant developers I've ever met! It is amazing that nobody has hired him yet. Hey you, you should hire this guy, he may be fresh out of University and have zero on the job experience but I am confident that he will be one of your best developers in no time!",
+        "user":"Steve Wozniak... impersonator"
+      }
+    ]
+  }
+}
