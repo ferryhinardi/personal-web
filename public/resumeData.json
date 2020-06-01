@@ -45,7 +45,7 @@
     ]
   },
   "resume":{
-    "skillmessage":"Here you can create a short write-up of your skills to show off to employers",
+    "skillmessage":"Basic ability that build new portfolio.",
     "education":[
       {
         "school":"University?",
@@ -59,13 +59,13 @@
         "company":"Traveloka",
         "title":"Software Engineer - React Native",
         "years":"April 2019 - Present",
-        "description":"Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know."
+        "description":"I'm worked to create new product that recently launch (Visa product). I'm develop using React Native and React Js for apps and web."
       },
       {
         "company":"Sale Stock",
         "title":"Front end Engineer",
         "years":"Juni 2016 - July 2018",
-        "description":"Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know."
+        "description":"I'm worked to create new warehouse management system for this company, build new system for new startup company to increase optimization for delivery and stocking. I'm using React Js to build this system. Apart from that, I'm also contribute in customer facing apps that customer can order product from this apps."
       }
     ],
     "skills":[
@@ -74,20 +74,20 @@
         "level":"70%"
       },
       {
-        "name":"Photoshop",
-        "level":"55%"
+        "name":"Design",
+        "level":"60%"
       },
       {
         "name":"ReactJs",
-        "level":"80%"
-      },
-      {
-        "name":"CSS",
         "level":"90%"
       },
       {
+        "name":"CSS",
+        "level":"75%"
+      },
+      {
         "name":"HTML5",
-        "level":"80%"
+        "level":"75%"
       },
       {
         "name":"React Native",
