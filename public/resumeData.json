@@ -2,7 +2,7 @@
   "main": {
     "name":"Ferry Hinardi",
     "occupation":"(Software Engineering)",
-    "description":"",
+    "description":"There are so many problem in the world and technology help to solve them. A person who have process, logic, and problem solving ability.",
     "image":"profilepic.jpg",
     "bio":"Ferry Hinardi is a Software Engineer at Traveloka, I'm doing I'm doing some task regarding one of product in Traveloka apps using React and React Native. Before that, i ever become contribution of create some apps: <a href='http://jaztip.com'>Jaztip Apps</a>, <a href='www.maideasy.my'>Maideasy Apps</a>. I'd like doing research some new technology to improve myself. In the end, <i>Technology is a tool that helps people to make some tasks simple and practical.</i>",
     "contactmessage":"Here is where you should write your message to readers to have them get in contact with you.",
@@ -52,12 +52,6 @@
         "degree":"Bina Nusantara",
         "graduated":"April 2015",
         "description":"In Binus, I'm join IT Department which help me to face in workplace environment. At that time, i learn how to manage time between school and work."
-      },
-      {
-        "school":"School #1 Maybe College?",
-        "degree":"What did you study 101",
-        "graduated":"March 2003",
-        "description":"Describe your experience at school, what you learned, what useful skills you have acquired etc."
       }
     ],
     "work":[
@@ -108,28 +102,28 @@
   "portfolio":{
     "projects": [
       {
-        "title":"Canadian Wanderlust",
-        "category":"My Travel Blog for my post-university travels",
-        "image":"canadian-wanderlust.jpg",
-        "url":"https://www.canadianwanderlust.com"
+        "title":"Jaztip",
+        "category":"The social-commerce marketplace in Indonesia. Buying and selling application where you can find seller info as well as requests for purchase of goods, and directly connect to the chat application of your choice",
+        "image":"jaztip.png",
+        "url":"https://www.jaztip.com"
       },
       {
-        "title":"Fury Fighting Gear",
-        "category":"(offline now) A fighting gear company I started",
-        "image":"fury-fighting-gear.jpg",
-        "url":"http://www.timbakerdev.com"
+        "title":"Maideasy",
+        "category":"Maideasy is a homegrown Malaysian company that seeks to revolutionise the way we book part-time cleaners.",
+        "image":"maideasy.png",
+        "url":"https://www.maideasy.my"
       }
     ]
   },
   "testimonials":{
     "testimonials":[
       {
-        "text":"Here you should write some nice things that someone has said about you. No lies though, employers can tell when you are lying.",
-        "user":"Kareem Abdul Jabbar"
+        "text":"It's not the technology that changes the world. It's the people using technology that changes the world.",
+        "user":"Jack Ma"
       },
       {
-        "text":"That Tim Baker must be one of the most brilliant developers I've ever met! It is amazing that nobody has hired him yet. Hey you, you should hire this guy, he may be fresh out of University and have zero on the job experience but I am confident that he will be one of your best developers in no time!",
-        "user":"Steve Wozniak... impersonator"
+        "text":"Technology is just a tool. In terms of getting the kids working together and motivating them. The teacher is the most important.",
+        "user":"Bill Gates"
       }
     ]
   }
