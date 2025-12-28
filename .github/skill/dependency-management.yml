@@ -1,0 +1,140 @@
+name: Dependency Management
+description: Monitor and update project dependencies safely
+
+trigger:
+  - on_pr_comment: "/update-deps"
+  - on_schedule: "0 9 * * 1" # Every Monday 9am UTC
+  - on_security_alert: true
+
+steps:
+  - name: Audit Dependencies
+    action: audit
+    config:
+      package_manager: pnpm
+      check:
+        - security_vulnerabilities
+        - outdated_packages
+        - deprecated_packages
+    outputs:
+      - vulnerabilities
+      - outdated
+      - deprecated
+
+  - name: Categorize Updates
+    action: categorize
+    inputs:
+      - outdated
+    config:
+      categories:
+        - critical: # Security fixes
+            priority: high
+            auto_merge: false
+        - major: # Breaking changes
+            priority: medium
+            auto_merge: false
+        - minor: # New features
+            priority: medium
+            auto_merge: true_if_tests_pass
+        - patch: # Bug fixes
+            priority: low
+            auto_merge: true_if_tests_pass
+    outputs:
+      - categorized_updates
+
+  - name: Create Update Branches
+    action: create_branches
+    inputs:
+      - categorized_updates
+    config:
+      branch_prefix: chore/update-
+      separate_prs: true
+      group_by: category
+
+  - name: Run Tests
+    action: test
+    config:
+      commands:
+        - pnpm exec tsc --noEmit
+        - pnpm run build
+      timeout_minutes: 10
+    outputs:
+      - test_results
+
+  - name: Generate PR Description
+    action: generate_pr
+    inputs:
+      - categorized_updates
+      - test_results
+    config:
+      template: |
+        ## Dependency Update: {{category}}
+        
+        ### Updated Packages
+        {{#each packages}}
+        - **{{name}}**: {{old_version}} → {{new_version}}
+          {{#if breaking_changes}}
+          ⚠️ Breaking changes:
+          {{breaking_changes}}
+          {{/if}}
+        {{/each}}
+        
+        ### Testing
+        - [{{test_status}}] Type check
+        - [{{build_status}}] Build
+        
+        ### Security
+        {{#if fixes_vulnerabilities}}
+        🔒 Fixes security vulnerabilities:
+        {{vulnerabilities_fixed}}
+        {{else}}
+        ✅ No security issues
+        {{/if}}
+        
+        ### Impact Assessment
+        - Bundle size change: {{bundle_size_diff}} KB
+        - Breaking changes: {{has_breaking_changes}}
+        - Requires manual review: {{needs_review}}
+        
+        ### Checklist
+        - [x] Dependencies updated
+        - [x] Type check passed
+        - [x] Build successful
+        - [ ] Tested locally ({{#if auto_mergeable}}optional{{else}}required{{/if}})
+        
+        Co-Authored-By: Warp <agent@warp.dev>
+
+  - name: Create Pull Request
+    action: github_pr
+    inputs:
+      - pr_description
+      - updated_files
+    config:
+      title: "chore(deps): {{category}} dependency updates"
+      labels:
+        - dependencies
+        - automated
+      reviewers:
+        - ferryhinardi
+      auto_merge: "{{auto_mergeable}}"
+
+notifications:
+  slack:
+    on_security_vulnerability: true
+    on_breaking_change: true
+    on_failed_update: true
+  github:
+    on_new_pr: true
+    on_merge: true
+
+safety_checks:
+  - never_update:
+      - react # Wait for manual approval
+      - typescript # Wait for manual approval
+  - require_manual_review_if:
+      - has_breaking_changes
+      - fixes_critical_vulnerability
+      - updates_peer_dependencies
+  - rollback_if:
+      - build_fails
+      - tests_fail
+      - bundle_size_increase_gt: 30

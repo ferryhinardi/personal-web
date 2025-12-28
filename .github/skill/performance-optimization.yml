@@ -1,0 +1,101 @@
+name: Performance Optimization
+description: Analyze and optimize website performance metrics
+
+trigger:
+  - on_pr_comment: "/optimize-performance"
+  - on_schedule: weekly
+  - on_lighthouse_regression: true
+
+steps:
+  - name: Analyze Bundle Size
+    action: analyze_bundle
+    config:
+      threshold_kb: 220
+      alert_on_increase_kb: 20
+      breakdown: true
+    outputs:
+      - current_size
+      - size_change
+      - largest_chunks
+
+  - name: Run Lighthouse Audit
+    action: lighthouse
+    config:
+      urls:
+        - http://localhost:4173
+      runs: 3
+      thresholds:
+        performance: 90
+        accessibility: 95
+        best-practices: 90
+        seo: 95
+    outputs:
+      - performance_score
+      - accessibility_score
+      - recommendations
+
+  - name: Analyze Dependencies
+    action: analyze_deps
+    config:
+      check_for:
+        - duplicate_packages
+        - unused_dependencies
+        - outdated_packages
+        - large_dependencies
+      size_threshold_kb: 50
+    outputs:
+      - duplicates
+      - unused
+      - large_deps
+
+  - name: Suggest Optimizations
+    action: generate_report
+    inputs:
+      - bundle_analysis
+      - lighthouse_results
+      - dependency_analysis
+    config:
+      format: markdown
+      include:
+        - code_splitting_opportunities
+        - lazy_loading_candidates
+        - dependency_replacements
+        - caching_strategies
+    outputs:
+      - optimization_report
+
+  - name: Create Issue or Comment
+    action: github_comment
+    condition: has_recommendations
+    inputs:
+      - optimization_report
+    config:
+      template: |
+        ## 🚀 Performance Optimization Report
+        
+        ### Bundle Analysis
+        - Current size: {{current_size}} KB
+        - Change from last build: {{size_change}} KB
+        - Largest chunks: {{largest_chunks}}
+        
+        ### Lighthouse Scores
+        - Performance: {{performance_score}}/100
+        - Accessibility: {{accessibility_score}}/100
+        
+        ### Recommendations
+        {{recommendations}}
+        
+        ### Suggested Actions
+        {{optimization_suggestions}}
+
+metrics:
+  track:
+    - bundle_size_kb
+    - lighthouse_performance
+    - lighthouse_accessibility
+    - time_to_interactive_ms
+    - first_contentful_paint_ms
+  alert_on_regression:
+    - bundle_size_increase: 10%
+    - performance_decrease: 5
+    - tti_increase: 500

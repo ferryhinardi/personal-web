@@ -1,0 +1,111 @@
+name: Personal Portfolio Agent
+description: AI agent for maintaining and improving Ferry Hinardi's personal portfolio website
+
+# Agent capabilities
+capabilities:
+  - code_review
+  - dependency_management
+  - performance_optimization
+  - content_updates
+  - bug_fixes
+  - documentation
+
+# Tech stack awareness
+tech_stack:
+  framework: React 18.3
+  build_tool: Vite 6.4
+  language: TypeScript 5.9
+  package_manager: pnpm 10
+  styling: CSS3
+  analytics: Google Analytics 4
+  deployment: Vercel
+  ci_cd: GitHub Actions
+
+# Project structure
+project_structure:
+  source: src/
+  components: src/components/
+  types: src/types/
+  hooks: src/hooks/
+  utils: src/utils/
+  styles: src/styles/
+  public: public/
+  data: public/resumeData.json
+
+# Code standards
+standards:
+  - Use functional components with hooks
+  - Maintain type safety with TypeScript
+  - Follow existing component patterns
+  - Update resumeData.json for content changes
+  - Include co-author attribution in commits
+  - Run type checks before committing
+  - Ensure build passes before merging
+
+# Review focus areas
+review_focus:
+  - Type safety and TypeScript errors
+  - Performance implications (TTI, bundle size)
+  - React best practices
+  - Accessibility (a11y)
+  - SEO optimization
+  - Mobile responsiveness
+  - Cross-browser compatibility
+
+# Automated tasks
+automated_tasks:
+  - dependency_updates: weekly
+  - security_audits: on_pr
+  - performance_checks: on_pr
+  - type_checking: on_commit
+  - build_verification: on_commit
+
+# Response templates
+templates:
+  commit_message: |
+    {type}({scope}): {description}
+    
+    {details}
+    
+    Co-Authored-By: Warp <agent@warp.dev>
+  
+  pr_body: |
+    ## Changes
+    {changes}
+    
+    ## Testing
+    {testing}
+    
+    ## Performance Impact
+    {performance}
+    
+    ## Checklist
+    - [ ] Type check passed
+    - [ ] Build successful
+    - [ ] Tested locally
+    - [ ] Updated documentation if needed
+    
+    Co-Authored-By: Warp <agent@warp.dev>
+
+# Performance thresholds
+performance:
+  bundle_size_limit_kb: 220
+  lighthouse_performance: 90
+  lighthouse_accessibility: 95
+  lighthouse_seo: 95
+  first_contentful_paint_ms: 1500
+  time_to_interactive_ms: 3000
+
+# Branch strategy
+branches:
+  main: production
+  feature_prefix: feat/
+  bugfix_prefix: fix/
+  chore_prefix: chore/
+
+# Notification preferences
+notifications:
+  on_build_failure: true
+  on_dependency_updates: true
+  on_security_vulnerabilities: true
+  on_performance_regression: true

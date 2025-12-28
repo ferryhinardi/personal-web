@@ -1,0 +1,70 @@
+name: Dependency Update
+
+on:
+  schedule:
+    # Run every Monday at 9am UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update dependencies
+        run: pnpm update --latest
+
+      - name: Run type check
+        run: pnpm exec tsc --noEmit
+
+      - name: Run build
+        run: pnpm run build
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore(deps): update dependencies'
+          title: 'chore(deps): update dependencies'
+          body: |
+            ## Automated Dependency Update
+            
+            This PR updates all dependencies to their latest versions.
+            
+            ### Changes
+            - Updated all dependencies to latest versions
+            - Type check passed ✅
+            - Build passed ✅
+            
+            ### Next Steps
+            1. Review the changes
+            2. Test locally if needed
+            3. Merge if all checks pass
+            
+            Co-Authored-By: Warp <agent@warp.dev>
+          branch: chore/update-dependencies
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
