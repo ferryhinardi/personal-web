@@ -109,6 +109,6 @@ jobs:
         with:
           urls: |
             http://localhost:4173
-          uploadArtifacts: true
+          uploadArtifacts: false
           temporaryPublicStorage: true
           runs: 3
