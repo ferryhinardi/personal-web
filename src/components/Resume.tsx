@@ -17,7 +17,7 @@ export default function Resume({ data }: ResumeProps) {
   const { skillmessage, education, work, skills } = data;
 
   return (
-    <section id="resume" className="section-padding bg-white dark:bg-slate-900">
+    <section id="resume" className="section-padding bg-gray-50 dark:bg-slate-800/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
