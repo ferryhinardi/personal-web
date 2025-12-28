@@ -89,11 +89,20 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-output
           path: build/
+
+      - name: Start preview server
+        run: pnpm run preview &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:4173 --timeout 30000
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
@@ -108,7 +117,7 @@ jobs:
     name: Deploy Preview (Vercel)
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: build
+    needs: lint-and-typecheck
     if: github.event_name == 'pull_request'
     environment:
       name: preview
@@ -117,12 +126,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: build/
 
       - name: Deploy to Vercel
         id: deploy
@@ -139,7 +142,7 @@ jobs:
     name: Deploy Production (Vercel)
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: build
+    needs: lint-and-typecheck
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     environment:
       name: production
@@ -148,12 +151,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: build/
 
       - name: Deploy to Vercel Production
         uses: amondnet/vercel-action@v25

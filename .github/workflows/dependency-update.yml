@@ -32,8 +32,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Update dependencies
-        run: pnpm update --latest
+      - name: Check for outdated dependencies
+        id: check-outdated
+        run: |
+          echo "Checking for outdated dependencies..."
+          pnpm outdated --format json > outdated.json || true
+          cat outdated.json
+
+      - name: Update patch and minor versions only
+        run: |
+          echo "Updating patch and minor versions (safer than --latest)"
+          pnpm update
 
       - name: Run type check
         run: pnpm exec tsc --noEmit
@@ -50,17 +59,21 @@ jobs:
           body: |
             ## Automated Dependency Update
             
-            This PR updates all dependencies to their latest versions.
+            This PR updates patch and minor versions of dependencies (major updates excluded for safety).
             
             ### Changes
-            - Updated all dependencies to latest versions
+            - Updated dependencies within their semver ranges
             - Type check passed ✅
             - Build passed ✅
             
             ### Next Steps
             1. Review the changes
             2. Test locally if needed
-            3. Merge if all checks pass
+            3. Check for any major version updates that should be done separately
+            4. Merge if all checks pass
+            
+            > **Note:** Major version updates are excluded to prevent breaking changes. 
+            > Review major updates manually using `pnpm outdated` and update selectively.
             
             Co-Authored-By: Warp <agent@warp.dev>
           branch: chore/update-dependencies

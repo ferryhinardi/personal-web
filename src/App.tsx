@@ -15,6 +15,9 @@ function App() {
 
   useEffect(() => {
     // Initialize Google Analytics
+    // TODO: Replace with GA4 measurement ID (format: G-XXXXXXXXXX)
+    // The current UA-* ID is for legacy Universal Analytics which is deprecated
+    // Get your GA4 measurement ID from: https://analytics.google.com/analytics/web/ > Admin > Data Streams
     initGA('UA-78972539-1');
     logPageView();
   }, []);

@@ -9,7 +9,9 @@ export function useResumeData() {
   useEffect(() => {
     fetch('/resumeData.json')
       .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch resume data');
+        if (!res.ok) {
+          throw new Error(`Failed to fetch resume data: ${res.status} ${res.statusText}`);
+        }
         return res.json();
       })
       .then(data => {
