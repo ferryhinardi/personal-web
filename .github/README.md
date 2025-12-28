@@ -33,8 +33,8 @@ Main CI/CD pipeline that runs on every push and pull request.
 5. **Deploy Production** - Deploys to production (main branch only)
 
 **Triggers:**
-- Push to `main` or `feat/vite-migration`
-- Pull requests to `main`
+- Push to `master` or `feat/vite-migration`
+- Pull requests to `master`
 
 **Required Secrets:**
 - `VERCEL_TOKEN` - Vercel deployment token
@@ -198,7 +198,7 @@ Add these comments to PRs to trigger skills:
 
 ## Branch Strategy
 
-- `main` - Production branch
+- `master` - Production branch
 - `feat/*` - New features
 - `fix/*` - Bug fixes
 - `chore/*` - Maintenance tasks

@@ -98,7 +98,7 @@ performance:
 
 # Branch strategy
 branches:
-  main: production
+  master: production
   feature_prefix: feat/
   bugfix_prefix: fix/
   chore_prefix: chore/

@@ -44,7 +44,7 @@ This is a React 18 + TypeScript + Vite project using:
 - **Components**: Functional components with hooks only
 - **Styling**: CSS3 (legacy stylesheets in src/styles/)
 - **Data**: JSON-driven from public/resumeData.json
-- **Deployment**: Vercel (automatic from main branch)
+- **Deployment**: Vercel (automatic from master branch)
 - **CI/CD**: GitHub Actions
 
 ## Code Standards
