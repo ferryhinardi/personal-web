@@ -7,6 +7,8 @@ export function useResumeData() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     fetch('/resumeData.json')
       .then(res => {
         if (!res.ok) {
@@ -15,13 +17,21 @@ export function useResumeData() {
         return res.json();
       })
       .then(data => {
-        setData(data);
-        setLoading(false);
+        if (!cancelled) {
+          setData(data);
+          setLoading(false);
+        }
       })
       .catch(err => {
-        setError(err);
-        setLoading(false);
+        if (!cancelled) {
+          setError(err);
+          setLoading(false);
+        }
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { data, loading, error };

@@ -8,18 +8,20 @@ import Contact from '@components/Contact';
 import Testimonials from '@components/Testimonials';
 import Portfolio from '@components/Portfolio';
 import { useResumeData } from '@/hooks/useResumeData';
-import { initGA, logPageView } from '@/utils/analytics';
+// import { initGA, logPageView } from '@/utils/analytics';
 
 function App() {
   const { data: resumeData, loading, error } = useResumeData();
 
   useEffect(() => {
-    // Initialize Google Analytics
+    // Google Analytics disabled until GA4 is configured
     // TODO: Replace with GA4 measurement ID (format: G-XXXXXXXXXX)
-    // The current UA-* ID is for legacy Universal Analytics which is deprecated
+    // The current UA-* ID is for legacy Universal Analytics (deprecated July 2023)
     // Get your GA4 measurement ID from: https://analytics.google.com/analytics/web/ > Admin > Data Streams
-    initGA('UA-78972539-1');
-    logPageView();
+    // Then uncomment the lines below:
+    // import { initGA, logPageView } from '@/utils/analytics';
+    // initGA('G-XXXXXXXXXX');
+    // logPageView();
   }, []);
 
   if (loading) {
