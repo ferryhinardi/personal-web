@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* Custom CSS variables for design system */
+@theme {
+  /* Colors */
+  --color-primary-50: oklch(0.97 0.01 240);
+  --color-primary-100: oklch(0.93 0.03 240);
+  --color-primary-200: oklch(0.86 0.06 240);
+  --color-primary-300: oklch(0.77 0.12 240);
+  --color-primary-400: oklch(0.67 0.18 240);
+  --color-primary-500: oklch(0.57 0.24 240);
+  --color-primary-600: oklch(0.48 0.26 240);
+  --color-primary-700: oklch(0.39 0.22 240);
+  --color-primary-800: oklch(0.31 0.17 240);
+  --color-primary-900: oklch(0.24 0.11 240);
+  --color-primary-950: oklch(0.15 0.06 240);
+
+  /* Dark mode colors */
+  --color-dark-50: oklch(0.95 0 0);
+  --color-dark-100: oklch(0.90 0 0);
+  --color-dark-200: oklch(0.80 0 0);
+  --color-dark-300: oklch(0.70 0 0);
+  --color-dark-400: oklch(0.60 0 0);
+  --color-dark-500: oklch(0.50 0 0);
+  --color-dark-600: oklch(0.40 0 0);
+  --color-dark-700: oklch(0.30 0 0);
+  --color-dark-800: oklch(0.20 0 0);
+  --color-dark-900: oklch(0.12 0 0);
+  --color-dark-950: oklch(0.06 0 0);
+
+  /* Fonts */
+  --font-heading: 'Poppins', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-slide-down: slide-down 0.6s ease-out;
+  --animate-slide-left: slide-left 0.6s ease-out;
+  --animate-slide-right: slide-right 0.6s ease-out;
+  --animate-scale-in: scale-in 0.5s ease-out;
+}
+
+/* Keyframe Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Global Base Styles */
+* {
+  border-color: rgb(229 231 235);
+}
+
+.dark * {
+  border-color: rgb(55 65 81);
+}
+
+body {
+  background-color: white;
+  color: rgb(17 24 39);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dark body {
+  background-color: rgb(15 23 42);
+  color: rgb(243 244 246);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Utility Classes */
+.text-balance {
+  text-wrap: balance;
+}
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.container-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-padding {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.glass-effect {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.dark .glass-effect {
+  background-color: rgba(15, 23, 42, 0.8);
+}
+
+.card-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+.smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Component Styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgb(14 165 233) 0%, rgb(59 130 246) 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgb(2 132 199) 0%, rgb(37 99 235) 100%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59 130 246 / 0.5);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  background-color: rgb(243 244 246);
+  color: rgb(17 24 39);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .btn-secondary {
+  background-color: rgb(30 41 59);
+  color: rgb(243 244 246);
+}
+
+.btn-secondary:hover {
+  background-color: rgb(229 231 235);
+}
+
+.dark .btn-secondary:hover {
+  background-color: rgb(51 65 85);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  border: 2px solid rgb(59 130 246);
+  color: rgb(59 130 246);
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline:hover {
+  background-color: rgb(59 130 246);
+  color: white;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(209 213 219);
+  background-color: white;
+  color: rgb(17 24 39);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .input-field {
+  border-color: rgb(75 85 99);
+  background-color: rgb(30 41 59);
+  color: rgb(243 244 246);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 3px rgba(59 130 246 / 0.1);
+}
+
+.input-field::placeholder {
+  color: rgb(156 163 175);
+}
+
+.dark .input-field::placeholder {
+  color: rgb(107 114 128);
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, rgb(59 130 246) 0%, rgb(147 197 253) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+.card {
+  border-radius: 0.75rem;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .card {
+  background-color: rgb(30 41 59);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
