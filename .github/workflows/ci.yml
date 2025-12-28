@@ -118,7 +118,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: lint-and-typecheck
-    if: github.event_name == 'pull_request'
+    # Only run if Vercel secrets are configured
+    if: github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != ''
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.preview-url }}
@@ -143,7 +144,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: lint-and-typecheck
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    # Only run if Vercel secrets are configured
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && secrets.VERCEL_TOKEN != ''
     environment:
       name: production
       url: https://ferryhinardi.com
