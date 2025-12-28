@@ -1,0 +1,161 @@
+name: Content Validation
+description: Validate and manage portfolio content updates
+
+trigger:
+  - on_file_change: "public/resumeData.json"
+  - on_pr_comment: "/validate-content"
+
+steps:
+  - name: Validate JSON Structure
+    action: validate_json
+    config:
+      file: public/resumeData.json
+      schema: src/types/resume.types.ts
+      checks:
+        - valid_json
+        - matches_schema
+        - no_missing_required_fields
+        - valid_urls
+        - valid_email
+        - valid_phone
+    outputs:
+      - validation_errors
+      - warnings
+
+  - name: Check Image References
+    action: validate_assets
+    config:
+      data_file: public/resumeData.json
+      asset_paths:
+        - public/images/
+        - public/images/portfolio/
+      check_for:
+        - missing_images
+        - broken_references
+        - large_file_size # >500KB
+        - wrong_format # Only jpg, png, webp allowed
+    outputs:
+      - missing_images
+      - large_images
+      - format_issues
+
+  - name: Validate Links
+    action: check_links
+    config:
+      data_file: public/resumeData.json
+      check:
+        - external_links
+        - social_media_urls
+        - resume_pdf
+      timeout_seconds: 5
+    outputs:
+      - broken_links
+      - slow_links
+
+  - name: Content Quality Check
+    action: analyze_content
+    config:
+      checks:
+        - spelling_grammar
+        - professional_tone
+        - consistent_formatting
+        - date_format # YYYY or YYYY - Present
+        - length_limits:
+            bio: 500
+            description: 200
+            work_description: 300
+    outputs:
+      - spelling_errors
+      - formatting_issues
+      - length_violations
+
+  - name: Generate Validation Report
+    action: generate_report
+    inputs:
+      - validation_errors
+      - warnings
+      - missing_images
+      - broken_links
+      - spelling_errors
+    config:
+      format: markdown
+      severity_levels:
+        - error # Must fix
+        - warning # Should fix
+        - info # Nice to have
+
+  - name: Comment on PR
+    action: github_comment
+    condition: has_issues_or_warnings
+    inputs:
+      - validation_report
+    config:
+      template: |
+        ## 📋 Content Validation Report
+        
+        {{#if validation_errors}}
+        ### ❌ Errors (Must Fix)
+        {{#each validation_errors}}
+        - **{{field}}**: {{message}}
+        {{/each}}
+        {{/if}}
+        
+        {{#if warnings}}
+        ### ⚠️ Warnings (Should Fix)
+        {{#each warnings}}
+        - **{{field}}**: {{message}}
+        {{/each}}
+        {{/if}}
+        
+        {{#if missing_images}}
+        ### 🖼️ Missing Images
+        {{#each missing_images}}
+        - `{{path}}` referenced in {{location}}
+        {{/each}}
+        {{/if}}
+        
+        {{#if broken_links}}
+        ### 🔗 Broken Links
+        {{#each broken_links}}
+        - [{{url}}]({{url}}) - {{error}}
+        {{/each}}
+        {{/if}}
+        
+        {{#if spelling_errors}}
+        ### 📝 Spelling/Grammar
+        {{#each spelling_errors}}
+        - "{{text}}" in {{location}} - Suggestion: {{suggestion}}
+        {{/each}}
+        {{/if}}
+        
+        ---
+        {{#if all_checks_passed}}
+        ✅ All validation checks passed!
+        {{else}}
+        Please address the issues above before merging.
+        {{/if}}
+
+  - name: Update Type Definitions
+    action: sync_types
+    condition: schema_changed
+    config:
+      source: public/resumeData.json
+      target: src/types/resume.types.ts
+      generate: interface_from_json
+
+auto_fixes:
+  enabled: true
+  fixes:
+    - trim_whitespace
+    - normalize_urls # Add https:// if missing
+    - format_dates # Standardize date format
+    - optimize_images # Compress if >500KB
+    - fix_typos # Auto-correct common typos
+
+suggestions:
+  on_content_update:
+    - Check if work experience is up to date
+    - Update skills if new technologies learned
+    - Refresh portfolio projects
+    - Update profile image if >1 year old
+    - Review contact information accuracy

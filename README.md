@@ -3,7 +3,14 @@
 ### <a href="https://react-resume-template.herokuapp.com/">LIVE DEMO</a> 
 
 ## Description
-This is a ReactJS based personal resume website template. I have built this by following a Udemy course (credits below) and by beginning with the Ceevee template by Styleshout (credits also below), and breaking up their template into isolated React components. Data is fed directly from a JSON File. This means that in its final form, it can be customized and used by anybody simply by filling in their own personal info into the JSON file and the changes will be dynamically fed into the site. If you would like to use this template for your own personal resume website, read on to learn how to build your own copy.
+This is a modern ReactJS based personal resume website template built with Vite, React 18, and TypeScript. Data is fed directly from a JSON file, making it fully customizable - simply update the `public/resumeData.json` file with your personal information and the changes will be dynamically reflected on the site.
+
+### Tech Stack
+- **React 18.3** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Vite 6.4** - Lightning-fast build tool
+- **pnpm** - Fast, disk space efficient package manager
+- **Google Analytics 4** - Modern analytics tracking
 
 ## Make it Your Own!
 ### 1. Make sure you have what you need
