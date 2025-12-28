@@ -194,7 +194,7 @@ export default function Resume({ data }: ResumeProps) {
                         >
                           <Progress
                             value={percentage}
-                            className="h-3 bg-gray-200 dark:bg-slate-700"
+                            className="h-3 bg-gray-200 dark:bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-cyan-500 [&>div]:to-blue-600"
                           />
                         </motion.div>
                         
