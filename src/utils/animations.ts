@@ -79,7 +79,7 @@ export const scaleIn: Variants = {
 
 // Stagger container for child animations
 export const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 }, // Changed from 0 to 1 to ensure content is visible even if animation doesn't trigger
   visible: {
     opacity: 1,
     transition: {
@@ -143,13 +143,13 @@ export const pageTransition: Variants = {
 // Viewport options for scroll-triggered animations
 export const viewportOptions = {
   once: true, // Animation triggers only once
-  margin: '-100px', // Trigger animation 100px before element enters viewport
-  amount: 0.3, // Trigger when 30% of element is visible
+  margin: '0px 0px -50px 0px', // Trigger animation 50px before element enters viewport (mobile-friendly)
+  amount: 0.1, // Trigger when only 10% of element is visible (better for mobile)
 };
 
 // Enhanced viewport options (more aggressive triggering)
 export const viewportOptionsEager = {
   once: true,
   margin: '0px',
-  amount: 0.1, // Trigger when only 10% is visible
+  amount: 0.05, // Trigger when only 5% is visible (very aggressive for long sections)
 };
