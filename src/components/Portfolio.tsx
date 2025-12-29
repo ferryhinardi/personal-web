@@ -4,6 +4,7 @@ import { ExternalLink, Code2 } from 'lucide-react';
 import type { Portfolio as PortfolioData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import OptimizedImage from '@/components/ui/optimized-image';
 import {
   Dialog,
   DialogContent,
@@ -64,11 +65,12 @@ export default function Portfolio({ data }: PortfolioProps) {
                 >
                   <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
                     <div className="relative overflow-hidden aspect-video">
-                      <img
+                      <OptimizedImage
                         src={projectImage}
                         alt={project.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        width={600}
+                        height={400}
+                        className="w-full h-full transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="absolute bottom-4 left-4 right-4 flex gap-2">
@@ -120,11 +122,12 @@ export default function Portfolio({ data }: PortfolioProps) {
               </DialogHeader>
               <div className="space-y-6">
                 <div className="relative overflow-hidden rounded-lg aspect-video">
-                  <img
+                  <OptimizedImage
                     src={`images/portfolio/${selectedProject.image}`}
                     alt={selectedProject.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
+                    width={800}
+                    height={450}
+                    className="w-full h-full"
                   />
                 </div>
                 <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">

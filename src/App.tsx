@@ -1,18 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-import About from '@components/About';
-import Resume from '@components/Resume';
-import Contact from '@components/Contact';
-import Testimonials from '@components/Testimonials';
-import Portfolio from '@components/Portfolio';
 import { useResumeData } from '@/hooks/useResumeData';
 import { initGA, logPageView } from '@/utils/analytics';
 import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
+
+// Lazy load components that are not immediately visible
+const About = lazy(() => import('@components/About'));
+const Resume = lazy(() => import('@components/Resume'));
+const Portfolio = lazy(() => import('@components/Portfolio'));
+const Testimonials = lazy(() => import('@components/Testimonials'));
+const Contact = lazy(() => import('@components/Contact'));
 
 function App() {
   const { data: resumeData, loading, error } = useResumeData();
@@ -95,11 +97,13 @@ function App() {
           </script>
         </Helmet>
         <Header data={resumeData.main} />
-        <About data={resumeData.main} />
-        <Resume data={resumeData.resume} />
-        <Portfolio data={resumeData.portfolio} />
-        <Testimonials data={resumeData.testimonials} />
-        <Contact data={resumeData.main} />
+        <Suspense fallback={<Loading message="Loading content..." />}>
+          <About data={resumeData.main} />
+          <Resume data={resumeData.resume} />
+          <Portfolio data={resumeData.portfolio} />
+          <Testimonials data={resumeData.testimonials} />
+          <Contact data={resumeData.main} />
+        </Suspense>
         <Footer data={resumeData.main} />
         <Analytics />
       </div>
