@@ -59,8 +59,8 @@ function App() {
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Ferry Hinardi',
-              url: 'https://ferryhinardi.vercel.app',
-              image: 'https://ferryhinardi.vercel.app/images/profilepic.jpg',
+              url: 'https://ferryhinardi.com',
+              image: 'https://ferryhinardi.com/images/profilepic.jpg',
               jobTitle: 'Software Engineer',
               worksFor: {
                 '@type': 'Organization',
