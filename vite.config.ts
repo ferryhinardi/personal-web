@@ -40,6 +40,7 @@ export default defineConfig({
             '@radix-ui/react-slot',
           ],
           'analytics': ['@vercel/analytics', 'react-ga4'],
+          'charts': ['recharts'], // Separate chunk for heavy charting library
         },
         // Optimize chunk sizes
         chunkFileNames: 'assets/[name]-[hash].js',

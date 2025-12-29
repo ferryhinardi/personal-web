@@ -1,9 +1,12 @@
 import { GraduationCap, Briefcase, Award, TrendingUp } from 'lucide-react';
+import { lazy, Suspense } from 'react';
 import type { ResumeSection } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import SkillsRadar from '@/components/ui/skills-radar';
+
+// Lazy load the heavy recharts component
+const SkillsRadar = lazy(() => import('@/components/ui/skills-radar'));
 
 interface ResumeProps {
   data?: ResumeSection;
@@ -177,7 +180,13 @@ export default function Resume({ data }: ResumeProps) {
 
             {/* Skill Bars */}
             {skills && skills.length > 0 ? (
-              <SkillsRadar skills={skills} />
+              <Suspense fallback={
+                <div className="flex items-center justify-center h-64 text-gray-500">
+                  Loading skills visualization...
+                </div>
+              }>
+                <SkillsRadar skills={skills} />
+              </Suspense>
             ) : (
               <p className="text-gray-600 dark:text-gray-400">No skills data available.</p>
             )}
