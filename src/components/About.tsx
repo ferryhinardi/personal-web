@@ -4,8 +4,8 @@ import { Download, Mail, MapPin, User } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 import { staggerContainer, staggerItem, viewportOptions } from '@/utils/animations';
 
 interface AboutProps {
@@ -17,10 +17,6 @@ export default function About({ data }: AboutProps) {
 
   const { name, image, bio, address, email, resumedownload } = data;
   const profilepic = `images/${image}`;
-  const initials = name
-    .split(' ')
-    .map((n) => n[0])
-    .join('');
 
   const contactDetails = [
     {
@@ -67,16 +63,14 @@ export default function About({ data }: AboutProps) {
                     transition={{ duration: 0.3 }}
                     className="mb-6"
                   >
-                    <Avatar className="w-full h-auto aspect-square rounded-2xl shadow-xl">
-                      <AvatarImage
-                        src={profilepic}
-                        alt={`${name} - Software Engineer`}
-                        className="object-cover"
-                      />
-                      <AvatarFallback className="text-4xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
-                        {initials}
-                      </AvatarFallback>
-                    </Avatar>
+                    <OptimizedImage
+                      src={profilepic}
+                      alt={`${name} - Software Engineer`}
+                      className="w-full h-auto aspect-square rounded-2xl shadow-xl"
+                      priority={true}
+                      responsive={true}
+                      useWebP={true}
+                    />
                   </motion.div>
 
                   {/* Name */}

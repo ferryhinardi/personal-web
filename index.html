@@ -12,7 +12,9 @@
     <link rel="dns-prefetch" href="https://vitals.vercel-analytics.com" />
     
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="/images/profilepic.jpg" as="image" type="image/jpeg" />
+    <link rel="preload" href="/images/profilepic-mobile.webp" as="image" type="image/webp" media="(max-width: 640px)" />
+    <link rel="preload" href="/images/profilepic-tablet.webp" as="image" type="image/webp" media="(max-width: 1024px)" />
+    <link rel="preload" href="/images/profilepic.webp" as="image" type="image/webp" media="(min-width: 1025px)" />
     <link rel="preload" href="/css/fonts.css" as="style" />
     
     <!-- Primary Meta Tags -->
