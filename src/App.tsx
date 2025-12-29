@@ -10,6 +10,13 @@ import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
 import ScrollProgress from '@components/ui/scroll-progress';
 import BackToTop from '@components/ui/back-to-top';
+import {
+  AboutSkeleton,
+  ResumeSkeleton,
+  PortfolioSkeleton,
+  TestimonialsSkeleton,
+  ContactSkeleton,
+} from '@components/ui/skeleton';
 
 // Lazy load components that are not immediately visible
 const About = lazy(() => import('@components/About'));
@@ -100,11 +107,19 @@ function App() {
           </script>
         </Helmet>
         <Header data={resumeData.main} />
-        <Suspense fallback={<Loading message="Loading content..." />}>
+        <Suspense fallback={<AboutSkeleton />}>
           <About data={resumeData.main} />
+        </Suspense>
+        <Suspense fallback={<ResumeSkeleton />}>
           <Resume data={resumeData.resume} />
+        </Suspense>
+        <Suspense fallback={<PortfolioSkeleton />}>
           <Portfolio data={resumeData.portfolio} />
+        </Suspense>
+        <Suspense fallback={<TestimonialsSkeleton />}>
           <Testimonials data={resumeData.testimonials} />
+        </Suspense>
+        <Suspense fallback={<ContactSkeleton />}>
           <Contact data={resumeData.main} />
         </Suspense>
         <Footer data={resumeData.main} />

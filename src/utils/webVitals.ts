@@ -52,10 +52,3 @@ export async function initWebVitals() {
     console.error('Failed to initialize Web Vitals:', error);
   }
 }
-
-// TypeScript declarations for global objects
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}
