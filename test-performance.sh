@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Performance Testing Script
+# This script helps you test Core Web Vitals after deployment
+
+echo "🚀 Performance Testing Guide for ferryhinardi.com"
+echo "=================================================="
+echo ""
+
+PROD_URL="https://ferryhinardi.com"
+PREVIEW_URL="https://ferryhinardi-2w0nrp94q-ferryhinardis-projects.vercel.app"
+
+echo "Your deployment URLs:"
+echo "  Production: $PROD_URL"
+echo "  Latest Preview: $PREVIEW_URL"
+echo ""
+
+echo "📊 Option 1: Test with Lighthouse (Chrome DevTools)"
+echo "---------------------------------------------------"
+echo "1. Open Chrome browser"
+echo "2. Navigate to: $PROD_URL"
+echo "3. Open DevTools (F12 or Cmd+Option+I)"
+echo "4. Go to 'Lighthouse' tab"
+echo "5. Select:"
+echo "   - ✓ Performance"
+echo "   - ✓ Desktop or Mobile"
+echo "   - Mode: Navigation"
+echo "6. Click 'Analyze page load'"
+echo ""
+
+echo "📈 Option 2: PageSpeed Insights (Online)"
+echo "-----------------------------------------"
+echo "Visit: https://pagespeed.web.dev/"
+echo "Enter URL: $PROD_URL"
+echo "Click 'Analyze'"
+echo ""
+
+echo "🔍 Option 3: Chrome User Experience Report"
+echo "-------------------------------------------"
+echo "Visit: https://developers.google.com/speed/pagespeed/insights/"
+echo "Enter URL: $PROD_URL"
+echo "Check 'Field Data' section for real user metrics"
+echo ""
+
+echo "📱 Option 4: Test on Mobile Device"
+echo "-----------------------------------"
+echo "1. Open Chrome on your mobile device"
+echo "2. Navigate to: $PROD_URL"
+echo "3. Note the loading experience"
+echo ""
+
+echo "📊 Expected Core Web Vitals (Good Scores):"
+echo "-------------------------------------------"
+echo "  ✅ LCP (Largest Contentful Paint): < 2.5s"
+echo "  ✅ INP (Interaction to Next Paint): < 200ms"
+echo "  ✅ CLS (Cumulative Layout Shift): < 0.1"
+echo "  ✅ FCP (First Contentful Paint): < 1.8s"
+echo "  ✅ TTFB (Time to First Byte): < 800ms"
+echo ""
+
+echo "🎯 What to Look For:"
+echo "-------------------"
+echo "  • Performance Score: Should be 90+ (GREEN)"
+echo "  • All Core Web Vitals in GREEN zone"
+echo "  • Reduced bundle sizes in Network tab"
+echo "  • Lazy loading of images (check Network throttling)"
+echo "  • Fast interactive time"
+echo ""
+
+echo "📈 Monitor Web Vitals:"
+echo "---------------------"
+echo "  • Google Analytics 4: Events > Web Vitals"
+echo "  • Vercel Analytics: https://vercel.com/ferryhinardis-projects/ferryhinardi/analytics"
+echo ""
+
+echo "💡 Tips:"
+echo "--------"
+echo "  • Test in Incognito mode (no extensions)"
+echo "  • Test with 'Fast 3G' throttling"
+echo "  • Compare before/after scores"
+echo "  • Allow 24-48 hours for real user data"
+echo ""
+
+echo "🎉 Your optimizations are now live!"
+echo "Test the site and compare the results with previous scores."
+echo ""
