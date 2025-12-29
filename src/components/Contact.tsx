@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { motion } from 'framer-motion';
 import { Send, MapPin, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
@@ -26,12 +27,14 @@ interface FormErrors {
   message?: string;
 }
 
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
-
 export default function Contact({ data }: ContactProps) {
   if (!data) return null;
 
   const { address, email, contactmessage } = data;
+  
+  // Formspree hook - Gets form ID from environment variable
+  const formspreeId = import.meta.env.VITE_FORMSPREE_FORM_ID || 'YOUR_FORM_ID';
+  const [state, handleFormspreeSubmit] = useForm(formspreeId);
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -41,7 +44,6 @@ export default function Contact({ data }: ContactProps) {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<FormStatus>('idle');
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -64,21 +66,20 @@ export default function Contact({ data }: ContactProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    setStatus('submitting');
-
-    // Simulate API call (replace with actual implementation)
-    setTimeout(() => {
-      setStatus('success');
+    // Submit to Formspree
+    await handleFormspreeSubmit(e);
+    
+    // Clear form on success
+    if (state.succeeded) {
       setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
-    }, 1500);
+    }
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -120,13 +121,16 @@ export default function Contact({ data }: ContactProps) {
                       </Label>
                       <Input
                         id="name"
+                        name="name"
                         type="text"
                         value={formData.name}
                         onChange={(e) => handleChange('name', e.target.value)}
                         placeholder="Your full name"
                         className={errors.name ? 'border-red-500' : ''}
-                        disabled={status === 'submitting'}
+                        disabled={state.submitting}
+                        required
                       />
+                      <ValidationError prefix="Name" field="name" errors={state.errors} />
                       {errors.name && (
                         <p className="text-sm text-red-500 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
@@ -142,13 +146,16 @@ export default function Contact({ data }: ContactProps) {
                       </Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange('email', e.target.value)}
                         placeholder="your.email@example.com"
                         className={errors.email ? 'border-red-500' : ''}
-                        disabled={status === 'submitting'}
+                        disabled={state.submitting}
+                        required
                       />
+                      <ValidationError prefix="Email" field="email" errors={state.errors} />
                       {errors.email && (
                         <p className="text-sm text-red-500 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
@@ -162,12 +169,14 @@ export default function Contact({ data }: ContactProps) {
                       <Label htmlFor="subject">Subject</Label>
                       <Input
                         id="subject"
+                        name="subject"
                         type="text"
                         value={formData.subject}
                         onChange={(e) => handleChange('subject', e.target.value)}
                         placeholder="What is this regarding?"
-                        disabled={status === 'submitting'}
+                        disabled={state.submitting}
                       />
+                      <ValidationError prefix="Subject" field="subject" errors={state.errors} />
                     </div>
 
                     {/* Message Field */}
@@ -177,13 +186,16 @@ export default function Contact({ data }: ContactProps) {
                       </Label>
                       <Textarea
                         id="message"
+                        name="message"
                         value={formData.message}
                         onChange={(e) => handleChange('message', e.target.value)}
                         placeholder="Your message here..."
                         rows={6}
                         className={errors.message ? 'border-red-500' : ''}
-                        disabled={status === 'submitting'}
+                        disabled={state.submitting}
+                        required
                       />
+                      <ValidationError prefix="Message" field="message" errors={state.errors} />
                       {errors.message && (
                         <p className="text-sm text-red-500 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
@@ -196,9 +208,9 @@ export default function Contact({ data }: ContactProps) {
                     <Button
                       type="submit"
                       className="w-full"
-                      disabled={status === 'submitting'}
+                      disabled={state.submitting}
                     >
-                      {status === 'submitting' ? (
+                      {state.submitting ? (
                         <>
                           <span className="animate-spin mr-2">⏳</span>
                           Sending...
@@ -212,7 +224,7 @@ export default function Contact({ data }: ContactProps) {
                     </Button>
 
                     {/* Success Message */}
-                    {status === 'success' && (
+                    {state.succeeded && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -226,7 +238,7 @@ export default function Contact({ data }: ContactProps) {
                     )}
 
                     {/* Error Message */}
-                    {status === 'error' && (
+                    {state.errors && Object.keys(state.errors).length > 0 && !state.succeeded && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
