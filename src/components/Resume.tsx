@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion';
 import { GraduationCap, Briefcase, Award, TrendingUp } from 'lucide-react';
 import type { ResumeSection } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { staggerContainer, staggerItem, viewportOptions } from '@/utils/animations';
 
 interface ResumeProps {
   data?: ResumeSection;
@@ -40,23 +38,17 @@ export default function Resume({ data }: ResumeProps) {
   return (
     <section id="resume" className="section-padding bg-gray-50 dark:bg-slate-800/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOptions}
-          className="max-w-6xl mx-auto"
-        >
+        <div className="max-w-6xl mx-auto">
           {/* Section Title */}
-          <motion.div variants={staggerItem} className="text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="section-title">Resume</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               My professional journey, education, and technical expertise
             </p>
-          </motion.div>
+          </div>
 
           {/* Education Section */}
-          <motion.div variants={staggerItem} className="mb-16">
+          <div className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
                 <GraduationCap className="w-6 h-6 text-white" />
@@ -69,14 +61,8 @@ export default function Resume({ data }: ResumeProps) {
 
             <div className="space-y-6">
               {education && education.length > 0 ? (
-                education.map((edu, index) => (
-                <motion.div
-                  key={edu.school}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={viewportOptions}
-                  transition={{ delay: index * 0.1 }}
-                >
+                education.map((edu) => (
+                  <div key={edu.school}>
                   <Card className="hover:shadow-xl transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-3">
@@ -96,19 +82,19 @@ export default function Resume({ data }: ResumeProps) {
                         {edu.description}
                       </p>
                     </CardContent>
-                  </Card>
-                </motion.div>
-              ))
+                    </Card>
+                  </div>
+                ))
               ) : (
                 <p className="text-gray-600 dark:text-gray-400">No education data available.</p>
               )}
             </div>
-          </motion.div>
+          </div>
 
           <Separator className="my-16" />
 
           {/* Work Experience Section */}
-          <motion.div variants={staggerItem} className="mb-16">
+          <div className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
                 <Briefcase className="w-6 h-6 text-white" />
@@ -126,15 +112,11 @@ export default function Resume({ data }: ResumeProps) {
 
               <div className="space-y-8">
                 {work && work.length > 0 ? (
-                  work.map((job, index) => (
-                  <motion.div
-                    key={job.company}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={viewportOptions}
-                    transition={{ delay: index * 0.1 }}
-                    className="relative"
-                  >
+                  work.map((job) => (
+                    <div
+                      key={job.company}
+                      className="relative"
+                    >
                     {/* Timeline Dot */}
                     <div className="hidden md:block absolute left-[26px] top-6 w-4 h-4 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 border-4 border-white dark:border-slate-900 shadow-lg z-10"></div>
 
@@ -158,20 +140,20 @@ export default function Resume({ data }: ResumeProps) {
                           {job.description}
                         </p>
                       </CardContent>
-                    </Card>
-                  </motion.div>
-                ))
+                      </Card>
+                    </div>
+                  ))
                 ) : (
                   <p className="text-gray-600 dark:text-gray-400">No work experience data available.</p>
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           <Separator className="my-16" />
 
           {/* Skills Section */}
-          <motion.div variants={staggerItem}>
+          <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-white" />
@@ -196,16 +178,10 @@ export default function Resume({ data }: ResumeProps) {
             {/* Skill Bars */}
             <div className="grid md:grid-cols-2 gap-6">
               {skills && skills.length > 0 ? (
-                skills.map((skill, index) => {
-                const percentage = parseInt(skill.level);
-                return (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={viewportOptions}
-                    transition={{ delay: index * 0.05 }}
-                  >
+                skills.map((skill) => {
+                  const percentage = parseInt(skill.level);
+                  return (
+                    <div key={skill.name}>
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-3">
@@ -216,17 +192,12 @@ export default function Resume({ data }: ResumeProps) {
                             {skill.level}
                           </span>
                         </div>
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '100%' }}
-                          viewport={viewportOptions}
-                          transition={{ duration: 0.8, delay: index * 0.05 }}
-                        >
+                        <div>
                           <Progress
                             value={percentage}
                             className="h-3 bg-gray-200 dark:bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-cyan-500 [&>div]:to-blue-600"
                           />
-                        </motion.div>
+                        </div>
                         
                         {/* Proficiency Label */}
                         <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
@@ -254,15 +225,15 @@ export default function Resume({ data }: ResumeProps) {
                         </div>
                       </CardContent>
                     </Card>
-                  </motion.div>
-                );
-              })
+                  </div>
+                  );
+                })
               ) : (
                 <p className="text-gray-600 dark:text-gray-400">No skills data available.</p>
               )}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
