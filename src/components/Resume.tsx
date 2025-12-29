@@ -12,9 +12,30 @@ interface ResumeProps {
 }
 
 export default function Resume({ data }: ResumeProps) {
-  if (!data) return null;
+  console.log('Resume component - data:', data);
+  
+  if (!data) {
+    console.error('Resume component - No data provided!');
+    return (
+      <section id="resume" className="section-padding bg-gray-50 dark:bg-slate-800/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="section-title">Resume</h2>
+            <p className="text-gray-600 dark:text-gray-400">Loading resume data...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const { skillmessage, education, work, skills } = data;
+  
+  console.log('Resume component - Parsed data:', { 
+    skillmessage, 
+    educationCount: education?.length, 
+    workCount: work?.length, 
+    skillsCount: skills?.length 
+  });
 
   return (
     <section id="resume" className="section-padding bg-gray-50 dark:bg-slate-800/50">
@@ -47,7 +68,8 @@ export default function Resume({ data }: ResumeProps) {
             </div>
 
             <div className="space-y-6">
-              {education.map((edu, index) => (
+              {education && education.length > 0 ? (
+                education.map((edu, index) => (
                 <motion.div
                   key={edu.school}
                   initial={{ opacity: 0, x: -20 }}
@@ -76,7 +98,10 @@ export default function Resume({ data }: ResumeProps) {
                     </CardContent>
                   </Card>
                 </motion.div>
-              ))}
+              ))
+              ) : (
+                <p className="text-gray-600 dark:text-gray-400">No education data available.</p>
+              )}
             </div>
           </motion.div>
 
@@ -100,7 +125,8 @@ export default function Resume({ data }: ResumeProps) {
               <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 via-blue-500 to-purple-500"></div>
 
               <div className="space-y-8">
-                {work.map((job, index) => (
+                {work && work.length > 0 ? (
+                  work.map((job, index) => (
                   <motion.div
                     key={job.company}
                     initial={{ opacity: 0, x: -20 }}
@@ -134,7 +160,10 @@ export default function Resume({ data }: ResumeProps) {
                       </CardContent>
                     </Card>
                   </motion.div>
-                ))}
+                ))
+                ) : (
+                  <p className="text-gray-600 dark:text-gray-400">No work experience data available.</p>
+                )}
               </div>
             </div>
           </motion.div>
@@ -166,7 +195,8 @@ export default function Resume({ data }: ResumeProps) {
 
             {/* Skill Bars */}
             <div className="grid md:grid-cols-2 gap-6">
-              {skills.map((skill, index) => {
+              {skills && skills.length > 0 ? (
+                skills.map((skill, index) => {
                 const percentage = parseInt(skill.level);
                 return (
                   <motion.div
@@ -226,7 +256,10 @@ export default function Resume({ data }: ResumeProps) {
                     </Card>
                   </motion.div>
                 );
-              })}
+              })
+              ) : (
+                <p className="text-gray-600 dark:text-gray-400">No skills data available.</p>
+              )}
             </div>
           </motion.div>
         </motion.div>
