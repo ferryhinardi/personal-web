@@ -33,7 +33,7 @@ export function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (priority) return; // Skip intersection observer for priority images
@@ -52,8 +52,8 @@ export function OptimizedImage({
       }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => observer.disconnect();
@@ -80,6 +80,7 @@ export function OptimizedImage({
 
   return (
     <div
+      ref={containerRef}
       className={cn('relative overflow-hidden bg-slate-200 dark:bg-slate-700', className)}
       style={{ aspectRatio: width && height ? `${width}/${height}` : undefined }}
     >
@@ -111,7 +112,6 @@ export function OptimizedImage({
           )}
           {/* Fallback to original format */}
           <img
-            ref={imgRef}
             src={paths.original}
             alt={alt}
             width={width}
