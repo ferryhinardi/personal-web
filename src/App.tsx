@@ -11,6 +11,8 @@ import Testimonials from '@components/Testimonials';
 import Portfolio from '@components/Portfolio';
 import { useResumeData } from '@/hooks/useResumeData';
 import { initGA, logPageView } from '@/utils/analytics';
+import Loading from '@components/ui/loading';
+import ErrorDisplay from '@components/ui/error';
 
 function App() {
   const { data: resumeData, loading, error } = useResumeData();
@@ -19,7 +21,7 @@ function App() {
     // Initialize Google Analytics 4
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
     
-    if (measurementId && measurementId !== 'G-XXXXXXXXXX') {
+    if (measurementId) {
       initGA(measurementId);
       logPageView();
       console.log('Google Analytics initialized with ID:', measurementId);
@@ -29,12 +31,19 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading fullScreen message="Loading your portfolio..." />;
   }
 
   if (error) {
     console.error('Failed to load resume data:', error);
-    return <div>Error loading resume data. Please try again later.</div>;
+    return (
+      <ErrorDisplay 
+        error={error} 
+        fullScreen 
+        onRetry={() => window.location.reload()} 
+        showDetails={true} 
+      />
+    );
   }
 
   if (!resumeData) {
