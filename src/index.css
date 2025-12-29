@@ -320,6 +320,25 @@ html {
   }
 }
 
+.section-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  color: rgb(55 65 81);
+}
+
+.dark .section-subtitle {
+  color: rgb(156 163 175);
+}
+
+@media (min-width: 768px) {
+  .section-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
 .card {
   border-radius: 0.75rem;
   background-color: white;
