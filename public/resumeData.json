@@ -141,31 +141,36 @@
         "title":"Traveloka Flight Booking",
         "category":"Redesigned Traveloka's flight booking experience, driving a massive 10.16% revenue increase. Orchestrated complex integrations with global metasearch platforms including Google Flights, Skyscanner, and KAYAK—connecting millions of travelers with their perfect flights.",
         "image":"traveloka-owl-icon.png",
-        "url":"https://www.traveloka.com"
+        "url":"https://www.traveloka.com",
+        "technologies":["React.js","TypeScript","GraphQL","AWS","Next.js"]
       },
       {
         "title":"Supertool.id",
         "category":"Crafted a comprehensive suite of developer tools and utilities to supercharge productivity. A one-stop platform featuring everything from JSON formatters and code generators to image optimizers and API testing tools. Built to make developers' lives easier, one tool at a time.",
         "image":"supertool.png",
-        "url":"https://supertool.id/"
+        "url":"https://supertool.id/",
+        "technologies":["Next.js","TypeScript","Vercel","Tailwind CSS"]
       },
       {
         "title":"Maideasy",
         "category":"Built from ground zero—a beautifully crafted React Native app that revolutionized home cleaning services in Malaysia. Designed intuitive booking flows that made finding and scheduling professional cleaners as easy as ordering food delivery.",
         "image":"maideasy.png",
-        "url":"https://www.maideasy.my"
+        "url":"https://www.maideasy.my",
+        "technologies":["React Native","TypeScript","Firebase","GraphQL"]
       },
       {
         "title":"Jaztip",
         "category":"Indonesia's innovative social-commerce marketplace where buying meets community. Built a seamless platform connecting buyers and sellers, with smart integrations to popular chat apps for instant communication. Making e-commerce more personal, one connection at a time.",
         "image":"jaztip.png",
-        "url":"https://www.jaztip.com"
+        "url":"https://www.jaztip.com",
+        "technologies":["React.js","JavaScript","Firebase","Node.js"]
       },
       {
         "title":"Ryna",
         "category":"Empowering women through technology. A forward-thinking co-living platform that combines safety, community, and convenience. Built with cutting-edge tech to help women find their perfect living space and build the life they envision.",
         "image":"ryna.png",
-        "url":"#"
+        "url":"#",
+        "technologies":["React.js","Node.js","MongoDB","Express"]
       }
     ]
   },

@@ -8,6 +8,8 @@ import { useResumeData } from '@/hooks/useResumeData';
 import { initGA, logPageView } from '@/utils/analytics';
 import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
+import ScrollProgress from '@components/ui/scroll-progress';
+import BackToTop from '@components/ui/back-to-top';
 
 // Lazy load components that are not immediately visible
 const About = lazy(() => import('@components/About'));
@@ -55,6 +57,7 @@ function App() {
   return (
     <HelmetProvider>
       <div className="App">
+        <ScrollProgress />
         <Helmet>
           <script type="application/ld+json">
             {JSON.stringify({
@@ -105,6 +108,7 @@ function App() {
           <Contact data={resumeData.main} />
         </Suspense>
         <Footer data={resumeData.main} />
+        <BackToTop />
         <Analytics />
       </div>
     </HelmetProvider>

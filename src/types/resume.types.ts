@@ -57,6 +57,7 @@ export interface Project {
   category: string;
   image: string;
   url: string;
+  technologies?: string[];
 }
 
 export interface Portfolio {

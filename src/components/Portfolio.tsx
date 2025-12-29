@@ -4,6 +4,7 @@ import { ExternalLink, Code2 } from 'lucide-react';
 import type { Portfolio as PortfolioData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import OptimizedImage from '@/components/ui/optimized-image';
 import {
   Dialog,
@@ -23,6 +24,7 @@ interface Project {
   category: string;
   image: string;
   url: string;
+  technologies?: string[];
 }
 
 export default function Portfolio({ data }: PortfolioProps) {
@@ -98,9 +100,22 @@ export default function Portfolio({ data }: PortfolioProps) {
                       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                         {project.title}
                       </h3>
-                      <p className="text-slate-600 dark:text-slate-300 line-clamp-2">
+                      <p className="text-slate-600 dark:text-slate-300 line-clamp-2 mb-3">
                         {project.category}
                       </p>
+                      {project.technologies && project.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.map((tech) => (
+                            <Badge
+                              key={tech}
+                              variant="secondary"
+                              className="text-xs bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border-cyan-500/20 text-cyan-700 dark:text-cyan-300 hover:from-cyan-500/20 hover:to-blue-500/20 transition-colors"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -133,6 +148,23 @@ export default function Portfolio({ data }: PortfolioProps) {
                 <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
                   {selectedProject.category}
                 </DialogDescription>
+                {selectedProject.technologies && selectedProject.technologies.length > 0 && (
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
+                      Technologies Used
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 transition-colors"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {selectedProject.url !== '#' && (
                   <div className="flex gap-3 pt-4">
                     <Button

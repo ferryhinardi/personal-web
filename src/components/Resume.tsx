@@ -1,9 +1,9 @@
 import { GraduationCap, Briefcase, Award, TrendingUp } from 'lucide-react';
 import type { ResumeSection } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import SkillsRadar from '@/components/ui/skills-radar';
 
 interface ResumeProps {
   data?: ResumeSection;
@@ -176,62 +176,11 @@ export default function Resume({ data }: ResumeProps) {
             </Card>
 
             {/* Skill Bars */}
-            <div className="grid md:grid-cols-2 gap-6">
-              {skills && skills.length > 0 ? (
-                skills.map((skill) => {
-                  const percentage = parseInt(skill.level);
-                  return (
-                    <div key={skill.name}>
-                    <Card className="hover:shadow-lg transition-shadow">
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-3">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                            {skill.name}
-                          </h4>
-                          <span className="text-sm font-bold text-cyan-600 dark:text-cyan-400">
-                            {skill.level}
-                          </span>
-                        </div>
-                        <div>
-                          <Progress
-                            value={percentage}
-                            className="h-3 bg-gray-200 dark:bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-cyan-500 [&>div]:to-blue-600"
-                          />
-                        </div>
-                        
-                        {/* Proficiency Label */}
-                        <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                          {percentage >= 90 ? (
-                            <span className="flex items-center gap-1">
-                              <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                              Expert
-                            </span>
-                          ) : percentage >= 75 ? (
-                            <span className="flex items-center gap-1">
-                              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                              Advanced
-                            </span>
-                          ) : percentage >= 60 ? (
-                            <span className="flex items-center gap-1">
-                              <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                              Intermediate
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1">
-                              <span className="w-2 h-2 rounded-full bg-gray-500"></span>
-                              Proficient
-                            </span>
-                          )}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                  );
-                })
-              ) : (
-                <p className="text-gray-600 dark:text-gray-400">No skills data available.</p>
-              )}
-            </div>
+            {skills && skills.length > 0 ? (
+              <SkillsRadar skills={skills} />
+            ) : (
+              <p className="text-gray-600 dark:text-gray-400">No skills data available.</p>
+            )}
           </div>
         </div>
       </div>
