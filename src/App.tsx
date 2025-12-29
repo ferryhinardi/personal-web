@@ -11,6 +11,7 @@ import ErrorDisplay from '@components/ui/error';
 import ScrollProgress from '@components/ui/scroll-progress';
 import BackToTop from '@components/ui/back-to-top';
 import SkipLinks from '@components/ui/skip-links';
+import { PrintButton } from '@components/ui/print-button';
 import {
   AboutSkeleton,
   ResumeSkeleton,
@@ -126,6 +127,7 @@ function App() {
         </Suspense>
         <Footer data={resumeData.main} />
         <BackToTop />
+        <PrintButton />
         <Analytics />
       </div>
     </HelmetProvider>
