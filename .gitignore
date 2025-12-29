@@ -86,3 +86,4 @@ logs/
 
 # Dependency check artifacts
 outdated.json
+.env*.local
