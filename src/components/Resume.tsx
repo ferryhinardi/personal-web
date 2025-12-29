@@ -43,7 +43,7 @@ export default function Resume({ data }: ResumeProps) {
           <div className="text-center mb-16">
             <h2 className="section-title">Resume</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              My professional journey, education, and technical expertise
+              A journey of continuous learning, innovative solutions, and technical mastery
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function Resume({ data }: ResumeProps) {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Education</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Academic Background</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Building the foundation for excellence</p>
               </div>
             </div>
 
@@ -101,7 +101,7 @@ export default function Resume({ data }: ResumeProps) {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Work Experience</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Professional Journey</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Where passion meets impact</p>
               </div>
             </div>
 
@@ -160,7 +160,7 @@ export default function Resume({ data }: ResumeProps) {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Technical Skills</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Expertise & Proficiency</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Tools I wield to build amazing things</p>
               </div>
             </div>
 

@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Menu, Moon, Sun } from 'lucide-react';
+import { Menu, Moon, Sun, Facebook, Twitter, Linkedin, Instagram, Github } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { staggerContainer, staggerItem } from '@/utils/animations';
 import { useDarkMode } from '@/hooks/useDarkMode';
+
+// Map social network names to icons
+const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  facebook: Facebook,
+  twitter: Twitter,
+  linkedin: Linkedin,
+  instagram: Instagram,
+  github: Github,
+};
 
 interface HeaderProps {
   data?: MainData;
@@ -253,20 +262,25 @@ export default function Header({ data }: HeaderProps) {
 
           {/* Social Links */}
           <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mb-12">
-            {social.map((network) => (
-              <motion.a
-                key={network.name}
-                href={network.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={network.name}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-300"
-              >
-                <i className={`${network.className} text-lg`}></i>
-              </motion.a>
-            ))}
+            {social.map((network) => {
+              const IconComponent = socialIcons[network.name.toLowerCase()];
+              if (!IconComponent) return null;
+
+              return (
+                <motion.a
+                  key={network.name}
+                  href={network.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={network.name}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-300"
+                >
+                  <IconComponent className="w-5 h-5" />
+                </motion.a>
+              );
+            })}
           </motion.div>
 
           {/* CTA Buttons */}

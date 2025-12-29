@@ -1,6 +1,6 @@
 import parser from 'html-react-parser';
 import { motion } from 'framer-motion';
-import { Download, Mail, MapPin, Phone, User } from 'lucide-react';
+import { Download, Mail, MapPin, User } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -15,7 +15,7 @@ interface AboutProps {
 export default function About({ data }: AboutProps) {
   if (!data) return null;
 
-  const { name, image, bio, address, phone, email, resumedownload } = data;
+  const { name, image, bio, address, email, resumedownload } = data;
   const profilepic = `images/${image}`;
   const initials = name
     .split(' ')
@@ -28,12 +28,6 @@ export default function About({ data }: AboutProps) {
       label: 'Location',
       value: `${address.city}, ${address.state}`,
       fullAddress: `${address.street}, ${address.city} ${address.state}, ${address.zip}`,
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: phone,
-      href: `tel:${phone}`,
     },
     {
       icon: Mail,

@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Phone, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Send, MapPin, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -31,7 +31,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 export default function Contact({ data }: ContactProps) {
   if (!data) return null;
 
-  const { address, phone, email, contactmessage } = data;
+  const { address, email, contactmessage } = data;
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -267,21 +267,6 @@ export default function Contact({ data }: ContactProps) {
                           <br />
                           {address.city}, {address.state} {address.zip}
                         </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center">
-                        <Phone className="w-5 h-5 text-sky-600 dark:text-sky-400" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-slate-900 dark:text-white">Phone</p>
-                        <a
-                          href={`tel:${phone}`}
-                          className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
-                        >
-                          {phone}
-                        </a>
                       </div>
                     </div>
 

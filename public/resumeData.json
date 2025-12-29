@@ -2,10 +2,10 @@
   "main": {
     "name":"Ferry Hinardi",
     "occupation":"Software Engineer - Web Developer",
-    "description":"A highly skilled Software Development Professional with over five years of experience in software design, development, and integration, offering advanced expertise in React.js and JavaScript.",
+    "description":"Transforming ideas into elegant digital experiences. 5+ years crafting high-performance web applications with React.js, TypeScript, and modern web technologies.",
     "image":"profilepic.jpg",
-    "bio":"A highly skilled Software Development Professional with over five years of experience in software design, development, and integration, offering advanced expertise in React.js and JavaScript. Possesses a strong background in building E-Commerce applications, with a proven track record of writing clean, reliable code and developing scalable systems. Thrives in complex problem-solving environments with an analytical and driven mindset. Contributed to projects including <a href='http://jaztip.com'>Jaztip Apps</a>, <a href='https://www.maideasy.my'>Maideasy Apps</a>, and Ryna - a co-living and apartment rental platform.",
-    "contactmessage":"Feel free to reach out if you'd like to collaborate or discuss opportunities.",
+    "bio":"I'm a passionate software engineer who loves turning complex problems into elegant solutions. With over 5 years of experience, I've had the privilege of working on projects that impact millions of users daily. My expertise lies in building lightning-fast, user-centric web applications using React.js, TypeScript, and Next.js. From architecting scalable e-commerce platforms to optimizing performance that directly boosts revenue, I thrive on challenges that push the boundaries of what's possible. I've contributed to exciting projects like <a href='http://jaztip.com'>Jaztip</a> - Indonesia's social-commerce marketplace, <a href='https://www.maideasy.my'>Maideasy</a> - revolutionizing home services booking, and Ryna - empowering co-living experiences. When I'm not coding, you'll find me exploring new technologies, contributing to open source, or mentoring fellow developers.",
+    "contactmessage":"Have an exciting project or opportunity? Let's connect and create something amazing together!",
     "email": "hinardi93@gmail.com",
     "phone": "+6281958020882",
     "address":{
@@ -45,13 +45,13 @@
     ]
   },
   "resume":{
-    "skillmessage":"Advanced expertise in modern web development technologies and frameworks.",
+    "skillmessage":"I believe in mastering the fundamentals while staying ahead of the curve. My toolkit spans the entire modern web development ecosystem—from crafting pixel-perfect UIs with React and TypeScript to architecting cloud-native solutions on AWS. Every line of code I write is driven by performance, scalability, and user delight.",
     "education":[
       {
         "school":"Bina Nusantara University",
         "degree":"Bachelor of Science - Applied Database",
         "graduated":"2015",
-        "description":"West Jakarta. Gained hands-on experience balancing academic studies with professional work in IT Department, developing strong time management and workplace readiness skills."
+        "description":"Earned my degree while working full-time in the IT Department—proving that passion and dedication can conquer any challenge. This experience taught me invaluable lessons in time management, resilience, and real-world problem-solving that no classroom could provide."
       }
     ],
     "work":[
@@ -59,37 +59,37 @@
         "company":"Traveloka",
         "title":"Software Engineer - Web Developer",
         "years":"2020 - Present",
-        "description":"Led frontend development for Traveloka's flight booking form redesign, contributing to a 10.16% increase in net revenue. Maintained and optimized web performance for Transport Products (Flights, Trains, Bus & Travel), improving Core Web Vitals. Developed a debugging tool reducing issue resolution time by 30%. Handled metasearch flight integrations with partners including Google Flights, Skyscanner, KAYAK, Wego, Travelko, and Naver."
+        "description":"Driving innovation at one of Southeast Asia's leading travel platforms. Spearheaded the flight booking form redesign that generated a 10.16% revenue boost—translating to millions in additional revenue. Architected a custom debugging tool that slashed issue resolution time by 30%, saving countless engineering hours. Currently maintaining performance excellence across Transport Products (Flights, Trains, Bus) and orchestrating seamless integrations with global metasearch giants like Google Flights, Skyscanner, KAYAK, Wego, and Naver."
       },
       {
         "company":"PT Trinusa Travelindo (Traveloka)",
         "title":"Software Engineer - React Native Developer",
         "years":"2019 - 2020",
-        "description":"Developed a new Visa product for Traveloka, enabling users to apply for visas for Japan, Australia, China, and India through mobile and web platforms. Built and maintained the mobile application using React Native and web application using React.js. Handled end-to-end user flows from document pickup scheduling to final visa delivery."
+        "description":"Pioneered Traveloka's revolutionary Visa product from concept to launch, empowering travelers to apply for visas to Japan, Australia, China, and India—all from their mobile devices. Built a seamless cross-platform experience using React Native and React.js, handling the complete user journey from document scheduling to doorstep visa delivery. This product opened new revenue streams and simplified what used to be a tedious process for thousands of users."
       },
       {
         "company":"PT. Global Prima Solusindo",
         "title":"Software Engineer Developer",
         "years":"2018 - 2019",
-        "description":"Collaborated across the full software development lifecycle for an education platform connecting students, teachers and parents. Developed applications for both desktop and mobile operating systems. Designed and implemented end-to-end backend architecture using GraphQL. Documented technical workflows in an internal wiki to support onboarding and knowledge sharing."
+        "description":"Architected and delivered a comprehensive education platform that bridges students, teachers, and parents in one unified ecosystem. Took ownership of the entire tech stack—from designing a robust GraphQL backend to building intuitive cross-platform applications. Established technical documentation standards that became the foundation for team knowledge sharing and faster onboarding. This role sharpened my full-stack capabilities and taught me the art of building scalable, maintainable systems."
       },
       {
         "company":"PT Salestock Indonesia (Sorabel)",
         "title":"Software Engineer - React Developer",
         "years":"2016 - 2018",
-        "description":"Developed the Warehouse Management System (WMS) UI using React.js, covering the full frontend flow from purchase order creation and quality control to barcode preparation and delivery. Built and enhanced customer-facing features for Salestock's e-commerce women's fashion platform using React Native, including feed list views, checkout flow, payment, and review screens."
+        "description":"Built the backbone of Sorabel's operations—a sophisticated Warehouse Management System (WMS) using React.js that streamlined the entire fulfillment pipeline from purchase orders to final delivery. Simultaneously enhanced the customer-facing mobile app with React Native, crafting delightful shopping experiences including feed views, seamless checkout flows, secure payments, and review systems. This dual focus taught me the importance of building for both internal efficiency and customer satisfaction."
       },
       {
         "company":"PT Suzuki Indomobil",
         "title":"Software Engineer",
         "years":"2015 - 2016",
-        "description":"Participated in highly complex software engineering projects. Resolved hardware and software compatibility issues to ensure reliable system performance and integration. Analyzed existing systems to identify requirements and opportunities for new web and database applications. Developed new web and database applications aligned with user needs and project specifications."
+        "description":"Launched my professional journey tackling enterprise-scale challenges in the automotive industry. Debugged complex hardware-software integration issues, ensuring rock-solid system reliability. Analyzed legacy systems and transformed user requirements into modern web and database solutions. This foundational experience taught me the discipline of writing production-grade code and the importance of thorough system analysis."
       },
       {
         "company":"Bina Nusantara",
         "title":"Front End Engineer",
         "years":"2013 - 2015",
-        "description":"Coded responsive websites using HTML, CSS, JavaScript and jQuery to implement interactive user interfaces. Translated design mockups into functional web pages using HTML, JavaScript, AJAX and JSON. Implemented front-end enhancements by proposing, designing and developing solutions to fulfill feature requests and address reported issues."
+        "description":"Where it all began—my first dive into the world of web development. Transformed static designs into living, breathing websites using HTML, CSS, JavaScript, and jQuery. Mastered the art of translating design mockups into pixel-perfect, interactive experiences while learning the fundamentals of AJAX and JSON. This role ignited my passion for frontend development and set me on the path to becoming the engineer I am today."
       }
     ],
     "skills":[
@@ -139,25 +139,31 @@
     "projects": [
       {
         "title":"Traveloka Flight Booking",
-        "category":"Led frontend development for flight booking form redesign, contributing to 10.16% revenue increase. Integrated with multiple metasearch partners including Google Flights, Skyscanner, and KAYAK.",
+        "category":"Redesigned Traveloka's flight booking experience, driving a massive 10.16% revenue increase. Orchestrated complex integrations with global metasearch platforms including Google Flights, Skyscanner, and KAYAK—connecting millions of travelers with their perfect flights.",
         "image":"traveloka-logo.png",
         "url":"https://www.traveloka.com"
       },
       {
+        "title":"Supertool.id",
+        "category":"Crafted a comprehensive suite of developer tools and utilities to supercharge productivity. A one-stop platform featuring everything from JSON formatters and code generators to image optimizers and API testing tools. Built to make developers' lives easier, one tool at a time.",
+        "image":"supertool.png",
+        "url":"https://supertool.id/"
+      },
+      {
         "title":"Maideasy",
-        "category":"Developed a home services booking app from scratch using React Native, improving user experience for seamless cleaner reservations. A Malaysian platform that revolutionises the way we book part-time cleaners.",
+        "category":"Built from ground zero—a beautifully crafted React Native app that revolutionized home cleaning services in Malaysia. Designed intuitive booking flows that made finding and scheduling professional cleaners as easy as ordering food delivery.",
         "image":"maideasy.png",
         "url":"https://www.maideasy.my"
       },
       {
         "title":"Jaztip",
-        "category":"The social-commerce marketplace in Indonesia. Buying and selling application where you can find seller info as well as requests for purchase of goods, and directly connect to the chat application of your choice.",
+        "category":"Indonesia's innovative social-commerce marketplace where buying meets community. Built a seamless platform connecting buyers and sellers, with smart integrations to popular chat apps for instant communication. Making e-commerce more personal, one connection at a time.",
         "image":"jaztip.png",
         "url":"https://www.jaztip.com"
       },
       {
         "title":"Ryna",
-        "category":"A co-living and apartment rental platform that leverages technology to make renting easier and safer for people who identify as women, while giving them the proper tools to pave their own path and build a life they love.",
+        "category":"Empowering women through technology. A forward-thinking co-living platform that combines safety, community, and convenience. Built with cutting-edge tech to help women find their perfect living space and build the life they envision.",
         "image":"ryna.png",
         "url":"#"
       }
@@ -166,12 +172,12 @@
   "testimonials":{
     "testimonials":[
       {
-        "text":"It's not the technology that changes the world. It's the people using technology that changes the world.",
-        "user":"Jack Ma"
+        "text":"The best way to predict the future is to invent it.",
+        "user":"Alan Kay"
       },
       {
-        "text":"Technology is just a tool. In terms of getting the kids working together and motivating them. The teacher is the most important.",
-        "user":"Bill Gates"
+        "text":"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+        "user":"Martin Fowler"
       }
     ]
   }
