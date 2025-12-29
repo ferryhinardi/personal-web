@@ -219,7 +219,7 @@ export default function Header({ data }: HeaderProps) {
           {/* Greeting */}
           <motion.div variants={staggerItem} className="mb-4">
             <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium">
-              👋 Welcome to my portfolio
+              👋 Welcome! Let's build something amazing
             </span>
           </motion.div>
 
@@ -236,13 +236,13 @@ export default function Header({ data }: HeaderProps) {
             <h2 className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light">
               <TypeAnimation
                 sequence={[
-                  'Software Engineer',
+                  'Crafting Digital Experiences',
                   2000,
-                  'React.js Developer',
+                  'Building Scalable Solutions',
                   2000,
-                  'Web Developer',
+                  'React.js Specialist',
                   2000,
-                  'Frontend Expert',
+                  'Turning Ideas into Reality',
                   2000,
                 ]}
                 wrapper="span"
@@ -293,7 +293,7 @@ export default function Header({ data }: HeaderProps) {
                 handleNavClick(e as any, '#contact');
               }}
             >
-              Get In Touch
+              Let's Connect
             </Button>
             <Button
               size="lg"
@@ -304,7 +304,7 @@ export default function Header({ data }: HeaderProps) {
                 handleNavClick(e as any, '#portfolio');
               }}
             >
-              View My Work
+              Explore My Work
             </Button>
           </motion.div>
         </motion.div>
@@ -318,7 +318,7 @@ export default function Header({ data }: HeaderProps) {
           transition={{ delay: 1.5, duration: 0.8 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors group"
         >
-          <span className="text-sm font-medium">Scroll Down</span>
+          <span className="text-sm font-medium">Discover More</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

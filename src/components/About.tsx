@@ -51,7 +51,7 @@ export default function About({ data }: AboutProps) {
           <motion.div variants={staggerItem} className="text-center mb-12">
             <h2 className="section-title">About Me</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Get to know more about my background, experience, and what drives me as a developer.
+              The story behind the code—my journey, passion, and what makes me tick as a developer
             </p>
           </motion.div>
 
@@ -86,7 +86,7 @@ export default function About({ data }: AboutProps) {
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
                       <User className="w-4 h-4" />
-                      Software Engineer
+                      Software Engineer & Problem Solver
                     </p>
                   </div>
 
@@ -95,7 +95,7 @@ export default function About({ data }: AboutProps) {
                   {/* Contact Details */}
                   <div className="space-y-4">
                     <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Contact Details
+                      Let's Connect
                     </h4>
                     {contactDetails.map((detail) => {
                       const Icon = detail.icon;
@@ -147,7 +147,7 @@ export default function About({ data }: AboutProps) {
                   >
                     <a href={resumedownload} download>
                       <Download className="w-5 h-5 mr-2" />
-                      Download Resume
+                      Get My Resume
                     </a>
                   </Button>
                 </CardContent>
@@ -173,28 +173,28 @@ export default function About({ data }: AboutProps) {
                     {/* Key Highlights */}
                     <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                        Key Highlights
+                        By The Numbers
                       </h4>
                       <div className="grid sm:grid-cols-2 gap-4">
                         {[
                           {
                             number: '5+',
-                            label: 'Years Experience',
+                            label: 'Years of Excellence',
                             color: 'from-cyan-500 to-blue-600',
                           },
                           {
                             number: '10+',
-                            label: 'Major Projects',
+                            label: 'Successful Projects',
                             color: 'from-blue-500 to-purple-600',
                           },
                           {
                             number: '95%',
-                            label: 'React.js Expertise',
+                            label: 'React.js Mastery',
                             color: 'from-purple-500 to-pink-600',
                           },
                           {
                             number: '∞',
-                            label: 'Learning & Growing',
+                            label: 'Always Evolving',
                             color: 'from-pink-500 to-red-600',
                           },
                         ].map((stat) => (
@@ -219,7 +219,7 @@ export default function About({ data }: AboutProps) {
                     {/* Tech Stack Preview */}
                     <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                        Core Technologies
+                        My Tech Arsenal
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {[
