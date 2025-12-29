@@ -46,7 +46,7 @@ export default function Portfolio({ data }: PortfolioProps) {
             </div>
             <h2 className="section-title">Featured Projects</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Check out some of my recent work and professional projects
+              A showcase of impactful projects that solve real-world problems and delight users
             </p>
           </motion.div>
 

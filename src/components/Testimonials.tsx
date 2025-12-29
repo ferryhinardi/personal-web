@@ -66,7 +66,7 @@ export default function Testimonials({ data }: TestimonialsProps) {
             </div>
             <h2 className="section-title">Testimonials</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Words of wisdom from industry leaders
+              Timeless wisdom from the visionaries who shaped our craft
             </p>
           </div>
 
