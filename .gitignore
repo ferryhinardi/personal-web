@@ -83,3 +83,6 @@ buck-out/
 /ios/Pods/
 .vercel
 logs/
+
+# Dependency check artifacts
+outdated.json
