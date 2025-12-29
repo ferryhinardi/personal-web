@@ -35,7 +35,7 @@ export default function About({ data }: AboutProps) {
 
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-slate-800/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="main-content" className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

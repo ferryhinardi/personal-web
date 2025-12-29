@@ -10,6 +10,7 @@ import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
 import ScrollProgress from '@components/ui/scroll-progress';
 import BackToTop from '@components/ui/back-to-top';
+import SkipLinks from '@components/ui/skip-links';
 import {
   AboutSkeleton,
   ResumeSkeleton,
@@ -64,6 +65,7 @@ function App() {
   return (
     <HelmetProvider>
       <div className="App">
+        <SkipLinks />
         <ScrollProgress />
         <Helmet>
           <script type="application/ld+json">

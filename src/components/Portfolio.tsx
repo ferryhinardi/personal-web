@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Code2 } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Code2, Filter, X } from 'lucide-react';
 import type { Portfolio as PortfolioData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -32,6 +32,24 @@ export default function Portfolio({ data }: PortfolioProps) {
 
   const { projects } = data;
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+
+  // Get all unique technologies from all projects
+  const allTechnologies = useMemo(() => {
+    const techSet = new Set<string>();
+    projects.forEach((project) => {
+      project.technologies?.forEach((tech) => techSet.add(tech));
+    });
+    return Array.from(techSet).sort();
+  }, [projects]);
+
+  // Filter projects based on selected technology
+  const filteredProjects = useMemo(() => {
+    if (!selectedTech) return projects;
+    return projects.filter((project) =>
+      project.technologies?.includes(selectedTech)
+    );
+  }, [projects, selectedTech]);
 
   return (
     <section id="portfolio" className="section-padding bg-gray-50 dark:bg-slate-800/50">
@@ -43,7 +61,7 @@ export default function Portfolio({ data }: PortfolioProps) {
           viewport={viewportOptions}
         >
           {/* Section Title */}
-          <motion.div variants={staggerItem} className="text-center mb-16">
+          <motion.div variants={staggerItem} className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 mb-4">
               <Code2 className="w-8 h-8 text-white" />
             </div>
@@ -53,9 +71,61 @@ export default function Portfolio({ data }: PortfolioProps) {
             </p>
           </motion.div>
 
+          {/* Technology Filter */}
+          {allTechnologies.length > 0 && (
+            <motion.div variants={staggerItem} className="mb-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Filter className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  Filter by Technology
+                </h3>
+                {selectedTech && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setSelectedTech(null)}
+                    className="ml-auto text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  >
+                    <X className="w-4 h-4 mr-1" />
+                    Clear Filter
+                  </Button>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {allTechnologies.map((tech) => (
+                  <Badge
+                    key={tech}
+                    variant={selectedTech === tech ? 'default' : 'outline'}
+                    className={`cursor-pointer transition-all ${
+                      selectedTech === tech
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-transparent hover:from-cyan-600 hover:to-blue-700'
+                        : 'border-slate-300 dark:border-slate-600 hover:border-cyan-500 dark:hover:border-cyan-500 hover:bg-cyan-500/10'
+                    }`}
+                    onClick={() => setSelectedTech(selectedTech === tech ? null : tech)}
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+              {selectedTech && (
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-3">
+                  Showing {filteredProjects.length} of {projects.length} projects
+                </p>
+              )}
+            </motion.div>
+          )}
+
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => {
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedTech || 'all'}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredProjects.map((project, index) => {
               const projectImage = `images/portfolio/${project.image}`;
               return (
                 <motion.div
@@ -104,24 +174,26 @@ export default function Portfolio({ data }: PortfolioProps) {
                         {project.category}
                       </p>
                       {project.technologies && project.technologies.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech) => (
-                            <Badge
-                              key={tech}
-                              variant="secondary"
-                              className="text-xs bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border-cyan-500/20 text-cyan-700 dark:text-cyan-300 hover:from-cyan-500/20 hover:to-blue-500/20 transition-colors"
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
+                         <div className="flex flex-wrap gap-2">
+                           {project.technologies.map((tech) => (
+                             <Badge
+                               key={tech}
+                               variant="secondary"
+                               className="text-xs bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border-cyan-500/20 text-cyan-700 dark:text-cyan-300 hover:from-cyan-500/20 hover:to-blue-500/20 transition-colors cursor-pointer"
+                               onClick={() => setSelectedTech(tech)}
+                             >
+                               {tech}
+                             </Badge>
+                           ))}
+                         </div>
+                       )}
+                     </CardContent>
+                   </Card>
+                 </motion.div>
+               );
+             })}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
 
