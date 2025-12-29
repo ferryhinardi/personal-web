@@ -67,6 +67,7 @@ export default function Portfolio({ data }: PortfolioProps) {
                       <img
                         src={projectImage}
                         alt={project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -122,6 +123,7 @@ export default function Portfolio({ data }: PortfolioProps) {
                   <img
                     src={`images/portfolio/${selectedProject.image}`}
                     alt={selectedProject.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
