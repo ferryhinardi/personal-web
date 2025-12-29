@@ -116,24 +116,18 @@ export default function Portfolio({ data }: PortfolioProps) {
           )}
 
           {/* Projects Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedTech || 'all'}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filteredProjects.map((project, index) => {
-              const projectImage = `images/portfolio/${project.image}`;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project) => {
+              const projectImage = `/images/portfolio/${project.image}`;
               return (
                 <motion.div
                   key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={viewportOptions}
-                  transition={{ delay: index * 0.1 }}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 h-full">
                     <div className="relative overflow-hidden aspect-video">
@@ -142,6 +136,7 @@ export default function Portfolio({ data }: PortfolioProps) {
                         alt={project.title}
                         width={600}
                         height={400}
+                        responsive={false}
                         className="w-full h-full transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -192,8 +187,8 @@ export default function Portfolio({ data }: PortfolioProps) {
                  </motion.div>
                );
              })}
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
         </motion.div>
       </div>
 
@@ -207,16 +202,17 @@ export default function Portfolio({ data }: PortfolioProps) {
                   {selectedProject.title}
                 </DialogTitle>
               </DialogHeader>
-              <div className="space-y-6">
-                <div className="relative overflow-hidden rounded-lg aspect-video">
-                  <OptimizedImage
-                    src={`images/portfolio/${selectedProject.image}`}
-                    alt={selectedProject.title}
-                    width={800}
-                    height={450}
-                    className="w-full h-full"
-                  />
-                </div>
+               <div className="space-y-6">
+                 <div className="relative overflow-hidden rounded-lg aspect-video">
+                   <OptimizedImage
+                     src={`/images/portfolio/${selectedProject.image}`}
+                     alt={selectedProject.title}
+                     width={800}
+                     height={450}
+                     responsive={false}
+                     className="w-full h-full"
+                   />
+                 </div>
                 <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
                   {selectedProject.category}
                 </DialogDescription>
