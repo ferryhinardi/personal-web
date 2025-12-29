@@ -298,7 +298,7 @@ export default function Header({ data }: HeaderProps) {
             <Button
               size="lg"
               variant="outline"
-              className="border-white/20 text-white hover:bg-white/10 text-base sm:text-lg px-8 py-6"
+              className="border-white/20 !text-white bg-transparent hover:bg-white/10 text-base sm:text-lg px-8 py-6"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick(e as any, '#portfolio');
