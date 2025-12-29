@@ -248,7 +248,7 @@ export default function Contact({ data }: ContactProps) {
               <Card>
                 <CardContent className="p-6 space-y-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                       Contact Information
                     </h3>
                   </div>
@@ -259,10 +259,10 @@ export default function Contact({ data }: ContactProps) {
                         <MapPin className="w-5 h-5 text-sky-600 dark:text-sky-400" />
                       </div>
                       <div>
-                        <p className="font-medium text-slate-900 dark:text-white">
+                        <p className="font-medium text-gray-900 dark:text-white">
                           Location
                         </p>
-                        <p className="text-sm text-slate-600 dark:text-slate-300">
+                        <p className="text-sm text-gray-700 dark:text-slate-300">
                           {address.street}
                           <br />
                           {address.city}, {address.state} {address.zip}
@@ -275,7 +275,7 @@ export default function Contact({ data }: ContactProps) {
                         <Mail className="w-5 h-5 text-sky-600 dark:text-sky-400" />
                       </div>
                       <div>
-                        <p className="font-medium text-slate-900 dark:text-white">Email</p>
+                        <p className="font-medium text-gray-900 dark:text-white">Email</p>
                         <a
                           href={`mailto:${email}`}
                           className="text-sm text-sky-600 dark:text-sky-400 hover:underline break-all"

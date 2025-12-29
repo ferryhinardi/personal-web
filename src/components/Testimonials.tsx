@@ -91,11 +91,11 @@ export default function Testimonials({ data }: TestimonialsProps) {
                     >
                       <div className="flex flex-col items-center text-center space-y-6">
                         <Quote className="w-12 h-12 text-sky-500 dark:text-sky-400 opacity-50" />
-                        <blockquote className="text-xl sm:text-2xl font-medium text-slate-700 dark:text-slate-200 leading-relaxed">
+                        <blockquote className="text-xl sm:text-2xl font-medium text-gray-900 dark:text-slate-200 leading-relaxed">
                           "{testimonials[currentIndex].text}"
                         </blockquote>
                         <cite className="not-italic">
-                          <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                          <p className="text-lg font-semibold text-gray-900 dark:text-white">
                             {testimonials[currentIndex].user}
                           </p>
                         </cite>
