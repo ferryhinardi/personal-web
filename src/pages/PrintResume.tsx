@@ -47,7 +47,7 @@ export default function PrintResume() {
       <div className="print-resume">
       {/* Page numbers will be added via CSS */}
       
-      {/* Header */}
+      {/* Compact Header with Contact Info and QR Code (visible on print only) */}
       <header className="print-header">
         <div className="print-header-content">
           <div className="print-header-text">
