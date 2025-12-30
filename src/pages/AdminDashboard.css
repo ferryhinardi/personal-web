@@ -1,0 +1,293 @@
+/* Admin Dashboard Styles */
+
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.admin-login-card h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #1a1a1a;
+}
+
+.admin-login-card .form-group {
+  margin-bottom: 20px;
+}
+
+.admin-login-card .login-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-error {
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.admin-note {
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 20px;
+}
+
+.admin-note code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #0369a1;
+}
+
+/* Dashboard */
+.admin-dashboard {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.admin-header {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  font-size: 24px;
+  color: #0f172a;
+  margin: 0;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.unsaved-indicator {
+  color: #f59e0b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Tabs */
+.admin-tabs {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 40px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  position: sticky;
+  top: 85px;
+  z-index: 90;
+}
+
+.admin-tabs button {
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.admin-tabs button:hover {
+  color: #0369a1;
+  background: #f8fafc;
+}
+
+.admin-tabs button.tab-active {
+  color: #0369a1;
+  border-bottom-color: #0369a1;
+  background: #f0f9ff;
+}
+
+/* Content */
+.admin-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cards */
+.admin-card {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card.compact {
+  padding: 20px;
+}
+
+.admin-card h2 {
+  font-size: 20px;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.admin-card h3 {
+  font-size: 18px;
+  color: #0f172a;
+  margin: 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.form-group.flex-2 {
+  grid-column: span 2;
+}
+
+/* Array Items */
+.array-item {
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.array-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Buttons */
+.add-btn {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.remove-btn {
+  align-self: flex-end;
+  margin-top: 24px;
+}
+
+/* Footer */
+.admin-footer {
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 20px 40px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.admin-footer p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.admin-footer code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #0369a1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-header {
+    padding: 16px 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 20px;
+  }
+
+  .admin-tabs {
+    padding: 0 20px;
+  }
+
+  .admin-tabs button {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.flex-2 {
+    grid-column: span 1;
+  }
+}
