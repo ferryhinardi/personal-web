@@ -279,15 +279,15 @@
 /* Print button (shows in screen, hidden in print) */
 .print-button {
   position: fixed;
-  bottom: 80px;
-  right: 20px;
+  bottom: 104px; /* 32px (back-to-top position) + 56px (back-to-top height) + 16px (gap) */
+  right: 32px; /* Match back-to-top button alignment */
   z-index: 1000;
   background: linear-gradient(135deg, #0891b2 0%, #3b82f6 100%);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 56px;
-  height: 56px;
+  width: 48px; /* Slightly smaller than back-to-top to show hierarchy */
+  height: 48px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
   display: flex;
@@ -299,6 +299,7 @@
 .print-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(8, 145, 178, 0.4);
+  background: linear-gradient(135deg, #0ea5e9 0%, #60a5fa 100%);
 }
 
 @media print {
@@ -309,9 +310,9 @@
 
 @media (max-width: 640px) {
   .print-button {
-    width: 48px;
-    height: 48px;
-    bottom: 70px;
-    right: 16px;
+    width: 44px;
+    height: 44px;
+    bottom: 96px; /* 32px (back-to-top) + 48px (back-to-top height) + 16px (gap) */
+    right: 32px;
   }
 }
