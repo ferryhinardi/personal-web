@@ -92,6 +92,48 @@
   text-align: center;
 }
 
+/* Contact Information Section */
+.print-contact-section {
+  text-align: center;
+}
+
+.print-contact-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.print-contact-title {
+  font-size: 14px;
+  color: #0369a1;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.print-contact-details {
+  font-size: 11px;
+  color: #475569;
+  font-family: Arial, sans-serif;
+  margin-bottom: 6px;
+}
+
+.print-contact-details .separator {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
+
+.print-contact-social {
+  font-size: 10px;
+  color: #475569;
+  font-family: Arial, sans-serif;
+}
+
+.print-contact-social .separator {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
+
 /* Sections */
 .print-section {
   margin-bottom: 20px;

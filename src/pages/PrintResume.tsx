@@ -86,6 +86,35 @@ export default function PrintResume() {
         </div>
       </header>
 
+      {/* Contact Information Section - #1 */}
+      <section className="print-section">
+        <h2 className="print-section-title">Contact Information</h2>
+        <div className="print-contact-section">
+          <h3 className="print-contact-name">{main.name}</h3>
+          <p className="print-contact-title">{main.occupation}</p>
+          <div className="print-contact-details">
+            <span>{main.email}</span>
+            <span className="separator">•</span>
+            <span>{main.phone}</span>
+            <span className="separator">•</span>
+            <span>{main.website}</span>
+          </div>
+          {(linkedinUrl || githubUrl) && (
+            <div className="print-contact-social">
+              {linkedinUrl && (
+                <span>LinkedIn: {linkedinUrl.replace('https://', '').replace('www.', '')}</span>
+              )}
+              {githubUrl && (
+                <>
+                  {linkedinUrl && <span className="separator">•</span>}
+                  <span>GitHub: {githubUrl.replace('https://', '').replace('www.', '')}</span>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Professional Summary */}
       <section className="print-section">
         <h2 className="print-section-title">Professional Summary</h2>
