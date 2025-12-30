@@ -9,72 +9,7 @@
   line-height: 1.4;
 }
 
-/* Header */
-.print-header {
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 3px solid #0369a1;
-}
-
-.print-header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.print-header-text {
-  flex: 1;
-  text-align: center;
-}
-
-.print-name {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0 0 8px 0;
-  color: #0f172a;
-  letter-spacing: 0.5px;
-}
-
-.print-title {
-  font-size: 16px;
-  color: #0369a1;
-  margin: 0 0 12px 0;
-  font-weight: 500;
-}
-
-.print-contact {
-  font-size: 11px;
-  color: #475569;
-  font-family: Arial, sans-serif;
-  margin-bottom: 6px;
-}
-
-.print-contact .separator {
-  margin: 0 8px;
-  color: #cbd5e1;
-}
-
-.print-social {
-  font-size: 10px;
-  color: #475569;
-  font-family: Arial, sans-serif;
-  margin-top: 6px;
-}
-
-.print-social .separator {
-  margin: 0 8px;
-  color: #cbd5e1;
-}
-
-.print-social-item {
-  display: inline-block;
-}
-
-.print-social-label {
-  font-weight: 600;
-  color: #0369a1;
-}
+/* Old header styles removed - now using .print-contact-main layout */
 
 /* QR Code */
 .print-qr-code {
@@ -94,6 +29,18 @@
 
 /* Contact Information Section */
 .print-contact-section {
+  text-align: center;
+}
+
+.print-contact-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.print-contact-text {
+  flex: 1;
   text-align: center;
 }
 
@@ -312,11 +259,6 @@
   }
 
   /* Adjust spacing for print */
-  .print-header {
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-  }
-
   .print-section {
     margin-bottom: 12px;
   }
@@ -326,12 +268,12 @@
   }
 
   /* Reduce font sizes slightly for print */
-  .print-name {
-    font-size: 28px;
+  .print-contact-name {
+    font-size: 16px;
   }
 
-  .print-title {
-    font-size: 14px;
+  .print-contact-title {
+    font-size: 12px;
   }
 
   .print-section-title {

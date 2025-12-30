@@ -41,76 +41,46 @@ export default function PrintResume() {
   return (
     <div className="print-resume">
       {/* Page numbers will be added via CSS */}
-      
-      {/* Compact Header with Contact Info and QR Code */}
-      <header className="print-header">
-        <div className="print-header-content">
-          <div className="print-header-text">
-            <h1 className="print-name">{main.name}</h1>
-            <p className="print-title">{main.occupation}</p>
-            <div className="print-contact">
-              <span>{main.email}</span>
-              <span className="separator">•</span>
-              <span>{main.phone}</span>
-              <span className="separator">•</span>
-              <span>{main.website}</span>
-            </div>
-            {(linkedinUrl || githubUrl) && (
-              <div className="print-social">
-                {linkedinUrl && (
-                  <span className="print-social-item">
-                    <span className="print-social-label">LinkedIn:</span> {linkedinUrl.replace('https://', '').replace('www.', '')}
-                  </span>
-                )}
-                {githubUrl && (
-                  <>
-                    {linkedinUrl && <span className="separator">•</span>}
-                    <span className="print-social-item">
-                      <span className="print-social-label">GitHub:</span> {githubUrl.replace('https://', '').replace('www.', '')}
-                    </span>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-          {/* QR Code linking to portfolio */}
-          <div className="print-qr-code">
-            <QRCodeSVG 
-              value={main.website} 
-              size={80}
-              level="M"
-              includeMargin={false}
-            />
-            <p className="print-qr-label">Scan for Portfolio</p>
-          </div>
-        </div>
-      </header>
 
-      {/* Contact Information Section - #1 */}
+      {/* Contact Information Section with QR Code - #1 */}
       <section className="print-section print-contact-no-border">
         <div className="print-contact-section">
-          <h3 className="print-contact-name">{main.name}</h3>
-          <p className="print-contact-title">{main.occupation}</p>
-          <div className="print-contact-details">
-            <span>{main.email}</span>
-            <span className="separator">•</span>
-            <span>{main.phone}</span>
-            <span className="separator">•</span>
-            <span>{main.website}</span>
-          </div>
-          {(linkedinUrl || githubUrl) && (
-            <div className="print-contact-social">
-              {linkedinUrl && (
-                <span>LinkedIn: {linkedinUrl.replace('https://', '').replace('www.', '')}</span>
-              )}
-              {githubUrl && (
-                <>
-                  {linkedinUrl && <span className="separator">•</span>}
-                  <span>GitHub: {githubUrl.replace('https://', '').replace('www.', '')}</span>
-                </>
+          <div className="print-contact-main">
+            <div className="print-contact-text">
+              <h3 className="print-contact-name">{main.name}</h3>
+              <p className="print-contact-title">{main.occupation}</p>
+              <div className="print-contact-details">
+                <span>{main.email}</span>
+                <span className="separator">•</span>
+                <span>{main.phone}</span>
+                <span className="separator">•</span>
+                <span>{main.website}</span>
+              </div>
+              {(linkedinUrl || githubUrl) && (
+                <div className="print-contact-social">
+                  {linkedinUrl && (
+                    <span>LinkedIn: {linkedinUrl.replace('https://', '').replace('www.', '')}</span>
+                  )}
+                  {githubUrl && (
+                    <>
+                      {linkedinUrl && <span className="separator">•</span>}
+                      <span>GitHub: {githubUrl.replace('https://', '').replace('www.', '')}</span>
+                    </>
+                  )}
+                </div>
               )}
             </div>
-          )}
+            {/* QR Code linking to portfolio */}
+            <div className="print-qr-code">
+              <QRCodeSVG 
+                value={main.website} 
+                size={80}
+                level="M"
+                includeMargin={false}
+              />
+              <p className="print-qr-label">Scan for Portfolio</p>
+            </div>
+          </div>
         </div>
       </section>
 
