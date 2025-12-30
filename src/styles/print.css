@@ -57,6 +57,18 @@
     opacity: 1 !important;
   }
 
+  /* Override dark mode - ensure everything is visible */
+  .dark\:bg-slate-800\/50,
+  .dark\:text-white,
+  .dark\:text-gray-400,
+  .dark\:text-gray-300,
+  .dark\:text-cyan-400,
+  .dark\:border-slate-900 {
+    background: white !important;
+    color: #000 !important;
+    border-color: #000 !important;
+  }
+
   /* Hide the main "Resume" title and subtitle */
   #resume .text-center.mb-16:first-child {
     display: none !important;
@@ -89,37 +101,57 @@
   }
 
   /* Section headers */
-  h3 {
+  #resume h3 {
     font-size: 14pt !important;
     font-weight: bold !important;
     color: #000 !important;
+    background: white !important;
     text-transform: uppercase;
     margin: 18pt 0 10pt 0 !important;
     padding-bottom: 4pt !important;
     border-bottom: 2pt solid #000 !important;
     page-break-after: avoid !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
   /* Company/School names */
-  h4 {
+  #resume h4 {
     font-size: 11pt !important;
     font-weight: bold !important;
     color: #000 !important;
+    background: white !important;
     margin: 0 0 4pt 0 !important;
     page-break-after: avoid !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
   /* Job titles / Degrees */
-  .text-cyan-600,
-  .dark\:text-cyan-400 {
+  #resume .text-cyan-600,
+  #resume .dark\:text-cyan-400,
+  #resume p.text-lg {
     font-size: 10pt !important;
     font-style: italic !important;
     color: #333 !important;
+    background: white !important;
     margin-bottom: 6pt !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* All text visible */
+  #resume .text-gray-700,
+  #resume .text-gray-900,
+  #resume .dark\:text-gray-300,
+  #resume .dark\:text-white {
+    color: #000 !important;
+    background: white !important;
+    visibility: visible !important;
   }
 
   /* Card styling */
-  [class*="Card"] {
+  #resume [class*="Card"] {
     border: none !important;
     border-left: 3pt solid #000 !important;
     border-radius: 0 !important;
@@ -127,14 +159,19 @@
     margin-bottom: 12pt !important;
     padding-left: 10pt !important;
     page-break-inside: avoid !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
-  [class*="CardContent"] {
+  #resume [class*="CardContent"] {
     padding: 8pt 0 8pt 8pt !important;
+    background: white !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
   /* Badge styling */
-  [class*="Badge"] {
+  #resume [class*="Badge"] {
     display: inline-block !important;
     padding: 2pt 8pt !important;
     border: 1pt solid #000 !important;
@@ -143,20 +180,26 @@
     color: #000 !important;
     background: white !important;
     font-weight: normal !important;
+    visibility: visible !important;
   }
 
   /* Text styling */
-  p {
+  #resume p {
     color: #000 !important;
+    background: white !important;
     font-size: 10pt !important;
     line-height: 1.4 !important;
     margin-bottom: 8pt !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
   /* Links */
-  a {
+  #resume a {
     color: #000 !important;
+    background: white !important;
     text-decoration: none !important;
+    visibility: visible !important;
   }
 
   /* Timeline adjustments */
