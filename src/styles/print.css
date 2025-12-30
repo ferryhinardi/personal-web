@@ -6,18 +6,18 @@
     print-color-adjust: exact !important;
   }
 
-  /* Page setup */
+  /* Page setup - A4 optimized */
   @page {
-    margin: 0.75in;
-    size: letter portrait;
+    margin: 20mm 15mm;
+    size: A4 portrait;
   }
 
   body {
     background: white !important;
     color: black !important;
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 11pt;
-    line-height: 1.5;
+    font-size: 10pt;
+    line-height: 1.4;
   }
 
   /* Hide non-resume sections */
@@ -41,6 +41,21 @@
     visibility: visible !important;
     background: white !important;
     color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Container adjustments for A4 */
+  #resume .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #resume .max-w-6xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* Hide the "Resume" title */
@@ -52,22 +67,22 @@
   #resume .container::before {
     content: 'FERRY HINARDI';
     display: block;
-    font-size: 26pt;
+    font-size: 24pt;
     font-weight: bold;
     text-align: center;
     color: #0369a1;
     letter-spacing: 3pt;
-    margin-bottom: 10pt;
+    margin-bottom: 8pt;
     font-family: Arial, sans-serif;
   }
 
   #resume .container::after {
     content: 'Software Engineer · Full Stack Developer';
     display: block;
-    font-size: 11pt;
+    font-size: 10.5pt;
     text-align: center;
     color: #334155;
-    margin-bottom: 8pt;
+    margin-bottom: 6pt;
     font-weight: 600;
     font-family: Arial, sans-serif;
   }
@@ -75,12 +90,12 @@
   #resume .max-w-6xl::before {
     content: 'hinardi93@gmail.com  ·  +6281958020882  ·  ferryhinardi.com';
     display: block;
-    font-size: 9.5pt;
+    font-size: 9pt;
     text-align: center;
     color: #475569;
-    margin-bottom: 14pt;
-    padding-bottom: 14pt;
-    border-bottom: 2.5pt solid #0369a1;
+    margin-bottom: 12pt;
+    padding-bottom: 10pt;
+    border-bottom: 2pt solid #0369a1;
     font-family: Arial, sans-serif;
   }
 
@@ -98,13 +113,13 @@
 
   /* Section titles (Education, Work, Skills) */
   #resume h3 {
-    font-size: 13pt;
+    font-size: 12pt;
     font-weight: bold;
     color: #0369a1;
     text-transform: uppercase;
     letter-spacing: 1.5pt;
-    margin: 20pt 0 12pt 0;
-    padding-bottom: 5pt;
+    margin: 16pt 0 10pt 0;
+    padding-bottom: 4pt;
     border-bottom: 2pt solid #cbd5e1;
     page-break-after: avoid;
     font-family: Arial, sans-serif;
@@ -112,50 +127,50 @@
 
   /* Company/School names */
   #resume h4 {
-    font-size: 11.5pt;
+    font-size: 11pt;
     font-weight: bold;
     color: #1e293b;
-    margin: 0 0 3pt 0;
+    margin: 0 0 2pt 0;
     page-break-after: avoid;
   }
 
   /* Job titles */
   #resume p.text-lg {
-    font-size: 10.5pt;
+    font-size: 10pt;
     font-style: italic;
     color: #475569;
-    margin-bottom: 6pt;
+    margin-bottom: 5pt;
   }
 
   /* Regular paragraphs */
   #resume p {
     color: #334155;
-    font-size: 10.5pt;
-    line-height: 1.5;
-    margin-bottom: 6pt;
+    font-size: 10pt;
+    line-height: 1.4;
+    margin-bottom: 5pt;
   }
 
   /* Cards */
   #resume [class*="Card"] {
     border: none;
     border-left: 3pt solid #94a3b8;
-    margin-bottom: 14pt;
-    padding-left: 12pt;
+    margin-bottom: 12pt;
+    padding-left: 10pt;
     page-break-inside: avoid;
     box-shadow: none !important;
   }
 
   #resume [class*="CardContent"] {
-    padding: 6pt 0 6pt 8pt;
+    padding: 5pt 0 5pt 6pt;
   }
 
   /* Badges (dates) */
   #resume [class*="Badge"] {
     display: inline-block;
-    padding: 3pt 10pt;
+    padding: 2pt 8pt;
     border: 1pt solid #64748b;
     border-radius: 3pt;
-    font-size: 9pt;
+    font-size: 8.5pt;
     color: #334155;
     background: #f8fafc;
     font-weight: 500;
@@ -184,11 +199,11 @@
 
   /* Remove extra spacing */
   #resume .space-y-8 > * {
-    margin-bottom: 14pt;
+    margin-bottom: 12pt;
   }
 
   #resume .space-y-6 > * {
-    margin-bottom: 12pt;
+    margin-bottom: 10pt;
   }
 
   /* Page breaks */
