@@ -1,31 +1,26 @@
 /* Professional Print Styles for Resume */
 @media print {
-  /* Force print color adjustment */
+  /* Basic reset */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
-  /* Complete reset */
-  html,
+  /* Page setup */
+  @page {
+    margin: 0.75in;
+    size: letter portrait;
+  }
+
   body {
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
     background: white !important;
-    overflow: visible !important;
+    color: black !important;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.5;
   }
 
-  body {
-    font-family: 'Georgia', 'Times New Roman', serif !important;
-    font-size: 11pt !important;
-    line-height: 1.5 !important;
-    color: #000 !important;
-  }
-
-  /* Hide everything except resume */
+  /* Hide non-resume sections */
   header,
   nav,
   footer,
@@ -36,74 +31,34 @@
   .scroll-progress,
   .back-to-top,
   .skip-links,
-  .print-button,
-  [data-helmet],
-  script,
-  style:not([media="print"]) {
+  .print-button {
     display: none !important;
-    visibility: hidden !important;
   }
 
   /* Show resume section */
   #resume {
     display: block !important;
     visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
     background: white !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    color: black !important;
   }
 
-  /* Make sure all resume children are visible */
-  #resume,
-  #resume * {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Container */
-  #resume .container {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: white !important;
-  }
-
-  #resume .max-w-6xl {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* Hide main title section */
-  #resume > .container > .max-w-6xl > .text-center:first-child,
-  #resume .text-center.mb-16:first-child {
+  /* Hide the "Resume" title */
+  #resume > .container > .max-w-6xl > .text-center:first-child {
     display: none !important;
   }
 
-  /* Add professional header */
-  #resume::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 0;
-    margin-bottom: 0.3in;
-  }
-
+  /* Professional header */
   #resume .container::before {
     content: 'FERRY HINARDI';
     display: block;
     font-size: 26pt;
     font-weight: bold;
     text-align: center;
-    color: #0369a1 !important;
-    background: white !important;
+    color: #0369a1;
     letter-spacing: 3pt;
     margin-bottom: 10pt;
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    font-family: Arial, sans-serif;
   }
 
   #resume .container::after {
@@ -111,254 +66,155 @@
     display: block;
     font-size: 11pt;
     text-align: center;
-    color: #334155 !important;
-    background: white !important;
+    color: #334155;
     margin-bottom: 8pt;
     font-weight: 600;
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    font-family: Arial, sans-serif;
   }
 
-  /* Add contact info */
   #resume .max-w-6xl::before {
-    content: '✉ hinardi93@gmail.com  ·  ☎ +6281958020882  ·  🌐 ferryhinardi.com';
+    content: 'hinardi93@gmail.com  ·  +6281958020882  ·  ferryhinardi.com';
     display: block;
     font-size: 9.5pt;
     text-align: center;
-    color: #475569 !important;
-    background: white !important;
+    color: #475569;
     margin-bottom: 14pt;
     padding-bottom: 14pt;
-    border-bottom: 2.5pt solid #0369a1 !important;
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    border-bottom: 2.5pt solid #0369a1;
+    font-family: Arial, sans-serif;
   }
 
-  /* Hide icon containers and decorative elements */
-  #resume .w-12,
-  #resume .h-12,
-  #resume .rounded-xl,
-  #resume .absolute,
+  /* Hide decorative icons */
+  #resume .w-12.h-12,
   #resume svg,
-  #resume canvas,
-  #resume [class*="recharts"] {
+  #resume canvas {
     display: none !important;
   }
 
-  /* Hide subtitle paragraphs under section headers */
-  #resume .flex.items-center.gap-3 > div > p {
+  /* Hide subtitle text under headers */
+  #resume .flex.items-center.gap-3 > div > p.text-sm {
     display: none !important;
   }
 
-  /* Section Headers */
+  /* Section titles (Education, Work, Skills) */
   #resume h3 {
-    font-size: 13pt !important;
-    font-weight: bold !important;
-    color: #0369a1 !important;
-    background: transparent !important;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #0369a1;
     text-transform: uppercase;
     letter-spacing: 1.5pt;
-    margin: 20pt 0 12pt 0 !important;
-    padding: 0 0 5pt 0 !important;
-    border-bottom: 2pt solid #cbd5e1 !important;
-    page-break-after: avoid !important;
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
-    display: block !important;
+    margin: 20pt 0 12pt 0;
+    padding-bottom: 5pt;
+    border-bottom: 2pt solid #cbd5e1;
+    page-break-after: avoid;
+    font-family: Arial, sans-serif;
   }
 
-  /* First section has less top margin */
-  #resume .mb-16:first-of-type h3 {
-    margin-top: 0 !important;
-  }
-
-  /* Company/School Names */
+  /* Company/School names */
   #resume h4 {
-    font-size: 11.5pt !important;
-    font-weight: bold !important;
-    color: #1e293b !important;
-    background: transparent !important;
-    margin: 0 0 3pt 0 !important;
-    padding: 0 !important;
-    page-break-after: avoid !important;
-    font-family: 'Georgia', 'Times New Roman', serif !important;
-    display: block !important;
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #1e293b;
+    margin: 0 0 3pt 0;
+    page-break-after: avoid;
   }
 
-  /* Job Titles / Degrees - be specific with classes */
-  #resume .text-cyan-600,
-  #resume .text-lg.text-cyan-600,
-  #resume p.text-cyan-600 {
-    font-size: 10.5pt !important;
-    font-style: italic !important;
-    color: #475569 !important;
-    background: transparent !important;
-    margin-bottom: 6pt !important;
-    font-weight: 500 !important;
-    display: block !important;
+  /* Job titles */
+  #resume p.text-lg {
+    font-size: 10.5pt;
+    font-style: italic;
+    color: #475569;
+    margin-bottom: 6pt;
   }
 
-  /* Cards - make sure content is visible */
+  /* Regular paragraphs */
+  #resume p {
+    color: #334155;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    margin-bottom: 6pt;
+  }
+
+  /* Cards */
   #resume [class*="Card"] {
-    display: block !important;
-    border: none !important;
-    border-left: 3pt solid #94a3b8 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
+    border: none;
+    border-left: 3pt solid #94a3b8;
+    margin-bottom: 14pt;
+    padding-left: 12pt;
+    page-break-inside: avoid;
     box-shadow: none !important;
-    margin-bottom: 14pt !important;
-    padding: 0 0 0 12pt !important;
-    page-break-inside: avoid !important;
   }
 
   #resume [class*="CardContent"] {
-    display: block !important;
-    padding: 6pt 0 6pt 8pt !important;
-    background: transparent !important;
+    padding: 6pt 0 6pt 8pt;
   }
 
-  /* Badges */
+  /* Badges (dates) */
   #resume [class*="Badge"] {
-    display: inline-block !important;
-    padding: 3pt 10pt !important;
-    border: 1pt solid #64748b !important;
-    border-radius: 3pt !important;
-    font-size: 9pt !important;
-    color: #334155 !important;
-    background: #f8fafc !important;
-    font-weight: 500 !important;
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
-  }
-
-  /* All paragraphs - critical for content visibility */
-  #resume p {
-    display: block !important;
-    color: #334155 !important;
-    background: transparent !important;
-    font-size: 10.5pt !important;
-    line-height: 1.5 !important;
-    margin-bottom: 6pt !important;
-    text-align: left !important;
-  }
-
-  /* Specific text color overrides */
-  #resume .text-gray-700 {
-    color: #475569 !important;
-  }
-
-  #resume .text-gray-900 {
-    color: #1e293b !important;
+    display: inline-block;
+    padding: 3pt 10pt;
+    border: 1pt solid #64748b;
+    border-radius: 3pt;
+    font-size: 9pt;
+    color: #334155;
+    background: #f8fafc;
+    font-weight: 500;
+    font-family: Arial, sans-serif;
   }
 
   /* Links */
   #resume a {
-    color: #0369a1 !important;
-    background: transparent !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
+    color: #0369a1;
+    text-decoration: none;
   }
 
-  /* Layout fixes */
-  #resume .relative {
-    position: static !important;
+  /* Remove timeline graphics */
+  #resume .relative .absolute {
+    display: none !important;
   }
 
   #resume .md\:ml-20 {
     margin-left: 0 !important;
   }
 
-  #resume .flex,
-  #resume .flex-col,
-  #resume .sm\:flex-row {
-    display: block !important;
-  }
-
-  #resume .flex-1 {
-    flex: none !important;
-  }
-
-  /* Make sure content containers are visible */
-  #resume .space-y-6,
-  #resume .space-y-8 {
-    display: block !important;
-  }
-
-  #resume .space-y-6 > *,
-  #resume .space-y-8 > * {
-    display: block !important;
-  }
-
   /* Separators */
   #resume [class*="Separator"] {
-    display: block !important;
-    border: none !important;
-    background: transparent !important;
-    margin: 18pt 0 !important;
-    height: 0 !important;
+    display: none !important;
   }
 
-  /* Spacing */
-  #resume .mb-16 {
-    margin-bottom: 18pt !important;
-  }
-
-  #resume .mb-8 {
-    margin-bottom: 12pt !important;
-  }
-
-  #resume .mb-4 {
-    margin-bottom: 6pt !important;
-  }
-
-  #resume .mb-3 {
-    margin-bottom: 4pt !important;
-  }
-
-  #resume .mb-2 {
-    margin-bottom: 3pt !important;
-  }
-
+  /* Remove extra spacing */
   #resume .space-y-8 > * {
-    margin-bottom: 14pt !important;
+    margin-bottom: 14pt;
   }
 
   #resume .space-y-6 > * {
-    margin-bottom: 12pt !important;
+    margin-bottom: 12pt;
   }
 
   /* Page breaks */
   #resume h2,
   #resume h3,
   #resume h4 {
-    page-break-after: avoid !important;
+    page-break-after: avoid;
   }
 
-  #resume [class*="Card"],
-  #resume .space-y-6 > *,
-  #resume .space-y-8 > * {
-    page-break-inside: avoid !important;
+  #resume [class*="Card"] {
+    page-break-inside: avoid;
   }
 
-  /* Prevent widows and orphans */
-  #resume p {
-    orphans: 3;
-    widows: 3;
+  /* Override dark mode colors */
+  #resume .dark\:bg-slate-800\/50 {
+    background: white !important;
   }
 
-  /* Page margins */
-  @page {
-    margin: 0.6in 0.7in;
-    size: letter portrait;
+  #resume .dark\:text-white,
+  #resume .dark\:text-gray-400,
+  #resume .dark\:text-gray-300 {
+    color: #334155 !important;
   }
 
-  @page :first {
-    margin-top: 0.4in;
-  }
-
-  /* Page footer with page numbers */
-  @page {
-    @bottom-right {
-      content: counter(page);
-      font-size: 9pt;
-      color: #94a3b8;
-    }
+  #resume .dark\:text-cyan-400 {
+    color: #475569 !important;
   }
 }
 
