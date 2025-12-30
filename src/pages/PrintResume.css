@@ -1,0 +1,278 @@
+/* Print Resume Styles */
+.print-resume {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+/* Header */
+.print-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #0369a1;
+}
+
+.print-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #0f172a;
+  letter-spacing: 0.5px;
+}
+
+.print-title {
+  font-size: 16px;
+  color: #0369a1;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.print-contact {
+  font-size: 11px;
+  color: #475569;
+  font-family: Arial, sans-serif;
+}
+
+.print-contact .separator {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
+
+/* Sections */
+.print-section {
+  margin-bottom: 20px;
+  page-break-inside: avoid;
+}
+
+.print-section-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0369a1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 12px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #cbd5e1;
+  font-family: Arial, sans-serif;
+}
+
+/* Summary */
+.print-summary {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #334155;
+  text-align: justify;
+  margin: 0;
+}
+
+/* Entry */
+.print-entry {
+  margin-bottom: 14px;
+  padding-left: 4px;
+  border-left: 2px solid #e2e8f0;
+  padding-left: 12px;
+}
+
+.print-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  gap: 16px;
+}
+
+.print-entry-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.print-entry-subtitle {
+  font-size: 11px;
+  color: #0369a1;
+  margin: 0;
+  font-weight: 500;
+}
+
+.print-date {
+  font-size: 10px;
+  color: #64748b;
+  white-space: nowrap;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.print-description {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+  text-align: justify;
+}
+
+/* Skills Grid */
+.print-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.print-skill {
+  font-size: 10px;
+  color: #0f172a;
+  padding: 4px 8px;
+  background: #f1f5f9;
+  border-left: 2px solid #0369a1;
+  border-radius: 2px;
+}
+
+.print-skill-name {
+  font-weight: 500;
+}
+
+/* Controls (hidden in print) */
+.print-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.print-btn,
+.close-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: Arial, sans-serif;
+}
+
+.print-btn {
+  background: #0369a1;
+  color: white;
+}
+
+.print-btn:hover {
+  background: #0284c7;
+}
+
+.close-btn {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.close-btn:hover {
+  background: #e2e8f0;
+}
+
+/* Print Media Query */
+@media print {
+  .print-resume {
+    margin: 0;
+    padding: 12mm 15mm;
+    max-width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Ensure page breaks work correctly */
+  .print-section {
+    page-break-inside: avoid;
+  }
+
+  .print-entry {
+    page-break-inside: avoid;
+  }
+
+  /* Adjust spacing for print */
+  .print-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .print-section {
+    margin-bottom: 12px;
+  }
+
+  .print-entry {
+    margin-bottom: 8px;
+  }
+
+  /* Reduce font sizes slightly for print */
+  .print-name {
+    font-size: 28px;
+  }
+
+  .print-title {
+    font-size: 14px;
+  }
+
+  .print-section-title {
+    font-size: 12px;
+  }
+
+  .print-summary {
+    font-size: 10px;
+  }
+
+  .print-entry-title {
+    font-size: 11px;
+  }
+
+  .print-entry-subtitle {
+    font-size: 10px;
+  }
+
+  .print-description {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .print-date {
+    font-size: 9px;
+  }
+
+  .print-skill {
+    font-size: 9px;
+  }
+
+  /* Ensure no background colors in print */
+  .print-date,
+  .print-skill {
+    background: transparent !important;
+    border: 1px solid #cbd5e1;
+  }
+}
+
+/* Screen-only styles */
+@media screen {
+  body {
+    background: #f8fafc;
+  }
+
+  .print-resume {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}

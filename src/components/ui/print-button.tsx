@@ -3,7 +3,8 @@ import { Button } from './button';
 
 export function PrintButton() {
   const handlePrint = () => {
-    window.print();
+    // Navigate to /print page which will auto-trigger print
+    window.open('/print', '_blank');
   };
 
   return (
@@ -12,7 +13,7 @@ export function PrintButton() {
       className="print-button screen-only"
       size="icon"
       aria-label="Print Resume"
-      title="Print Resume (Ctrl+P)"
+      title="Print Resume (Opens in new tab)"
     >
       <Printer className="h-5 w-5" />
     </Button>
