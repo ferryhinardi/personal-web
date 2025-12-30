@@ -229,6 +229,38 @@
 
 /* Print Media Query */
 @media print {
+  /* Hide website header's non-essential elements when printing */
+  header nav,
+  header .mobile-menu,
+  header button,
+  header .dark-mode-toggle,
+  header .social-links {
+    display: none !important;
+  }
+
+  /* Optimize header hero section for print */
+  header {
+    page-break-after: avoid;
+    min-height: auto !important;
+    padding: 20mm 15mm 10mm 15mm !important;
+    background: white !important;
+  }
+
+  header h1 {
+    font-size: 36px !important;
+    color: #0f172a !important;
+  }
+
+  header h3 {
+    font-size: 18px !important;
+    color: #0369a1 !important;
+  }
+
+  header .banner-text {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
   .print-resume {
     margin: 0;
     padding: 12mm 15mm 20mm 15mm; /* Add bottom padding for page numbers */
