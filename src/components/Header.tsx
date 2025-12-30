@@ -19,9 +19,10 @@ const socialIcons: Record<string, React.ComponentType<{ className?: string }>> =
 
 interface HeaderProps {
   data?: MainData;
+  showContactInfo?: boolean; // Show contact info for print page
 }
 
-export default function Header({ data }: HeaderProps) {
+export default function Header({ data, showContactInfo = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const { isDark, toggleDarkMode } = useDarkMode();
@@ -49,7 +50,7 @@ export default function Header({ data }: HeaderProps) {
 
   if (!data) return null;
 
-  const { name, description, social } = data;
+  const { name, description, social, email, phone, website } = data;
 
   const navItems = [
     { label: 'Home', href: '#home' },
@@ -259,6 +260,20 @@ export default function Header({ data }: HeaderProps) {
           >
             {description}
           </motion.p>
+
+          {/* Contact Info for Print */}
+          {showContactInfo && (
+            <motion.div 
+              variants={staggerItem} 
+              className="print-contact-info mb-6 text-white/80 text-sm sm:text-base"
+            >
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {email && <span>📧 {email}</span>}
+                {phone && <span>📱 {phone}</span>}
+                {website && <span>🌐 {website}</span>}
+              </div>
+            </motion.div>
+          )}
 
           {/* Social Links */}
           <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mb-12">

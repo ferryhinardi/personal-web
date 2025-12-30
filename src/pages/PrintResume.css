@@ -262,6 +262,19 @@
     background: transparent !important;
   }
 
+  /* Show contact info in print */
+  .print-contact-info {
+    display: flex !important;
+    font-size: 11px !important;
+    margin-bottom: 12px !important;
+    color: #475569 !important;
+  }
+
+  .print-contact-info span {
+    display: inline-block;
+    margin: 0 8px;
+  }
+
   .print-resume {
     margin: 0;
     padding: 12mm 15mm 20mm 15mm; /* Add bottom padding for page numbers */

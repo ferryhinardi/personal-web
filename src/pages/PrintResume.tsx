@@ -41,8 +41,8 @@ export default function PrintResume() {
 
   return (
     <>
-      {/* Website Header */}
-      <Header data={main} />
+      {/* Website Header with contact info for print */}
+      <Header data={main} showContactInfo={true} />
 
       <div className="print-resume">
       {/* Page numbers will be added via CSS */}
