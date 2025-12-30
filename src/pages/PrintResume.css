@@ -11,7 +11,6 @@
 
 /* Header */
 .print-header {
-  display: none; /* Hide compact header - using Website Header instead */
   margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 3px solid #0369a1;
@@ -230,36 +229,9 @@
 
 /* Print Media Query */
 @media print {
-  /* Hide website header's non-essential elements when printing */
-  header nav,
-  header .mobile-menu,
-  header button,
-  header .dark-mode-toggle,
-  header .social-links {
+  /* Hide website header when printing - use compact print-header instead */
+  body > header {
     display: none !important;
-  }
-
-  /* Optimize header hero section for print */
-  header {
-    page-break-after: avoid;
-    min-height: auto !important;
-    padding: 20mm 15mm 10mm 15mm !important;
-    background: white !important;
-  }
-
-  header h1 {
-    font-size: 36px !important;
-    color: #0f172a !important;
-  }
-
-  header h3 {
-    font-size: 18px !important;
-    color: #0369a1 !important;
-  }
-
-  header .banner-text {
-    padding: 0 !important;
-    background: transparent !important;
   }
 
   /* Show contact info in print */
@@ -373,6 +345,11 @@
 
 /* Screen-only styles */
 @media screen {
+  /* Hide website header on print page - only show compact resume header */
+  body > header {
+    display: none !important;
+  }
+
   body {
     background: #f8fafc;
   }
