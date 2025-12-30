@@ -5,11 +5,11 @@
   "installCommand": "pnpm install",
   "framework": "vite",
   "outputDirectory": "build",
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
