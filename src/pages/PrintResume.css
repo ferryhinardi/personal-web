@@ -11,10 +11,21 @@
 
 /* Header */
 .print-header {
-  text-align: center;
   margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 3px solid #0369a1;
+}
+
+.print-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.print-header-text {
+  flex: 1;
+  text-align: center;
 }
 
 .print-name {
@@ -36,11 +47,49 @@
   font-size: 11px;
   color: #475569;
   font-family: Arial, sans-serif;
+  margin-bottom: 6px;
 }
 
 .print-contact .separator {
   margin: 0 8px;
   color: #cbd5e1;
+}
+
+.print-social {
+  font-size: 10px;
+  color: #475569;
+  font-family: Arial, sans-serif;
+  margin-top: 6px;
+}
+
+.print-social .separator {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
+
+.print-social-item {
+  display: inline-block;
+}
+
+.print-social-label {
+  font-weight: 600;
+  color: #0369a1;
+}
+
+/* QR Code */
+.print-qr-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.print-qr-label {
+  font-size: 8px;
+  color: #64748b;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 /* Sections */
@@ -182,8 +231,9 @@
 @media print {
   .print-resume {
     margin: 0;
-    padding: 12mm 15mm;
+    padding: 12mm 15mm 20mm 15mm; /* Add bottom padding for page numbers */
     max-width: 100%;
+    counter-reset: page;
   }
 
   .no-print {
@@ -193,6 +243,17 @@
   @page {
     size: A4;
     margin: 0;
+  }
+
+  /* Page numbers */
+  .print-resume::after {
+    content: "Page " counter(page) " of 2";
+    position: fixed;
+    bottom: 8mm;
+    right: 15mm;
+    font-size: 9px;
+    color: #64748b;
+    font-family: Arial, sans-serif;
   }
 
   /* Ensure page breaks work correctly */
