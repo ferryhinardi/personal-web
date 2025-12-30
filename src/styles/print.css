@@ -117,8 +117,9 @@
     font-family: Arial, sans-serif;
   }
 
-  /* Professional Summary section - added after header, before resume sections */
-  #resume > .container > .max-w-6xl::before {
+  /* Professional Summary section - placed right before Education section */
+  /* Target the first mb-16 div after the title (which is the Education section) */
+  #resume .max-w-6xl > .text-center.mb-16 ~ .mb-16:first-of-type::before {
     content: 'PROFESSIONAL SUMMARY';
     display: block;
     font-size: 10pt;
@@ -126,13 +127,13 @@
     color: #0369a1;
     text-transform: uppercase;
     letter-spacing: 1pt;
-    margin: 8pt 0 3pt 0;
+    margin: 0 0 3pt 0;
     padding-bottom: 2pt;
     border-bottom: 1pt solid #cbd5e1;
     font-family: Arial, sans-serif;
   }
 
-  #resume > .container > .max-w-6xl::after {
+  #resume .max-w-6xl > .text-center.mb-16 ~ .mb-16:first-of-type::after {
     content: 'Professional software engineer with 5+ years of experience transforming complex problems into elegant solutions. Expertise in building lightning-fast, user-centric web applications using React.js, TypeScript, and Next.js. Proven track record of architecting scalable e-commerce platforms and optimizing performance that directly impacts millions of users and boosts revenue. Contributed to innovative projects including social-commerce marketplaces, home services booking platforms, and co-living experiences. Committed to pushing technological boundaries while mentoring fellow developers.';
     display: block;
     font-size: 9pt;
@@ -141,6 +142,13 @@
     text-align: justify;
     margin: 3pt 0 8pt 0;
     font-family: Georgia, 'Times New Roman', serif;
+    order: -1;
+  }
+
+  /* Ensure the Education section container displays as flex to support order property */
+  #resume .max-w-6xl > .text-center.mb-16 ~ .mb-16:first-of-type {
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   /* Hide decorative icons and gradient boxes */
