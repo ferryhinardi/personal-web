@@ -9,15 +9,12 @@
 
   /* Complete reset */
   html,
-  body,
-  #root,
-  #root > * {
+  body {
     width: 100% !important;
     height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
-    color: black !important;
     overflow: visible !important;
   }
 
@@ -25,15 +22,10 @@
     font-family: 'Georgia', 'Times New Roman', serif !important;
     font-size: 11pt !important;
     line-height: 1.5 !important;
+    color: #000 !important;
   }
 
   /* Hide everything except resume */
-  body > *:not(#root),
-  #root > *:not(.App),
-  .App > *:not(#resume),
-  .App > header,
-  .App > nav,
-  .App > footer,
   header,
   nav,
   footer,
@@ -45,38 +37,31 @@
   .back-to-top,
   .skip-links,
   .print-button,
-  [class*="Helmet"] {
+  [data-helmet],
+  script,
+  style:not([media="print"]) {
     display: none !important;
+    visibility: hidden !important;
   }
 
   /* Show resume section */
-  .App,
   #resume {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     position: relative !important;
     background: white !important;
-    color: black !important;
-  }
-
-  /* Resume section styling */
-  #resume {
     padding: 0 !important;
     margin: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  /* Force all child elements visible */
+  /* Make sure all resume children are visible */
   #resume,
-  #resume *,
-  #resume *::before,
-  #resume *::after {
+  #resume * {
     visibility: visible !important;
     opacity: 1 !important;
-    color: black !important;
-    background: white !important;
   }
 
   /* Container */
@@ -85,6 +70,7 @@
     max-width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
+    background: white !important;
   }
 
   #resume .max-w-6xl {
@@ -93,7 +79,8 @@
   }
 
   /* Hide main title section */
-  #resume > .container > .max-w-6xl > .text-center:first-child {
+  #resume > .container > .max-w-6xl > .text-center:first-child,
+  #resume .text-center.mb-16:first-child {
     display: none !important;
   }
 
@@ -157,7 +144,7 @@
   }
 
   /* Hide subtitle paragraphs under section headers */
-  #resume .flex.items-center.gap-3 p {
+  #resume .flex.items-center.gap-3 > div > p {
     display: none !important;
   }
 
@@ -166,7 +153,7 @@
     font-size: 13pt !important;
     font-weight: bold !important;
     color: #0369a1 !important;
-    background: white !important;
+    background: transparent !important;
     text-transform: uppercase;
     letter-spacing: 1.5pt;
     margin: 20pt 0 12pt 0 !important;
@@ -174,6 +161,7 @@
     border-bottom: 2pt solid #cbd5e1 !important;
     page-break-after: avoid !important;
     font-family: 'Arial', 'Helvetica', sans-serif !important;
+    display: block !important;
   }
 
   /* First section has less top margin */
@@ -186,31 +174,34 @@
     font-size: 11.5pt !important;
     font-weight: bold !important;
     color: #1e293b !important;
-    background: white !important;
+    background: transparent !important;
     margin: 0 0 3pt 0 !important;
     padding: 0 !important;
     page-break-after: avoid !important;
     font-family: 'Georgia', 'Times New Roman', serif !important;
+    display: block !important;
   }
 
-  /* Job Titles / Degrees */
+  /* Job Titles / Degrees - be specific with classes */
   #resume .text-cyan-600,
-  #resume [class*="dark:text-cyan"],
-  #resume p.text-lg.text-cyan-600 {
+  #resume .text-lg.text-cyan-600,
+  #resume p.text-cyan-600 {
     font-size: 10.5pt !important;
     font-style: italic !important;
     color: #475569 !important;
-    background: white !important;
+    background: transparent !important;
     margin-bottom: 6pt !important;
     font-weight: 500 !important;
+    display: block !important;
   }
 
-  /* Cards */
+  /* Cards - make sure content is visible */
   #resume [class*="Card"] {
+    display: block !important;
     border: none !important;
     border-left: 3pt solid #94a3b8 !important;
     border-radius: 0 !important;
-    background: white !important;
+    background: transparent !important;
     box-shadow: none !important;
     margin-bottom: 14pt !important;
     padding: 0 0 0 12pt !important;
@@ -218,8 +209,9 @@
   }
 
   #resume [class*="CardContent"] {
+    display: block !important;
     padding: 6pt 0 6pt 8pt !important;
-    background: white !important;
+    background: transparent !important;
   }
 
   /* Badges */
@@ -235,27 +227,30 @@
     font-family: 'Arial', 'Helvetica', sans-serif !important;
   }
 
-  /* All paragraphs */
+  /* All paragraphs - critical for content visibility */
   #resume p {
+    display: block !important;
     color: #334155 !important;
-    background: white !important;
+    background: transparent !important;
     font-size: 10.5pt !important;
     line-height: 1.5 !important;
     margin-bottom: 6pt !important;
     text-align: left !important;
   }
 
-  /* Description text */
-  #resume .text-gray-700,
-  #resume [class*="dark:text-gray-300"] {
+  /* Specific text color overrides */
+  #resume .text-gray-700 {
     color: #475569 !important;
-    background: white !important;
+  }
+
+  #resume .text-gray-900 {
+    color: #1e293b !important;
   }
 
   /* Links */
   #resume a {
     color: #0369a1 !important;
-    background: white !important;
+    background: transparent !important;
     text-decoration: none !important;
     font-weight: 500 !important;
   }
@@ -277,6 +272,17 @@
 
   #resume .flex-1 {
     flex: none !important;
+  }
+
+  /* Make sure content containers are visible */
+  #resume .space-y-6,
+  #resume .space-y-8 {
+    display: block !important;
+  }
+
+  #resume .space-y-6 > *,
+  #resume .space-y-8 > * {
+    display: block !important;
   }
 
   /* Separators */
@@ -334,20 +340,6 @@
   #resume p {
     orphans: 3;
     widows: 3;
-  }
-
-  /* Override any Tailwind background/text colors in dark mode */
-  #resume .bg-gray-50,
-  #resume [class*="dark:bg-slate"],
-  #resume [class*="dark:bg-gray"] {
-    background: white !important;
-  }
-
-  #resume .text-gray-900,
-  #resume [class*="dark:text-white"],
-  #resume [class*="dark:text-gray"] {
-    color: black !important;
-    background: white !important;
   }
 
   /* Page margins */
