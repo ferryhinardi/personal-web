@@ -8,7 +8,7 @@
 
   /* Page setup - A4 optimized with consistent margins */
   @page {
-    margin: 15mm;
+    margin: 12mm 15mm;
     size: A4 portrait;
   }
 
@@ -16,8 +16,8 @@
     background: white !important;
     color: black !important;
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 9.5pt;
-    line-height: 1.35;
+    font-size: 9pt;
+    line-height: 1.3;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -79,22 +79,22 @@
   #resume .container::before {
     content: 'FERRY HINARDI';
     display: block;
-    font-size: 22pt;
+    font-size: 20pt;
     font-weight: bold;
     text-align: center;
     color: #0369a1;
     letter-spacing: 3pt;
-    margin-bottom: 6pt;
+    margin-bottom: 4pt;
     font-family: Arial, sans-serif;
   }
 
   #resume .container::after {
     content: 'Software Engineer · Full Stack Developer';
     display: block;
-    font-size: 10pt;
+    font-size: 9.5pt;
     text-align: center;
     color: #334155;
-    margin-bottom: 4pt;
+    margin-bottom: 3pt;
     font-weight: 600;
     font-family: Arial, sans-serif;
   }
@@ -102,11 +102,11 @@
   #resume .max-w-6xl::before {
     content: 'hinardi93@gmail.com  ·  +6281958020882  ·  ferryhinardi.com';
     display: block;
-    font-size: 9pt;
+    font-size: 8.5pt;
     text-align: center;
     color: #475569;
-    margin-bottom: 6pt;
-    padding-bottom: 6pt;
+    margin-bottom: 5pt;
+    padding-bottom: 5pt;
     border-bottom: 2pt solid #0369a1;
     font-family: Arial, sans-serif;
   }
@@ -125,13 +125,13 @@
 
   /* Section titles (Education, Work, Skills) */
   #resume h3 {
-    font-size: 11.5pt;
+    font-size: 11pt;
     font-weight: bold;
     color: #0369a1;
     text-transform: uppercase;
     letter-spacing: 1.5pt;
-    margin: 8pt 0 5pt 0;
-    padding-bottom: 3pt;
+    margin: 6pt 0 4pt 0;
+    padding-bottom: 2pt;
     border-bottom: 2pt solid #cbd5e1;
     page-break-after: avoid;
     page-break-inside: avoid;
@@ -140,17 +140,17 @@
 
   /* Company/School names */
   #resume h4 {
-    font-size: 10.5pt;
+    font-size: 10pt;
     font-weight: bold;
     color: #1e293b;
-    margin: 0 0 2pt 0;
+    margin: 0 0 1pt 0;
     page-break-after: avoid;
     page-break-inside: avoid;
   }
 
   /* Job titles */
   #resume p.text-lg {
-    font-size: 9.5pt;
+    font-size: 9pt;
     font-style: italic;
     color: #475569;
     margin-bottom: 2pt;
@@ -159,8 +159,8 @@
   /* Regular paragraphs */
   #resume p {
     color: #334155;
-    font-size: 9.5pt;
-    line-height: 1.35;
+    font-size: 9pt;
+    line-height: 1.3;
     margin-bottom: 2pt;
   }
 
@@ -168,23 +168,23 @@
   #resume [class*="Card"] {
     border: none;
     border-left: 3pt solid #94a3b8;
-    margin-bottom: 6pt;
+    margin-bottom: 4pt;
     padding-left: 8pt;
     page-break-inside: avoid;
     box-shadow: none !important;
   }
 
   #resume [class*="CardContent"] {
-    padding: 2pt 0 2pt 5pt;
+    padding: 1pt 0 1pt 5pt;
   }
 
   /* Badges (dates) */
   #resume [class*="Badge"] {
     display: inline-block;
-    padding: 1pt 6pt;
+    padding: 1pt 5pt;
     border: 1pt solid #64748b;
     border-radius: 3pt;
-    font-size: 8pt;
+    font-size: 7.5pt;
     color: #334155;
     background: #f8fafc;
     font-weight: 500;
@@ -213,14 +213,14 @@
 
   /* Remove extra spacing - make more compact */
   #resume .space-y-8 > * {
-    margin-bottom: 6pt;
-  }
-
-  #resume .space-y-6 > * {
     margin-bottom: 4pt;
   }
 
-  /* Page break control - prevent extra pages */
+  #resume .space-y-6 > * {
+    margin-bottom: 3pt;
+  }
+
+  /* Page break control - STRICT */
   #resume h2,
   #resume h3,
   #resume h4 {
@@ -234,7 +234,17 @@
 
   /* First section after header - less top margin */
   #resume h3:first-of-type {
-    margin-top: 4pt !important;
+    margin-top: 3pt !important;
+  }
+
+  /* Force content to not create page 3 */
+  #resume > .container {
+    page-break-after: avoid !important;
+  }
+
+  #resume .max-w-6xl > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   /* Override dark mode colors */
