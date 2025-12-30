@@ -12,12 +12,29 @@
     size: A4 portrait;
   }
 
+  /* First page without top margin for header */
+  @page :first {
+    margin-top: 15mm;
+  }
+
+  /* Subsequent pages with proper top margin */
+  @page :left, @page :right {
+    margin-top: 20mm;
+  }
+
   body {
     background: white !important;
     color: black !important;
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 10pt;
     line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
   }
 
   /* Hide non-resume sections */
@@ -43,6 +60,8 @@
     color: black !important;
     padding: 0 !important;
     margin: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
   }
 
   /* Container adjustments for A4 */
@@ -206,15 +225,34 @@
     margin-bottom: 6pt;
   }
 
-  /* Page breaks */
+  /* Page breaks - better control */
   #resume h2,
   #resume h3,
   #resume h4 {
     page-break-after: avoid;
+    page-break-inside: avoid;
   }
 
   #resume [class*="Card"] {
     page-break-inside: avoid;
+  }
+
+  /* Prevent orphaned content at bottom creating extra page */
+  #resume > .container,
+  #resume .max-w-6xl {
+    page-break-after: avoid;
+  }
+
+  /* Ensure content doesn't overflow to create blank page */
+  #resume * {
+    orphans: 2;
+    widows: 2;
+  }
+
+  /* First section after header */
+  #resume h3:first-of-type {
+    margin-top: 6pt !important;
+    page-break-before: avoid;
   }
 
   /* Override dark mode colors */
