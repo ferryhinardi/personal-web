@@ -87,8 +87,7 @@ export default function PrintResume() {
       </header>
 
       {/* Contact Information Section - #1 */}
-      <section className="print-section">
-        <h2 className="print-section-title">Contact Information</h2>
+      <section className="print-section print-contact-no-border">
         <div className="print-contact-section">
           <h3 className="print-contact-name">{main.name}</h3>
           <p className="print-contact-title">{main.occupation}</p>

@@ -140,6 +140,10 @@
   page-break-inside: avoid;
 }
 
+.print-contact-no-border {
+  margin-bottom: 16px;
+}
+
 .print-section-title {
   font-size: 14px;
   font-weight: bold;
