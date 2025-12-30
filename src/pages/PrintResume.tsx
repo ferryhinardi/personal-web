@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { useResumeData } from '@/hooks/useResumeData';
+import Header from '@/components/Header';
 import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
 import './PrintResume.css';
@@ -39,7 +40,13 @@ export default function PrintResume() {
   const githubUrl = main.social?.find((s: any) => s.name === 'github')?.url;
 
   return (
-    <div className="print-resume">
+    <>
+      {/* Website Header - hidden in print */}
+      <div className="no-print">
+        <Header data={main} />
+      </div>
+
+      <div className="print-resume">
       {/* Page numbers will be added via CSS */}
       
       {/* Header */}
@@ -148,5 +155,6 @@ export default function PrintResume() {
         </button>
       </div>
     </div>
+    </>
   );
 }

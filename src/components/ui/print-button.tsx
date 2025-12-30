@@ -1,10 +1,13 @@
 import { Printer } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
 
 export function PrintButton() {
+  const navigate = useNavigate();
+
   const handlePrint = () => {
-    // Navigate to /print page which will auto-trigger print
-    window.open('/print', '_blank');
+    // Navigate to /print page
+    navigate('/print');
   };
 
   return (
@@ -13,7 +16,7 @@ export function PrintButton() {
       className="print-button screen-only"
       size="icon"
       aria-label="Print Resume"
-      title="Print Resume (Opens in new tab)"
+      title="Print Resume"
     >
       <Printer className="h-5 w-5" />
     </Button>
