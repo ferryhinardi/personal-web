@@ -135,6 +135,39 @@ export default function AdminDashboard() {
     setHasChanges(true);
   };
 
+  const moveArrayItem = (section: string, arrayField: string, index: number, direction: 'up' | 'down') => {
+    if (!resumeData) return;
+    
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    
+    setResumeData(prev => {
+      if (!prev) return prev;
+      const updated = JSON.parse(JSON.stringify(prev));
+      
+      let array: any[] = [];
+      if (section === 'main') {
+        array = updated.main[arrayField];
+      } else if (section === 'resume') {
+        array = updated.resume[arrayField];
+      } else if (section === 'portfolio') {
+        array = updated.portfolio[arrayField];
+      } else if (section === 'testimonials') {
+        array = updated.testimonials[arrayField];
+      }
+      
+      // Validate bounds
+      if (newIndex < 0 || newIndex >= array.length) return prev;
+      
+      // Swap items
+      const temp = array[index];
+      array[index] = array[newIndex];
+      array[newIndex] = temp;
+      
+      return updated;
+    });
+    setHasChanges(true);
+  };
+
   const handleSave = () => {
     if (!resumeData) return;
     
@@ -273,6 +306,7 @@ export default function AdminDashboard() {
             }
             onAddArrayItem={(arrayField, template) => addArrayItem('main', arrayField, template)}
             onRemoveArrayItem={(arrayField, index) => removeArrayItem('main', arrayField, index)}
+            onMoveArrayItem={(arrayField, index, direction) => moveArrayItem('main', arrayField, index, direction)}
           />
         )}
 
@@ -289,6 +323,7 @@ export default function AdminDashboard() {
               description: ''
             })}
             onRemove={(index) => removeArrayItem('resume', 'education', index)}
+            onMove={(index, direction) => moveArrayItem('resume', 'education', index, direction)}
           />
         )}
 
@@ -305,6 +340,7 @@ export default function AdminDashboard() {
               description: ''
             })}
             onRemove={(index) => removeArrayItem('resume', 'work', index)}
+            onMove={(index, direction) => moveArrayItem('resume', 'work', index, direction)}
           />
         )}
 
@@ -321,6 +357,7 @@ export default function AdminDashboard() {
               level: '50%'
             })}
             onRemove={(index) => removeArrayItem('resume', 'skills', index)}
+            onMove={(index, direction) => moveArrayItem('resume', 'skills', index, direction)}
           />
         )}
 
@@ -338,6 +375,7 @@ export default function AdminDashboard() {
               technologies: []
             })}
             onRemove={(index) => removeArrayItem('portfolio', 'projects', index)}
+            onMove={(index, direction) => moveArrayItem('portfolio', 'projects', index, direction)}
           />
         )}
 
@@ -352,6 +390,7 @@ export default function AdminDashboard() {
               user: ''
             })}
             onRemove={(index) => removeArrayItem('testimonials', 'testimonials', index)}
+            onMove={(index, direction) => moveArrayItem('testimonials', 'testimonials', index, direction)}
           />
         )}
       </div>
@@ -370,9 +409,10 @@ interface MainInfoTabProps {
   onArrayItemChange: (arrayField: string, index: number, field: string, value: any) => void;
   onAddArrayItem: (arrayField: string, template: any) => void;
   onRemoveArrayItem: (arrayField: string, index: number) => void;
+  onMoveArrayItem: (arrayField: string, index: number, direction: 'up' | 'down') => void;
 }
 
-function MainInfoTab({ data, onChange, onArrayItemChange, onAddArrayItem, onRemoveArrayItem }: MainInfoTabProps) {
+function MainInfoTab({ data, onChange, onArrayItemChange, onAddArrayItem, onRemoveArrayItem, onMoveArrayItem }: MainInfoTabProps) {
   return (
     <div className="tab-content">
       <Card className="admin-card">
@@ -484,6 +524,22 @@ function MainInfoTab({ data, onChange, onArrayItemChange, onAddArrayItem, onRemo
                 />
               </div>
               <Button 
+                onClick={() => onMoveArrayItem('social', index, 'up')} 
+                variant="outline"
+                disabled={index === 0}
+                title="Move up"
+              >
+                ⬆️
+              </Button>
+              <Button 
+                onClick={() => onMoveArrayItem('social', index, 'down')} 
+                variant="outline"
+                disabled={index === data.social.length - 1}
+                title="Move down"
+              >
+                ⬇️
+              </Button>
+              <Button 
                 onClick={() => onRemoveArrayItem('social', index)}
                 variant="outline"
                 className="remove-btn"
@@ -509,16 +565,35 @@ interface ArrayTabProps {
   onChange: (index: number, field: string, value: any) => void;
   onAdd: () => void;
   onRemove: (index: number) => void;
+  onMove: (index: number, direction: 'up' | 'down') => void;
 }
 
-function EducationTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
+function EducationTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps) {
   return (
     <div className="tab-content">
       {data?.map((edu: any, index: number) => (
         <Card key={index} className="admin-card">
           <div className="card-header">
             <h3>Education #{index + 1}</h3>
-            <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            <div className="card-actions">
+              <Button 
+                onClick={() => onMove(index, 'up')} 
+                variant="outline"
+                disabled={index === 0}
+                title="Move up"
+              >
+                ⬆️
+              </Button>
+              <Button 
+                onClick={() => onMove(index, 'down')} 
+                variant="outline"
+                disabled={index === data.length - 1}
+                title="Move down"
+              >
+                ⬇️
+              </Button>
+              <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            </div>
           </div>
 
           <div className="form-group">
@@ -562,14 +637,32 @@ function EducationTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
   );
 }
 
-function WorkTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
+function WorkTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps) {
   return (
     <div className="tab-content">
       {data?.map((job: any, index: number) => (
         <Card key={index} className="admin-card">
           <div className="card-header">
             <h3>Work Experience #{index + 1}</h3>
-            <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            <div className="card-actions">
+              <Button 
+                onClick={() => onMove(index, 'up')} 
+                variant="outline"
+                disabled={index === 0}
+                title="Move up"
+              >
+                ⬆️
+              </Button>
+              <Button 
+                onClick={() => onMove(index, 'down')} 
+                variant="outline"
+                disabled={index === data.length - 1}
+                title="Move down"
+              >
+                ⬇️
+              </Button>
+              <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            </div>
           </div>
 
           <div className="form-group">
@@ -618,7 +711,7 @@ interface SkillsTabProps extends ArrayTabProps {
   onMessageChange: (value: string) => void;
 }
 
-function SkillsTab({ data, skillMessage, onMessageChange, onChange, onAdd, onRemove }: SkillsTabProps) {
+function SkillsTab({ data, skillMessage, onMessageChange, onChange, onAdd, onRemove, onMove }: SkillsTabProps) {
   return (
     <div className="tab-content">
       <Card className="admin-card">
@@ -651,6 +744,22 @@ function SkillsTab({ data, skillMessage, onMessageChange, onChange, onAdd, onRem
                 placeholder="e.g., 90%"
               />
             </div>
+            <Button 
+              onClick={() => onMove(index, 'up')} 
+              variant="outline"
+              disabled={index === 0}
+              title="Move up"
+            >
+              ⬆️
+            </Button>
+            <Button 
+              onClick={() => onMove(index, 'down')} 
+              variant="outline"
+              disabled={index === data.length - 1}
+              title="Move down"
+            >
+              ⬇️
+            </Button>
             <Button onClick={() => onRemove(index)} variant="outline">🗑️</Button>
           </div>
         </Card>
@@ -661,7 +770,7 @@ function SkillsTab({ data, skillMessage, onMessageChange, onChange, onAdd, onRem
   );
 }
 
-function PortfolioTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
+function PortfolioTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps) {
   const handleTechnologiesChange = (index: number, value: string) => {
     const techs = value.split(',').map(t => t.trim()).filter(t => t);
     onChange(index, 'technologies', techs);
@@ -673,7 +782,25 @@ function PortfolioTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
         <Card key={index} className="admin-card">
           <div className="card-header">
             <h3>Project #{index + 1}</h3>
-            <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            <div className="card-actions">
+              <Button 
+                onClick={() => onMove(index, 'up')} 
+                variant="outline"
+                disabled={index === 0}
+                title="Move up"
+              >
+                ⬆️
+              </Button>
+              <Button 
+                onClick={() => onMove(index, 'down')} 
+                variant="outline"
+                disabled={index === data.length - 1}
+                title="Move down"
+              >
+                ⬇️
+              </Button>
+              <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            </div>
           </div>
 
           <div className="form-group">
@@ -728,14 +855,32 @@ function PortfolioTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
   );
 }
 
-function TestimonialsTab({ data, onChange, onAdd, onRemove }: ArrayTabProps) {
+function TestimonialsTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps) {
   return (
     <div className="tab-content">
       {data?.map((testimonial: any, index: number) => (
         <Card key={index} className="admin-card">
           <div className="card-header">
             <h3>Testimonial #{index + 1}</h3>
-            <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            <div className="card-actions">
+              <Button 
+                onClick={() => onMove(index, 'up')} 
+                variant="outline"
+                disabled={index === 0}
+                title="Move up"
+              >
+                ⬆️
+              </Button>
+              <Button 
+                onClick={() => onMove(index, 'down')} 
+                variant="outline"
+                disabled={index === data.length - 1}
+                title="Move down"
+              >
+                ⬇️
+              </Button>
+              <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
+            </div>
           </div>
 
           <div className="form-group">

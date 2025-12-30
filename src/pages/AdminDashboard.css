@@ -186,6 +186,23 @@
   border-bottom: 2px solid #e2e8f0;
 }
 
+/* Card Actions - for reorder buttons */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.card-actions button {
+  min-width: 40px;
+  padding: 8px 12px;
+}
+
+.card-actions button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* Forms */
 .form-group {
   margin-bottom: 20px;
@@ -204,6 +221,19 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 20px;
+  align-items: end;
+}
+
+.form-row button {
+  min-width: 40px;
+  padding: 8px 12px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.form-row button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .form-group.flex-2 {
