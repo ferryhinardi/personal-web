@@ -3,17 +3,7 @@ import { Button } from './button';
 
 export function PrintButton() {
   const handlePrint = () => {
-    // Scroll to resume section before printing
-    const resumeSection = document.getElementById('resume');
-    if (resumeSection) {
-      resumeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Wait for smooth scroll to complete
-      setTimeout(() => {
-        window.print();
-      }, 500);
-    } else {
-      window.print();
-    }
+    window.print();
   };
 
   return (
