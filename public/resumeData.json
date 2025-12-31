@@ -80,16 +80,16 @@
         "description": "Built the backbone of Sorabel's operations—a sophisticated Warehouse Management System (WMS) using React.js that streamlined the entire fulfillment pipeline from purchase orders to final delivery. Simultaneously enhanced the customer-facing mobile app with React Native, crafting delightful shopping experiences including feed views, seamless checkout flows, secure payments, and review systems. This dual focus taught me the importance of building for both internal efficiency and customer satisfaction."
       },
       {
-        "company": "Bina Nusantara",
-        "title": "Front End Engineer",
-        "years": "2013 - 2015",
-        "description": "Where it all began—my first dive into the world of web development. Transformed static designs into living, breathing websites using HTML, CSS, JavaScript, and jQuery. Mastered the art of translating design mockups into pixel-perfect, interactive experiences while learning the fundamentals of AJAX and JSON. This role ignited my passion for frontend development and set me on the path to becoming the engineer I am today."
-      },
-      {
         "company": "PT Suzuki Indomobil",
         "title": "Software Engineer",
         "years": "2015 - 2016",
         "description": "Launched my professional journey tackling enterprise-scale challenges in the automotive industry. Debugged complex hardware-software integration issues, ensuring rock-solid system reliability. Analyzed legacy systems and transformed user requirements into modern web and database solutions. This foundational experience taught me the discipline of writing production-grade code and the importance of thorough system analysis."
+      },
+      {
+        "company": "Bina Nusantara",
+        "title": "Front End Engineer",
+        "years": "2013 - 2015",
+        "description": "Where it all began—my first dive into the world of web development. Transformed static designs into living, breathing websites using HTML, CSS, JavaScript, and jQuery. Mastered the art of translating design mockups into pixel-perfect, interactive experiences while learning the fundamentals of AJAX and JSON. This role ignited my passion for frontend development and set me on the path to becoming the engineer I am today."
       }
     ],
     "skills": [
@@ -138,7 +138,7 @@
   "portfolio": {
     "projects": [
       {
-        "title": "Traveloka Flight Booking",
+        "title": "Traveloka Flight",
         "category": "Redesigned Traveloka's flight booking experience, driving a massive 10.16% revenue increase. Orchestrated complex integrations with global metasearch platforms including Google Flights, Skyscanner, and KAYAK—connecting millions of travelers with their perfect flights.",
         "image": "traveloka-owl-icon.png",
         "url": "https://www.traveloka.com",
