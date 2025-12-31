@@ -191,6 +191,7 @@
 }
 
 .print-btn,
+.home-btn,
 .close-btn {
   padding: 10px 20px;
   border: none;
@@ -209,6 +210,15 @@
 
 .print-btn:hover {
   background: #0284c7;
+}
+
+.home-btn {
+  background: #059669;
+  color: white;
+}
+
+.home-btn:hover {
+  background: #10b981;
 }
 
 .close-btn {

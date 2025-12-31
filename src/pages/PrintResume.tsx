@@ -141,6 +141,9 @@ export default function PrintResume() {
         <button onClick={() => window.print()} className="print-btn">
           Print Resume
         </button>
+        <button onClick={() => window.location.href = '/'} className="home-btn">
+          Back to Homepage
+        </button>
         <button onClick={() => window.close()} className="close-btn">
           Close
         </button>
