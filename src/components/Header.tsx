@@ -224,6 +224,44 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             </span>
           </motion.div>
 
+          {/* Open to Opportunities Banner */}
+          <motion.div 
+            variants={staggerItem} 
+            className="mb-6 inline-block"
+          >
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 0px rgba(34, 211, 238, 0)',
+                  '0 0 20px rgba(34, 211, 238, 0.3)',
+                  '0 0 0px rgba(34, 211, 238, 0)',
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 backdrop-blur-sm"
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="w-2 h-2 rounded-full bg-green-400" />
+              </motion.div>
+              <span className="text-green-300 text-sm sm:text-base font-medium">
+                Open to Opportunities
+              </span>
+            </motion.div>
+          </motion.div>
+
           {/* Name */}
           <motion.h1
             variants={staggerItem}
