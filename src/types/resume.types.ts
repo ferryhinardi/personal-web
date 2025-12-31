@@ -52,6 +52,30 @@ export interface ResumeSection {
   skills: Skill[];
 }
 
+export interface ProjectMetrics {
+  users?: string;
+  revenueIncrease?: string;
+  performanceScore?: number;
+  conversionIncrease?: string;
+  loadTimeReduction?: string;
+  integrationsCount?: number;
+  toolsCount?: string;
+  privacyFirst?: boolean;
+  offlineSupport?: boolean;
+  bookingTimeReduction?: string;
+  userSatisfaction?: string;
+  activeUsers?: string;
+  platformCoverage?: string;
+  sellers?: string;
+  transactions?: string;
+  chatIntegrations?: number;
+  avgResponseTime?: string;
+  verifiedProperties?: string;
+  communityMembers?: string;
+  safetyRating?: string;
+  features?: string;
+}
+
 export interface Project {
   title: string;
   category: string; // Keep for backward compatibility
@@ -65,6 +89,7 @@ export interface Project {
   role?: string; // e.g., "Lead Frontend Engineer"
   team?: string; // e.g., "Cross-functional team of 8"
   duration?: string; // e.g., "8 months"
+  metrics?: ProjectMetrics; // Quantifiable project metrics
 }
 
 export interface Portfolio {
