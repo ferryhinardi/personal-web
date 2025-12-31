@@ -156,15 +156,7 @@
           "GraphQL",
           "AWS",
           "Next.js"
-        ],
-        "metrics": {
-          "users": "5M+",
-          "revenueIncrease": "10.16%",
-          "performanceScore": 92,
-          "conversionIncrease": "15%",
-          "loadTimeReduction": "40%",
-          "integrationsCount": 5
-        }
+        ]
       },
       {
         "title": "Supertool.id",
@@ -184,13 +176,7 @@
           "TypeScript",
           "Vercel",
           "Tailwind CSS"
-        ],
-        "metrics": {
-          "toolsCount": "50+",
-          "performanceScore": 98,
-          "privacyFirst": true,
-          "offlineSupport": true
-        }
+        ]
       },
       {
         "title": "Maideasy",
@@ -210,13 +196,7 @@
           "TypeScript",
           "Firebase",
           "GraphQL"
-        ],
-        "metrics": {
-          "bookingTimeReduction": "95%",
-          "userSatisfaction": "4.7/5",
-          "activeUsers": "500+",
-          "platformCoverage": "iOS & Android"
-        }
+        ]
       },
       {
         "title": "Jaztip",
@@ -236,13 +216,7 @@
           "JavaScript",
           "Firebase",
           "Node.js"
-        ],
-        "metrics": {
-          "sellers": "1000+",
-          "transactions": "5000+",
-          "chatIntegrations": 3,
-          "avgResponseTime": "< 2 minutes"
-        }
+        ]
       },
       {
         "title": "Ryna",
@@ -261,13 +235,7 @@
           "Node.js",
           "MongoDB",
           "Express"
-        ],
-        "metrics": {
-          "verifiedProperties": "200+",
-          "communityMembers": "300+",
-          "safetyRating": "4.8/5",
-          "features": "Virtual tours, Forums, Events"
-        }
+        ]
       }
     ]
   },
