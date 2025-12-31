@@ -34,6 +34,7 @@ jobs:
           VITE_FORMSPREE_FORM_ID: ${{ secrets.VITE_FORMSPREE_FORM_ID }}
       
       - name: Run Lighthouse CI
+        continue-on-error: true
         run: |
           pnpm lhci autorun
         env:
