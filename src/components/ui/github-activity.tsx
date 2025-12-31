@@ -1,7 +1,7 @@
 import { useGitHubActivity } from '@/hooks/useGitHubActivity';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLink, GitBranch, Star, Users } from 'lucide-react';
-import { Loading } from '@/components/ui/loading';
+import { GitHubActivitySkeleton } from '@/components/ui/skeleton';
 
 interface GitHubActivityProps {
   username: string;
@@ -25,13 +25,7 @@ export function GitHubActivity({
   } = useGitHubActivity(username);
 
   if (loading) {
-    return (
-      <Card>
-        <CardContent className="py-8">
-          <Loading message="Loading GitHub activity..." />
-        </CardContent>
-      </Card>
-    );
+    return <GitHubActivitySkeleton />;
   }
 
   if (error) {

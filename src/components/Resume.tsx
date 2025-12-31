@@ -1,9 +1,10 @@
-import { GraduationCap, Briefcase, Award, TrendingUp } from 'lucide-react';
+import { GraduationCap, Briefcase, Award, TrendingUp, Github } from 'lucide-react';
 import { lazy, Suspense } from 'react';
 import type { ResumeSection } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { GitHubActivity } from '@/components/ui/github-activity';
 
 // Lazy load the heavy recharts component
 const SkillsRadar = lazy(() => import('@/components/ui/skills-radar'));
@@ -151,6 +152,23 @@ export default function Resume({ data }: ResumeProps) {
                 )}
               </div>
             </div>
+          </div>
+
+          <Separator className="my-16" />
+
+          {/* GitHub Activity Section */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+                <Github className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">GitHub Activity</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Recent contributions and open source work</p>
+              </div>
+            </div>
+
+            <GitHubActivity username="ferryhinardi" maxEvents={5} showStats={true} />
           </div>
 
           <Separator className="my-16" />

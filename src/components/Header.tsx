@@ -32,7 +32,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
       setIsScrolled(window.scrollY > 50);
 
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'resume', 'portfolio', 'testimonials', 'contact'];
+      const sections = ['home', 'about', 'resume', 'portfolio', 'contact'];
       const current = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -57,7 +57,6 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
     { label: 'About', href: '#about' },
     { label: 'Resume', href: '#resume' },
     { label: 'Works', href: '#portfolio' },
-    { label: 'Testimonials', href: '#testimonials' },
     { label: 'Contact', href: '#contact' },
   ];
 
