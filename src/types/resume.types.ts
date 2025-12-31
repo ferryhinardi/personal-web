@@ -54,10 +54,17 @@ export interface ResumeSection {
 
 export interface Project {
   title: string;
-  category: string;
+  category: string; // Keep for backward compatibility
+  description?: string; // Short one-liner for overview
+  challenge?: string; // Problem being solved
+  solution?: string; // How it was solved
+  impact?: string; // Results and outcomes
   image: string;
   url: string;
   technologies?: string[];
+  role?: string; // e.g., "Lead Frontend Engineer"
+  team?: string; // e.g., "Cross-functional team of 8"
+  duration?: string; // e.g., "8 months"
 }
 
 export interface Portfolio {

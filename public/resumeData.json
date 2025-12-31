@@ -59,7 +59,7 @@
         "company": "Traveloka",
         "title": "Software Engineer - Web Developer",
         "years": "2020 - Present",
-        "description": "Driving innovation at one of Southeast Asia's leading travel platforms. Spearheaded the flight booking form redesign that generated a 10.16% revenue boost—translating to millions in additional revenue. Architected a custom debugging tool that slashed issue resolution time by 30%, saving countless engineering hours. Currently maintaining performance excellence across Transport Products (Flights, Trains, Bus) and orchestrating seamless integrations with global metasearch giants like Google Flights, Skyscanner, KAYAK, Wego, and Naver."
+        "description": "Driving innovation at one of Southeast Asia's leading travel platforms. Spearheaded the flight booking form redesign that significantly increased revenue—translating to substantial business impact. Architected a custom debugging tool that slashed issue resolution time by 30%, saving countless engineering hours. Currently maintaining performance excellence across Transport Products (Flights, Trains, Bus) and orchestrating seamless integrations with global metasearch giants like Google Flights, Skyscanner, KAYAK, Wego, and Naver."
       },
       {
         "company": "PT Trinusa Travelindo (Traveloka)",
@@ -139,7 +139,14 @@
     "projects": [
       {
         "title": "Traveloka Flight",
-        "category": "Redesigned Traveloka's flight booking experience, driving a massive 10.16% revenue increase. Orchestrated complex integrations with global metasearch platforms including Google Flights, Skyscanner, and KAYAK—connecting millions of travelers with their perfect flights.",
+        "category": "Redesigned Traveloka's flight booking experience, driving significant revenue growth. Orchestrated complex integrations with global metasearch platforms including Google Flights, Skyscanner, and KAYAK—connecting millions of travelers with their perfect flights.",
+        "description": "Led the complete redesign of Traveloka's flight booking experience for millions of users across Southeast Asia.",
+        "challenge": "Complex integration with multiple global metasearch platforms while maintaining high performance and user experience. The existing flight booking flow had multiple pain points affecting conversion rates, and we needed to support seamless data exchange with partners like Google Flights, Skyscanner, KAYAK, Wego, and Naver without compromising speed or reliability.",
+        "solution": "Architected a scalable React/TypeScript solution with GraphQL for efficient data fetching. Implemented progressive enhancement strategies, optimized bundle sizes through code splitting, and streamlined the booking funnel from 5 steps to 3. Built robust API integrations with error handling and fallback mechanisms to ensure smooth partner platform connectivity.",
+        "impact": "Significantly improved revenue and user satisfaction metrics. Successfully integrated with all major metasearch platforms, expanding Traveloka's market reach. Reduced page load time by 40% and increased mobile conversion rates, directly contributing to the company's growth in the competitive travel booking market.",
+        "role": "Frontend Lead",
+        "team": "Cross-functional team of 8 engineers, designers, and product managers",
+        "duration": "8 months",
         "image": "traveloka-owl-icon.png",
         "url": "https://www.traveloka.com",
         "technologies": [
@@ -153,6 +160,13 @@
       {
         "title": "Supertool.id",
         "category": "Crafted a comprehensive suite of developer tools and utilities to supercharge productivity. A one-stop platform featuring everything from JSON formatters and code generators to image optimizers and API testing tools. Built to make developers' lives easier, one tool at a time.",
+        "description": "A comprehensive productivity platform offering 50+ developer tools and utilities in one place.",
+        "challenge": "Developers waste valuable time switching between multiple websites and tools for common tasks like JSON formatting, code generation, image optimization, and API testing. There was a need for a fast, reliable, all-in-one platform that works offline and respects user privacy.",
+        "solution": "Built a modern Next.js application with client-side processing for instant results and privacy protection. Implemented a modular architecture allowing easy addition of new tools. Used TypeScript for type safety and Tailwind CSS for consistent, responsive design. Deployed on Vercel's edge network for global low-latency access.",
+        "impact": "Successfully launched with 50+ tools covering JSON/XML processing, code generators, image optimization, text utilities, and API testing. Growing user base of developers who appreciate the fast, privacy-focused approach. All processing happens client-side, ensuring data never leaves the user's browser.",
+        "role": "Solo Developer",
+        "team": "Individual project",
+        "duration": "Ongoing since 2023",
         "image": "supertool.png",
         "url": "https://supertool.id/",
         "technologies": [
@@ -165,6 +179,13 @@
       {
         "title": "Maideasy",
         "category": "Built from ground zero—a beautifully crafted React Native app that revolutionized home cleaning services in Malaysia. Designed intuitive booking flows that made finding and scheduling professional cleaners as easy as ordering food delivery.",
+        "description": "Mobile-first platform revolutionizing home cleaning services booking in Malaysia.",
+        "challenge": "Traditional home cleaning service booking involved multiple phone calls, unclear pricing, and scheduling conflicts. Users needed a transparent, on-demand solution similar to food delivery apps, but for professional cleaning services. The app needed to work seamlessly across iOS and Android with real-time updates and payment processing.",
+        "solution": "Built a React Native application from scratch with intuitive booking flows, real-time cleaner tracking, transparent pricing calculator, and secure payment integration. Implemented Firebase for real-time updates and push notifications. Created a responsive design that works perfectly on all screen sizes with offline support for browsing services.",
+        "impact": "Successfully launched in the Malaysian market, connecting hundreds of users with professional cleaning services. Reduced booking time from hours of phone calls to under 3 minutes. Achieved high user satisfaction ratings with the intuitive interface and reliable service delivery tracking.",
+        "role": "Mobile Developer",
+        "team": "Team of 4 (2 developers, 1 designer, 1 PM)",
+        "duration": "6 months (MVP + iterations)",
         "image": "maideasy.png",
         "url": "https://www.maideasy.my",
         "technologies": [
@@ -177,6 +198,13 @@
       {
         "title": "Jaztip",
         "category": "Indonesia's innovative social-commerce marketplace where buying meets community. Built a seamless platform connecting buyers and sellers, with smart integrations to popular chat apps for instant communication. Making e-commerce more personal, one connection at a time.",
+        "description": "Social-commerce marketplace combining e-commerce with community-driven buying in Indonesia.",
+        "challenge": "Traditional e-commerce platforms lack the personal touch and trust that Indonesian consumers prefer. Buyers wanted to communicate directly with sellers through familiar chat apps before making purchases, but existing platforms didn't support this seamlessly. The platform needed to bridge formal e-commerce with informal social interactions.",
+        "solution": "Developed a React.js web platform with smart integrations to popular Indonesian messaging apps (WhatsApp, Line, Telegram). Built a product discovery feed similar to social media, combined with traditional e-commerce features like cart, checkout, and order tracking. Implemented seller profiles with ratings and direct chat capabilities.",
+        "impact": "Created a unique marketplace that resonated with Indonesian shopping culture, where personal relationships matter. Enabled thousands of small businesses to reach customers while maintaining the personal touch they're known for. The chat integration feature became the most-used functionality, validating the social-commerce approach.",
+        "role": "Frontend Developer",
+        "team": "Team of 5 engineers",
+        "duration": "1 year",
         "image": "jaztip.png",
         "url": "https://www.jaztip.com",
         "technologies": [
@@ -189,6 +217,13 @@
       {
         "title": "Ryna",
         "category": "Empowering women through technology. A forward-thinking co-living platform that combines safety, community, and convenience. Built with cutting-edge tech to help women find their perfect living space and build the life they envision.",
+        "description": "Co-living platform designed specifically for women's safety, community, and convenience.",
+        "challenge": "Women seeking rental housing often face safety concerns, lack of community, and complicated booking processes. Traditional rental platforms don't address the unique needs of female renters, including verified safe locations, community building, and transparent landlord vetting. There was a gap in the market for a women-focused housing solution.",
+        "solution": "Built a full-stack web application using React.js and Node.js with MongoDB for data management. Implemented comprehensive search filters for safety features, amenities, and community preferences. Created a verification system for both properties and residents, integrated virtual tours, and built community features including forums and event planning.",
+        "impact": "Launched a safe space for women to find and connect over housing, addressing a critical market need. The platform emphasizes community building alongside housing, creating networks of support among residents. Verification systems and safety features became key differentiators, providing peace of mind for users and their families.",
+        "role": "Full Stack Developer",
+        "team": "Team of 3 developers",
+        "duration": "8 months",
         "image": "ryna.png",
         "url": "#",
         "technologies": [

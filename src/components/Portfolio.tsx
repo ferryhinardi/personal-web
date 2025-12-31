@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Code2, Filter, X } from 'lucide-react';
-import type { Portfolio as PortfolioData } from '@/types/resume.types';
+import type { Portfolio as PortfolioData, Project } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,14 +17,6 @@ import { staggerContainer, staggerItem, viewportOptions } from '@/utils/animatio
 
 interface PortfolioProps {
   data?: PortfolioData;
-}
-
-interface Project {
-  title: string;
-  category: string;
-  image: string;
-  url: string;
-  technologies?: string[];
 }
 
 export default function Portfolio({ data }: PortfolioProps) {
@@ -197,7 +189,7 @@ export default function Portfolio({ data }: PortfolioProps) {
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           {selectedProject && (
             <>
-              <DialogHeader>
+               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold">
                   {selectedProject.title}
                 </DialogTitle>
@@ -213,9 +205,79 @@ export default function Portfolio({ data }: PortfolioProps) {
                      className="w-full h-full"
                    />
                  </div>
-                <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
-                  {selectedProject.category}
-                </DialogDescription>
+                
+                {/* Project Metadata */}
+                {(selectedProject.role || selectedProject.team || selectedProject.duration) && (
+                  <div className="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
+                    {selectedProject.role && (
+                      <div>
+                        <span className="font-semibold">Role:</span> {selectedProject.role}
+                      </div>
+                    )}
+                    {selectedProject.team && (
+                      <div>
+                        <span className="font-semibold">Team:</span> {selectedProject.team}
+                      </div>
+                    )}
+                    {selectedProject.duration && (
+                      <div>
+                        <span className="font-semibold">Duration:</span> {selectedProject.duration}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Short Description */}
+                {selectedProject.description && (
+                  <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                    {selectedProject.description}
+                  </DialogDescription>
+                )}
+
+                {/* Challenge Section */}
+                {selectedProject.challenge && (
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                      <span className="text-amber-500">🎯</span> Challenge
+                    </h4>
+                    <p className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                      {selectedProject.challenge}
+                    </p>
+                  </div>
+                )}
+
+                {/* Solution Section */}
+                {selectedProject.solution && (
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                      <span className="text-blue-500">💡</span> Solution
+                    </h4>
+                    <p className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                      {selectedProject.solution}
+                    </p>
+                  </div>
+                )}
+
+                {/* Impact Section */}
+                {selectedProject.impact && (
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                      <span className="text-green-500">📈</span> Impact
+                    </h4>
+                    <p className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                      {selectedProject.impact}
+                    </p>
+                  </div>
+                )}
+
+                {/* Fallback to category if no new fields */}
+                {!selectedProject.description && !selectedProject.challenge && (
+                  <DialogDescription className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                    {selectedProject.category}
+                  </DialogDescription>
+                )}
+
+                {/* Technologies Used */}
                 {selectedProject.technologies && selectedProject.technologies.length > 0 && (
                   <div>
                     <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
@@ -233,6 +295,8 @@ export default function Portfolio({ data }: PortfolioProps) {
                     </div>
                   </div>
                 )}
+
+                {/* Visit Project Button */}
                 {selectedProject.url !== '#' && (
                   <div className="flex gap-3 pt-4">
                     <Button
