@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { staggerContainer, staggerItem, viewportOptions } from '@/utils/animations';
+import { useGitHubActivity } from '@/hooks/useGitHubActivity';
 
 interface AboutProps {
   data?: MainData;
@@ -17,6 +18,7 @@ export default function About({ data }: AboutProps) {
 
   const { name, image, bio, address, email, resumedownload } = data;
   const profilepic = `images/${image}`;
+  const { stats: githubStats } = useGitHubActivity('ferryhinardi');
 
   const contactDetails = [
     {
@@ -177,18 +179,18 @@ export default function About({ data }: AboutProps) {
                             color: 'from-cyan-500 to-blue-600',
                           },
                           {
-                            number: '10+',
-                            label: 'Successful Projects',
+                            number: githubStats?.publicRepos?.toString() || '10+',
+                            label: 'GitHub Repositories',
                             color: 'from-blue-500 to-purple-600',
                           },
                           {
-                            number: '95%',
-                            label: 'React.js Mastery',
+                            number: githubStats?.totalStars?.toString() || '50+',
+                            label: 'GitHub Stars Earned',
                             color: 'from-purple-500 to-pink-600',
                           },
                           {
-                            number: '∞',
-                            label: 'Always Evolving',
+                            number: githubStats?.followers?.toString() || '∞',
+                            label: 'GitHub Followers',
                             color: 'from-pink-500 to-red-600',
                           },
                         ].map((stat) => (
