@@ -24,6 +24,8 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState('');
 
   useEffect(() => {
     if (originalData) {
@@ -195,6 +197,61 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleSaveToGitHub = async () => {
+    if (!resumeData) return;
+
+    if (!confirm('This will commit and push changes to GitHub. Are you sure?')) {
+      return;
+    }
+
+    setIsSaving(true);
+    setSaveMessage('');
+
+    try {
+      const response = await fetch('/api/update-resume', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: 'ferry2025', // Same password as login
+          data: resumeData,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to save to GitHub');
+      }
+
+      setSaveMessage(`✅ ${result.message}`);
+      setHasChanges(false);
+
+      // Show commit URL
+      if (result.commit?.url) {
+        const viewCommit = confirm(
+          `Successfully saved! Would you like to view the commit on GitHub?`
+        );
+        if (viewCommit) {
+          window.open(result.commit.url, '_blank');
+        }
+      }
+
+      // Reload data after 2 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+
+    } catch (error: any) {
+      console.error('Error saving to GitHub:', error);
+      setSaveMessage(`❌ Error: ${error.message}`);
+      alert(`Failed to save to GitHub: ${error.message}`);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   if (loading) {
     return <Loading fullScreen message="Loading admin dashboard..." />;
   }
@@ -246,9 +303,17 @@ export default function AdminDashboard() {
           <h1>📝 Resume Admin Dashboard</h1>
           <div className="admin-actions">
             {hasChanges && <span className="unsaved-indicator">● Unsaved changes</span>}
+            {saveMessage && <span className={saveMessage.startsWith('✅') ? 'save-success' : 'save-error'}>{saveMessage}</span>}
             <Button onClick={handleReset} variant="outline">Reset</Button>
             <Button onClick={handleSave} disabled={!hasChanges}>
               💾 Download JSON
+            </Button>
+            <Button 
+              onClick={handleSaveToGitHub} 
+              disabled={!hasChanges || isSaving}
+              variant="default"
+            >
+              {isSaving ? '⏳ Saving...' : '🚀 Save to GitHub'}
             </Button>
             <Button onClick={() => window.open('/', '_blank')} variant="outline">
               👁️ Preview Site
