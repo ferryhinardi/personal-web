@@ -16,7 +16,7 @@ import {
   AboutSkeleton,
   ResumeSkeleton,
   PortfolioSkeleton,
-  TestimonialsSkeleton,
+  // TestimonialsSkeleton, // Hidden until real testimonials available
   ContactSkeleton,
 } from '@components/ui/skeleton';
 
@@ -24,7 +24,7 @@ import {
 const About = lazy(() => import('@components/About'));
 const Resume = lazy(() => import('@components/Resume'));
 const Portfolio = lazy(() => import('@components/Portfolio'));
-const Testimonials = lazy(() => import('@components/Testimonials'));
+// const Testimonials = lazy(() => import('@components/Testimonials')); // Hidden until real testimonials available
 const Contact = lazy(() => import('@components/Contact'));
 
 function App() {
@@ -119,9 +119,10 @@ function App() {
         <Suspense fallback={<PortfolioSkeleton />}>
           <Portfolio data={resumeData.portfolio} />
         </Suspense>
-        <Suspense fallback={<TestimonialsSkeleton />}>
+        {/* Testimonials section hidden until real testimonials are available */}
+        {/* <Suspense fallback={<TestimonialsSkeleton />}>
           <Testimonials data={resumeData.testimonials} />
-        </Suspense>
+        </Suspense> */}
         <Suspense fallback={<ContactSkeleton />}>
           <Contact data={resumeData.main} />
         </Suspense>
