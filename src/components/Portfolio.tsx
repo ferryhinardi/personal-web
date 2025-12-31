@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Code2, Filter, X } from 'lucide-react';
+import { ExternalLink, Code2, Filter, X, Rocket } from 'lucide-react';
 import type { Portfolio as PortfolioData, Project, ProjectMetrics } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { TechStack } from '@/components/ui';
 import OptimizedImage from '@/components/ui/optimized-image';
 import {
   Dialog,
@@ -204,25 +205,35 @@ export default function Portfolio({ data }: PortfolioProps) {
                         </div>
                       )}
                       
+                      {/* Tech Stack */}
                       {project.technologies && project.technologies.length > 0 && (
-                         <div className="flex flex-wrap gap-2">
-                           {project.technologies.map((tech) => (
-                             <Badge
-                               key={tech}
-                               variant="secondary"
-                               className="text-xs bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border-cyan-500/20 text-cyan-700 dark:text-cyan-300 hover:from-cyan-500/20 hover:to-blue-500/20 transition-colors cursor-pointer"
-                               onClick={() => setSelectedTech(tech)}
-                             >
-                               {tech}
-                             </Badge>
-                           ))}
-                         </div>
-                       )}
-                     </CardContent>
-                   </Card>
-                 </motion.div>
-               );
-             })}
+                        <TechStack 
+                          technologies={project.technologies} 
+                          limit={4}
+                          className="mb-3"
+                        />
+                      )}
+                      
+                      {/* View Live Demo Button */}
+                      {project.liveUrl && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(project.liveUrl, '_blank');
+                          }}
+                          className="w-full mt-3 border-2 border-blue-500/30 hover:border-blue-500 hover:bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                        >
+                          <Rocket className="w-4 h-4 mr-2" />
+                          View Live Demo
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
             </AnimatePresence>
           </div>
         </motion.div>
@@ -413,34 +424,36 @@ export default function Portfolio({ data }: PortfolioProps) {
                 {/* Technologies Used */}
                 {selectedProject.technologies && selectedProject.technologies.length > 0 && (
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                      <Code2 className="w-4 h-4" />
                       Technologies Used
                     </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.technologies.map((tech) => (
-                        <Badge
-                          key={tech}
-                          className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 transition-colors"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
+                    <TechStack technologies={selectedProject.technologies} />
                   </div>
                 )}
 
-                {/* Visit Project Button */}
-                {selectedProject.url !== '#' && (
-                  <div className="flex gap-3 pt-4">
+                {/* Action Buttons */}
+                <div className="flex gap-3 pt-4">
+                  {selectedProject.liveUrl && (
+                    <Button
+                      onClick={() => window.open(selectedProject.liveUrl, '_blank')}
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                    >
+                      <Rocket className="w-4 h-4 mr-2" />
+                      View Live Demo
+                    </Button>
+                  )}
+                  {selectedProject.url !== '#' && selectedProject.url !== selectedProject.liveUrl && (
                     <Button
                       onClick={() => window.open(selectedProject.url, '_blank')}
+                      variant="outline"
                       className="flex-1"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Visit Project
+                      More Info
                     </Button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </>
           )}

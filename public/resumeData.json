@@ -149,6 +149,7 @@
         "duration": "8 months",
         "image": "traveloka-owl-icon.png",
         "url": "https://www.traveloka.com",
+        "liveUrl": "https://www.traveloka.com/en-id/flight",
         "technologies": [
           "React.js",
           "TypeScript",
@@ -177,6 +178,7 @@
         "duration": "Ongoing since 2023",
         "image": "supertool.png",
         "url": "https://supertool.id/",
+        "liveUrl": "https://supertool.id/",
         "technologies": [
           "Next.js",
           "TypeScript",
@@ -202,6 +204,7 @@
         "duration": "6 months (MVP + iterations)",
         "image": "maideasy.png",
         "url": "https://www.maideasy.my",
+        "liveUrl": "https://www.maideasy.my",
         "technologies": [
           "React Native",
           "TypeScript",
@@ -227,6 +230,7 @@
         "duration": "1 year",
         "image": "jaztip.png",
         "url": "https://www.jaztip.com",
+        "liveUrl": "https://www.jaztip.com",
         "technologies": [
           "React.js",
           "JavaScript",

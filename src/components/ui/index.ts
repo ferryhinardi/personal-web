@@ -9,3 +9,4 @@ export { PrintButton } from './print-button';
 export { ProjectMetrics } from './project-metrics';
 export { GitHubActivity } from './github-activity';
 export { CodePlayground } from './code-playground';
+export { TechBadge, TechStack } from './tech-badge';

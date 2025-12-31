@@ -85,6 +85,8 @@ export interface Project {
   impact?: string; // Results and outcomes
   image: string;
   url: string;
+  liveUrl?: string; // Live demo/production URL
+  screenshots?: string[]; // Array of screenshot image URLs
   technologies?: string[];
   role?: string; // e.g., "Lead Frontend Engineer"
   team?: string; // e.g., "Cross-functional team of 8"
