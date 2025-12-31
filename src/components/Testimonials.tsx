@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Linkedin, Briefcase } from 'lucide-react';
 import type { Testimonials as TestimonialsData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Avatar } from '@/components/ui/avatar';
 
 interface TestimonialsProps {
   data?: TestimonialsData;
@@ -50,6 +51,8 @@ export default function Testimonials({ data }: TestimonialsProps) {
     }),
   };
 
+  const currentTestimonial = testimonials[currentIndex];
+
   return (
     <section id="testimonials" className="section-padding bg-gray-50 dark:bg-slate-800/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +69,7 @@ export default function Testimonials({ data }: TestimonialsProps) {
             </div>
             <h2 className="section-title">Testimonials</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Timeless wisdom from the visionaries who shaped our craft
+              What colleagues and collaborators say about working with me
             </p>
           </div>
 
@@ -74,7 +77,7 @@ export default function Testimonials({ data }: TestimonialsProps) {
           <div className="max-w-4xl mx-auto">
             <Card className="relative overflow-hidden">
               <CardContent className="p-8 sm:p-12">
-                <div className="relative min-h-[200px] flex items-center">
+                <div className="relative min-h-[280px] flex items-center">
                   <AnimatePresence initial={false} custom={direction} mode="wait">
                     <motion.div
                       key={currentIndex}
@@ -90,14 +93,61 @@ export default function Testimonials({ data }: TestimonialsProps) {
                       className="w-full"
                     >
                       <div className="flex flex-col items-center text-center space-y-6">
+                        {/* Profile Image */}
+                        {currentTestimonial.image && (
+                          <Avatar className="w-20 h-20 border-4 border-sky-500/20">
+                            <img
+                              src={currentTestimonial.image}
+                              alt={currentTestimonial.user}
+                              className="w-full h-full object-cover"
+                            />
+                          </Avatar>
+                        )}
+                        
                         <Quote className="w-12 h-12 text-sky-500 dark:text-sky-400 opacity-50" />
+                        
                         <blockquote className="text-xl sm:text-2xl font-medium text-gray-900 dark:text-slate-200 leading-relaxed">
-                          "{testimonials[currentIndex].text}"
+                          "{currentTestimonial.text}"
                         </blockquote>
-                        <cite className="not-italic">
+                        
+                        <cite className="not-italic space-y-2">
                           <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                            {testimonials[currentIndex].user}
+                            {currentTestimonial.user}
                           </p>
+                          
+                          {/* Title and Company */}
+                          {(currentTestimonial.title || currentTestimonial.company) && (
+                            <div className="flex items-center justify-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                              <Briefcase className="w-4 h-4" />
+                              <span>
+                                {currentTestimonial.title}
+                                {currentTestimonial.title && currentTestimonial.company && ' at '}
+                                {currentTestimonial.company && (
+                                  <span className="font-medium">{currentTestimonial.company}</span>
+                                )}
+                              </span>
+                            </div>
+                          )}
+                          
+                          {/* Relationship */}
+                          {currentTestimonial.relationship && (
+                            <p className="text-sm text-slate-500 dark:text-slate-500 italic">
+                              {currentTestimonial.relationship}
+                            </p>
+                          )}
+                          
+                          {/* LinkedIn Link */}
+                          {currentTestimonial.linkedin && (
+                            <a
+                              href={currentTestimonial.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors mt-2"
+                            >
+                              <Linkedin className="w-4 h-4" />
+                              <span className="text-sm">View LinkedIn Profile</span>
+                            </a>
+                          )}
                         </cite>
                       </div>
                     </motion.div>

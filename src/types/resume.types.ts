@@ -74,6 +74,11 @@ export interface Portfolio {
 export interface Testimonial {
   text: string;
   user: string;
+  title?: string; // Job title
+  company?: string; // Company name
+  image?: string; // Profile photo
+  linkedin?: string; // LinkedIn profile URL
+  relationship?: string; // e.g., "Worked together at Traveloka"
 }
 
 export interface Testimonials {

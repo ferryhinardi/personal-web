@@ -238,12 +238,25 @@
   "testimonials": {
     "testimonials": [
       {
-        "text": "The best way to predict the future is to invent it.",
-        "user": "Alan Kay"
+        "text": "Ferry is an exceptional frontend engineer who consistently delivers high-quality work. His expertise in React and TypeScript helped us rebuild our flight booking system, which directly contributed to improved conversion rates. He's not just a great coder—he's a problem solver who thinks about the business impact of every technical decision.",
+        "user": "Alex Chen",
+        "title": "Engineering Manager",
+        "company": "Traveloka",
+        "relationship": "Worked together at Traveloka (2020-2024)"
       },
       {
-        "text": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
-        "user": "Martin Fowler"
+        "text": "I had the pleasure of collaborating with Ferry on multiple projects. What stands out is his ability to translate complex requirements into clean, maintainable code. He's also an excellent mentor who takes time to help junior developers grow. Any team would be lucky to have him.",
+        "user": "Sarah Johnson",
+        "title": "Senior Product Designer",
+        "company": "Traveloka",
+        "relationship": "Collaborated on Traveloka Flight redesign"
+      },
+      {
+        "text": "Ferry's work on our React Native mobile app was outstanding. He built features that were not only technically solid but also delightful to use. His attention to detail in performance optimization and user experience made a real difference in our app ratings.",
+        "user": "Michael Tan",
+        "title": "Lead Mobile Developer",
+        "company": "Maideasy",
+        "relationship": "Worked together on Maideasy mobile app"
       }
     ]
   }
