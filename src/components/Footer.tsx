@@ -1,4 +1,4 @@
-import { ArrowUp, Facebook, Twitter, Linkedin, Instagram, Github } from 'lucide-react';
+import { ArrowUp, FacebookIcon, TwitterIcon, LinkedinIcon, InstagramIcon, GithubIcon } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Button } from '@/components/ui/button';
 
@@ -8,11 +8,11 @@ interface FooterProps {
 
 // Map social network names to icons
 const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  facebook: Facebook,
-  twitter: Twitter,
-  linkedin: Linkedin,
-  instagram: Instagram,
-  github: Github,
+  facebook: FacebookIcon,
+  twitter: TwitterIcon,
+  linkedin: LinkedinIcon,
+  instagram: InstagramIcon,
+  github: GithubIcon,
 };
 
 export default function Footer({ data }: FooterProps) {

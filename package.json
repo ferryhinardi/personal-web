@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@formspree/react": "^3.0.0",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -41,9 +42,12 @@
     "test:coverage": "vitest --coverage",
     "optimize:images": "node scripts/optimize-images.mjs",
     "optimize:gif": "node scripts/convert-gif.mjs",
-    "optimize:all": "npm run optimize:images && npm run optimize:gif"
+    "optimize:all": "npm run optimize:images && npm run optimize:gif",
+    "lhci": "lhci autorun",
+    "lhci:open": "lhci open"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
@@ -59,12 +63,15 @@
     "autoprefixer": "^10.4.23",
     "happy-dom": "^20.0.11",
     "jsdom": "^27.4.0",
+    "lighthouse": "^13.0.1",
     "postcss": "^8.5.6",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.18",
     "terser": "^5.44.1",
     "typescript": "^5.9.3",
     "vite": "^6.4.1",
-    "vitest": "^4.0.16"
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.0.16",
+    "workbox-window": "^7.4.0"
   }
 }

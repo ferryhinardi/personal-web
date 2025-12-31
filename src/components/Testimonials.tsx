@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, ChevronLeft, ChevronRight, Linkedin, Briefcase } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, LinkedinIcon, Briefcase } from 'lucide-react';
 import type { Testimonials as TestimonialsData } from '@/types/resume.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -144,7 +144,7 @@ export default function Testimonials({ data }: TestimonialsProps) {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors mt-2"
                             >
-                              <Linkedin className="w-4 h-4" />
+                              <LinkedinIcon className="w-4 h-4" />
                               <span className="text-sm">View LinkedIn Profile</span>
                             </a>
                           )}

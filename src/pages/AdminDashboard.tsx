@@ -7,6 +7,9 @@ import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
 import { Textarea } from '@components/ui/textarea';
 import { Card } from '@components/ui/card';
+import { TestimonialsManager } from '@/components/TestimonialsManager';
+import { GitHubActivity } from '@components/ui/github-activity';
+import { ProjectMetrics } from '@components/ui/project-metrics';
 import './AdminDashboard.css';
 
 type ResumeData = {
@@ -359,6 +362,24 @@ export default function AdminDashboard() {
         >
           Testimonials
         </button>
+        <button 
+          className={activeTab === 'linkedin-testimonials' ? 'tab-active' : ''} 
+          onClick={() => setActiveTab('linkedin-testimonials')}
+        >
+          🔗 LinkedIn Sync
+        </button>
+        <button 
+          className={activeTab === 'metrics' ? 'tab-active' : ''} 
+          onClick={() => setActiveTab('metrics')}
+        >
+          📊 Project Metrics
+        </button>
+        <button 
+          className={activeTab === 'github-activity' ? 'tab-active' : ''} 
+          onClick={() => setActiveTab('github-activity')}
+        >
+          🐙 GitHub Activity
+        </button>
       </div>
 
       <div className="admin-content">
@@ -457,6 +478,60 @@ export default function AdminDashboard() {
             onRemove={(index) => removeArrayItem('testimonials', 'testimonials', index)}
             onMove={(index, direction) => moveArrayItem('testimonials', 'testimonials', index, direction)}
           />
+        )}
+
+        {activeTab === 'linkedin-testimonials' && (
+          <div className="tab-content">
+            <Card className="admin-card">
+              <div className="card-header">
+                <h3>🔗 LinkedIn Testimonials Sync</h3>
+                <p style={{ fontSize: '14px', color: '#666', marginTop: '8px' }}>
+                  Import testimonials from LinkedIn and manage them here. Featured testimonials will be exported to resumeData.json.
+                </p>
+              </div>
+              <TestimonialsManager />
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'metrics' && (
+          <div className="tab-content">
+            <Card className="admin-card">
+              <div className="card-header">
+                <h3>📊 Project Metrics & Analytics</h3>
+                <p style={{ fontSize: '14px', color: '#666', marginTop: '8px' }}>
+                  Visualize your portfolio projects' performance, technology stack, and impact metrics.
+                </p>
+              </div>
+              <ProjectMetrics
+                projects={resumeData.portfolio.projects.map((p: any) => ({
+                  name: p.title,
+                  category: p.category,
+                  technologies: p.technologies || [],
+                  impact: {
+                    users: Math.floor(Math.random() * 1000000), // Replace with actual data
+                    performance: Math.floor(Math.random() * 30) + 70, // 70-100
+                    businessValue: Math.floor(Math.random() * 3) + 8, // 8-10
+                    codeQuality: Math.floor(Math.random() * 3) + 8, // 8-10
+                  },
+                }))}
+              />
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'github-activity' && (
+          <div className="tab-content">
+            <Card className="admin-card">
+              <div className="card-header">
+                <h3>🐙 GitHub Activity Dashboard</h3>
+                <p style={{ fontSize: '14px', color: '#666', marginTop: '8px' }}>
+                  View your GitHub activity feed and repository statistics in real-time.
+                </p>
+              </div>
+              <GitHubActivity username="ferryhinardi" />
+            </Card>
+          </div>
         )}
       </div>
 

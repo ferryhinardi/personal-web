@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { staggerContainer, staggerItem, viewportOptions } from '@/utils/animations';
+import { sendWebhookNotifications, getWebhookConfig, trackFormSubmission } from '@/utils/webhooks';
 
 interface ContactProps {
   data?: MainData;
@@ -76,8 +77,21 @@ export default function Contact({ data }: ContactProps) {
     // Submit to Formspree
     await handleFormspreeSubmit(e);
     
-    // Clear form on success
+    // If Formspree submission succeeded, send webhook notifications
     if (state.succeeded) {
+      // Send to configured webhooks (Slack, Discord, Telegram)
+      try {
+        const webhookConfig = getWebhookConfig();
+        await sendWebhookNotifications(formData, webhookConfig);
+      } catch (error) {
+        console.error('Webhook notification failed:', error);
+        // Don't block user experience if webhooks fail
+      }
+
+      // Track analytics
+      trackFormSubmission(formData);
+
+      // Clear form on success
       setFormData({ name: '', email: '', subject: '', message: '' });
     }
   };

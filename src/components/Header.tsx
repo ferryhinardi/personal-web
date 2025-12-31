@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Menu, Moon, Sun, Facebook, Twitter, Linkedin, Instagram, Github } from 'lucide-react';
+import { Menu, Moon, Sun, FacebookIcon, TwitterIcon, LinkedinIcon, InstagramIcon, GithubIcon } from 'lucide-react';
 import type { MainData } from '@/types/resume.types';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -10,11 +10,11 @@ import { useDarkMode } from '@/hooks/useDarkMode';
 
 // Map social network names to icons
 const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  facebook: Facebook,
-  twitter: Twitter,
-  linkedin: Linkedin,
-  instagram: Instagram,
-  github: Github,
+  facebook: FacebookIcon,
+  twitter: TwitterIcon,
+  linkedin: LinkedinIcon,
+  instagram: InstagramIcon,
+  github: GithubIcon,
 };
 
 interface HeaderProps {
