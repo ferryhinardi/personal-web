@@ -1,266 +1,239 @@
-# Performance Optimization Plan & Results
+# Performance Optimization Plan
 
-## Current Performance Audit (January 2, 2026)
+## Current Bundle Analysis
 
-### Lighthouse Scores
-- **Performance**: 65/100 ⚠️ (Target: 90+)
-- **Accessibility**: 86/100 ✅ (Target: 90+)
-- **Best Practices**: 100/100 ✅
-- **SEO**: 100/100 ✅
+### Bundle Sizes (Uncompressed)
+```
+Portfolio component: 580 KB  ⚠️ LARGE
+Charts (recharts):   390 KB  ⚠️ LARGE
+Main bundle:         173 KB  ✅ OK
+UI vendor:           140 KB  ✅ OK
+React vendor:        136 KB  ✅ OK
+About component:      37 KB  ✅ OK
+Radix vendor:         35 KB  ✅ OK
+Contact component:    25 KB  ✅ OK
+```
 
-### Core Web Vitals
-| Metric | Current | Target | Status |
-|--------|---------|--------|--------|
-| FCP (First Contentful Paint) | 3.4s | < 1.8s | ❌ |
-| LCP (Largest Contentful Paint) | 7.6s | < 2.5s | ❌ |
-| TBT (Total Blocking Time) | 130ms | < 200ms | ✅ |
-| CLS (Cumulative Layout Shift) | 0 | < 0.1 | ✅ |
-| SI (Speed Index) | 5.1s | < 3.4s | ❌ |
-
----
-
-## Identified Issues & Solutions
-
-### 1. ⚠️ High Priority: Largest Contentful Paint (7.6s)
-
-**Problem**: LCP is 7.6s, needs to be under 2.5s for good performance.
-
-**Root Causes**:
-- Large header background images not optimized
-- Hero section images loading without priority
-- Font loading blocking render
-
-**Solutions Implemented**:
-✅ Added `rel="preconnect"` for Google Fonts (index.html:10-11)
-✅ Added preload hints for critical images (index.html:15-17)
-✅ Using WebP format for all images
-✅ Lazy loading non-critical sections (App.tsx:24-28)
-
-**Still TODO**:
-- [ ] Add `fetchpriority="high"` to hero image
-- [ ] Optimize header background GIF (convert to video or static WebP)
-- [ ] Implement image CDN with automatic optimization
-- [ ] Use `font-display: swap` for web fonts
-
-### 2. ⚠️ Medium Priority: Unused JavaScript (289 KiB)
-
-**Problem**: 289 KiB of JavaScript not being used on initial load.
-
-**Root Causes**:
-- Portfolio.tsx: 125 KiB (61% unused)
-- Charts library: 65 KiB (58% unused) - already lazy loaded ✅
-- Google Analytics: 56 KiB (38% unused)
-- Main bundle: 25 KiB (47% unused)
-
-**Solutions Implemented**:
-✅ Code splitting with manual chunks (vite.config.ts:131-145)
-✅ Lazy loading Resume component
-✅ Lazy loading charts library (SkillsRadar)
-✅ Tree shaking enabled
-✅ Terser minification with console.log removal
-
-**Still TODO**:
-- [ ] Further split Portfolio component
-- [ ] Defer Google Analytics loading
-- [ ] Use dynamic imports for modal dialogs
-- [ ] Analyze and remove unused utility functions
-
-### 3. ⚠️ Medium Priority: Page Redirects (780ms waste)
-
-**Problem**: Multiple redirects adding 780ms latency.
-
-**Likely Causes**:
-- www → non-www redirect
-- HTTP → HTTPS redirect (though should be automatic)
-
-**Solutions**:
-✅ Vercel handles HTTPS automatically
-✅ No redirects configured in vercel.json
-
-**Still TODO**:
-- [ ] Configure domain settings to serve non-www by default
-- [ ] Add HSTS preload header
-- [ ] Verify no redirect chains
-
-### 4. ⚠️ Medium Priority: Missing Resource Hints (330ms waste)
-
-**Problem**: Not preconnecting to required origins.
-
-**Solutions Implemented**:
-✅ Added preconnect to fonts.googleapis.com (index.html:10)
-✅ Added preconnect to fonts.gstatic.com (index.html:11)
-✅ Added preconnect to googletagmanager.com (index.html:12)
-✅ Added dns-prefetch for Analytics (index.html:13-15)
-
-### 5. ✅ Low Priority: Accessibility (86/100)
-
-**Current Issues**:
-- Missing some ARIA labels
-- Color contrast issues in some badges
-
-**Solutions Implemented**:
-✅ Skip links for keyboard navigation (App.tsx:69)
-✅ Semantic HTML throughout
-✅ Alt text for all images
-
-**Still TODO**:
-- [ ] Add ARIA labels to icon buttons
-- [ ] Improve color contrast for badges
-- [ ] Add focus indicators for all interactive elements
-- [ ] Test with screen reader
+### Total: ~1.5 MB uncompressed, ~280 KB gzipped
 
 ---
 
-## Optimization Checklist
+## Identified Issues
 
-### ✅ Completed Optimizations
+### 1. **Recharts Library (390 KB)** 🔴
+**Impact:** HIGH
+- Used in `skills-radar.tsx` and `project-metrics.tsx`
+- Importing multiple chart types increases bundle size
+- Already lazy loaded in Resume, but not in Portfolio
 
-1. **Code Splitting**
-   - ✅ Manual chunk configuration for vendor libraries
-   - ✅ Separate chunks for React, UI libraries, Radix UI, Analytics, Charts
-   - ✅ Lazy loading for all major components (About, Resume, Portfolio, Contact)
-   - ✅ Suspense boundaries with loading skeletons
+**Solution:**
+- ✅ Already lazy loaded SkillsRadar in Resume component
+- Consider removing project-metrics or making it optional
+- Alternative: Use lightweight chart library (e.g., Chart.js mini, or CSS-only charts)
 
-2. **Image Optimization**
-   - ✅ All images converted to WebP format
-   - ✅ Responsive images with srcSet
-   - ✅ Lazy loading for portfolio images
-   - ✅ Preload hints for critical images (hero section)
+### 2. **Portfolio Component (580 KB)** 🟡
+**Impact:** MEDIUM  
+- Contains detailed modal with all project information
+- Large inline styles and conditional rendering
+- Already lazy loaded in App.tsx ✅
 
-3. **Resource Hints**
-   - ✅ Preconnect to Google Fonts
-   - ✅ DNS prefetch for Analytics
-   - ✅ Preload critical assets
+**Potential Optimizations:**
+- Split modal into separate lazy-loaded component
+- Remove unused lucide-react icons
+- Optimize image loading
 
-4. **Caching Strategy**
-   - ✅ Long-term caching for static assets (1 year)
-   - ✅ Cache-Control headers in vercel.json
-   - ✅ Service Worker for offline support
-   - ✅ PWA with caching strategies
+### 3. **Image Optimization** 🟡
+**Current:**
+- Using WebP format ✅
+- Responsive images with srcset ✅
+- Lazy loading implemented ✅
 
-5. **Bundle Optimization**
-   - ✅ Terser minification
-   - ✅ Tree shaking enabled
-   - ✅ Console.log removal in production
-   - ✅ Source maps disabled in production
-
-6. **Loading Strategy**
-   - ✅ Lazy loading for heavy components
-   - ✅ Loading skeletons for better perceived performance
-   - ✅ Suspense boundaries with error handling
-   - ✅ Progressive enhancement
-
-### 🔄 In Progress / Next Steps
-
-1. **Further Reduce LCP**
-   - [ ] Convert header background GIF to optimized video (MP4/WebM)
-   - [ ] Add `fetchpriority="high"` to LCP image
-   - [ ] Inline critical CSS
-   - [ ] Use system fonts as fallback
-   - [ ] Implement font-display: swap
-
-2. **Reduce JavaScript Bundle**
-   - [ ] Defer Google Analytics (load after page interactive)
-   - [ ] Dynamic import for modal components
-   - [ ] Remove unused dependencies
-   - [ ] Use lighter alternatives (e.g., date-fns → native Intl)
-
-3. **Eliminate Redirects**
-   - [ ] Configure Vercel to serve non-www as primary
-   - [ ] Add HSTS preload header
-   - [ ] Verify redirect chain is eliminated
-
-4. **Improve Accessibility**
-   - [ ] Add missing ARIA labels
-   - [ ] Improve color contrast ratios
-   - [ ] Enhanced keyboard navigation
-   - [ ] Screen reader testing
-
-5. **Advanced Optimizations**
-   - [ ] Implement critical CSS extraction
-   - [ ] Use HTTP/3 (verify Vercel support)
-   - [ ] Add resource hints for third-party domains
-   - [ ] Implement predictive prefetching for internal links
+**Improvements:**
+- Add blur placeholders for better perceived performance
+- Implement progressive image loading
 
 ---
 
-## Performance Testing Commands
+## Quick Wins (Implement Now)
 
+### 1. Further Code Splitting ⚡
+Split Portfolio modal into separate component:
+```tsx
+// Create src/components/Portfolio/ProjectModal.tsx
+const ProjectModal = lazy(() => import('./ProjectModal'));
+```
+
+### 2. Remove Unused Dependencies 🗑️
+Check for unused imports and dependencies:
 ```bash
-# Run Lighthouse test
-lighthouse https://ferryhinardi.com --output=json --output-path=./lighthouse-report.json
+npx depcheck
+```
 
-# Extract scores
-cat lighthouse-report.json | jq '{
-  performance: .categories.performance.score,
-  accessibility: .categories.accessibility.score,
-  bestPractices: .categories["best-practices"].score,
-  seo: .categories.seo.score
-}'
+### 3. Optimize Framer Motion 📦
+Use specific imports instead of importing everything:
+```tsx
+// ❌ Don't
+import { motion, AnimatePresence, ... } from 'framer-motion';
 
-# Check bundle sizes
-pnpm build
-du -sh build/assets/*
+// ✅ Do
+import { motion } from 'framer-motion/dist/es/render/dom/motion';
+import { AnimatePresence } from 'framer-motion/dist/es/components/AnimatePresence';
+```
 
-# Analyze bundle
-npx vite-bundle-visualizer
-
-# Test Core Web Vitals locally
-pnpm dev
-# Open http://localhost:3000 and check Chrome DevTools > Performance Insights
+### 4. Tree Shaking Check 🌳
+Ensure Vite is properly tree-shaking:
+```ts
+// vite.config.ts
+build: {
+  rollupOptions: {
+    output: {
+      manualChunks: {
+        'react-vendor': ['react', 'react-dom'],
+        'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+        'charts': ['recharts']
+      }
+    }
+  }
+}
 ```
 
 ---
 
-## Expected Impact
+## Core Web Vitals Optimization
 
-### After Current Optimizations
-- Performance Score: 65 → **75** (+10)
-- LCP: 7.6s → **5.5s** (-2.1s)
-- FCP: 3.4s → **2.5s** (-0.9s)
+### Current Status (Need to Test):
+- **LCP (Largest Contentful Paint):** Target < 2.5s
+- **FID (First Input Delay):** Target < 100ms  
+- **CLS (Cumulative Layout Shift):** Target < 0.1
 
-### After Next Phase
-- Performance Score: 75 → **90+** (+15)
-- LCP: 5.5s → **2.3s** (-3.2s)
-- FCP: 2.5s → **1.5s** (-1.0s)
+### Improvements:
 
-### Target Goals (End State)
-- ✅ Performance: 90+
-- ✅ Accessibility: 95+
-- ✅ Best Practices: 100
-- ✅ SEO: 100
-- ✅ LCP < 2.5s
-- ✅ FCP < 1.8s
-- ✅ CLS < 0.1
+#### 1. Preload Critical Resources ✅ (Already Done)
+```html
+<link rel="preload" href="/images/profilepic-mobile.webp" as="image" />
+```
 
----
+#### 2. Font Display Strategy
+```css
+@font-face {
+  font-family: 'Open Sans';
+  font-display: swap; /* Prevent FOIT */
+}
+```
 
-## Monitoring & Continuous Improvement
+#### 3. Resource Hints ✅ (Already Done)
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+```
 
-### Tools to Use
-- Lighthouse CI (already configured in GitHub Actions)
-- Chrome DevTools Performance tab
-- WebPageTest for real-world testing
-- Vercel Analytics for real user monitoring (already installed)
-- Google Analytics for Core Web Vitals tracking
-
-### Regular Checks
-- [ ] Weekly: Check Lighthouse scores
-- [ ] Monthly: Review bundle sizes
-- [ ] Quarterly: Full performance audit
-- [ ] After each deployment: Verify no regression
+#### 4. Reduce Layout Shift
+- Add explicit width/height to images ✅ (Already done)
+- Reserve space for dynamic content
+- Avoid inserting content above existing content
 
 ---
 
-## References
+## Long-term Optimizations
 
-- [Web.dev Performance Guide](https://web.dev/performance/)
-- [Core Web Vitals](https://web.dev/vitals/)
-- [Lighthouse Scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/)
-- [Vercel Performance Best Practices](https://vercel.com/docs/concepts/edge-network/compression)
-- [React Performance Optimization](https://react.dev/learn/render-and-commit#optimizing-performance)
+### 1. Consider Chart Alternatives
+**Option A:** Remove Charts Entirely
+- Charts are nice-to-have, not essential
+- Save 390 KB immediately
+- Use CSS progress bars instead
+
+**Option B:** Lightweight Chart Library
+```bash
+npm install chart.js react-chartjs-2 --save
+# ~60 KB vs 390 KB for recharts
+```
+
+**Option C:** CSS-Only Charts
+- Pure CSS progress bars
+- Simple bar charts with divs
+- No JS overhead
+
+### 2. Image CDN
+```tsx
+// Use Vercel Image Optimization API
+<Image
+  src="/images/profilepic.jpg"
+  width={400}
+  height={400}
+  quality={85}
+  format="webp"
+/>
+```
+
+### 3. Service Worker Improvements
+- Implement stale-while-revalidate for images
+- Cache API responses
+- Offline support
+
+### 4. HTTP/2 Server Push
+- Push critical CSS and JS
+- Already handled by Vercel ✅
 
 ---
 
-**Last Updated**: January 2, 2026  
-**Next Review**: January 9, 2026
+## Recommended Action Plan
+
+### Phase 1: Quick Wins (Today - 1 hour)
+1. ✅ Analyze bundle sizes (Done)
+2. ⏳ Remove unused dependencies
+3. ⏳ Optimize Framer Motion imports
+4. ⏳ Add manual chunks configuration
+
+### Phase 2: Component Optimization (1-2 hours)
+1. ⏳ Split Portfolio modal into separate component
+2. ⏳ Optimize lucide-react imports (use tree-shakeable version)
+3. ⏳ Add image placeholders
+
+### Phase 3: Testing (30 minutes)
+1. ⏳ Run Lighthouse audit
+2. ⏳ Test Core Web Vitals
+3. ⏳ Verify bundle size reduction
+4. ⏳ Check loading performance on slow 3G
+
+### Phase 4: Consider Chart Removal (Optional)
+1. ⏳ Evaluate if charts add value
+2. ⏳ Consider removing project-metrics component
+3. ⏳ Use simpler visualizations
+
+---
+
+## Expected Improvements
+
+| Metric | Before | Target | Method |
+|--------|--------|--------|--------|
+| **Bundle Size** | 280 KB gzipped | 200 KB | Code splitting, tree shaking |
+| **LCP** | TBD | < 2.5s | Image optimization, preload |
+| **FID** | TBD | < 100ms | Code splitting, less JS |
+| **CLS** | TBD | < 0.1 | Fixed dimensions, placeholders |
+| **Lighthouse** | ~90 | 95+ | All optimizations |
+
+---
+
+## Decision: Remove Charts?
+
+### Pros of Keeping Charts:
+- Visual appeal
+- Shows technical capabilities
+- Engaging for technical audience
+
+### Cons of Keeping Charts:
+- 390 KB additional bundle size
+- Slower initial load
+- Not essential to portfolio
+
+### Recommendation:
+**Make charts optional/lazy-loaded only when user navigates to "Analytics" section**
+
+If charts are rarely viewed, the bundle size impact isn't worth it for all users.
+
+---
+
+**Next Steps:** 
+1. Implement Phase 1 optimizations
+2. Run Lighthouse audit
+3. Document improvements

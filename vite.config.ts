@@ -134,7 +134,6 @@ export default defineConfig({
           'radix-vendor': [
             '@radix-ui/react-avatar',
             '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-label',
             '@radix-ui/react-progress',
             '@radix-ui/react-separator',
