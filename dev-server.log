@@ -1,0 +1,13 @@
+
+> personalportfolio@0.1.0 dev /Users/ferryhinardi/Project/personal-web
+> vite
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+  VITE v6.4.1  ready in 1499 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+10:58:43 PM [vite] (client) ✨ new dependencies optimized: @codesandbox/sandpack-react
+10:58:43 PM [vite] (client) ✨ optimized dependencies changed. reloading
+ ELIFECYCLE  Command failed with exit code 143.
