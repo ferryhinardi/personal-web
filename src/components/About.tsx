@@ -98,7 +98,7 @@ export default function About({ data }: AboutProps) {
                       const content = (
                         <div className="flex items-start gap-3 group">
                           <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-50 dark:bg-cyan-900/20 flex items-center justify-center group-hover:bg-cyan-100 dark:group-hover:bg-cyan-900/40 transition-colors">
-                            <Icon className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+                            <Icon className="w-5 h-5 text-cyan-700 dark:text-cyan-300" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">

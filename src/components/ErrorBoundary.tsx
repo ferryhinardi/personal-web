@@ -127,7 +127,7 @@ class ErrorBoundary extends Component<Props, State> {
                   If the problem persists, please{' '}
                   <a
                     href="mailto:hinardi93@gmail.com"
-                    className="text-cyan-600 dark:text-cyan-400 hover:underline"
+                    className="text-cyan-700 dark:text-cyan-300 hover:underline"
                   >
                     contact me
                   </a>

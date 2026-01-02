@@ -74,7 +74,7 @@ export default function Resume({ data }: ResumeProps) {
                           <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                             {edu.school}
                           </h4>
-                          <p className="text-lg text-cyan-600 dark:text-cyan-400 font-medium mb-2">
+                          <p className="text-lg text-cyan-700 dark:text-cyan-300 font-medium mb-2">
                             {edu.degree}
                           </p>
                         </div>
@@ -132,7 +132,7 @@ export default function Resume({ data }: ResumeProps) {
                             <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                               {job.company}
                             </h4>
-                            <p className="text-lg text-cyan-600 dark:text-cyan-400 font-medium">
+                            <p className="text-lg text-cyan-700 dark:text-cyan-300 font-medium">
                               {job.title}
                             </p>
                           </div>
@@ -188,7 +188,7 @@ export default function Resume({ data }: ResumeProps) {
             <Card className="mb-8">
               <CardContent className="p-6">
                 <div className="flex items-start gap-3">
-                  <Award className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-1" />
+                  <Award className="w-5 h-5 text-cyan-700 dark:text-cyan-300 flex-shrink-0 mt-1" />
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     {skillmessage}
                   </p>

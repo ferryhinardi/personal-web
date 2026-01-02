@@ -37,7 +37,7 @@ export default function SkipLinks() {
           top: -100px;
           left: 0;
           padding: 1rem 1.5rem;
-          background: #0891b2;
+          background: #0e7490;
           color: white;
           font-weight: 600;
           text-decoration: none;
@@ -48,12 +48,13 @@ export default function SkipLinks() {
         
         .skip-link:focus {
           top: 0;
+          background: #0e7490;
           outline: 2px solid #06b6d4;
           outline-offset: 2px;
         }
         
         .skip-link:hover {
-          background: #0e7490;
+          background: #155e75;
         }
       `}</style>
     </div>
