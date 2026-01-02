@@ -31,13 +31,29 @@ function App() {
   const { data: resumeData, loading, error } = useResumeData();
 
   useEffect(() => {
-    // Initialize Google Analytics 4
+    // Defer Google Analytics initialization to improve initial load performance
+    // Wait for page to be fully loaded before initializing GA
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
     
     if (measurementId) {
-      initGA(measurementId);
-      logPageView();
-      console.log('Google Analytics initialized with ID:', measurementId);
+      // Defer GA loading after page load completes
+      if (document.readyState === 'complete') {
+        // Page already loaded, defer by 2 seconds
+        setTimeout(() => {
+          initGA(measurementId);
+          logPageView();
+          console.log('Google Analytics initialized (deferred) with ID:', measurementId);
+        }, 2000);
+      } else {
+        // Wait for page to load, then defer by 2 seconds
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            initGA(measurementId);
+            logPageView();
+            console.log('Google Analytics initialized (deferred) with ID:', measurementId);
+          }, 2000);
+        });
+      }
     } else {
       console.warn('Google Analytics not initialized. Set VITE_GA_MEASUREMENT_ID in .env.local');
     }
