@@ -1,12 +1,24 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { Menu, Moon, Sun, FacebookIcon, TwitterIcon, LinkedinIcon, InstagramIcon, GithubIcon } from 'lucide-react';
-import type { MainData } from '@/types/resume.types';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { staggerContainer, staggerItem } from '@/utils/animations';
-import { useDarkMode } from '@/hooks/useDarkMode';
+import {useState, useEffect} from 'react';
+import {motion} from 'framer-motion';
+import {TypeAnimation} from 'react-type-animation';
+import {
+  Menu,
+  Moon,
+  Sun,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  InstagramIcon,
+  GithubIcon,
+} from 'lucide-react';
+import type {MainData} from '@/types/resume.types';
+import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
+import {Button} from '@/components/ui/button';
+import {staggerContainer, staggerItem} from '@/utils/animations';
+import {useDarkMode} from '@/hooks/useDarkMode';
+import {useFadeOnScroll} from '@/hooks/useParallax';
+import {ParallaxBackground, FloatingShapes, AnimatedText} from '@/components/hero';
+import {MagneticButton} from '@/components/ui/MagneticButton';
 
 // Map social network names to icons
 const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -50,7 +62,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
 
   if (!data) return null;
 
-  const { name, description, social, email, phone, website } = data;
+  const {name} = data;
 
   const navItems = [
     { label: 'Home', href: '#home' },
@@ -177,57 +189,60 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
       </motion.nav>
 
       {/* Hero Section */}
-      <div className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900" />
+      <HeroSection
+        data={data}
+        showContactInfo={showContactInfo}
+        handleNavClick={handleNavClick}
+      />
+    </header>
+  );
+}
 
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-cyan-500/10 to-transparent rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, -90, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-blue-500/10 to-transparent rounded-full blur-3xl"
-          />
-        </div>
+/**
+ * Hero section with parallax background, floating shapes, and animated text.
+ */
+interface HeroSectionProps {
+  data: MainData;
+  showContactInfo: boolean;
+  handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+}
 
-        {/* Hero Content */}
+function HeroSection({data, showContactInfo, handleNavClick}: HeroSectionProps) {
+  const {name, description, social, email, phone, website} = data;
+  const {ref, y, opacity} = useFadeOnScroll();
+
+  return (
+    <div className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+      {/* Parallax Background */}
+      <ParallaxBackground />
+
+      {/* Floating Shapes */}
+      <FloatingShapes />
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900 z-[5]" />
+
+      {/* Hero Content with fade on scroll */}
+      <motion.div
+        ref={ref}
+        style={{y, opacity}}
+        className="relative z-10 max-w-5xl mx-auto"
+      >
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="relative z-10 max-w-5xl mx-auto text-center"
+          className="text-center"
         >
-          {/* Greeting */}
+          {/* Greeting Badge */}
           <motion.div variants={staggerItem} className="mb-4">
-            <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium">
-              👋 Welcome! Let's build something amazing
+            <span className="glass-badge inline-block px-4 py-2 text-cyan-400 text-sm font-medium">
+              Welcome! Let's build something amazing
             </span>
           </motion.div>
 
           {/* Open to Opportunities Banner */}
-          <motion.div 
-            variants={staggerItem} 
-            className="mb-6 inline-block"
-          >
+          <motion.div variants={staggerItem} className="mb-6 inline-block">
             <motion.div
               animate={{
                 boxShadow: [
@@ -261,13 +276,21 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             </motion.div>
           </motion.div>
 
-          {/* Name */}
-          <motion.h1
+          {/* Name with animated text */}
+          <motion.div
             variants={staggerItem}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
           >
-            I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{name}</span>
-          </motion.h1>
+            <span>I'm </span>
+            <AnimatedText
+              text={name}
+              animationStyle="char"
+              className="gradient-text"
+              triggerOnView={false}
+              staggerDelay={0.04}
+              initialDelay={0.3}
+            />
+          </motion.div>
 
           {/* Typing Animation */}
           <motion.div variants={staggerItem} className="mb-6">
@@ -300,20 +323,23 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
 
           {/* Contact Info for Print */}
           {showContactInfo && (
-            <motion.div 
-              variants={staggerItem} 
+            <motion.div
+              variants={staggerItem}
               className="print-contact-info mb-6 text-white/80 text-sm sm:text-base"
             >
               <div className="flex flex-wrap items-center justify-center gap-3">
-                {email && <span>📧 {email}</span>}
-                {phone && <span>📱 {phone}</span>}
-                {website && <span>🌐 {website}</span>}
+                {email && <span>{email}</span>}
+                {phone && <span>{phone}</span>}
+                {website && <span>{website}</span>}
               </div>
             </motion.div>
           )}
 
           {/* Social Links */}
-          <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mb-12">
+          <motion.div
+            variants={staggerItem}
+            className="flex items-center justify-center gap-4 mb-12"
+          >
             {social.map((network) => {
               const IconComponent = socialIcons[network.name.toLowerCase()];
               if (!IconComponent) return null;
@@ -325,8 +351,8 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={network.name}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{scale: 1.1, y: -2}}
+                  whileTap={{scale: 0.95}}
                   className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-300"
                 >
                   <IconComponent className="w-5 h-5" />
@@ -335,55 +361,76 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             })}
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              size="lg"
-              className="btn-primary text-base sm:text-lg px-8 py-6"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(e as any, '#contact');
+          {/* CTA Buttons with Magnetic Effect */}
+          <motion.div
+            variants={staggerItem}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <MagneticButton
+              strength={0.35}
+              maxDistance={12}
+              className="btn-primary text-base sm:text-lg px-8 py-4 rounded-lg"
+              onClick={() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({behavior: 'smooth', block: 'start'});
+                }
               }}
             >
               Let's Connect
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/20 !text-white bg-transparent hover:bg-white/10 text-base sm:text-lg px-8 py-6"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(e as any, '#portfolio');
+            </MagneticButton>
+            <MagneticButton
+              strength={0.35}
+              maxDistance={12}
+              className="border-2 border-white/20 text-white bg-transparent hover:bg-white/10 text-base sm:text-lg px-8 py-4 rounded-lg transition-colors"
+              onClick={() => {
+                const element = document.getElementById('portfolio');
+                if (element) {
+                  element.scrollIntoView({behavior: 'smooth', block: 'start'});
+                }
               }}
             >
               Explore My Work
-            </Button>
+            </MagneticButton>
           </motion.div>
         </motion.div>
+      </motion.div>
 
-        {/* Scroll Down Indicator */}
-        <motion.a
-          href="#about"
-          onClick={(e) => handleNavClick(e, '#about')}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors group"
-        >
-          <span className="text-sm font-medium">Discover More</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-6 h-10 rounded-full border-2 border-white/30 group-hover:border-white flex items-start justify-center p-2"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white"
-            />
-          </motion.div>
-        </motion.a>
-      </div>
-    </header>
+      {/* Scroll Down Indicator */}
+      <ScrollIndicator handleNavClick={handleNavClick} />
+    </div>
+  );
+}
+
+/**
+ * Animated scroll indicator at bottom of hero.
+ */
+interface ScrollIndicatorProps {
+  handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+}
+
+function ScrollIndicator({handleNavClick}: ScrollIndicatorProps) {
+  return (
+    <motion.a
+      href="#about"
+      onClick={(e) => handleNavClick(e, '#about')}
+      initial={{opacity: 0, y: -20}}
+      animate={{opacity: 1, y: 0}}
+      transition={{delay: 1.5, duration: 0.8}}
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors group z-10"
+    >
+      <span className="text-sm font-medium">Discover More</span>
+      <motion.div
+        animate={{y: [0, 8, 0]}}
+        transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}
+        className="w-6 h-10 rounded-full border-2 border-white/30 group-hover:border-white flex items-start justify-center p-2"
+      >
+        <motion.div
+          animate={{y: [0, 12, 0]}}
+          transition={{duration: 1.5, repeat: Infinity, ease: 'easeInOut'}}
+          className="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white"
+        />
+      </motion.div>
+    </motion.a>
   );
 }

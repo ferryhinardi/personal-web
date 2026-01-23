@@ -12,6 +12,9 @@ import ScrollProgress from '@components/ui/scroll-progress';
 import BackToTop from '@components/ui/back-to-top';
 import SkipLinks from '@components/ui/skip-links';
 import { PrintButton } from '@components/ui/print-button';
+import { SectionDots } from '@components/ui/section-dots';
+import { CustomCursor } from '@components/ui/custom-cursor';
+import { PerformanceProvider, usePerformanceConfig } from '@/contexts/PerformanceContext';
 import {
   AboutSkeleton,
   ResumeSkeleton,
@@ -42,7 +45,6 @@ function App() {
         setTimeout(() => {
           initGA(measurementId);
           logPageView();
-          console.log('Google Analytics initialized (deferred) with ID:', measurementId);
         }, 2000);
       } else {
         // Wait for page to load, then defer by 2 seconds
@@ -50,12 +52,9 @@ function App() {
           setTimeout(() => {
             initGA(measurementId);
             logPageView();
-            console.log('Google Analytics initialized (deferred) with ID:', measurementId);
           }, 2000);
         });
       }
-    } else {
-      console.warn('Google Analytics not initialized. Set VITE_GA_MEASUREMENT_ID in .env.local');
     }
   }, []);
 
@@ -64,7 +63,6 @@ function App() {
   }
 
   if (error) {
-    console.error('Failed to load resume data:', error);
     return (
       <ErrorDisplay 
         error={error} 
@@ -81,73 +79,86 @@ function App() {
 
   return (
     <HelmetProvider>
-      <div className="App">
-        <SkipLinks />
-        <ScrollProgress />
-        <Helmet>
-          <script type="application/ld+json">
-            {JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Ferry Hinardi',
-              url: 'https://ferryhinardi.com',
-              image: 'https://ferryhinardi.com/images/profilepic.jpg',
-              jobTitle: 'Software Engineer',
-              worksFor: {
-                '@type': 'Organization',
-                name: 'Traveloka',
-              },
-              alumniOf: {
-                '@type': 'EducationalOrganization',
-                name: 'Bina Nusantara University',
-              },
-              knowsAbout: [
-                'React.js',
-                'TypeScript',
-                'JavaScript',
-                'Next.js',
-                'React Native',
-                'GraphQL',
-                'AWS',
-                'GitHub Actions',
-              ],
-              sameAs: [
-                resumeData.main?.social?.find((s: any) => s.name === 'linkedin')?.url,
-                resumeData.main?.social?.find((s: any) => s.name === 'github')?.url,
-              ].filter(Boolean),
-              email: resumeData.main?.email,
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: resumeData.main?.address?.city,
-                addressRegion: resumeData.main?.address?.state,
-                addressCountry: 'ID',
-              },
-            })}
-          </script>
-        </Helmet>
-        <Header data={resumeData.main} />
-        <Suspense fallback={<AboutSkeleton />}>
-          <About data={resumeData.main} />
-        </Suspense>
-        <Suspense fallback={<ResumeSkeleton />}>
-          <Resume data={resumeData.resume} />
-        </Suspense>
-        <Suspense fallback={<PortfolioSkeleton />}>
-          <Portfolio data={resumeData.portfolio} />
-        </Suspense>
-        {/* Testimonials section hidden until real testimonials are available */}
-        {/* <Suspense fallback={<TestimonialsSkeleton />}>
-          <Testimonials data={resumeData.testimonials} />
-        </Suspense> */}
-        <Suspense fallback={<ContactSkeleton />}>
-          <Contact data={resumeData.main} />
-        </Suspense>
-        <Footer data={resumeData.main} />
-        <BackToTop />
-        <PrintButton />
-        <Analytics />
-      </div>
+      <PerformanceProvider>
+        <AppContent resumeData={resumeData} />
+      </PerformanceProvider>
     </HelmetProvider>
+  );
+}
+
+// Separate component to use performance context
+function AppContent({ resumeData }: { resumeData: any }) {
+  const { enableCustomCursor } = usePerformanceConfig();
+
+  return (
+    <div className="App">
+      <SkipLinks />
+      {enableCustomCursor && <CustomCursor enableBlendMode />}
+      <ScrollProgress showPercentage />
+      <SectionDots position="right" />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Ferry Hinardi',
+            url: 'https://ferryhinardi.com',
+            image: 'https://ferryhinardi.com/images/profilepic.jpg',
+            jobTitle: 'Software Engineer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Traveloka',
+            },
+            alumniOf: {
+              '@type': 'EducationalOrganization',
+              name: 'Bina Nusantara University',
+            },
+            knowsAbout: [
+              'React.js',
+              'TypeScript',
+              'JavaScript',
+              'Next.js',
+              'React Native',
+              'GraphQL',
+              'AWS',
+              'GitHub Actions',
+            ],
+            sameAs: [
+              resumeData.main?.social?.find((s: any) => s.name === 'linkedin')?.url,
+              resumeData.main?.social?.find((s: any) => s.name === 'github')?.url,
+            ].filter(Boolean),
+            email: resumeData.main?.email,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: resumeData.main?.address?.city,
+              addressRegion: resumeData.main?.address?.state,
+              addressCountry: 'ID',
+            },
+          })}
+        </script>
+      </Helmet>
+      <Header data={resumeData.main} />
+      <Suspense fallback={<AboutSkeleton />}>
+        <About data={resumeData.main} />
+      </Suspense>
+      <Suspense fallback={<ResumeSkeleton />}>
+        <Resume data={resumeData.resume} />
+      </Suspense>
+      <Suspense fallback={<PortfolioSkeleton />}>
+        <Portfolio data={resumeData.portfolio} />
+      </Suspense>
+      {/* Testimonials section hidden until real testimonials are available */}
+      {/* <Suspense fallback={<TestimonialsSkeleton />}>
+        <Testimonials data={resumeData.testimonials} />
+      </Suspense> */}
+      <Suspense fallback={<ContactSkeleton />}>
+        <Contact data={resumeData.main} />
+      </Suspense>
+      <Footer data={resumeData.main} />
+      <BackToTop />
+      <PrintButton />
+      <Analytics />
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import { Code2, ExternalLink, Rocket } from 'lucide-react';
 import type { Project } from '@/types/resume.types';
 import { Button } from '@/components/ui/button';
-import { TechStack } from '@/components/ui';
+import { TechStack } from '@/components/ui/tech-badge';
 import OptimizedImage from '@/components/ui/optimized-image';
 import {
   Dialog,
