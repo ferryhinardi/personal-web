@@ -1,15 +1,61 @@
-import { cn } from '@/lib/utils';
+import {cn} from '@/lib/utils';
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
+  /** Animation type: shimmer (default) or pulse */
+  animation?: 'shimmer' | 'pulse';
+  /** Shimmer duration in seconds */
+  duration?: number;
 }
 
-function Skeleton({ className, ...props }: SkeletonProps) {
+/**
+ * Skeleton loading placeholder with shimmer animation.
+ *
+ * @example
+ * ```tsx
+ * // Default shimmer animation
+ * <Skeleton className="h-6 w-full" />
+ *
+ * // Pulse animation (fallback)
+ * <Skeleton animation="pulse" className="h-6 w-full" />
+ *
+ * // Custom duration
+ * <Skeleton duration={2} className="h-6 w-full" />
+ * ```
+ */
+function Skeleton({
+  className,
+  animation = 'shimmer',
+  duration = 1.5,
+  ...props
+}: SkeletonProps) {
+  if (animation === 'pulse') {
+    return (
+      <div
+        className={cn(
+          'animate-pulse rounded-md bg-gray-200 dark:bg-slate-700',
+          className,
+        )}
+        {...props}
+      />
+    );
+  }
+
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-gray-200 dark:bg-slate-700', className)}
+      className={cn(
+        'relative overflow-hidden rounded-md bg-gray-200 dark:bg-slate-700',
+        className,
+      )}
       {...props}
-    />
+    >
+      <div
+        className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent"
+        style={{
+          animationDuration: `${duration}s`,
+        }}
+      />
+    </div>
   );
 }
 
@@ -68,7 +114,10 @@ function AboutSkeleton() {
 // Resume section skeleton
 function ResumeSkeleton() {
   return (
-    <section id="resume" className="section-padding bg-gray-50 dark:bg-slate-800/50">
+    <section
+      id="resume"
+      className="section-padding bg-gray-50 dark:bg-slate-800/50"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Title */}
@@ -133,7 +182,10 @@ function ResumeSkeleton() {
 // Portfolio section skeleton
 function PortfolioSkeleton() {
   return (
-    <section id="portfolio" className="section-padding bg-gray-50 dark:bg-slate-800/50">
+    <section
+      id="portfolio"
+      className="section-padding bg-gray-50 dark:bg-slate-800/50"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Title */}
@@ -141,6 +193,14 @@ function PortfolioSkeleton() {
             <Skeleton className="h-16 w-16 rounded-full mx-auto mb-4" />
             <Skeleton className="h-12 w-64 mx-auto mb-4" />
             <Skeleton className="h-6 w-96 mx-auto" />
+          </div>
+
+          {/* Filter buttons skeleton */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <Skeleton className="h-10 w-20 rounded-full" />
+            <Skeleton className="h-10 w-24 rounded-full" />
+            <Skeleton className="h-10 w-28 rounded-full" />
+            <Skeleton className="h-10 w-20 rounded-full" />
           </div>
 
           {/* Project Grid */}
@@ -226,6 +286,57 @@ function CardSkeleton() {
   );
 }
 
+// Image skeleton with aspect ratio
+function ImageSkeleton({
+  aspectRatio = '16/9',
+  className,
+}: {
+  aspectRatio?: string;
+  className?: string;
+}) {
+  return (
+    <Skeleton
+      className={cn('w-full', className)}
+      style={{aspectRatio}}
+    />
+  );
+}
+
+// Text skeleton with multiple lines
+function TextSkeleton({
+  lines = 3,
+  className,
+}: {
+  lines?: number;
+  className?: string;
+}) {
+  return (
+    <div className={cn('space-y-2', className)}>
+      {Array.from({length: lines}).map((_, i) => (
+        <Skeleton
+          key={i}
+          className={cn(
+            'h-4',
+            i === lines - 1 ? 'w-2/3' : 'w-full',
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Avatar skeleton
+function AvatarSkeleton({size = 'md'}: {size?: 'sm' | 'md' | 'lg' | 'xl'}) {
+  const sizeClasses = {
+    sm: 'h-8 w-8',
+    md: 'h-12 w-12',
+    lg: 'h-16 w-16',
+    xl: 'h-24 w-24',
+  };
+
+  return <Skeleton className={cn('rounded-full', sizeClasses[size])} />;
+}
+
 // GitHub Activity Skeleton
 function GitHubActivitySkeleton() {
   return (
@@ -269,5 +380,8 @@ export {
   TestimonialsSkeleton,
   ContactSkeleton,
   CardSkeleton,
+  ImageSkeleton,
+  TextSkeleton,
+  AvatarSkeleton,
   GitHubActivitySkeleton,
 };

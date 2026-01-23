@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import {Variants, Transition} from 'framer-motion';
 
 // Fade in animation
 export const fadeIn: Variants = {
@@ -514,6 +514,466 @@ export const animationPresets = {
       opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  },
+};
+
+// ============================================
+// PARALLAX & SCROLL-TRIGGERED ANIMATIONS
+// ============================================
+
+/**
+ * Spring configurations for smooth parallax effects
+ */
+export const springConfigs = {
+  /** Gentle, smooth spring for backgrounds */
+  gentle: {stiffness: 50, damping: 20, mass: 1} as const,
+  /** Default balanced spring */
+  default: {stiffness: 100, damping: 30, mass: 1} as const,
+  /** Snappy spring for interactive elements */
+  snappy: {stiffness: 300, damping: 30, mass: 0.5} as const,
+  /** Bouncy spring for playful effects */
+  bouncy: {stiffness: 400, damping: 10, mass: 0.5} as const,
+  /** Very stiff spring (almost no bounce) */
+  stiff: {stiffness: 500, damping: 40, mass: 1} as const,
+};
+
+/**
+ * Parallax layer configurations for multi-layer effects
+ */
+export const parallaxLayers = {
+  /** Far background (slowest) */
+  background: {
+    yMultiplier: 0.2,
+    springConfig: springConfigs.gentle,
+  },
+  /** Mid-ground layer */
+  midground: {
+    yMultiplier: 0.5,
+    springConfig: springConfigs.default,
+  },
+  /** Foreground (fastest) */
+  foreground: {
+    yMultiplier: 0.8,
+    springConfig: springConfigs.snappy,
+  },
+  /** Content layer (1:1 with scroll) */
+  content: {
+    yMultiplier: 1,
+    springConfig: springConfigs.default,
+  },
+};
+
+/**
+ * Scroll-triggered reveal animations
+ */
+export const scrollReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+export const scrollRevealLeft: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -60,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+export const scrollRevealRight: Variants = {
+  hidden: {
+    opacity: 0,
+    x: 60,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+/**
+ * Parallax float animation (continuous)
+ */
+export const parallaxFloat = {
+  y: [0, -20, 0],
+  transition: {
+    duration: 6,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+export const parallaxFloatSlow = {
+  y: [0, -15, 0],
+  transition: {
+    duration: 8,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+export const parallaxFloatFast = {
+  y: [0, -25, 0],
+  transition: {
+    duration: 4,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+/**
+ * Magnetic button hover effect configuration
+ */
+export const magneticHover = {
+  transition: {
+    type: 'spring',
+    stiffness: 150,
+    damping: 15,
+  } as Transition,
+};
+
+/**
+ * 3D tilt card configuration
+ */
+export const tiltCardConfig = {
+  perspective: 1000,
+  maxTilt: 15,
+  scale: 1.02,
+  transition: {
+    type: 'spring',
+    stiffness: 300,
+    damping: 30,
+  } as Transition,
+};
+
+/**
+ * Hero section text reveal animation
+ */
+export const heroTextReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    skewY: 7,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    skewY: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+/**
+ * Split text animation (for character-by-character reveal)
+ */
+export const splitTextContainer: Variants = {
+  hidden: {opacity: 1},
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export const splitTextChar: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+    rotateX: -90,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 200,
+      damping: 20,
+    },
+  },
+};
+
+/**
+ * Counter/number animation for stats
+ */
+export const counterReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 200,
+      damping: 20,
+    },
+  },
+};
+
+/**
+ * Timeline item reveal (for Resume section)
+ */
+export const timelineItemReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -30,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+export const timelineLineGrow: Variants = {
+  hidden: {
+    scaleY: 0,
+    originY: 0,
+  },
+  visible: {
+    scaleY: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeOut',
+    },
+  },
+};
+
+/**
+ * Portfolio card hover effect
+ */
+export const portfolioCardHover = {
+  scale: 1.03,
+  y: -10,
+  transition: {
+    type: 'spring',
+    stiffness: 300,
+    damping: 20,
+  },
+};
+
+export const portfolioImageZoom = {
+  scale: 1.1,
+  transition: {
+    duration: 0.4,
+    ease: 'easeOut',
+  },
+};
+
+/**
+ * Glassmorphism card animation
+ */
+export const glassCardReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    backdropFilter: 'blur(0px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    backdropFilter: 'blur(12px)',
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+/**
+ * Section transition wave effect
+ */
+export const sectionWave: Variants = {
+  hidden: {
+    pathLength: 0,
+    opacity: 0,
+  },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      duration: 1.5,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+/**
+ * Floating shape animations for backgrounds
+ */
+export const floatingShape1 = {
+  y: [0, -30, 0],
+  x: [0, 15, 0],
+  rotate: [0, 10, 0],
+  transition: {
+    duration: 8,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+export const floatingShape2 = {
+  y: [0, 20, 0],
+  x: [0, -20, 0],
+  rotate: [0, -15, 0],
+  transition: {
+    duration: 10,
+    repeat: Infinity,
+    ease: 'easeInOut',
+    delay: 1,
+  },
+};
+
+export const floatingShape3 = {
+  y: [0, -25, 0],
+  x: [0, 10, 0],
+  scale: [1, 1.1, 1],
+  transition: {
+    duration: 7,
+    repeat: Infinity,
+    ease: 'easeInOut',
+    delay: 2,
+  },
+};
+
+/**
+ * Gradient mesh animation for hero backgrounds
+ */
+export const gradientMeshAnimate = {
+  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+  transition: {
+    duration: 20,
+    repeat: Infinity,
+    ease: 'linear',
+  },
+};
+
+/**
+ * Scroll progress indicator animation
+ */
+export const scrollIndicatorPulse = {
+  opacity: [0.5, 1, 0.5],
+  y: [0, 10, 0],
+  transition: {
+    duration: 2,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  },
+};
+
+/**
+ * Custom cursor animations
+ */
+export const cursorDefault = {
+  scale: 1,
+  transition: {type: 'spring', stiffness: 500, damping: 28},
+};
+
+export const cursorHover = {
+  scale: 1.5,
+  transition: {type: 'spring', stiffness: 500, damping: 28},
+};
+
+export const cursorClick = {
+  scale: 0.9,
+  transition: {duration: 0.1},
+};
+
+/**
+ * Navigation dots animation
+ */
+export const navDotActive = {
+  scale: 1.2,
+  backgroundColor: 'var(--color-primary)',
+  transition: {type: 'spring', stiffness: 300, damping: 20},
+};
+
+export const navDotInactive = {
+  scale: 1,
+  backgroundColor: 'var(--color-muted)',
+  transition: {type: 'spring', stiffness: 300, damping: 20},
+};
+
+/**
+ * Ripple effect for buttons
+ */
+export const rippleEffect: Variants = {
+  initial: {
+    scale: 0,
+    opacity: 0.5,
+  },
+  animate: {
+    scale: 4,
+    opacity: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+/**
+ * Stagger configurations for parallax sections
+ */
+export const parallaxStagger: Variants = {
+  hidden: {opacity: 1},
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+export const parallaxStaggerItem: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
 };

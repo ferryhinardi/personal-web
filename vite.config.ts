@@ -2,11 +2,18 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    visualizer({
+      filename: 'bundle-stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'images/**/*', 'Ferry-Hinardi-Resume-2025.pdf'],
@@ -124,23 +131,47 @@ export default defineConfig({
       compress: {
         drop_console: true, // Remove console.logs in production
         drop_debugger: true,
+        passes: 2, // Multiple compression passes for better minification
+      },
+      mangle: {
+        safari10: true,
       },
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'ui-vendor': ['framer-motion', 'react-type-animation', 'lucide-react'],
-          'radix-vendor': [
-            '@radix-ui/react-avatar',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-label',
-            '@radix-ui/react-progress',
-            '@radix-ui/react-separator',
-            '@radix-ui/react-slot',
-          ],
-          'analytics': ['@vercel/analytics', 'react-ga4'],
-          'charts': ['recharts'], // Separate chunk for heavy charting library
+        manualChunks: (id) => {
+          // React core
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-vendor';
+          }
+          // Framer Motion (large animation library)
+          if (id.includes('node_modules/framer-motion')) {
+            return 'framer-motion';
+          }
+          // UI libraries
+          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-type-animation')) {
+            return 'ui-icons';
+          }
+          // Radix UI
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'radix-vendor';
+          }
+          // Analytics
+          if (id.includes('node_modules/@vercel/analytics') || id.includes('node_modules/react-ga4')) {
+            return 'analytics';
+          }
+          // Charts (heavy)
+          if (id.includes('node_modules/recharts') || id.includes('node_modules/d3')) {
+            return 'charts';
+          }
+          // Three.js related (if used)
+          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
+            return 'three-vendor';
+          }
+          // Date utilities
+          if (id.includes('node_modules/date-fns') || id.includes('node_modules/dayjs')) {
+            return 'date-utils';
+          }
         },
         // Optimize chunk sizes
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -149,9 +180,15 @@ export default defineConfig({
       }
     },
     // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     // Enable CSS code splitting
     cssCodeSplit: true,
+    // Enable tree-shaking for better bundle size
+    target: 'es2020',
+    // Module preload polyfill
+    modulePreload: {
+      polyfill: true,
+    },
   },
   // Optimize dependencies
   optimizeDeps: {
