@@ -227,23 +227,6 @@ function PortfolioSkeleton() {
   );
 }
 
-// Testimonials skeleton
-function TestimonialsSkeleton() {
-  return (
-    <section className="section-padding bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <Skeleton className="h-12 w-64 mx-auto mb-16 bg-white/10" />
-          <div className="space-y-8">
-            <Skeleton className="h-32 w-full rounded-lg bg-white/10" />
-            <Skeleton className="h-6 w-48 mx-auto bg-white/10" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // Contact skeleton
 function ContactSkeleton() {
   return (
@@ -377,7 +360,6 @@ export {
   AboutSkeleton,
   ResumeSkeleton,
   PortfolioSkeleton,
-  TestimonialsSkeleton,
   ContactSkeleton,
   CardSkeleton,
   ImageSkeleton,

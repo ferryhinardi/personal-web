@@ -98,23 +98,8 @@ export interface Portfolio {
   projects: Project[];
 }
 
-export interface Testimonial {
-  text: string;
-  user: string;
-  title?: string; // Job title
-  company?: string; // Company name
-  image?: string; // Profile photo
-  linkedin?: string; // LinkedIn profile URL
-  relationship?: string; // e.g., "Worked together at Traveloka"
-}
-
-export interface Testimonials {
-  testimonials: Testimonial[];
-}
-
 export interface ResumeData {
   main: MainData;
   resume: ResumeSection;
   portfolio: Portfolio;
-  testimonials: Testimonials;
 }

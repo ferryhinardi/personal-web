@@ -7,7 +7,6 @@ import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
 import { Textarea } from '@components/ui/textarea';
 import { Card } from '@components/ui/card';
-import { TestimonialsManager } from '@/components/TestimonialsManager';
 import { GitHubActivity } from '@components/ui/github-activity';
 import { ProjectMetrics } from '@components/ui/project-metrics';
 import './AdminDashboard.css';
@@ -16,7 +15,6 @@ type ResumeData = {
   main: any;
   resume: any;
   portfolio: any;
-  testimonials: any;
 };
 
 export default function AdminDashboard() {
@@ -62,8 +60,6 @@ export default function AdminDashboard() {
         updated.resume = { ...updated.resume, [field]: value };
       } else if (section === 'portfolio') {
         updated.portfolio = { ...updated.portfolio, [field]: value };
-      } else if (section === 'testimonials') {
-        updated.testimonials = { ...updated.testimonials, [field]: value };
       }
       return updated;
     });
@@ -83,8 +79,6 @@ export default function AdminDashboard() {
         updated.resume[arrayField][index][field] = value;
       } else if (section === 'portfolio') {
         updated.portfolio[arrayField][index][field] = value;
-      } else if (section === 'testimonials') {
-        updated.testimonials[arrayField][index][field] = value;
       }
       
       return updated;
@@ -108,9 +102,6 @@ export default function AdminDashboard() {
       } else if (section === 'portfolio') {
         if (!updated.portfolio[arrayField]) updated.portfolio[arrayField] = [];
         updated.portfolio[arrayField].push(template);
-      } else if (section === 'testimonials') {
-        if (!updated.testimonials[arrayField]) updated.testimonials[arrayField] = [];
-        updated.testimonials[arrayField].push(template);
       }
       
       return updated;
@@ -131,8 +122,6 @@ export default function AdminDashboard() {
         updated.resume[arrayField].splice(index, 1);
       } else if (section === 'portfolio') {
         updated.portfolio[arrayField].splice(index, 1);
-      } else if (section === 'testimonials') {
-        updated.testimonials[arrayField].splice(index, 1);
       }
       
       return updated;
@@ -156,8 +145,6 @@ export default function AdminDashboard() {
         array = updated.resume[arrayField];
       } else if (section === 'portfolio') {
         array = updated.portfolio[arrayField];
-      } else if (section === 'testimonials') {
-        array = updated.testimonials[arrayField];
       }
       
       // Validate bounds
@@ -357,18 +344,6 @@ export default function AdminDashboard() {
           Portfolio
         </button>
         <button 
-          className={activeTab === 'testimonials' ? 'tab-active' : ''} 
-          onClick={() => setActiveTab('testimonials')}
-        >
-          Testimonials
-        </button>
-        <button 
-          className={activeTab === 'linkedin-testimonials' ? 'tab-active' : ''} 
-          onClick={() => setActiveTab('linkedin-testimonials')}
-        >
-          🔗 LinkedIn Sync
-        </button>
-        <button 
           className={activeTab === 'metrics' ? 'tab-active' : ''} 
           onClick={() => setActiveTab('metrics')}
         >
@@ -463,35 +438,6 @@ export default function AdminDashboard() {
             onRemove={(index) => removeArrayItem('portfolio', 'projects', index)}
             onMove={(index, direction) => moveArrayItem('portfolio', 'projects', index, direction)}
           />
-        )}
-
-        {activeTab === 'testimonials' && (
-          <TestimonialsTab 
-            data={resumeData.testimonials.testimonials} 
-            onChange={(index, field, value) => 
-              handleArrayItemChange('testimonials', 'testimonials', index, field, value)
-            }
-            onAdd={() => addArrayItem('testimonials', 'testimonials', {
-              text: '',
-              user: ''
-            })}
-            onRemove={(index) => removeArrayItem('testimonials', 'testimonials', index)}
-            onMove={(index, direction) => moveArrayItem('testimonials', 'testimonials', index, direction)}
-          />
-        )}
-
-        {activeTab === 'linkedin-testimonials' && (
-          <div className="tab-content">
-            <Card className="admin-card">
-              <div className="card-header">
-                <h3>🔗 LinkedIn Testimonials Sync</h3>
-                <p style={{ fontSize: '14px', color: '#666', marginTop: '8px' }}>
-                  Import testimonials from LinkedIn and manage them here. Featured testimonials will be exported to resumeData.json.
-                </p>
-              </div>
-              <TestimonialsManager />
-            </Card>
-          </div>
         )}
 
         {activeTab === 'metrics' && (
@@ -991,58 +937,6 @@ function PortfolioTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps
       ))}
       
       <Button onClick={onAdd} className="add-btn">+ Add Project</Button>
-    </div>
-  );
-}
-
-function TestimonialsTab({ data, onChange, onAdd, onRemove, onMove }: ArrayTabProps) {
-  return (
-    <div className="tab-content">
-      {data?.map((testimonial: any, index: number) => (
-        <Card key={index} className="admin-card">
-          <div className="card-header">
-            <h3>Testimonial #{index + 1}</h3>
-            <div className="card-actions">
-              <Button 
-                onClick={() => onMove(index, 'up')} 
-                variant="outline"
-                disabled={index === 0}
-                title="Move up"
-              >
-                ⬆️
-              </Button>
-              <Button 
-                onClick={() => onMove(index, 'down')} 
-                variant="outline"
-                disabled={index === data.length - 1}
-                title="Move down"
-              >
-                ⬇️
-              </Button>
-              <Button onClick={() => onRemove(index)} variant="outline">🗑️ Remove</Button>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <Label>Quote</Label>
-            <Textarea
-              value={testimonial.text || ''}
-              onChange={(e) => onChange(index, 'text', e.target.value)}
-              rows={3}
-            />
-          </div>
-
-          <div className="form-group">
-            <Label>Author</Label>
-            <Input
-              value={testimonial.user || ''}
-              onChange={(e) => onChange(index, 'user', e.target.value)}
-            />
-          </div>
-        </Card>
-      ))}
-      
-      <Button onClick={onAdd} className="add-btn">+ Add Testimonial</Button>
     </div>
   );
 }

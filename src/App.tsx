@@ -20,7 +20,6 @@ import {
   AboutSkeleton,
   ResumeSkeleton,
   PortfolioSkeleton,
-  TestimonialsSkeleton,
   ContactSkeleton,
 } from '@components/ui/skeleton';
 
@@ -28,7 +27,6 @@ import {
 const About = lazy(() => import('@components/About'));
 const Resume = lazy(() => import('@components/Resume'));
 const Portfolio = lazy(() => import('@components/Portfolio'));
-const Testimonials = lazy(() => import('@components/Testimonials'));
 const Contact = lazy(() => import('@components/Contact'));
 
 function App() {
@@ -148,9 +146,6 @@ function AppContent({ resumeData }: { resumeData: any }) {
       </Suspense>
       <Suspense fallback={<PortfolioSkeleton />}>
         <Portfolio data={resumeData.portfolio} />
-      </Suspense>
-      <Suspense fallback={<TestimonialsSkeleton />}>
-        <Testimonials data={resumeData.testimonials} />
       </Suspense>
       <Suspense fallback={<ContactSkeleton />}>
         <Contact data={resumeData.main} />
