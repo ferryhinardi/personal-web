@@ -5,11 +5,17 @@ import {
   Menu,
   Moon,
   Sun,
+  Home,
+  User,
+  FileText,
+  Briefcase,
+  Mail,
   FacebookIcon,
   TwitterIcon,
   LinkedinIcon,
   InstagramIcon,
   GithubIcon,
+  X,
 } from 'lucide-react';
 import type {MainData} from '@/types/resume.types';
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
@@ -38,6 +44,7 @@ interface HeaderProps {
 export default function Header({ data, showContactInfo = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isDark, toggleDarkMode } = useDarkMode();
 
   useEffect(() => {
@@ -66,11 +73,11 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
   const {name} = data;
 
   const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Resume', href: '#resume' },
-    { label: 'Works', href: '#portfolio' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '#home', icon: Home },
+    { label: 'About', href: '#about', icon: User },
+    { label: 'Resume', href: '#resume', icon: FileText },
+    { label: 'Works', href: '#portfolio', icon: Briefcase },
+    { label: 'Contact', href: '#contact', icon: Mail },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -158,30 +165,114 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
               
-              <Sheet>
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                     <Menu className="h-6 w-6" />
                     <span className="sr-only">Open menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-slate-900 border-white/10">
-                  <nav className="flex flex-col space-y-4 mt-8">
-                    {navItems.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        onClick={(e) => handleNavClick(e, item.href)}
-                        className={`px-4 py-3 rounded-lg text-base font-medium transition-all ${
-                          activeSection === item.href.replace('#', '')
-                            ? 'text-cyan-400 bg-white/10'
-                            : 'text-white/80 hover:text-white hover:bg-white/5'
-                        }`}
-                      >
-                        {item.label}
-                      </a>
-                    ))}
+                <SheetContent side="right" className="bg-slate-900 border-white/10 w-80">
+                  {/* Close button */}
+                  <div className="flex justify-end mb-4">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-white/70 hover:text-white hover:bg-white/10"
+                      aria-label="Close menu"
+                    >
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </div>
+
+                  {/* Navigation Links with staggered animation */}
+                  <nav className="flex flex-col space-y-2">
+                    {navItems.map((item, index) => {
+                      const IconComponent = item.icon;
+                      const isActive = activeSection === item.href.replace('#', '');
+                      
+                      return (
+                        <motion.a
+                          key={item.href}
+                          href={item.href}
+                          onClick={(e) => {
+                            handleNavClick(e, item.href);
+                            setMobileMenuOpen(false);
+                          }}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: index * 0.08,
+                            ease: 'easeOut',
+                          }}
+                          whileHover={{ x: 4, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden ${
+                            isActive
+                              ? 'text-cyan-400 bg-white/10'
+                              : 'text-white/80 hover:text-white'
+                          }`}
+                        >
+                          {/* Active indicator */}
+                          {isActive && (
+                            <motion.div
+                              layoutId="mobile-nav-indicator"
+                              className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-400 rounded-r-full"
+                              initial={false}
+                              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                            />
+                          )}
+                          
+                          <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
+                          <span>{item.label}</span>
+                        </motion.a>
+                      );
+                    })}
                   </nav>
+
+                  {/* Divider */}
+                  <motion.div
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    transition={{ delay: 0.4, duration: 0.3 }}
+                    className="my-8 h-px bg-white/10 origin-left"
+                  />
+
+                  {/* Social Links */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.3 }}
+                    className="px-4"
+                  >
+                    <p className="text-xs text-white/40 uppercase tracking-wider mb-4">Connect</p>
+                    <div className="flex items-center gap-3">
+                      {data.social.map((network, index) => {
+                        const IconComponent = socialIcons[network.name.toLowerCase()];
+                        if (!IconComponent) return null;
+
+                        return (
+                          <motion.a
+                            key={network.name}
+                            href={network.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={network.name}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.55 + index * 0.05, duration: 0.2 }}
+                            whileHover={{ scale: 1.15, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors"
+                          >
+                            <IconComponent className="w-4 h-4" />
+                          </motion.a>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
                 </SheetContent>
               </Sheet>
             </div>
