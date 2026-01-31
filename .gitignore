@@ -88,5 +88,8 @@ logs/
 outdated.json
 .env*.local
 
+# Build analysis artifacts
+bundle-stats.html
+
 # OpenCode
 .opencode/
