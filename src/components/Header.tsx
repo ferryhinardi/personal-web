@@ -14,6 +14,7 @@ import {
 import type {MainData} from '@/types/resume.types';
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
 import {Button} from '@/components/ui/button';
+import {InteractiveBadge} from '@/components/ui/interactive-badge';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 import {useDarkMode} from '@/hooks/useDarkMode';
 import {useFadeOnScroll} from '@/hooks/useParallax';
@@ -234,46 +235,13 @@ function HeroSection({data, showContactInfo, handleNavClick}: HeroSectionProps) 
           animate="visible"
           className="text-center"
         >
-          {/* Greeting Badge */}
-          <motion.div variants={staggerItem} className="mb-4">
-            <span className="glass-badge inline-block px-4 py-2 text-cyan-400 text-sm font-medium">
-              Welcome! Let's build something amazing
-            </span>
-          </motion.div>
-
-          {/* Open to Opportunities Banner */}
-          <motion.div variants={staggerItem} className="mb-6 inline-block">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 0px rgba(34, 211, 238, 0)',
-                  '0 0 20px rgba(34, 211, 238, 0.3)',
-                  '0 0 0px rgba(34, 211, 238, 0)',
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 backdrop-blur-sm"
-            >
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              >
-                <div className="w-2 h-2 rounded-full bg-green-400" />
-              </motion.div>
-              <span className="text-green-300 text-sm sm:text-base font-medium">
-                Open to Opportunities
-              </span>
-            </motion.div>
+          {/* Interactive Badge - Flip card with name/contact */}
+          <motion.div variants={staggerItem} className="mb-6">
+            <InteractiveBadge
+              data={data}
+              showAvailability
+              availabilityText="Open to Opportunities"
+            />
           </motion.div>
 
           {/* Name with animated text */}
