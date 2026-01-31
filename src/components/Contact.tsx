@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useForm, ValidationError} from '@formspree/react';
 import {motion} from 'framer-motion';
 import {Send, MapPin, Mail, CheckCircle2, AlertCircle, Sparkles} from 'lucide-react';
@@ -47,6 +47,23 @@ export default function Contact({ data }: ContactProps) {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [shouldShake, setShouldShake] = useState(false);
+
+  // Shake animation variant
+  const shakeAnimation = {
+    shake: {
+      x: [0, -10, 10, -10, 10, -5, 5, -2, 2, 0],
+      transition: {duration: 0.5, ease: 'easeInOut' as const},
+    },
+  };
+
+  // Reset shake state after animation completes
+  useEffect(() => {
+    if (shouldShake) {
+      const timer = setTimeout(() => setShouldShake(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldShake]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -66,6 +83,12 @@ export default function Contact({ data }: ContactProps) {
     }
 
     setErrors(newErrors);
+    
+    // Trigger shake animation if there are errors
+    if (Object.keys(newErrors).length > 0) {
+      setShouldShake(true);
+    }
+    
     return Object.keys(newErrors).length === 0;
   };
 
@@ -149,7 +172,11 @@ export default function Contact({ data }: ContactProps) {
                 <TiltCard maxTilt={3} glare={false} shadow>
                   <Card>
                     <CardContent className="p-8">
-                      <form onSubmit={handleSubmit} className="space-y-6">
+                      <motion.div
+                        variants={shakeAnimation}
+                        animate={shouldShake ? 'shake' : undefined}
+                      >
+                        <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Name Field */}
                         <div className="space-y-2">
                           <Label htmlFor="name">
@@ -296,7 +323,8 @@ export default function Contact({ data }: ContactProps) {
                             </p>
                           </motion.div>
                         )}
-                      </form>
+                        </form>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </TiltCard>
@@ -353,17 +381,33 @@ export default function Contact({ data }: ContactProps) {
                   </Card>
                 </TiltCard>
 
-                <TiltCard maxTilt={8} glare shadow>
-                  <Card className="bg-gradient-to-br from-sky-400 to-blue-500 border-0">
-                    <CardContent className="p-6 text-white">
-                      <h3 className="text-lg font-semibold mb-2">Available for Work</h3>
-                      <p className="text-sm text-white/90">
-                        I'm currently available for freelance work and full-time opportunities.
-                        Let's discuss how I can help with your project!
-                      </p>
-                    </CardContent>
-                  </Card>
-                </TiltCard>
+                {/* Pulsing border animation for Available for Work */}
+                <motion.div
+                  className="rounded-xl"
+                  animate={{
+                    boxShadow: [
+                      '0 0 0 0 rgba(56, 189, 248, 0)',
+                      '0 0 0 8px rgba(56, 189, 248, 0.3)',
+                      '0 0 0 0 rgba(56, 189, 248, 0)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut' as const,
+                  }}>
+                  <TiltCard maxTilt={8} glare shadow>
+                    <Card className="bg-gradient-to-br from-sky-400 to-blue-500 border-0">
+                      <CardContent className="p-6 text-white">
+                        <h3 className="text-lg font-semibold mb-2">Available for Work</h3>
+                        <p className="text-sm text-white/90">
+                          I'm currently available for freelance work and full-time opportunities.
+                          Let's discuss how I can help with your project!
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </TiltCard>
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>

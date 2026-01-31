@@ -49,20 +49,24 @@ vi.mock('@/components/ui/button', () => ({
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => {
-      const { whileHover, whileInView, initial, animate, transition, viewport, ...rest } = props;
+      const { whileHover, whileInView, whileTap, initial, animate, transition, viewport, variants, ...rest } = props;
       return React.createElement('div', rest, children);
     },
     section: ({ children, ...props }: any) => {
-      const { whileHover, whileInView, initial, animate, transition, viewport, ...rest } = props;
+      const { whileHover, whileInView, whileTap, initial, animate, transition, viewport, variants, ...rest } = props;
       return React.createElement('section', rest, children);
     },
     h2: ({ children, ...props }: any) => {
-      const { whileHover, whileInView, initial, animate, transition, viewport, ...rest } = props;
+      const { whileHover, whileInView, whileTap, initial, animate, transition, viewport, variants, ...rest } = props;
       return React.createElement('h2', rest, children);
     },
     p: ({ children, ...props }: any) => {
-      const { whileHover, whileInView, initial, animate, transition, viewport, ...rest } = props;
+      const { whileHover, whileInView, whileTap, initial, animate, transition, viewport, variants, ...rest } = props;
       return React.createElement('p', rest, children);
+    },
+    a: ({ children, ...props }: any) => {
+      const { whileHover, whileInView, whileTap, initial, animate, transition, viewport, variants, ...rest } = props;
+      return React.createElement('a', rest, children);
     },
   },
   AnimatePresence: ({ children }: any) => React.createElement(React.Fragment, null, children),
