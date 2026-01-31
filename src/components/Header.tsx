@@ -105,7 +105,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-slate-900/80 backdrop-blur-lg shadow-lg border-b border-white/10'
+            ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-lg border-b border-gray-200 dark:border-white/10'
             : 'bg-transparent'
         }`}
       >
@@ -115,7 +115,11 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             <motion.a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="text-xl sm:text-2xl font-bold text-white hover:text-cyan-400 transition-colors"
+              className={`text-xl sm:text-2xl font-bold transition-colors ${
+                isScrolled
+                  ? 'text-gray-900 hover:text-cyan-600 dark:text-white dark:hover:text-cyan-400'
+                  : 'text-white hover:text-cyan-400'
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -132,8 +136,12 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       activeSection === item.href.replace('#', '')
-                        ? 'text-cyan-400 bg-white/10'
-                        : 'text-white/80 hover:text-white hover:bg-white/5'
+                        ? isScrolled
+                          ? 'text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-white/10'
+                          : 'text-cyan-400 bg-white/10'
+                        : isScrolled
+                          ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white/80 dark:hover:text-white dark:hover:bg-white/5'
+                          : 'text-white/80 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {item.label}
@@ -146,7 +154,11 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                 variant="ghost"
                 size="icon"
                 onClick={toggleDarkMode}
-                className="text-white hover:bg-white/10"
+                className={`transition-colors ${
+                  isScrolled
+                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
+                    : 'text-white hover:bg-white/10'
+                }`}
                 aria-label="Toggle dark mode"
               >
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -159,7 +171,11 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                 variant="ghost"
                 size="icon"
                 onClick={toggleDarkMode}
-                className="text-white hover:bg-white/10"
+                className={`transition-colors ${
+                  isScrolled
+                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
+                    : 'text-white hover:bg-white/10'
+                }`}
                 aria-label="Toggle dark mode"
               >
                 {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -167,7 +183,15 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
               
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={`transition-colors ${
+                      isScrolled
+                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
+                        : 'text-white hover:bg-white/10'
+                    }`}
+                  >
                     <Menu className="h-6 w-6" />
                     <span className="sr-only">Open menu</span>
                   </Button>

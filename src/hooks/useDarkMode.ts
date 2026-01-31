@@ -21,7 +21,16 @@ export function useDarkMode() {
     localStorage.setItem('darkMode', String(isDark));
   }, [isDark]);
 
-  const toggleDarkMode = () => setIsDark(!isDark);
+  const toggleDarkMode = () => {
+    const root = document.documentElement;
+    // Add transition class for smooth theme change
+    root.classList.add('theme-transition');
+    setIsDark(!isDark);
+    // Remove transition class after animation completes
+    setTimeout(() => {
+      root.classList.remove('theme-transition');
+    }, 300);
+  };
 
-  return { isDark, toggleDarkMode };
+  return {isDark, toggleDarkMode};
 }
