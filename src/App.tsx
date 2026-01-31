@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
+import CommandPalette from '@components/CommandPalette';
 import { useResumeData } from '@/hooks/useResumeData';
 import { initGA, logPageView } from '@/utils/analytics';
 import Loading from '@components/ui/loading';
@@ -93,6 +94,7 @@ function AppContent({ resumeData }: { resumeData: any }) {
   return (
     <div className="App">
       <SkipLinks />
+      <CommandPalette />
       {enableCustomCursor && <CustomCursor enableBlendMode />}
       <ScrollProgress showPercentage />
       <SectionDots position="right" />
