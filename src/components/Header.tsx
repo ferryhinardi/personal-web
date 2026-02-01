@@ -26,6 +26,7 @@ import {useDarkMode} from '@/hooks/useDarkMode';
 import {useFadeOnScroll} from '@/hooks/useParallax';
 import {ParallaxBackground, FloatingShapes, AnimatedText} from '@/components/hero';
 import {MagneticButton} from '@/components/ui/MagneticButton';
+import {AnimatedLink} from '@/components/ui/animated-button';
 
 // Map social network names to icons
 const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -130,10 +131,11 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             <div className="hidden md:flex items-center gap-4">
               <nav className="flex items-center space-x-1">
                 {navItems.map((item) => (
-                  <a
+                  <AnimatedLink
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
+                    animation="subtle"
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       activeSection === item.href.replace('#', '')
                         ? isScrolled
@@ -145,7 +147,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                     }`}
                   >
                     {item.label}
-                  </a>
+                  </AnimatedLink>
                 ))}
               </nav>
               
