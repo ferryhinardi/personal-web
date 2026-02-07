@@ -136,7 +136,7 @@ function SectionDotsComponent({
           <motion.button
             key={section.id}
             variants={shouldReduceMotion ? undefined : dotVariants}
-            className="group relative flex items-center"
+            className="group relative flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             onClick={() => scrollToSection(section.id)}
             aria-label={`Navigate to ${section.label}`}
             aria-current={isActive ? 'true' : undefined}

@@ -1,29 +1,10 @@
 import {memo, useState, useRef, useCallback} from 'react';
 import {motion, useReducedMotion, type Variants} from 'framer-motion';
-import {
-  Mail,
-  MapPin,
-  ExternalLink,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  GithubIcon,
-} from 'lucide-react';
+import {Mail, MapPin, ExternalLink} from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {useTiltEffect, useMagneticEffect} from '@/hooks/useMousePosition';
 import type {MainData, Social} from '@/types/resume.types';
-
-/**
- * Map social network names to Lucide icons.
- */
-const socialIcons: Record<string, React.ComponentType<{className?: string}>> = {
-  facebook: FacebookIcon,
-  twitter: TwitterIcon,
-  linkedin: LinkedinIcon,
-  instagram: InstagramIcon,
-  github: GithubIcon,
-};
+import {socialIcons} from '@/utils/socialIcons';
 
 /**
  * Props for the InteractiveBadge component.
@@ -199,7 +180,7 @@ const BadgeBack = memo(function BadgeBack({
       {/* Email */}
       <a
         href={`mailto:${email}`}
-        className="flex items-center justify-center gap-2 text-white/80 hover:text-cyan-400 transition-colors mb-3 group"
+        className="flex items-center justify-center gap-2 text-white/80 hover:text-cyan-400 transition-colors mb-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded"
         onClick={(e) => e.stopPropagation()}
       >
         <Mail className="w-4 h-4" />
@@ -226,7 +207,7 @@ const BadgeBack = memo(function BadgeBack({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={network.name}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-200"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               onClick={(e) => e.stopPropagation()}
             >
               <IconComponent className="w-3.5 h-3.5" />

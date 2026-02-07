@@ -10,11 +10,6 @@ import {
   FileText,
   Briefcase,
   Mail,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  GithubIcon,
   X,
 } from 'lucide-react';
 import type {MainData} from '@/types/resume.types';
@@ -22,20 +17,13 @@ import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
 import {Button} from '@/components/ui/button';
 import {InteractiveBadge} from '@/components/ui/interactive-badge';
 import {staggerContainer, staggerItem} from '@/utils/animations';
+import {scrollToSection} from '@/utils/navigation';
+import {socialIcons} from '@/utils/socialIcons';
 import {useDarkMode} from '@/hooks/useDarkMode';
 import {useFadeOnScroll} from '@/hooks/useParallax';
 import {ParallaxBackground, FloatingShapes, AnimatedText} from '@/components/hero';
 import {MagneticButton} from '@/components/ui/MagneticButton';
 import {AnimatedLink} from '@/components/ui/animated-button';
-
-// Map social network names to icons
-const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  facebook: FacebookIcon,
-  twitter: TwitterIcon,
-  linkedin: LinkedinIcon,
-  instagram: InstagramIcon,
-  github: GithubIcon,
-};
 
 interface HeaderProps {
   data?: MainData;
@@ -84,17 +72,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offset = 80; // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    scrollToSection(targetId);
   };
 
   return (
@@ -116,7 +94,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             <motion.a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className={`text-xl sm:text-2xl font-bold transition-colors ${
+              className={`text-xl sm:text-2xl font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded ${
                 isScrolled
                   ? 'text-gray-900 hover:text-cyan-600 dark:text-white dark:hover:text-cyan-400'
                   : 'text-white hover:text-cyan-400'
@@ -235,7 +213,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                           }}
                           whileHover={{ x: 4, backgroundColor: 'rgba(255,255,255,0.08)' }}
                           whileTap={{ scale: 0.98 }}
-                          className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden ${
+                          className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
                             isActive
                               ? 'text-cyan-400 bg-white/10'
                               : 'text-white/80 hover:text-white'
@@ -291,7 +269,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                             transition={{ delay: 0.55 + index * 0.05, duration: 0.2 }}
                             whileHover={{ scale: 1.15, y: -2 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors"
+                            className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                           >
                             <IconComponent className="w-4 h-4" />
                           </motion.a>
@@ -438,7 +416,7 @@ function HeroSection({data, showContactInfo, handleNavClick}: HeroSectionProps) 
                   aria-label={network.name}
                   whileHover={{scale: 1.1, y: -2}}
                   whileTap={{scale: 0.95}}
-                  className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-300"
+                  className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/70 hover:text-cyan-400 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                 >
                   <IconComponent className="w-5 h-5" />
                 </motion.a>
@@ -502,7 +480,7 @@ function ScrollIndicator({handleNavClick}: ScrollIndicatorProps) {
       initial={{opacity: 0, y: -20}}
       animate={{opacity: 1, y: 0}}
       transition={{delay: 1.5, duration: 0.8}}
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors group z-10"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors group z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-lg"
     >
       <span className="text-sm font-medium">Discover More</span>
       <motion.div

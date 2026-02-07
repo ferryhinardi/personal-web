@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {useDarkMode} from '@/hooks/useDarkMode';
+import {scrollToSection} from '@/utils/navigation';
 
 interface CommandItem {
   id: string;
@@ -38,13 +39,7 @@ export default function CommandPalette() {
 
   const handleNavClick = useCallback((href: string) => {
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({top: offsetPosition, behavior: 'smooth'});
-    }
+    scrollToSection(targetId);
     setIsOpen(false);
   }, []);
 
@@ -281,6 +276,7 @@ export default function CommandPalette() {
           'hover:bg-white dark:hover:bg-gray-800',
           'transition-colors duration-200',
           'shadow-lg',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2',
         )}
         aria-label="Open command palette"
       >

@@ -81,7 +81,11 @@ function RippleButtonComponent({
 
   return (
     <div
-      className={cn('relative overflow-hidden', className)}
+      className={cn(
+        'relative overflow-hidden',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900',
+        className,
+      )}
       onClick={addRipple}
       role="button"
       tabIndex={0}

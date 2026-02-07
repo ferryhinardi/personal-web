@@ -73,7 +73,7 @@ function MagneticButtonComponent({
 
   // Common props
   const commonProps = {
-    className: `inline-block ${className}`,
+    className: `inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 ${className}`,
     'aria-label': ariaLabel,
     ...(isButton && {type, disabled}),
     ...(isLink && href && {

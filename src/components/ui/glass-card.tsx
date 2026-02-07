@@ -70,7 +70,8 @@ function GlassCardComponent({
     <MotionComponent
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        onClick && 'cursor-pointer',
+        onClick &&
+          'cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900',
         className,
       )}
       variants={shouldReduceMotion ? undefined : cardVariants}

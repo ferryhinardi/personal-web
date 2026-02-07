@@ -149,6 +149,7 @@ const AnimatedLink = React.forwardRef<HTMLAnchorElement, AnimatedLinkProps>(
         ref={ref}
         className={cn(
           'relative inline-flex items-center gap-1 transition-colors',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 rounded',
           underlineOnHover && 'hover:underline underline-offset-4',
           className,
         )}

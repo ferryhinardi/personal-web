@@ -16,6 +16,7 @@ import { PrintButton } from '@components/ui/print-button';
 import { SectionDots } from '@components/ui/section-dots';
 import { CustomCursor } from '@components/ui/custom-cursor';
 import { PerformanceProvider, usePerformanceConfig } from '@/contexts/PerformanceContext';
+import type { ResumeData, Social } from '@/types/resume.types';
 import {
   AboutSkeleton,
   ResumeSkeleton,
@@ -86,7 +87,7 @@ function App() {
 }
 
 // Separate component to use performance context
-function AppContent({ resumeData }: { resumeData: any }) {
+function AppContent({ resumeData }: { resumeData: ResumeData }) {
   const { enableCustomCursor } = usePerformanceConfig();
 
   return (
@@ -124,8 +125,8 @@ function AppContent({ resumeData }: { resumeData: any }) {
               'GitHub Actions',
             ],
             sameAs: [
-              resumeData.main?.social?.find((s: any) => s.name === 'linkedin')?.url,
-              resumeData.main?.social?.find((s: any) => s.name === 'github')?.url,
+              resumeData.main?.social?.find((s: Social) => s.name === 'linkedin')?.url,
+              resumeData.main?.social?.find((s: Social) => s.name === 'github')?.url,
             ].filter(Boolean),
             email: resumeData.main?.email,
             address: {

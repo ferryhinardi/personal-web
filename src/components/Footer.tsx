@@ -1,27 +1,12 @@
-import {
-  ArrowUp,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  GithubIcon,
-} from 'lucide-react';
+import {ArrowUp} from 'lucide-react';
 import {motion} from 'framer-motion';
 import type {MainData} from '@/types/resume.types';
 import {Button} from '@/components/ui/button';
+import {socialIcons} from '@/utils/socialIcons';
 
 interface FooterProps {
   data?: MainData;
 }
-
-// Map social network names to icons
-const socialIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  facebook: FacebookIcon,
-  twitter: TwitterIcon,
-  linkedin: LinkedinIcon,
-  instagram: InstagramIcon,
-  github: GithubIcon,
-};
 
 export default function Footer({data}: FooterProps) {
   if (!data) return null;
@@ -88,7 +73,7 @@ export default function Footer({data}: FooterProps) {
                 }}
                 whileTap={{scale: 0.95}}
                 transition={{type: 'spring', stiffness: 400, damping: 17}}
-                className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
                 <IconComponent className="w-5 h-5" />
               </motion.a>
             );

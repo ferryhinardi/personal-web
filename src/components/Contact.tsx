@@ -298,6 +298,8 @@ export default function Contact({ data }: ContactProps) {
                         {/* Success Message */}
                         {state.succeeded && (
                           <motion.div
+                            role="status"
+                            aria-live="polite"
                             initial={{opacity: 0, y: -10, scale: 0.95}}
                             animate={{opacity: 1, y: 0, scale: 1}}
                             transition={{type: 'spring', stiffness: 200, damping: 20}}
@@ -313,6 +315,7 @@ export default function Contact({ data }: ContactProps) {
                         {/* Error Message */}
                         {state.errors && Object.keys(state.errors).length > 0 && !state.succeeded && (
                           <motion.div
+                            role="alert"
                             initial={{opacity: 0, y: -10}}
                             animate={{opacity: 1, y: 0}}
                             className="flex items-center gap-2 p-4 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg"
@@ -362,7 +365,7 @@ export default function Contact({ data }: ContactProps) {
 
                         <motion.a
                           href={`mailto:${email}`}
-                          className="flex items-start gap-3 group"
+                          className="flex items-start gap-3 group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2"
                           whileHover={{x: 4}}
                           transition={{type: 'spring', stiffness: 300}}
                         >

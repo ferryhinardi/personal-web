@@ -117,7 +117,7 @@ export const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
             <div>
               <button
                 onClick={() => setShowMore(!showMore)}
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800"
               >
                 {showMore ? (
                   <>
@@ -171,7 +171,7 @@ export const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
             {onRetry && (
               <button
                 onClick={onRetry}
-                className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800"
               >
                 <svg
                   className="w-5 h-5"
@@ -192,7 +192,7 @@ export const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
             
             <button
               onClick={() => window.location.reload()}
-              className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+              className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800"
             >
               <svg
                 className="w-5 h-5"

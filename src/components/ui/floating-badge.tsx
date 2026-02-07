@@ -83,7 +83,7 @@ function FloatingBadgeComponent({
 
   return (
     <motion.span
-      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border cursor-default transition-colors ${variantStyles[variant]} ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border cursor-default transition-colors ${variantStyles[variant]} ${onClick ? 'cursor-pointer' : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 ${className}`}
       variants={disableFloat ? hoverVariants : floatVariants}
       initial={disableFloat ? 'rest' : 'initial'}
       animate={disableFloat ? undefined : 'float'}
