@@ -1,0 +1,41 @@
+name: Oz Cloud Agent
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: warpdotdev/oz-agent-action@main
+        id: agent
+        with:
+          prompt: |
+            You are working on the personal-web portfolio site (React 16, Create React App, data-driven from public/resumeData.json).
+
+            ${{ github.event_name == 'issues' && format('A new issue has been opened:
+            Title: {0}
+            Body: {1}
+
+            Triage the issue: add a relevant label (bug, enhancement, question), reply with a helpful comment via `gh issue comment {2} --body "..."`, and if it is a clear bug or small feature, open a draft PR with the fix.', github.event.issue.title, github.event.issue.body, github.event.issue.number) || '' }}
+
+            ${{ github.event_name == 'pull_request' && format('A pull request needs review:
+            Title: {0}
+            Body: {1}
+            Branch: {2}
+
+            Review the PR diff, check for issues (correctness, style, perf), and post a review comment via `gh pr review {3} --comment --body "..."`.', github.event.pull_request.title, github.event.pull_request.body, github.event.pull_request.head.ref, github.event.pull_request.number) || '' }}
+          warp_api_key: ${{ secrets.WARP_API_KEY }}
+          profile: ${{ vars.WARP_AGENT_PROFILE || '' }}
+
+      - name: Agent output
+        if: always()
+        run: echo "${{ steps.agent.outputs.agent_output }}"
