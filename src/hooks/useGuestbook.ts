@@ -135,6 +135,7 @@ export function useGuestbook(): UseGuestbookReturn {
           name: trimmedName,
           message: trimmedMessage,
           visitorId,
+          approved: true,
           createdAt: serverTimestamp(),
         });
 

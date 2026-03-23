@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import {Send, Clock, AlertCircle} from 'lucide-react';
+import {Send, Clock, AlertCircle, CheckCircle2} from 'lucide-react';
 import {motion, AnimatePresence} from 'framer-motion';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -28,6 +28,7 @@ export default function GuestbookForm({
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Restore saved name on mount
   useEffect(() => {
@@ -45,10 +46,13 @@ export default function GuestbookForm({
       if (!trimmedName || !trimmedMessage) return;
 
       setIsSubmitting(true);
+      setShowSuccess(false);
       try {
         await onSubmit(trimmedName, trimmedMessage);
         localStorage.setItem(SAVED_NAME_KEY, trimmedName);
         setMessage('');
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 4000);
       } finally {
         setIsSubmitting(false);
       }
@@ -107,6 +111,21 @@ export default function GuestbookForm({
           >
             <AlertCircle className="h-4 w-4 flex-shrink-0" />
             <span>{error}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Success message */}
+      <AnimatePresence>
+        {showSuccess && (
+          <motion.div
+            initial={{opacity: 0, height: 0}}
+            animate={{opacity: 1, height: 'auto'}}
+            exit={{opacity: 0, height: 0}}
+            className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400"
+          >
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+            <span>Message sent successfully!</span>
           </motion.div>
         )}
       </AnimatePresence>

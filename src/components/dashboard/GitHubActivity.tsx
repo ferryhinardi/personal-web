@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {motion} from 'framer-motion';
 import {ExternalLink} from 'lucide-react';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
@@ -19,9 +20,11 @@ export default function GitHubActivitySection({
     useGitHubActivity(username);
 
   // Notify parent when stats arrive
-  if (stats && onStatsLoaded) {
-    onStatsLoaded(stats);
-  }
+  useEffect(() => {
+    if (stats && onStatsLoaded) {
+      onStatsLoaded(stats);
+    }
+  }, [stats, onStatsLoaded]);
 
   if (loading) {
     return (
