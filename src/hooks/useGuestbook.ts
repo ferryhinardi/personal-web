@@ -5,6 +5,7 @@ import {
   onSnapshot,
   query,
   orderBy,
+  where,
   serverTimestamp,
 } from 'firebase/firestore';
 import {useFirebase} from '@/hooks/useFirebase';
@@ -73,6 +74,7 @@ export function useGuestbook(): UseGuestbookReturn {
 
     const q = query(
       collection(db, 'guestbook'),
+      where('approved', '==', true),
       orderBy('createdAt', 'desc'),
     );
 

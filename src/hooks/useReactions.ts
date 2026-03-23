@@ -111,16 +111,13 @@ export function useReactions(
 
       const hasReacted = userReactions.has(emoji);
 
+      // Compute new emojis list before optimistic update (avoid stale closure)
+      const newEmojis = hasReacted
+        ? [...userReactions].filter((e) => e !== emoji)
+        : [...userReactions, emoji];
+
       // Optimistic update
-      setUserReactions((prev) => {
-        const next = new Set(prev);
-        if (hasReacted) {
-          next.delete(emoji);
-        } else {
-          next.add(emoji);
-        }
-        return next;
-      });
+      setUserReactions(new Set(newEmojis));
 
       setReactions((prev) => ({
         ...prev,
@@ -140,21 +137,12 @@ export function useReactions(
         );
 
         // Update user's reactions
-        if (hasReacted) {
-          const newEmojis = [...userReactions].filter((e) => e !== emoji);
-          if (newEmojis.length === 0) {
-            await deleteDoc(userReactionRef);
-          } else {
-            await setDoc(userReactionRef, {
-              visitorId,
-              emojis: newEmojis,
-              updatedAt: new Date(),
-            });
-          }
+        if (newEmojis.length === 0) {
+          await deleteDoc(userReactionRef);
         } else {
           await setDoc(userReactionRef, {
             visitorId,
-            emojis: [...userReactions, emoji],
+            emojis: newEmojis,
             updatedAt: new Date(),
           });
         }

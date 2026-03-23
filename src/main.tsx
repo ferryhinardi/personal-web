@@ -19,6 +19,7 @@ const AchievementsPage = lazy(() => import('./pages/AchievementsPage'));
 const UsesPage = lazy(() => import('./pages/UsesPage'));
 const ChangelogPage = lazy(() => import('./pages/ChangelogPage'));
 const LinksPage = lazy(() => import('./pages/LinksPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // PWA registration component
 function PWAWrapper({children}: {children: React.ReactNode}) {
@@ -110,6 +111,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                   fallback={<Loading fullScreen message="Loading..." />}
                 >
                   <LinksPage />
+                </Suspense>
+              }
+            />
+
+            {/* 404 catch-all */}
+            <Route
+              path="*"
+              element={
+                <Suspense
+                  fallback={<Loading fullScreen message="Loading..." />}
+                >
+                  <NotFoundPage />
                 </Suspense>
               }
             />

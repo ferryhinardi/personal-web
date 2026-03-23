@@ -2,17 +2,42 @@ rules_version='2'
 
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Guestbook: anyone can read approved messages; anyone can create (with validation)
+    match /guestbook/{messageId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['name', 'message', 'visitorId', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 1000;
+      allow update, delete: if false;
+    }
+
+    // Reactions: anyone can read; writes require valid structure
+    match /reactions/{targetId} {
+      allow read: if true;
+      allow write: if request.resource.data.keys().hasAll(['reactions', 'targetId', 'targetType']);
+
+      match /userReactions/{visitorId} {
+        allow read: if true;
+        allow write: if request.resource.data.keys().hasAll(['visitorId', 'emojis', 'updatedAt'])
+          && request.resource.data.visitorId is string;
+        allow delete: if true;
+      }
+    }
+
+    // View counts: anyone can read and increment
+    match /viewCounts/{pageId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Deny all other collections by default
     match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read, write: if request.time < timestamp.date(2026, 4, 22);
+      allow read, write: if false;
     }
   }
 }

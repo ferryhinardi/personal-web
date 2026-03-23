@@ -145,9 +145,10 @@ export function useWakaTime() {
 
         // Generate daily coding from range data or fallback
         const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const avgHours = dailyAverage.hours + dailyAverage.minutes / 60;
         const dailyData = days.map((day) => ({
           date: day,
-          hours: Math.round((dailyAverage.hours + dailyAverage.minutes / 60 + (Math.random() - 0.5) * 2) * 10) / 10,
+          hours: Math.round(avgHours * 10) / 10,
         }));
         setDailyCoding(dailyData);
 

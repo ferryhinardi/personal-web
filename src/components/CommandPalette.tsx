@@ -171,7 +171,7 @@ export default function CommandPalette() {
         keywords: ['x', 'social', 'tweets'],
       },
     ],
-    [isDark, toggleDarkMode, handleSectionClick, handlePageClick],
+    [isDark, toggleDarkMode, handleSectionClick, handlePageClick, themeContext],
   );
 
   // Fuzzy search filter
@@ -194,6 +194,7 @@ export default function CommandPalette() {
       navigation: [],
       pages: [],
       action: [],
+      theme: [],
       social: [],
     };
 
@@ -279,7 +280,7 @@ export default function CommandPalette() {
   // Calculate flat index for selected state
   const getFlatIndex = (category: string, indexInCategory: number) => {
     let flatIndex = 0;
-    const categories = ['navigation', 'pages', 'action', 'social'];
+    const categories = ['navigation', 'pages', 'action', 'theme', 'social'];
 
     for (const cat of categories) {
       if (cat === category) {

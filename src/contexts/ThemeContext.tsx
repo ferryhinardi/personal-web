@@ -40,20 +40,21 @@ export function ThemeProvider({children}: {children: React.ReactNode}) {
     return 'system';
   });
 
-  const isDark = useMemo(() => {
-    if (mode === 'system') return getSystemDark();
-    return mode === 'dark';
-  }, [mode]);
-
   // Listen for system preference changes when mode is 'system'
-  const [, forceUpdate] = useState(0);
+  const [systemDarkSignal, setSystemDarkSignal] = useState(0);
   useEffect(() => {
     if (mode !== 'system') return;
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = () => forceUpdate((n) => n + 1);
+    const handler = () => setSystemDarkSignal((n) => n + 1);
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, [mode]);
+
+  const isDark = useMemo(() => {
+    if (mode === 'system') return getSystemDark();
+    return mode === 'dark';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, systemDarkSignal]);
 
   // Apply theme to DOM
   useEffect(() => {
