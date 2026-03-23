@@ -1,0 +1,48 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // View counts: anyone can read, increment only via server/client
+    match /viewCounts/{docId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if request.resource.data.count == resource.data.count + 1;
+    }
+
+    // Guestbook: anyone can read, write with rate limiting
+    match /guestbook/{entryId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['name', 'message', 'visitorId', 'createdAt'])
+                    && request.resource.data.name is string
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() <= 500
+                    && request.resource.data.name.size() <= 100;
+      allow delete: if false;
+      allow update: if false;
+    }
+
+    // Reactions: anyone can read, track per-visitor reactions
+    match /reactions/{targetId} {
+      allow read: if true;
+      allow write: if true;
+
+      match /userReactions/{visitorId} {
+        allow read: if true;
+        allow write: if true;
+      }
+    }
+
+    // Achievements: read-only for visitors, admin writes via server
+    match /achievements/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Changelog: read-only for visitors, admin writes via server
+    match /changelog/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

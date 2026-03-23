@@ -1,17 +1,8 @@
 import {useState, useEffect} from 'react';
+import {useLocation, Link} from 'react-router-dom';
 import {motion} from 'framer-motion';
 import {TypeAnimation} from 'react-type-animation';
-import {
-  Menu,
-  Moon,
-  Sun,
-  Home,
-  User,
-  FileText,
-  Briefcase,
-  Mail,
-  X,
-} from 'lucide-react';
+import {Menu, Moon, Sun, X} from 'lucide-react';
 import type {MainData} from '@/types/resume.types';
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet';
 import {Button} from '@/components/ui/button';
@@ -24,6 +15,9 @@ import {useFadeOnScroll} from '@/hooks/useParallax';
 import {ParallaxBackground, FloatingShapes, AnimatedText} from '@/components/hero';
 import {MagneticButton} from '@/components/ui/MagneticButton';
 import {AnimatedLink} from '@/components/ui/animated-button';
+import {mainSections, pageLinks} from '@/config/navigation';
+import {ThemePicker} from '@/components/ui/theme-picker';
+import {LanguagePicker} from '@/components/ui/language-picker';
 
 interface HeaderProps {
   data?: MainData;
@@ -35,12 +29,15 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isDark, toggleDarkMode } = useDarkMode();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
+      // Update active section based on scroll position (only on home page)
+      if (!isHomePage) return;
       const sections = ['home', 'about', 'resume', 'portfolio', 'contact'];
       const current = sections.find((section) => {
         const element = document.getElementById(section);
@@ -55,24 +52,21 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   if (!data) return null;
 
   const {name} = data;
 
-  const navItems = [
-    { label: 'Home', href: '#home', icon: Home },
-    { label: 'About', href: '#about', icon: User },
-    { label: 'Resume', href: '#resume', icon: FileText },
-    { label: 'Works', href: '#portfolio', icon: Briefcase },
-    { label: 'Contact', href: '#contact', icon: Mail },
-  ];
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    scrollToSection(targetId);
+    if (isHomePage) {
+      const targetId = href.replace('#', '');
+      scrollToSection(targetId);
+    } else {
+      // Navigate to home page with hash
+      window.location.href = '/' + href;
+    }
   };
 
   return (
@@ -108,14 +102,15 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-4">
               <nav className="flex items-center space-x-1">
-                {navItems.map((item) => (
+                {/* Main sections (scroll on home, link on other pages) */}
+                {mainSections.map((item) => (
                   <AnimatedLink
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
                     animation="subtle"
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      activeSection === item.href.replace('#', '')
+                      isHomePage && activeSection === item.href.replace('#', '')
                         ? isScrolled
                           ? 'text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-white/10'
                           : 'text-cyan-400 bg-white/10'
@@ -127,22 +122,30 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                     {item.label}
                   </AnimatedLink>
                 ))}
+
+                {/* Page links */}
+                {pageLinks.slice(0, 3).map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      location.pathname === item.href
+                        ? isScrolled
+                          ? 'text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-white/10'
+                          : 'text-cyan-400 bg-white/10'
+                        : isScrolled
+                          ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white/80 dark:hover:text-white dark:hover:bg-white/5'
+                          : 'text-white/80 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </nav>
               
-              {/* Dark Mode Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleDarkMode}
-                className={`transition-colors ${
-                  isScrolled
-                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
-                    : 'text-white hover:bg-white/10'
-                }`}
-                aria-label="Toggle dark mode"
-              >
-                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
+              {/* Theme Picker (replaces dark mode toggle) */}
+              <ThemePicker />
+              <LanguagePicker />
             </div>
 
             {/* Mobile Navigation */}
@@ -192,9 +195,10 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
 
                   {/* Navigation Links with staggered animation */}
                   <nav className="flex flex-col space-y-2">
-                    {navItems.map((item, index) => {
+                    {/* Main sections */}
+                    {mainSections.map((item, index) => {
                       const IconComponent = item.icon;
-                      const isActive = activeSection === item.href.replace('#', '');
+                      const isActive = isHomePage && activeSection === item.href.replace('#', '');
                       
                       return (
                         <motion.a
@@ -232,6 +236,43 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                           <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
                           <span>{item.label}</span>
                         </motion.a>
+                      );
+                    })}
+
+                    {/* Divider between sections and pages */}
+                    <motion.div
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      transition={{ delay: 0.35, duration: 0.3 }}
+                      className="h-px bg-white/10 origin-left mx-4"
+                    />
+
+                    {/* Page links */}
+                    {pageLinks.map((item) => {
+                      const IconComponent = item.icon;
+                      const isActive = location.pathname === item.href;
+
+                      return (
+                        <motion.div key={item.href}>
+                          <Link
+                            to={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
+                              isActive
+                                ? 'text-cyan-400 bg-white/10'
+                                : 'text-white/80 hover:text-white'
+                            }`}
+                          >
+                            {isActive && (
+                              <motion.div
+                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-400 rounded-r-full"
+                                initial={false}
+                              />
+                            )}
+                            <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
+                            <span>{item.label}</span>
+                          </Link>
+                        </motion.div>
                       );
                     })}
                   </nav>

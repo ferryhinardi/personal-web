@@ -1,0 +1,176 @@
+{
+  "categories": [
+    {
+      "name": "Hardware",
+      "icon": "monitor",
+      "items": [
+        {
+          "name": "MacBook Pro 14\" M3 Pro",
+          "description": "My main development machine. The M3 chip handles everything from heavy Docker workloads to smooth VS Code performance."
+        },
+        {
+          "name": "Dell U2723QE 27\" 4K",
+          "description": "4K IPS monitor with USB-C connectivity. Color-accurate display for both coding and design work.",
+          "url": "https://www.dell.com"
+        },
+        {
+          "name": "Keychron K2 V2",
+          "description": "75% wireless mechanical keyboard with Gateron Brown switches. Perfect balance of portability and functionality.",
+          "url": "https://www.keychron.com"
+        },
+        {
+          "name": "Logitech MX Master 3S",
+          "description": "The best productivity mouse. Quiet clicks, MagSpeed scroll wheel, and seamless multi-device switching.",
+          "url": "https://www.logitech.com"
+        },
+        {
+          "name": "Sony WH-1000XM5",
+          "description": "Industry-leading noise cancellation for focused coding sessions. Multipoint connection for phone and laptop."
+        },
+        {
+          "name": "Rain mStand",
+          "description": "Aluminum laptop stand that keeps the MacBook at eye level and helps with heat dissipation."
+        }
+      ]
+    },
+    {
+      "name": "Editor & Terminal",
+      "icon": "terminal",
+      "items": [
+        {
+          "name": "VS Code",
+          "description": "My primary code editor. Customized with Vim keybindings, GitHub Copilot, and a curated set of extensions.",
+          "url": "https://code.visualstudio.com"
+        },
+        {
+          "name": "iTerm2",
+          "description": "Feature-rich terminal emulator for macOS with split panes, search, and autocomplete.",
+          "url": "https://iterm2.com"
+        },
+        {
+          "name": "Oh My Zsh",
+          "description": "Zsh framework with the Powerlevel10k theme. Custom aliases and plugins for Git, Docker, and Node.",
+          "url": "https://ohmyz.sh"
+        },
+        {
+          "name": "JetBrains Mono",
+          "description": "Monospaced font with ligatures, designed specifically for developers. Easy on the eyes for long coding sessions.",
+          "url": "https://www.jetbrains.com/lp/mono"
+        },
+        {
+          "name": "GitHub Copilot",
+          "description": "AI-powered code completion that significantly speeds up development, especially for boilerplate and tests.",
+          "url": "https://github.com/features/copilot"
+        }
+      ]
+    },
+    {
+      "name": "Development Tools",
+      "icon": "wrench",
+      "items": [
+        {
+          "name": "Docker",
+          "description": "Containerization for consistent development environments. Essential for microservices and deployment.",
+          "url": "https://www.docker.com"
+        },
+        {
+          "name": "Git",
+          "description": "Version control with a trunk-based workflow. I use conventional commits and interactive rebasing.",
+          "url": "https://git-scm.com"
+        },
+        {
+          "name": "Postman",
+          "description": "API development and testing platform. Great for debugging REST and GraphQL endpoints.",
+          "url": "https://www.postman.com"
+        },
+        {
+          "name": "Figma",
+          "description": "Collaborative design tool for UI/UX. I use it for inspecting designs and creating quick mockups.",
+          "url": "https://www.figma.com"
+        },
+        {
+          "name": "GitHub Actions",
+          "description": "CI/CD pipeline automation. I use it for running tests, linting, building, and deploying projects.",
+          "url": "https://github.com/features/actions"
+        },
+        {
+          "name": "Vercel",
+          "description": "Frontend deployment platform with instant previews and edge functions. Powers this portfolio site.",
+          "url": "https://vercel.com"
+        }
+      ]
+    },
+    {
+      "name": "Tech Stack",
+      "icon": "code",
+      "items": [
+        {
+          "name": "React / Next.js",
+          "description": "My primary frontend framework. Used in production for millions of users at Traveloka and personal projects.",
+          "url": "https://react.dev"
+        },
+        {
+          "name": "TypeScript",
+          "description": "Type-safe JavaScript that catches bugs before they reach production. I use strict mode everywhere.",
+          "url": "https://www.typescriptlang.org"
+        },
+        {
+          "name": "Tailwind CSS",
+          "description": "Utility-first CSS framework that makes styling fast and consistent without context-switching.",
+          "url": "https://tailwindcss.com"
+        },
+        {
+          "name": "GraphQL",
+          "description": "Query language for APIs. Used extensively at Traveloka for efficient data fetching.",
+          "url": "https://graphql.org"
+        },
+        {
+          "name": "Node.js",
+          "description": "Server-side JavaScript runtime for building APIs, microservices, and developer tools.",
+          "url": "https://nodejs.org"
+        },
+        {
+          "name": "Go",
+          "description": "Fast, compiled language for performance-critical backend services and CLI tools.",
+          "url": "https://go.dev"
+        }
+      ]
+    },
+    {
+      "name": "Apps",
+      "icon": "app-window",
+      "items": [
+        {
+          "name": "Notion",
+          "description": "All-in-one workspace for notes, project management, documentation, and personal knowledge base.",
+          "url": "https://www.notion.so"
+        },
+        {
+          "name": "Slack",
+          "description": "Team communication with organized channels, threads, and integrations for CI/CD notifications.",
+          "url": "https://slack.com"
+        },
+        {
+          "name": "Spotify",
+          "description": "Music streaming for focus playlists. Lo-fi beats and ambient music are my go-to coding companions.",
+          "url": "https://www.spotify.com"
+        },
+        {
+          "name": "Arc Browser",
+          "description": "A reimagined browser with Spaces, Boosts, and a clean UI. Perfect for organizing work and personal browsing.",
+          "url": "https://arc.net"
+        },
+        {
+          "name": "Raycast",
+          "description": "Spotlight replacement with extensions for clipboard history, snippets, window management, and more.",
+          "url": "https://www.raycast.com"
+        },
+        {
+          "name": "1Password",
+          "description": "Password manager with SSH key management and developer CLI. Keeps credentials secure and accessible.",
+          "url": "https://1password.com"
+        }
+      ]
+    }
+  ]
+}

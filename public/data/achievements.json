@@ -1,0 +1,59 @@
+{
+  "achievements": [
+    {
+      "id": "aws-cloud-practitioner",
+      "title": "AWS Certified Cloud Practitioner",
+      "description": "Foundational understanding of AWS Cloud concepts, services, security, architecture, pricing, and support. Demonstrates ability to define the AWS shared responsibility model and basic security concepts.",
+      "type": "certificate",
+      "category": "Cloud",
+      "issuer": "Amazon Web Services",
+      "date": "2023-06",
+      "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+      "image": ""
+    },
+    {
+      "id": "google-ux-design",
+      "title": "Google UX Design Professional Certificate",
+      "description": "Comprehensive UX design program covering the full design process from empathizing with users to defining pain points, ideating solutions, creating wireframes and prototypes, and testing designs.",
+      "type": "certificate",
+      "category": "Design",
+      "issuer": "Google via Coursera",
+      "date": "2023-03",
+      "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+      "image": ""
+    },
+    {
+      "id": "hackathon-traveloka-2022",
+      "title": "Traveloka Internal Hackathon Winner",
+      "description": "Won first place at Traveloka's annual internal hackathon for building an AI-powered debugging tool that reduced issue resolution time by 30% across the transport engineering team.",
+      "type": "award",
+      "category": "Hackathon",
+      "issuer": "Traveloka",
+      "date": "2022-11",
+      "url": "",
+      "image": ""
+    },
+    {
+      "id": "meta-react-native",
+      "title": "Meta React Native Specialization",
+      "description": "Advanced React Native development certification covering cross-platform mobile development, state management, navigation, performance optimization, and deployment strategies.",
+      "type": "certificate",
+      "category": "Development",
+      "issuer": "Meta via Coursera",
+      "date": "2022-08",
+      "url": "https://www.coursera.org/specializations/meta-react-native",
+      "image": ""
+    },
+    {
+      "id": "top-contributor-2023",
+      "title": "Open Source Top Contributor",
+      "description": "Recognized as a top contributor for significant contributions to React ecosystem open source projects, including bug fixes, documentation improvements, and feature additions.",
+      "type": "badge",
+      "category": "Open Source",
+      "issuer": "GitHub",
+      "date": "2023-12",
+      "url": "https://github.com/ferryhinardi",
+      "image": ""
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "links": [
+    {
+      "title": "Portfolio Website",
+      "url": "https://www.ferryhinardi.com",
+      "icon": "globe",
+      "description": "My personal portfolio — you're here!"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://github.com/ferryhinardi",
+      "icon": "github",
+      "description": "Open source projects and contributions"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ferryhinardi",
+      "icon": "linkedin",
+      "description": "Professional profile and career history"
+    },
+    {
+      "title": "Twitter / X",
+      "url": "https://twitter.com/FerryHinardi",
+      "icon": "twitter",
+      "description": "Thoughts on tech, dev tips, and more"
+    },
+    {
+      "title": "Instagram",
+      "url": "https://www.instagram.com/ferryhinardi",
+      "icon": "instagram",
+      "description": "Life beyond the code editor"
+    },
+    {
+      "title": "Email Me",
+      "url": "mailto:hinardi93@gmail.com",
+      "icon": "mail",
+      "description": "Get in touch for collaborations or just to say hi"
+    }
+  ]
+}

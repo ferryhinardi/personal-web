@@ -1,13 +1,33 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useContext} from 'react';
+import {ThemeContext} from '@/contexts/ThemeContext';
 
+/**
+ * Dark mode hook — compatibility wrapper.
+ *
+ * When used inside a ThemeProvider (most of the app via RootLayout),
+ * delegates to ThemeContext. When used outside (e.g. PrintResume),
+ * manages its own state as a standalone fallback.
+ */
 export function useDarkMode() {
+  const themeContext = useContext(ThemeContext);
+
+  // If ThemeProvider is available, delegate to it
+  if (themeContext) {
+    return {
+      isDark: themeContext.isDark,
+      toggleDarkMode: themeContext.toggleDarkMode,
+    };
+  }
+
+  // Standalone fallback (for components outside ThemeProvider)
+  return useDarkModeStandalone();
+}
+
+function useDarkModeStandalone() {
   const [isDark, setIsDark] = useState<boolean>(() => {
-    // Check localStorage first
-    const saved = localStorage.getItem('darkMode');
-    if (saved !== null) {
-      return saved === 'true';
-    }
-    // Fall back to system preference
+    const saved = localStorage.getItem('themeMode') || localStorage.getItem('darkMode');
+    if (saved === 'dark' || saved === 'true') return true;
+    if (saved === 'light' || saved === 'false') return false;
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
@@ -18,15 +38,12 @@ export function useDarkMode() {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('darkMode', String(isDark));
   }, [isDark]);
 
   const toggleDarkMode = () => {
     const root = document.documentElement;
-    // Add transition class for smooth theme change
     root.classList.add('theme-transition');
     setIsDark(!isDark);
-    // Remove transition class after animation completes
     setTimeout(() => {
       root.classList.remove('theme-transition');
     }, 300);

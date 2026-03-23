@@ -1,5 +1,6 @@
 import {describe, it, expect, vi, beforeEach, afterEach} from 'vitest';
 import {render, screen, fireEvent, waitFor} from '@testing-library/react';
+import {BrowserRouter} from 'react-router-dom';
 import CommandPalette from '../CommandPalette';
 
 // Mock useDarkMode hook
@@ -55,14 +56,14 @@ describe('CommandPalette', () => {
 
   describe('Rendering', () => {
     it('renders the keyboard hint badge', () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       const badge = screen.getByRole('button', {name: /open command palette/i});
       expect(badge).toBeInTheDocument();
     });
 
     it('does not show dialog by default', () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       expect(
         screen.queryByRole('dialog', {name: /command palette/i}),
@@ -72,7 +73,7 @@ describe('CommandPalette', () => {
 
   describe('Opening and Closing', () => {
     it('opens when clicking the keyboard hint badge', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       const badge = screen.getByRole('button', {name: /open command palette/i});
       fireEvent.click(badge);
@@ -85,7 +86,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens with Cmd+K keyboard shortcut', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -97,7 +98,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens with Ctrl+K keyboard shortcut', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', ctrlKey: true});
 
@@ -109,7 +110,7 @@ describe('CommandPalette', () => {
     });
 
     it('closes with Escape key', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       // Open first
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
@@ -130,7 +131,7 @@ describe('CommandPalette', () => {
     });
 
     it('closes when clicking backdrop', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       // Open first
       const badge = screen.getByRole('button', {name: /open command palette/i});
@@ -155,7 +156,7 @@ describe('CommandPalette', () => {
     });
 
     it('toggles open/close with repeated Cmd+K', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       // Open
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
@@ -177,7 +178,7 @@ describe('CommandPalette', () => {
 
   describe('Command List', () => {
     it('displays navigation commands', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -191,7 +192,7 @@ describe('CommandPalette', () => {
     });
 
     it('displays action commands', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -202,7 +203,7 @@ describe('CommandPalette', () => {
     });
 
     it('displays social link commands', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -214,12 +215,13 @@ describe('CommandPalette', () => {
     });
 
     it('displays category labels', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
       await waitFor(() => {
-        expect(screen.getByText('Navigation')).toBeInTheDocument();
+        expect(screen.getByText('Sections')).toBeInTheDocument();
+        expect(screen.getByText('Pages')).toBeInTheDocument();
         expect(screen.getByText('Actions')).toBeInTheDocument();
         expect(screen.getByText('Social Links')).toBeInTheDocument();
       });
@@ -228,7 +230,7 @@ describe('CommandPalette', () => {
 
   describe('Search Filtering', () => {
     it('filters commands based on search input', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -249,7 +251,7 @@ describe('CommandPalette', () => {
     });
 
     it('filters by keywords', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -269,7 +271,7 @@ describe('CommandPalette', () => {
     });
 
     it('shows no results message when no commands match', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -290,7 +292,7 @@ describe('CommandPalette', () => {
     });
 
     it('is case insensitive', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -311,7 +313,7 @@ describe('CommandPalette', () => {
 
   describe('Keyboard Navigation', () => {
     it('navigates down with ArrowDown', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -335,7 +337,7 @@ describe('CommandPalette', () => {
     });
 
     it('navigates up with ArrowUp', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -359,7 +361,7 @@ describe('CommandPalette', () => {
     });
 
     it('wraps around when navigating past the last item', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -378,7 +380,7 @@ describe('CommandPalette', () => {
     });
 
     it('wraps around when navigating before the first item', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -401,7 +403,7 @@ describe('CommandPalette', () => {
       mockElement.id = 'home';
       document.body.appendChild(mockElement);
 
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -431,7 +433,7 @@ describe('CommandPalette', () => {
       mockElement.id = 'about';
       document.body.appendChild(mockElement);
 
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -452,7 +454,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens GitHub in new tab', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -470,7 +472,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens LinkedIn in new tab', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -490,7 +492,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens Twitter in new tab', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -508,7 +510,7 @@ describe('CommandPalette', () => {
     });
 
     it('opens resume PDF in new tab', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -530,7 +532,7 @@ describe('CommandPalette', () => {
 
   describe('Accessibility', () => {
     it('has proper ARIA attributes on dialog', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -539,7 +541,7 @@ describe('CommandPalette', () => {
     });
 
     it('has proper ARIA attributes on search input', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -548,7 +550,7 @@ describe('CommandPalette', () => {
     });
 
     it('has proper ARIA selected state on command items', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -560,7 +562,7 @@ describe('CommandPalette', () => {
     });
 
     it('focuses search input when opened', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -573,7 +575,7 @@ describe('CommandPalette', () => {
 
   describe('Mouse Interaction', () => {
     it('updates selection on mouse hover', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
@@ -595,7 +597,7 @@ describe('CommandPalette', () => {
 
   describe('Footer Hints', () => {
     it('displays keyboard navigation hints', async () => {
-      render(<CommandPalette />);
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
 
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
