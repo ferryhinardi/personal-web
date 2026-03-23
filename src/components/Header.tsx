@@ -349,7 +349,7 @@ function HeroSection({data, showContactInfo, handleNavClick}: HeroSectionProps) 
   const {ref, y, opacity} = useFadeOnScroll();
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+    <div className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24">
       {/* Parallax Background */}
       <ParallaxBackground />
 
