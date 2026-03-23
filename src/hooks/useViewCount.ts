@@ -33,6 +33,13 @@ export function useViewCount() {
       const docRef = doc(db, 'viewCounts', path.replace(/\//g, '_') || '_root');
 
       try {
+        // Read current count first (avoids unnecessary write round-trip)
+        const snap = await getDoc(docRef);
+        if (snap.exists()) {
+          setCount(snap.data().count ?? 0);
+        }
+
+        // Only increment once per session per path
         if (!alreadyViewed) {
           await setDoc(
             docRef,
@@ -44,12 +51,8 @@ export function useViewCount() {
             {merge: true},
           );
           sessionStorage.setItem(sessionKey, 'true');
-        }
-
-        // Always read current count
-        const snap = await getDoc(docRef);
-        if (snap.exists()) {
-          setCount(snap.data().count ?? 0);
+          // Update local count optimistically
+          setCount((prev) => prev + 1);
         }
       } catch {
         // Silently fail — view counting is non-critical

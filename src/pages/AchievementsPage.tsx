@@ -1,6 +1,15 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState, useEffect, useMemo, useCallback} from 'react';
 import {motion} from 'framer-motion';
-import {Award, BadgeCheck, Trophy, ExternalLink, Calendar} from 'lucide-react';
+import {
+  Award,
+  BadgeCheck,
+  Trophy,
+  ExternalLink,
+  Calendar,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 import PageLayout from '@/layouts/PageLayout';
 import SEOHead from '@/components/SEOHead';
 import {Card, CardContent} from '@/components/ui/card';
@@ -25,6 +34,8 @@ interface AchievementsData {
 }
 
 type FilterType = 'all' | 'certificate' | 'badge' | 'award';
+
+const ITEMS_PER_PAGE = 12;
 
 const typeConfig: Record<
   Achievement['type'],
@@ -125,13 +136,14 @@ function AchievementCard({achievement}: {achievement: Achievement}) {
 function AchievementsLoadingSkeleton() {
   return (
     <div className="space-y-6">
+      <Skeleton className="h-10 w-full max-w-sm rounded-lg" />
       <div className="flex gap-2">
         {[1, 2, 3, 4].map((i) => (
           <Skeleton key={i} className="h-9 w-24 rounded-full" />
         ))}
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3, 4, 5].map((i) => (
+        {[1, 2, 3, 4, 5, 6].map((i) => (
           <Skeleton key={i} className="h-64 rounded-xl" />
         ))}
       </div>
@@ -139,10 +151,91 @@ function AchievementsLoadingSkeleton() {
   );
 }
 
+function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+
+  // Build page numbers to show: always show first, last, current, and neighbors
+  const pages: (number | 'ellipsis')[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (
+      i === 1 ||
+      i === totalPages ||
+      (i >= currentPage - 1 && i <= currentPage + 1)
+    ) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== 'ellipsis') {
+      pages.push('ellipsis');
+    }
+  }
+
+  return (
+    <nav
+      aria-label="Achievements pagination"
+      className="flex items-center justify-center gap-1"
+    >
+      <button
+        type="button"
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="inline-flex items-center justify-center h-9 w-9 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      {pages.map((page, idx) =>
+        page === 'ellipsis' ? (
+          <span
+            key={`ellipsis-${idx}`}
+            className="h-9 w-9 inline-flex items-center justify-center text-gray-400 text-sm"
+          >
+            ...
+          </span>
+        ) : (
+          <button
+            key={page}
+            type="button"
+            onClick={() => onPageChange(page)}
+            className={`h-9 w-9 rounded-lg text-sm font-medium transition-colors ${
+              page === currentPage
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300'
+            }`}
+            aria-label={`Page ${page}`}
+            aria-current={page === currentPage ? 'page' : undefined}
+          >
+            {page}
+          </button>
+        ),
+      )}
+
+      <button
+        type="button"
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="inline-flex items-center justify-center h-9 w-9 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </nav>
+  );
+}
+
 export default function AchievementsPage() {
   const [data, setData] = useState<AchievementsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>('all');
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     fetch('/data/achievements.json')
@@ -152,11 +245,47 @@ export default function AchievementsPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Reset page when filter or search changes
+  useEffect(() => {
+    setPage(1);
+  }, [filter, search]);
+
   const filtered = useMemo(() => {
     if (!data) return [];
-    if (filter === 'all') return data.achievements;
-    return data.achievements.filter((a) => a.type === filter);
-  }, [data, filter]);
+    let results = data.achievements;
+
+    // Type filter
+    if (filter !== 'all') {
+      results = results.filter((a) => a.type === filter);
+    }
+
+    // Search filter
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      results = results.filter(
+        (a) =>
+          a.title.toLowerCase().includes(q) ||
+          a.issuer.toLowerCase().includes(q) ||
+          a.category.toLowerCase().includes(q) ||
+          a.description.toLowerCase().includes(q),
+      );
+    }
+
+    return results;
+  }, [data, filter, search]);
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paged = useMemo(
+    () =>
+      filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE),
+    [filtered, page],
+  );
+
+  const handlePageChange = useCallback((newPage: number) => {
+    setPage(newPage);
+    // Scroll to top of content area
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, []);
 
   return (
     <PageLayout
@@ -172,52 +301,81 @@ export default function AchievementsPage() {
         <AchievementsLoadingSkeleton />
       ) : data ? (
         <div className="space-y-8">
+          {/* Search Input */}
+          <div className="relative max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search achievements..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 py-2 pl-10 pr-4 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-2">
-            {filterOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => setFilter(option.value)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  filter === option.value
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
-                }`}
-              >
-                {option.label}
-                {option.value !== 'all' && (
-                  <span className="ml-1.5 text-xs opacity-75">
-                    {data.achievements.filter(
+          <div className="flex flex-wrap items-center gap-2">
+            {filterOptions.map((option) => {
+              const count =
+                option.value === 'all'
+                  ? data.achievements.length
+                  : data.achievements.filter(
                       (a) => a.type === option.value,
-                    ).length}
-                  </span>
-                )}
-              </button>
-            ))}
+                    ).length;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setFilter(option.value)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    filter === option.value
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
+                  }`}
+                >
+                  {option.label}
+                  <span className="ml-1.5 text-xs opacity-75">{count}</span>
+                </button>
+              );
+            })}
+
+            {/* Results count */}
+            <span className="ml-auto text-sm text-gray-500 dark:text-gray-400">
+              {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+              {search.trim() && ' found'}
+            </span>
           </div>
 
           {/* Cards Grid */}
-          <motion.div
-            key={filter}
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {filtered.map((achievement) => (
-              <AchievementCard
-                key={achievement.id}
-                achievement={achievement}
-              />
-            ))}
-          </motion.div>
-
-          {filtered.length === 0 && (
+          {paged.length > 0 ? (
+            <motion.div
+              key={`${filter}-${search}-${page}`}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {paged.map((achievement) => (
+                <AchievementCard
+                  key={achievement.id}
+                  achievement={achievement}
+                />
+              ))}
+            </motion.div>
+          ) : (
             <p className="text-center text-gray-500 dark:text-gray-400 py-12">
-              No achievements found for this filter.
+              {search.trim()
+                ? `No achievements matching "${search}".`
+                : 'No achievements found for this filter.'}
             </p>
           )}
+
+          {/* Pagination */}
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       ) : (
         <p className="text-center text-gray-500 dark:text-gray-400 py-20">

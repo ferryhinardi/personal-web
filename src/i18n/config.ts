@@ -8,9 +8,17 @@ const resources = {
   id: {translation: id},
 };
 
+function getSavedLanguage(): string {
+  try {
+    return (typeof window !== 'undefined' && localStorage.getItem('language')) || 'en';
+  } catch {
+    return 'en';
+  }
+}
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem('language') || 'en',
+  lng: getSavedLanguage(),
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false, // React already handles XSS
