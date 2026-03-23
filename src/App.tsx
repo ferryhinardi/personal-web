@@ -1,22 +1,20 @@
-import { useEffect, lazy, Suspense } from 'react';
-import { HelmetProvider, Helmet } from 'react-helmet-async';
-import { Analytics } from '@vercel/analytics/react';
+import {useEffect, lazy, Suspense} from 'react';
+import {Helmet} from 'react-helmet-async';
 import './App.css';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-import CommandPalette from '@components/CommandPalette';
-import { useResumeData } from '@/hooks/useResumeData';
-import { initGA, logPageView } from '@/utils/analytics';
+import {useResumeData} from '@/hooks/useResumeData';
+import {initGA, logPageView} from '@/utils/analytics';
 import Loading from '@components/ui/loading';
 import ErrorDisplay from '@components/ui/error';
 import ScrollProgress from '@components/ui/scroll-progress';
 import BackToTop from '@components/ui/back-to-top';
 import SkipLinks from '@components/ui/skip-links';
-import { PrintButton } from '@components/ui/print-button';
-import { SectionDots } from '@components/ui/section-dots';
-import { CustomCursor } from '@components/ui/custom-cursor';
-import { PerformanceProvider, usePerformanceConfig } from '@/contexts/PerformanceContext';
-import type { ResumeData, Social } from '@/types/resume.types';
+import {PrintButton} from '@components/ui/print-button';
+import {SectionDots} from '@components/ui/section-dots';
+import {CustomCursor} from '@components/ui/custom-cursor';
+import {usePerformanceConfig} from '@/contexts/PerformanceContext';
+import type {ResumeData, Social} from '@/types/resume.types';
 import {
   AboutSkeleton,
   ResumeSkeleton,
@@ -77,13 +75,7 @@ function App() {
     return null;
   }
 
-  return (
-    <HelmetProvider>
-      <PerformanceProvider>
-        <AppContent resumeData={resumeData} />
-      </PerformanceProvider>
-    </HelmetProvider>
-  );
+  return <AppContent resumeData={resumeData} />;
 }
 
 // Separate component to use performance context
@@ -93,7 +85,6 @@ function AppContent({ resumeData }: { resumeData: ResumeData }) {
   return (
     <div className="App">
       <SkipLinks />
-      <CommandPalette />
       {enableCustomCursor && <CustomCursor enableBlendMode />}
       <ScrollProgress showPercentage />
       <SectionDots position="right" />
@@ -154,7 +145,6 @@ function AppContent({ resumeData }: { resumeData: ResumeData }) {
       <Footer data={resumeData.main} />
       <BackToTop />
       <PrintButton />
-      <Analytics />
     </div>
   );
 }

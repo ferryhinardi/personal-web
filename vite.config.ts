@@ -172,6 +172,10 @@ export default defineConfig({
           if (id.includes('node_modules/date-fns') || id.includes('node_modules/dayjs')) {
             return 'date-utils';
           }
+          // Firebase (tree-shaken modular SDK)
+          if (id.includes('node_modules/firebase') || id.includes('node_modules/@firebase')) {
+            return 'firebase-vendor';
+          }
         },
         // Optimize chunk sizes
         chunkFileNames: 'assets/[name]-[hash].js',

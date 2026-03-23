@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "resume": "Resume",
+    "works": "Works",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "guestbook": "Guestbook",
+    "achievements": "Achievements",
+    "uses": "Uses",
+    "changelog": "Changelog",
+    "links": "Links"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "cta": "Get in Touch",
+    "scrollDown": "Scroll Down"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Get to know me"
+  },
+  "resume": {
+    "title": "Resume",
+    "subtitle": "My formal bio details",
+    "education": "Education",
+    "work": "Work Experience",
+    "skills": "Skills & Technologies"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Check out some of my works",
+    "viewProject": "View Project",
+    "viewCode": "View Code",
+    "viewAll": "View All"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Have a project in mind? Let's talk!",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "by": "by"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "backToHome": "Back to Home",
+    "comingSoon": "Coming soon",
+    "viewMore": "View More",
+    "close": "Close",
+    "search": "Search",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "language": "Language"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Personal developer dashboard with GitHub activity, coding stats, and more."
+    },
+    "guestbook": {
+      "title": "Guestbook",
+      "description": "Leave a message and say hello!",
+      "placeholder": "Write a message...",
+      "signIn": "Sign in to leave a message",
+      "send": "Send"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "description": "Certificates, badges, and professional achievements."
+    },
+    "uses": {
+      "title": "Uses & Setup",
+      "description": "Hardware, software, tools, and development setup I use daily."
+    },
+    "changelog": {
+      "title": "Changelog",
+      "description": "Version history and updates to this portfolio website."
+    },
+    "links": {
+      "title": "Links",
+      "description": "All my social profiles and important links in one place."
+    }
+  },
+  "commandPalette": {
+    "placeholder": "Search commands...",
+    "noResults": "No results found",
+    "sections": "Sections",
+    "pages": "Pages",
+    "actions": "Actions",
+    "themes": "Themes",
+    "socialLinks": "Social Links"
+  }
+}

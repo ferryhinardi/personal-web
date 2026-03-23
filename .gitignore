@@ -21,6 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+firebase-debug.log*
 
 # OSX
 #
@@ -87,6 +88,7 @@ logs/
 # Dependency check artifacts
 outdated.json
 .env*.local
+.env
 
 # Build analysis artifacts
 bundle-stats.html

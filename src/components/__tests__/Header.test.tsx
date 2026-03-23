@@ -1,5 +1,7 @@
 import {describe, it, expect, vi} from 'vitest';
 import {render, screen} from '@testing-library/react';
+import {BrowserRouter} from 'react-router-dom';
+import {ThemeProvider} from '@/contexts/ThemeContext';
 import Header from '../Header';
 
 // Mock framer-motion to avoid animation issues in tests
@@ -64,6 +66,15 @@ vi.mock('@/hooks/useParallax', () => ({
   useFadeOnScroll: () => ({ref: {current: null}, y: 0, opacity: 1}),
 }));
 
+// Helper to render with Router context
+const renderWithRouter = (ui: React.ReactElement) => {
+  return render(
+    <BrowserRouter>
+      <ThemeProvider>{ui}</ThemeProvider>
+    </BrowserRouter>,
+  );
+};
+
 const mockData = {
   name: 'Ferry Hinardi',
   occupation: 'Software Engineer',
@@ -89,18 +100,18 @@ const mockData = {
 
 describe('Header Component', () => {
   it('renders without crashing', () => {
-    render(<Header data={mockData} />);
+    renderWithRouter(<Header data={mockData} />);
     expect(screen.getAllByText('Ferry Hinardi').length).toBeGreaterThan(0);
   });
 
   it('displays the typing animation text', () => {
-    render(<Header data={mockData} />);
+    renderWithRouter(<Header data={mockData} />);
     // TypeAnimation mock renders the first sequence item
     expect(screen.getByText('Crafting Digital Experiences')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
-    render(<Header data={mockData} />);
+    renderWithRouter(<Header data={mockData} />);
     // The nav has: Home, About, Resume, Works, Contact
     expect(screen.getAllByText('Home').length).toBeGreaterThan(0);
     expect(screen.getAllByText('About').length).toBeGreaterThan(0);
@@ -110,7 +121,7 @@ describe('Header Component', () => {
   });
 
   it('renders social links', () => {
-    render(<Header data={mockData} />);
+    renderWithRouter(<Header data={mockData} />);
     const socialLinks = screen.getAllByRole('link');
     const hasSocialLinks = socialLinks.some(
       (link) =>
@@ -121,7 +132,7 @@ describe('Header Component', () => {
   });
 
   it('renders nothing when data is undefined', () => {
-    const {container} = render(<Header />);
+    const {container} = renderWithRouter(<Header />);
     // Component returns null when no data
     expect(container.querySelector('header')).not.toBeInTheDocument();
   });

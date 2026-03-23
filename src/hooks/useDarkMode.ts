@@ -1,36 +1,56 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useContext} from 'react';
+import {ThemeContext} from '@/contexts/ThemeContext';
 
+/**
+ * Dark mode hook — compatibility wrapper.
+ *
+ * When used inside a ThemeProvider (most of the app via RootLayout),
+ * delegates to ThemeContext. When used outside (e.g. PrintResume),
+ * manages its own state as a standalone fallback.
+ *
+ * Both code paths always run their hooks to satisfy the Rules of Hooks.
+ */
 export function useDarkMode() {
+  const themeContext = useContext(ThemeContext);
+
+  // Always run standalone state hooks (Rules of Hooks: no conditional hooks)
   const [isDark, setIsDark] = useState<boolean>(() => {
-    // Check localStorage first
-    const saved = localStorage.getItem('darkMode');
-    if (saved !== null) {
-      return saved === 'true';
-    }
-    // Fall back to system preference
+    const saved =
+      localStorage.getItem('themeMode') || localStorage.getItem('darkMode');
+    if (saved === 'dark' || saved === 'true') return true;
+    if (saved === 'light' || saved === 'false') return false;
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
   useEffect(() => {
+    // Only apply DOM changes when ThemeContext is NOT available
+    // (ThemeContext handles its own DOM updates)
+    if (themeContext) return;
     const root = document.documentElement;
     if (isDark) {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('darkMode', String(isDark));
-  }, [isDark]);
+  }, [isDark, themeContext]);
 
-  const toggleDarkMode = () => {
+  const toggleStandalone = () => {
     const root = document.documentElement;
-    // Add transition class for smooth theme change
     root.classList.add('theme-transition');
     setIsDark(!isDark);
-    // Remove transition class after animation completes
     setTimeout(() => {
       root.classList.remove('theme-transition');
     }, 300);
   };
 
-  return {isDark, toggleDarkMode};
+  // If ThemeProvider is available, delegate to it
+  if (themeContext) {
+    return {
+      isDark: themeContext.isDark,
+      toggleDarkMode: themeContext.toggleDarkMode,
+    };
+  }
+
+  // Standalone fallback (for components outside ThemeProvider)
+  return {isDark, toggleDarkMode: toggleStandalone};
 }

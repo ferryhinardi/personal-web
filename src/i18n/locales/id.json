@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "resume": "Resume",
+    "works": "Karya",
+    "contact": "Kontak",
+    "dashboard": "Dasbor",
+    "guestbook": "Buku Tamu",
+    "achievements": "Pencapaian",
+    "uses": "Peralatan",
+    "changelog": "Catatan Perubahan",
+    "links": "Tautan"
+  },
+  "hero": {
+    "greeting": "Hai, Saya",
+    "cta": "Hubungi Saya",
+    "scrollDown": "Gulir ke Bawah"
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "subtitle": "Kenali saya lebih dekat"
+  },
+  "resume": {
+    "title": "Resume",
+    "subtitle": "Detail bio formal saya",
+    "education": "Pendidikan",
+    "work": "Pengalaman Kerja",
+    "skills": "Keahlian & Teknologi"
+  },
+  "portfolio": {
+    "title": "Portofolio",
+    "subtitle": "Lihat beberapa karya saya",
+    "viewProject": "Lihat Proyek",
+    "viewCode": "Lihat Kode",
+    "viewAll": "Lihat Semua"
+  },
+  "contact": {
+    "title": "Hubungi Saya",
+    "subtitle": "Punya proyek? Mari bicara!",
+    "name": "Nama",
+    "email": "Email",
+    "subject": "Subjek",
+    "message": "Pesan",
+    "send": "Kirim Pesan",
+    "sending": "Mengirim...",
+    "success": "Pesan berhasil dikirim!",
+    "error": "Gagal mengirim pesan. Silakan coba lagi."
+  },
+  "footer": {
+    "madeWith": "Dibuat dengan",
+    "by": "oleh"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba Lagi",
+    "backToHome": "Kembali ke Beranda",
+    "comingSoon": "Segera hadir",
+    "viewMore": "Lihat Selengkapnya",
+    "close": "Tutup",
+    "search": "Cari",
+    "darkMode": "Mode Gelap",
+    "lightMode": "Mode Terang",
+    "language": "Bahasa"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dasbor",
+      "description": "Dasbor pengembang pribadi dengan aktivitas GitHub, statistik coding, dan lainnya."
+    },
+    "guestbook": {
+      "title": "Buku Tamu",
+      "description": "Tinggalkan pesan dan sapa!",
+      "placeholder": "Tulis pesan...",
+      "signIn": "Masuk untuk meninggalkan pesan",
+      "send": "Kirim"
+    },
+    "achievements": {
+      "title": "Pencapaian",
+      "description": "Sertifikat, lencana, dan pencapaian profesional."
+    },
+    "uses": {
+      "title": "Peralatan & Pengaturan",
+      "description": "Perangkat keras, perangkat lunak, alat, dan pengaturan pengembangan yang saya gunakan."
+    },
+    "changelog": {
+      "title": "Catatan Perubahan",
+      "description": "Riwayat versi dan pembaruan situs portofolio ini."
+    },
+    "links": {
+      "title": "Tautan",
+      "description": "Semua profil media sosial dan tautan penting saya di satu tempat."
+    }
+  },
+  "commandPalette": {
+    "placeholder": "Cari perintah...",
+    "noResults": "Tidak ada hasil",
+    "sections": "Bagian",
+    "pages": "Halaman",
+    "actions": "Tindakan",
+    "themes": "Tema",
+    "socialLinks": "Tautan Sosial"
+  }
+}

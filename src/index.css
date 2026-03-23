@@ -1,8 +1,36 @@
 @import "tailwindcss";
 
+/* ============================================
+   Theme System: oklch hue rotation
+   ============================================ */
+:root {
+  --theme-hue: 240;
+}
+
+/* Runtime primary palette — overrides @theme tokens with dynamic hue */
+:root {
+  --color-primary-50: oklch(0.97 0.01 var(--theme-hue));
+  --color-primary-100: oklch(0.93 0.03 var(--theme-hue));
+  --color-primary-200: oklch(0.86 0.06 var(--theme-hue));
+  --color-primary-300: oklch(0.77 0.12 var(--theme-hue));
+  --color-primary-400: oklch(0.67 0.18 var(--theme-hue));
+  --color-primary-500: oklch(0.57 0.24 var(--theme-hue));
+  --color-primary-600: oklch(0.48 0.26 var(--theme-hue));
+  --color-primary-700: oklch(0.39 0.22 var(--theme-hue));
+  --color-primary-800: oklch(0.31 0.17 var(--theme-hue));
+  --color-primary-900: oklch(0.24 0.11 var(--theme-hue));
+  --color-primary-950: oklch(0.15 0.06 var(--theme-hue));
+}
+
+/* Smooth theme transitions */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
 /* Custom CSS variables for design system */
 @theme {
-  /* Colors */
+  /* Colors — driven by --theme-hue for multi-theme support */
   --color-primary-50: oklch(0.97 0.01 240);
   --color-primary-100: oklch(0.93 0.03 240);
   --color-primary-200: oklch(0.86 0.06 240);

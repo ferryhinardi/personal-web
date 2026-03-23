@@ -1,12 +1,8 @@
-import {useState, useEffect, useCallback, useMemo} from 'react';
+import {useState, useEffect, useCallback, useMemo, useContext} from 'react';
+import {useNavigate, useLocation} from 'react-router-dom';
 import {motion, AnimatePresence} from 'framer-motion';
 import {
   Command,
-  Home,
-  User,
-  FileText,
-  Briefcase,
-  Mail,
   Moon,
   Sun,
   Download,
@@ -21,13 +17,17 @@ import {
 import {cn} from '@/lib/utils';
 import {useDarkMode} from '@/hooks/useDarkMode';
 import {scrollToSection} from '@/utils/navigation';
+import {mainSections, pageLinks} from '@/config/navigation';
+import {ThemeContext} from '@/contexts/ThemeContext';
+import {themes} from '@/types/theme.types';
+import {Palette} from 'lucide-react';
 
 interface CommandItem {
   id: string;
   label: string;
   icon: React.ReactNode;
   action: () => void;
-  category: 'navigation' | 'action' | 'social';
+  category: 'navigation' | 'pages' | 'action' | 'social' | 'theme';
   keywords?: string[];
 }
 
@@ -36,56 +36,63 @@ export default function CommandPalette() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const {isDark, toggleDarkMode} = useDarkMode();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
-  const handleNavClick = useCallback((href: string) => {
-    const targetId = href.replace('#', '');
-    scrollToSection(targetId);
-    setIsOpen(false);
-  }, []);
+  // Access ThemeContext directly (safe even outside provider)
+  const themeContext = useContext(ThemeContext);
+
+  const handleSectionClick = useCallback(
+    (href: string) => {
+      if (isHomePage) {
+        const targetId = href.replace('#', '');
+        scrollToSection(targetId);
+      } else {
+        // Navigate to home page with hash
+        window.location.href = '/' + href;
+      }
+      setIsOpen(false);
+    },
+    [isHomePage],
+  );
+
+  const handlePageClick = useCallback(
+    (href: string) => {
+      navigate(href);
+      setIsOpen(false);
+    },
+    [navigate],
+  );
 
   const commands: CommandItem[] = useMemo(
     () => [
-      // Navigation
-      {
-        id: 'home',
-        label: 'Home',
-        icon: <Home className="h-4 w-4" />,
-        action: () => handleNavClick('#home'),
-        category: 'navigation',
-        keywords: ['top', 'start', 'beginning'],
-      },
-      {
-        id: 'about',
-        label: 'About',
-        icon: <User className="h-4 w-4" />,
-        action: () => handleNavClick('#about'),
-        category: 'navigation',
-        keywords: ['bio', 'me', 'profile', 'introduction'],
-      },
-      {
-        id: 'resume',
-        label: 'Resume',
-        icon: <FileText className="h-4 w-4" />,
-        action: () => handleNavClick('#resume'),
-        category: 'navigation',
-        keywords: ['cv', 'experience', 'work history', 'skills', 'education'],
-      },
-      {
-        id: 'works',
-        label: 'Works',
-        icon: <Briefcase className="h-4 w-4" />,
-        action: () => handleNavClick('#portfolio'),
-        category: 'navigation',
-        keywords: ['portfolio', 'projects', 'showcase'],
-      },
-      {
-        id: 'contact',
-        label: 'Contact',
-        icon: <Mail className="h-4 w-4" />,
-        action: () => handleNavClick('#contact'),
-        category: 'navigation',
-        keywords: ['email', 'message', 'reach out', 'hire'],
-      },
+      // Section navigation
+      ...mainSections.map((item) => {
+        const IconComponent = item.icon;
+        return {
+          id: item.href.replace('#', ''),
+          label: item.label,
+          icon: <IconComponent className="h-4 w-4" />,
+          action: () => handleSectionClick(item.href),
+          category: 'navigation' as const,
+          keywords: item.keywords,
+        };
+      }),
+
+      // Page navigation
+      ...pageLinks.map((item) => {
+        const IconComponent = item.icon;
+        return {
+          id: `page-${item.href.replace('/', '')}`,
+          label: item.label,
+          icon: <IconComponent className="h-4 w-4" />,
+          action: () => handlePageClick(item.href),
+          category: 'pages' as const,
+          keywords: item.keywords,
+        };
+      }),
+
       // Actions
       {
         id: 'dark-mode',
@@ -102,6 +109,22 @@ export default function CommandPalette() {
         category: 'action',
         keywords: ['theme', 'toggle', 'light', 'dark', 'mode'],
       },
+
+      // Theme switching commands
+      ...(themeContext
+        ? themes.map((t) => ({
+            id: `theme-${t.id}`,
+            label: `Theme: ${t.label}`,
+            icon: <Palette className="h-4 w-4" style={{color: t.preview}} />,
+            action: () => {
+              themeContext.setTheme(t.id);
+              setIsOpen(false);
+            },
+            category: 'theme' as const,
+            keywords: ['color', 'palette', t.label.toLowerCase()],
+          }))
+        : []),
+
       {
         id: 'download-resume',
         label: 'Download Resume',
@@ -148,7 +171,7 @@ export default function CommandPalette() {
         keywords: ['x', 'social', 'tweets'],
       },
     ],
-    [isDark, toggleDarkMode, handleNavClick],
+    [isDark, toggleDarkMode, handleSectionClick, handlePageClick, themeContext],
   );
 
   // Fuzzy search filter
@@ -169,7 +192,9 @@ export default function CommandPalette() {
   const groupedCommands = useMemo(() => {
     const groups: Record<string, CommandItem[]> = {
       navigation: [],
+      pages: [],
       action: [],
+      theme: [],
       social: [],
     };
 
@@ -238,9 +263,13 @@ export default function CommandPalette() {
   const getCategoryLabel = (category: string) => {
     switch (category) {
       case 'navigation':
-        return 'Navigation';
+        return 'Sections';
+      case 'pages':
+        return 'Pages';
       case 'action':
         return 'Actions';
+      case 'theme':
+        return 'Themes';
       case 'social':
         return 'Social Links';
       default:
@@ -251,7 +280,7 @@ export default function CommandPalette() {
   // Calculate flat index for selected state
   const getFlatIndex = (category: string, indexInCategory: number) => {
     let flatIndex = 0;
-    const categories = ['navigation', 'action', 'social'];
+    const categories = ['navigation', 'pages', 'action', 'theme', 'social'];
 
     for (const cat of categories) {
       if (cat === category) {
@@ -352,7 +381,7 @@ export default function CommandPalette() {
               <div className="max-h-[300px] overflow-y-auto py-2">
                 {filteredCommands.length === 0 ? (
                   <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
-                    No commands found for "{searchQuery}"
+                    No commands found for &quot;{searchQuery}&quot;
                   </div>
                 ) : (
                   Object.entries(groupedCommands).map(

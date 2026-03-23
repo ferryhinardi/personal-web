@@ -1,0 +1,59 @@
+{
+  "versions": [
+    {
+      "version": "3.0.0",
+      "title": "Multi-Page Architecture & Full Redesign",
+      "date": "2025-03-01",
+      "changes": [
+        {"type": "added", "description": "Multi-page architecture with React Router and dedicated pages"},
+        {"type": "added", "description": "Firebase integration for guestbook, reactions, and analytics"},
+        {"type": "added", "description": "Theme system with multiple color themes and dark mode"},
+        {"type": "added", "description": "Internationalization (i18n) with English and Indonesian languages"},
+        {"type": "added", "description": "Admin dashboard with GitHub activity and project metrics"},
+        {"type": "added", "description": "Guestbook page with real-time comments"},
+        {"type": "added", "description": "Achievements, Uses, Changelog, and Links pages"},
+        {"type": "added", "description": "Command palette with keyboard navigation (Cmd+K)"},
+        {"type": "added", "description": "Emoji reactions on projects and achievements"},
+        {"type": "changed", "description": "Complete UI overhaul with Tailwind CSS 4 and modern design system"},
+        {"type": "changed", "description": "Improved accessibility with skip links, ARIA labels, and keyboard navigation"},
+        {"type": "changed", "description": "Optimized performance with lazy loading, code splitting, and image optimization"},
+        {"type": "fixed", "description": "Mobile responsiveness issues across all sections"},
+        {"type": "fixed", "description": "Animation performance on low-end devices with reduced motion support"}
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "title": "Modern Redesign",
+      "date": "2024-01-15",
+      "changes": [
+        {"type": "added", "description": "Tailwind CSS for utility-first styling approach"},
+        {"type": "added", "description": "Framer Motion animations throughout the site"},
+        {"type": "added", "description": "Responsive design with mobile-first approach"},
+        {"type": "added", "description": "Project detail modals with expanded case studies"},
+        {"type": "added", "description": "Skills visualization with interactive progress bars"},
+        {"type": "changed", "description": "Migrated from Create React App to Vite for faster builds"},
+        {"type": "changed", "description": "Upgraded to React 18 with concurrent features"},
+        {"type": "changed", "description": "Replaced class components with functional components and hooks"},
+        {"type": "changed", "description": "Updated resume data structure with richer project details"},
+        {"type": "fixed", "description": "SEO improvements with proper meta tags and structured data"},
+        {"type": "fixed", "description": "Contact form validation and error handling"},
+        {"type": "removed", "description": "jQuery dependency and legacy CSS framework"}
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "title": "Initial Launch",
+      "date": "2023-06-01",
+      "changes": [
+        {"type": "added", "description": "Single-page portfolio with React and TypeScript"},
+        {"type": "added", "description": "Hero section with animated introduction"},
+        {"type": "added", "description": "About section with bio and profile photo"},
+        {"type": "added", "description": "Resume section with education and work history"},
+        {"type": "added", "description": "Portfolio section showcasing selected projects"},
+        {"type": "added", "description": "Contact form with email integration"},
+        {"type": "added", "description": "Responsive footer with social links"},
+        {"type": "added", "description": "Dark mode toggle"}
+      ]
+    }
+  ]
+}
