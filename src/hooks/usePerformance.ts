@@ -15,7 +15,7 @@ export function useDeviceCapability() {
       const cores = navigator.hardwareConcurrency || 4;
 
       // Check device memory (GB) - only available in some browsers
-      const memory = (navigator as any).deviceMemory || 4;
+      const memory = navigator.deviceMemory || 4;
 
       // Check if it's a mobile device
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(

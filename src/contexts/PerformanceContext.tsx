@@ -74,13 +74,13 @@ function getDeviceCapability(): 'high' | 'medium' | 'low' {
   if (typeof window === 'undefined') return 'high';
 
   const cores = navigator.hardwareConcurrency || 4;
-  const memory = (navigator as any).deviceMemory || 4;
+  const memory = navigator.deviceMemory || 4;
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent,
   );
 
   // Connection quality check
-  const connection = (navigator as any).connection;
+  const connection = navigator.connection;
   const isSlowConnection =
     connection &&
     (connection.effectiveType === '2g' ||
@@ -155,13 +155,14 @@ export function useAnimationSettings() {
     enabled: config.enableAnimations,
     duration: (base: number) => base * config.durationMultiplier,
     stagger: (base: number) => base * config.staggerMultiplier,
-    transition: (base: object) => ({
-      ...base,
-      duration:
-        typeof (base as any).duration === 'number'
-          ? (base as any).duration * config.durationMultiplier
-          : undefined,
-    }),
+    transition: (base: object) => {
+      const baseDuration = (base as {duration?: number}).duration;
+      return {
+        ...base,
+        duration:
+          typeof baseDuration === 'number' ? baseDuration * config.durationMultiplier : undefined,
+      };
+    },
   };
 }
 
