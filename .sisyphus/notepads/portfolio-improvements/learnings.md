@@ -196,3 +196,54 @@ This maintains type safety by explicitly declaring only the property you need.
 - Before T11: 258 tests
 - After T11: 261 tests (+3 new Focus Trap tests)
 - CommandPalette now has 35 tests (was 32)
+
+## [2026-03-31] Task: T14 — Fix Touch Target Sizes in Header
+
+### WCAG 2.1 Level AAA Compliance: 44px Touch Targets
+
+**Three interactive elements fixed in `src/components/Header.tsx`:**
+
+1. **Theme Toggle (lines 153-165)**
+   - Uses `Button` with `size="icon"` which renders `h-9 w-9` (36px)
+   - Added `min-w-[44px] min-h-[44px]` className override → now 44px
+   - Does NOT break layout because min-width/min-height only expand, never shrink
+
+2. **Menu Trigger (lines 169-180)**
+   - Uses `Button` with `size="icon"` which renders `h-9 w-9` (36px)
+   - Added `min-w-[44px] min-h-[44px]` className override → now 44px
+   - Same non-destructive pattern as theme toggle
+
+3. **Drawer Social Icons (line 313)**
+   - Was: `w-10 h-10` (40px) — already above 36px, but substandard for WCAG AAA
+   - Fixed: `w-11 h-11` (44px) — meets WCAG 2.1 Level AAA minimum
+   - Uses direct motion.a element, not Button component — directly applied Tailwind classes
+
+**Architecture Decision:**
+- Do NOT modify `button.tsx` API (no new size variants)
+- Override at consumer site (Header.tsx) using `min-w-[44px] min-h-[44px]` on specific buttons
+- This keeps button.tsx lean and allows per-instance customization for accessibility
+
+**Why min-w/min-h instead of direct w/h?**
+- Button component defines `size="icon"` as `h-9 w-9` via CVA
+- Cannot override base size without modifying button.tsx API
+- `min-w-[44px] min-h-[44px]` forces the minimum expansion without breaking responsive design
+- Tailwind CSS precedence: `min-*` overrides `w-*` / `h-*` when inline utilities are used
+
+**Test Results:**
+- Before T14: 261 tests
+- After T14: 268 tests (+7 gained from additional testing coverage)
+- Build: ✓ success, ~1.5MB gzipped
+- All 268 tests pass
+
+**Commit:** `fix(a11y): increase touch targets to 44px minimum`
+
+## [2026-03-31T06:53] Task: T12
+- Created `src/pages/__tests__/LinksPage.test.tsx` as first page-level test file
+- `src/pages/__tests__/` directory must be created manually — did not exist before T12
+- LinksPage uses direct `fetch()` in a `useEffect` (not `useFetch` hook) — mock `global.fetch` via `vi.spyOn(global, 'fetch')`
+- LinksPage also calls `useResumeData()` for profile header — must mock `@/hooks/useResumeData`
+- Mock `@/layouts/PageLayout` to avoid nested hook/router complexity in page tests
+- Loading state test: use `new Promise(() => {})` (never-resolves) to keep component in loading state
+- framer-motion mock: `motion.a` required for `LinkCard` which uses `motion.a` with `whileHover`/`whileTap`
+- Total tests: 261 → 268 (7 new tests across 5 describe blocks)
+- Pattern: `renderWithRouter()` helper wraps in `MemoryRouter` for pages needing router context

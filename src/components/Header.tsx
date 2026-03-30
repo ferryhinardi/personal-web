@@ -154,7 +154,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                 variant="ghost"
                 size="icon"
                 onClick={toggleDarkMode}
-                className={`transition-colors ${
+                className={`min-w-[44px] min-h-[44px] transition-colors ${
                   isScrolled
                     ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
                     : 'text-white hover:bg-white/10'
@@ -169,7 +169,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className={`transition-colors ${
+                    className={`min-w-[44px] min-h-[44px] transition-colors ${
                       isScrolled
                         ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-white/10'
                         : 'text-white hover:bg-white/10'
@@ -310,7 +310,7 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                             transition={{ delay: 0.55 + index * 0.05, duration: 0.2 }}
                             whileHover={{ scale: 1.15, y: -2 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                            className="w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                           >
                             <IconComponent className="w-4 h-4" />
                           </motion.a>

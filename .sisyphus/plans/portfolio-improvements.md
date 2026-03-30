@@ -935,7 +935,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Message: `test(a11y): integrate axe automated accessibility testing`
   - Files: `src/test/a11y-utils.ts`, `src/components/__tests__/a11y.test.tsx`, `package.json` (new dev dependency)
 
-- [ ] 14. Fix Touch Target Sizes
+- [x] 14. Fix Touch Target Sizes
 
   **What to do**:
   - Fix drawer social icons in `src/components/Header.tsx:313`: change `w-10 h-10` to `w-11 h-11` (44px)

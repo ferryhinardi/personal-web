@@ -37,10 +37,10 @@ export default function AdminDashboard() {
   // Simple password authentication (you should use proper auth in production)
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Change this password to your preferred one
-    const correctPassword = 'ferry2025'; // CHANGE THIS!
+    // Get password from environment variable - fail closed if not set
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
     
-    if (password === correctPassword) {
+    if (correctPassword && password === correctPassword) {
       setIsAuthenticated(true);
       setAuthError('');
     } else {
@@ -198,13 +198,15 @@ export default function AdminDashboard() {
     setSaveMessage('');
 
     try {
+      const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+      
       const response = await fetch('/api/update-resume', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          password: 'ferry2025', // Same password as login
+          password: adminPassword,
           data: resumeData,
         }),
       });
@@ -276,9 +278,9 @@ export default function AdminDashboard() {
             {authError && <p className="auth-error">{authError}</p>}
             <Button type="submit" className="login-btn">Login</Button>
           </form>
-          <p className="admin-note">
-            Default password: <code>ferry2025</code> (Change in AdminDashboard.tsx:50)
-          </p>
+           <p className="admin-note">
+             Set password via <code>VITE_ADMIN_PASSWORD</code> environment variable
+           </p>
         </Card>
       </div>
     );
