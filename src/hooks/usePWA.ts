@@ -28,7 +28,7 @@ export function usePWA() {
           console.log('✅ Service Worker registered successfully');
         })
         .catch((error) => {
-          console.error('❌ Service Worker registration failed:', error);
+          console.warn('PWA registration failed:', error);
         });
     }
   }, []);

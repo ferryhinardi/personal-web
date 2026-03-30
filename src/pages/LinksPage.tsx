@@ -12,6 +12,7 @@ import {
 import PageLayout from '@/layouts/PageLayout';
 import SEOHead from '@/components/SEOHead';
 import {Skeleton} from '@/components/ui/skeleton';
+import {ErrorDisplay} from '@/components/ui/error';
 import {useResumeData} from '@/hooks/useResumeData';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
@@ -84,13 +85,16 @@ function LinksLoadingSkeleton() {
 export default function LinksPage() {
   const [data, setData] = useState<LinksData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
   const {data: resumeData} = useResumeData();
 
   useEffect(() => {
     fetch('/data/links.json')
       .then((res) => res.json())
       .then(setData)
-      .catch(console.error)
+      .catch((err) => {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -108,6 +112,12 @@ export default function LinksPage() {
       />
       {loading ? (
         <LinksLoadingSkeleton />
+      ) : error ? (
+        <ErrorDisplay
+          error={error}
+          title="Failed to load links"
+          message="Could not fetch your links. Please try again later."
+        />
       ) : data ? (
         <div className="max-w-lg mx-auto">
           {/* Profile Header */}

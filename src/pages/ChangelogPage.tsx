@@ -5,6 +5,7 @@ import PageLayout from '@/layouts/PageLayout';
 import SEOHead from '@/components/SEOHead';
 import {Badge} from '@/components/ui/badge';
 import {Skeleton} from '@/components/ui/skeleton';
+import {ErrorDisplay} from '@/components/ui/error';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
 type ChangeType = 'added' | 'changed' | 'fixed' | 'removed';
@@ -164,12 +165,15 @@ function ChangelogLoadingSkeleton() {
 export default function ChangelogPage() {
   const [data, setData] = useState<ChangelogData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     fetch('/data/changelog.json')
       .then((res) => res.json())
       .then(setData)
-      .catch(console.error)
+      .catch((err) => {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -185,6 +189,12 @@ export default function ChangelogPage() {
       />
       {loading ? (
         <ChangelogLoadingSkeleton />
+      ) : error ? (
+        <ErrorDisplay
+          error={error}
+          title="Failed to load changelog"
+          message="Could not fetch the changelog. Please try again later."
+        />
       ) : data ? (
         <motion.div
           variants={staggerContainer}

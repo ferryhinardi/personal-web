@@ -15,6 +15,7 @@ import SEOHead from '@/components/SEOHead';
 import {Card, CardContent} from '@/components/ui/card';
 import {Badge} from '@/components/ui/badge';
 import {Skeleton} from '@/components/ui/skeleton';
+import {ErrorDisplay} from '@/components/ui/error';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
 interface Achievement {
@@ -233,6 +234,7 @@ function Pagination({
 export default function AchievementsPage() {
   const [data, setData] = useState<AchievementsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -241,7 +243,9 @@ export default function AchievementsPage() {
     fetch('/data/achievements.json')
       .then((res) => res.json())
       .then(setData)
-      .catch(console.error)
+      .catch((err) => {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -299,6 +303,12 @@ export default function AchievementsPage() {
       />
       {loading ? (
         <AchievementsLoadingSkeleton />
+      ) : error ? (
+        <ErrorDisplay
+          error={error}
+          title="Failed to load achievements"
+          message="Could not fetch your achievements. Please try again later."
+        />
       ) : data ? (
         <div className="space-y-8">
           {/* Search Input */}
