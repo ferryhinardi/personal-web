@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback, useMemo, useContext} from 'react';
+import {useState, useEffect, useCallback, useMemo, useContext, useRef} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {motion, AnimatePresence} from 'framer-motion';
 import {
@@ -39,6 +39,8 @@ export default function CommandPalette() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   // Access ThemeContext directly (safe even outside provider)
   const themeContext = useContext(ThemeContext);
@@ -260,6 +262,44 @@ export default function CommandPalette() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, selectedIndex, filteredCommands]);
 
+  const handleDialogKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setIsOpen(false);
+        triggerRef.current?.focus();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const dialog = e.currentTarget;
+        const focusable = Array.from(
+          dialog.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => !el.hasAttribute('disabled'));
+
+        if (focusable.length === 0) return;
+
+        const firstEl = focusable[0];
+        const lastEl = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      }
+    },
+    [],
+  );
+
   const getCategoryLabel = (category: string) => {
     switch (category) {
       case 'navigation':
@@ -295,6 +335,7 @@ export default function CommandPalette() {
     <>
       {/* Keyboard hint badge */}
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(true)}
         className={cn(
           'fixed bottom-4 right-4 z-40',
@@ -330,6 +371,7 @@ export default function CommandPalette() {
 
             {/* Command Palette Modal */}
             <motion.div
+              ref={dialogRef}
               initial={{opacity: 0, scale: 0.95, y: -20}}
               animate={{opacity: 1, scale: 1, y: 0}}
               exit={{opacity: 0, scale: 0.95, y: -20}}
@@ -345,6 +387,7 @@ export default function CommandPalette() {
               role="dialog"
               aria-modal="true"
               aria-label="Command palette"
+              onKeyDown={handleDialogKeyDown}
             >
               {/* Search Input */}
               <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">

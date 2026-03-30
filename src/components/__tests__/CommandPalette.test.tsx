@@ -608,4 +608,80 @@ describe('CommandPalette', () => {
       });
     });
   });
+
+  describe('Focus Trap', () => {
+    it('Tab key cycles focus within modal and does not escape', async () => {
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
+
+      // Open the palette
+      fireEvent.keyDown(window, {key: 'k', metaKey: true});
+
+      const dialog = await screen.findByRole('dialog', {name: /command palette/i});
+
+      // Query focusable elements inside dialog
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      expect(focusable.length).toBeGreaterThan(1);
+
+      // Focus the last focusable element
+      focusable[focusable.length - 1].focus();
+      expect(document.activeElement).toBe(focusable[focusable.length - 1]);
+
+      // Tab from last element should wrap to first
+      fireEvent.keyDown(dialog, {key: 'Tab', shiftKey: false});
+
+      expect(document.activeElement).toBe(focusable[0]);
+    });
+
+    it('Shift+Tab cycles focus backward within modal', async () => {
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
+
+      // Open the palette
+      fireEvent.keyDown(window, {key: 'k', metaKey: true});
+
+      const dialog = await screen.findByRole('dialog', {name: /command palette/i});
+
+      // Query focusable elements inside dialog
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      expect(focusable.length).toBeGreaterThan(1);
+
+      // Focus the first focusable element
+      focusable[0].focus();
+      expect(document.activeElement).toBe(focusable[0]);
+
+      // Shift+Tab from first element should wrap to last
+      fireEvent.keyDown(dialog, {key: 'Tab', shiftKey: true});
+
+      expect(document.activeElement).toBe(focusable[focusable.length - 1]);
+    });
+
+    it('Escape closes modal and returns focus to trigger element', async () => {
+      render(<BrowserRouter><CommandPalette /></BrowserRouter>);
+
+      const triggerButton = screen.getByRole('button', {name: /open command palette/i});
+
+      // Focus trigger, then open
+      triggerButton.focus();
+      fireEvent.click(triggerButton);
+
+      await screen.findByRole('dialog', {name: /command palette/i});
+
+      const dialog = screen.getByRole('dialog', {name: /command palette/i});
+
+      // Press Escape on the dialog
+      fireEvent.keyDown(dialog, {key: 'Escape'});
+
+      await waitFor(() => {
+        expect(
+          screen.queryByRole('dialog', {name: /command palette/i}),
+        ).not.toBeInTheDocument();
+      });
+
+      // Focus should return to trigger
+      expect(document.activeElement).toBe(triggerButton);
+    });
+  });
 });

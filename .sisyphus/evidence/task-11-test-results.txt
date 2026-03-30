@@ -1,0 +1,314 @@
+
+> personalportfolio@0.1.0 test /Users/ferryhinardi/Workspace/personal-web
+> vitest -- --run src/components/__tests__/CommandPalette.test.tsx
+
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90m/Users/ferryhinardi/Workspace/personal-web[39m
+
+[90mstderr[2m | src/hooks/__tests__/useGuestbook.test.ts[2m > [22m[2museGuestbook[2m > [22m[2msets error message when Firestore subscription fails
+[22m[39mGuestbook subscription error: Error: Permission denied
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useGuestbook.test.ts:107:24
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@testing-library+react@16.3.2_@testing-library+dom@10.4.1_@types+react-dom@19.2.3_@type_20b78b9456b3810789451acec8daa340/node_modules/[4m@testing-library[24m/react/dist/act-compat.js:47:24
+    at act [90m(/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/react@18.3.1/node_modules/[4mreact[24m/cjs/react.development.js:2512:16[90m)[39m
+    at Proxy.<anonymous> [90m(/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@testing-library+react@16.3.2_@testing-library+dom@10.4.1_@types+react-dom@19.2.3_@type_20b78b9456b3810789451acec8daa340/node_modules/[4m@testing-library[24m/react/dist/act-compat.js:46:25[90m)[39m
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useGuestbook.test.ts:106:5
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:145:11
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:915:26
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1209:10[90m)[39m
+
+[90mstderr[2m | src/hooks/__tests__/useGuestbook.test.ts[2m > [22m[2museGuestbook[2m > [22m[2msets error when addDoc throws a Firebase network error
+[22m[39mFailed to add guestbook message: Error: Quota exceeded
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useGuestbook.test.ts:156:38
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:145:11
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:915:26
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1209:10[90m)[39m
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1653:37
+    at Traces.$ [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/vitest@4.0.18_@edge-runtime+vm@3.2.0_@opentelemetry+api@1.9.0_@types+node@25.0.10_@vite_36c0c09fedc56b775558aa1c9f08e436/node_modules/[4mvitest[24m/dist/chunks/traces.CCmnQaNT.js:142:27[90m)[39m
+    at trace [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/vitest@4.0.18_@edge-runtime+vm@3.2.0_@opentelemetry+api@1.9.0_@types+node@25.0.10_@vite_36c0c09fedc56b775558aa1c9f08e436/node_modules/[4mvitest[24m/dist/chunks/test.B8ej_ZHS.js:239:21[90m)[39m
+    at runTest [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1653:12[90m)[39m
+
+[90mstderr[2m | src/hooks/__tests__/useReactions.test.ts[2m > [22m[2museReactions[2m > [22m[2msets isLoading=false and does not update state when Firestore subscription errors
+[22m[39mReactions subscription error: Error: Permission denied
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useReactions.test.ts:148:24
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@testing-library+react@16.3.2_@testing-library+dom@10.4.1_@types+react-dom@19.2.3_@type_20b78b9456b3810789451acec8daa340/node_modules/[4m@testing-library[24m/react/dist/act-compat.js:47:24
+    at act [90m(/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/react@18.3.1/node_modules/[4mreact[24m/cjs/react.development.js:2512:16[90m)[39m
+    at Proxy.<anonymous> [90m(/Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@testing-library+react@16.3.2_@testing-library+dom@10.4.1_@types+react-dom@19.2.3_@type_20b78b9456b3810789451acec8daa340/node_modules/[4m@testing-library[24m/react/dist/act-compat.js:46:25[90m)[39m
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useReactions.test.ts:147:5
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:145:11
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:915:26
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1209:10[90m)[39m
+
+[90mstderr[2m | src/hooks/__tests__/useReactions.test.ts[2m > [22m[2museReactions[2m > [22m[2mreverts optimistic update when setDoc fails
+[22m[39mFailed to toggle reaction: Error: Quota exceeded
+    at [90m/Users/ferryhinardi/Workspace/personal-web/[39msrc/hooks/__tests__/useReactions.test.ts:180:38
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:145:11
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:915:26
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1243:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1209:10[90m)[39m
+    at [90mfile:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1653:37
+    at Traces.$ [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/vitest@4.0.18_@edge-runtime+vm@3.2.0_@opentelemetry+api@1.9.0_@types+node@25.0.10_@vite_36c0c09fedc56b775558aa1c9f08e436/node_modules/[4mvitest[24m/dist/chunks/traces.CCmnQaNT.js:142:27[90m)[39m
+    at trace [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/vitest@4.0.18_@edge-runtime+vm@3.2.0_@opentelemetry+api@1.9.0_@types+node@25.0.10_@vite_36c0c09fedc56b775558aa1c9f08e436/node_modules/[4mvitest[24m/dist/chunks/test.B8ej_ZHS.js:239:21[90m)[39m
+    at runTest [90m(file:///Users/ferryhinardi/Workspace/personal-web/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.0.18/node_modules/[4m@vitest[24m/runner/dist/index.js:1653:12[90m)[39m
+
+ [32m✓[39m src/hooks/__tests__/useGuestbook.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/hooks/__tests__/useReactions.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/Footer.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/ErrorBoundary.test.tsx [2m([22m[2m22 tests[22m[2m)[22m[32m 59[2mms[22m[39m
+[90mstderr[2m | src/components/__tests__/InteractiveBadge.test.tsx[2m > [22m[2mInteractiveBadge Component[2m > [22m[2mRendering[2m > [22m[2mrenders without crashing
+[22m[39mWarning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+
+Check the render method of `InteractiveBadgeComponent`.
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/InteractiveBadge.test.tsx:3:13)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/InteractiveBadge.test.tsx:3:13)
+    at InteractiveBadgeComponent (/Users/ferryhinardi/Workspace/personal-web/src/components/ui/interactive-badge.tsx:232:3)
+
+ [32m✓[39m src/hooks/__tests__/useMousePosition.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+[90mstderr[2m | src/components/__tests__/Portfolio.test.tsx[2m > [22m[2mPortfolio[2m > [22m[2mRendering[2m > [22m[2mrenders section with correct id
+[22m[39mWarning: React does not recognize the `whileHover` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whilehover` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at div
+    at div
+    at Card (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:21:12)
+    at div
+    at TiltCard (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:62:16)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at AnimatePresence (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:14:23)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at div
+    at section
+    at Portfolio (/Users/ferryhinardi/Workspace/personal-web/src/components/Portfolio.tsx:49:22)
+Warning: Received `true` for a non-boolean attribute `layout`.
+
+If you want to write it to the DOM, pass a string instead: layout="true" or layout={value.toString()}.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at AnimatePresence (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:14:23)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at div
+    at section
+    at Portfolio (/Users/ferryhinardi/Workspace/personal-web/src/components/Portfolio.tsx:49:22)
+Warning: React does not recognize the `whileInView` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whileinview` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Portfolio.test.tsx:3:13)
+    at div
+    at section
+    at Portfolio (/Users/ferryhinardi/Workspace/personal-web/src/components/Portfolio.tsx:49:22)
+
+[90mstderr[2m | src/components/__tests__/About.test.tsx[2m > [22m[2mAbout Component[2m > [22m[2mrenders without crashing
+[22m[39mWarning: React does not recognize the `whileHover` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whilehover` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:8:13)
+    at div
+    at div
+    at div
+    at div
+    at CardContent (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:66:19)
+    at div
+    at Card (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:61:12)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:8:13)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:8:13)
+    at div
+    at section
+    at About (/Users/ferryhinardi/Workspace/personal-web/src/components/About.tsx:16:18)
+Warning: React does not recognize the `whileInView` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whileinview` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/About.test.tsx:8:13)
+    at div
+    at section
+    at About (/Users/ferryhinardi/Workspace/personal-web/src/components/About.tsx:16:18)
+
+[90mstderr[2m | src/components/__tests__/Resume.test.tsx[2m > [22m[2mResume[2m > [22m[2mSection Structure[2m > [22m[2mrenders section with id="resume" when data is provided
+[22m[39mWarning: React does not recognize the `whileInView` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whileinview` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Resume.test.tsx:3:13)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Resume.test.tsx:3:13)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Resume.test.tsx:3:13)
+    at div
+    at section
+    at Resume (/Users/ferryhinardi/Workspace/personal-web/src/components/Resume.tsx:15:19)
+
+[90mstderr[2m | src/components/__tests__/CommandPalette.test.tsx[2m > [22m[2mCommandPalette[2m > [22m[2mOpening and Closing[2m > [22m[2mopens when clicking the keyboard hint badge
+[22m[39mWarning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+
+Check the render method of `CommandPalette`.
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/CommandPalette.test.tsx:9:13)
+    at AnimatePresence (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/CommandPalette.test.tsx:25:23)
+    at CommandPalette (/Users/ferryhinardi/Workspace/personal-web/src/components/CommandPalette.tsx:27:65)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+
+[90mstderr[2m | src/components/__tests__/Contact.test.tsx[2m > [22m[2mContact Component[2m > [22m[2mRendering[2m > [22m[2mrenders without crashing
+[22m[39mWarning: React does not recognize the `whileHover` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whilehover` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at form
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at CardContent (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:52:19)
+    at div
+    at Card (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:47:12)
+    at div
+    at TiltCard (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:33:16)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at section
+    at Contact (/Users/ferryhinardi/Workspace/personal-web/src/components/Contact.tsx:16:20)
+Warning: React does not recognize the `whileTap` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whiletap` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at form
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at CardContent (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:52:19)
+    at div
+    at Card (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:47:12)
+    at div
+    at TiltCard (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:33:16)
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at section
+    at Contact (/Users/ferryhinardi/Workspace/personal-web/src/components/Contact.tsx:16:20)
+Warning: React does not recognize the `whileInView` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whileinview` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Contact.test.tsx:15:13)
+    at div
+    at section
+    at Contact (/Users/ferryhinardi/Workspace/personal-web/src/components/Contact.tsx:16:20)
+
+ [32m✓[39m src/components/__tests__/About.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/InteractiveBadge.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[32m 80[2mms[22m[39m
+ [32m✓[39m src/hooks/__tests__/useFetch.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 170[2mms[22m[39m
+[90mstdout[2m | src/components/__tests__/Header.test.tsx
+[22m[39m🌐 i18next is made possible by our own product, Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+
+[90mstderr[2m | src/components/__tests__/Header.test.tsx[2m > [22m[2mHeader Component[2m > [22m[2mrenders without crashing
+[22m[39mWarning: React does not recognize the `whileHover` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whilehover` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at a
+    at a (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:38:11)
+    at div
+    at div
+    at nav
+    at nav (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:8:13)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+Warning: React does not recognize the `whileTap` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `whiletap` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at a
+    at a (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:38:11)
+    at div
+    at div
+    at nav
+    at nav (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:8:13)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+Warning: React does not recognize the `layoutId` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `layoutid` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:13:13)
+    at a
+    at a (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:38:11)
+    at nav
+    at div
+    at SheetContent (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:81:20)
+    at div
+    at Sheet (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:76:13)
+    at div
+    at div
+    at div
+    at nav
+    at nav (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:8:13)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+Warning: Received `false` for a non-boolean attribute `initial`.
+
+If you want to write it to the DOM, pass a string instead: initial="false" or initial={value.toString()}.
+
+If you used to conditionally omit it with initial={condition && value}, pass initial={condition ? value : undefined} instead.
+    at div
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:13:13)
+    at a
+    at a (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:38:11)
+    at nav
+    at div
+    at SheetContent (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:81:20)
+    at div
+    at Sheet (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:76:13)
+    at div
+    at div
+    at div
+    at nav
+    at nav (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:8:13)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+Warning: div: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:13:13)
+    at div
+    at HeroSection (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:499:24)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+
+Check the render method of `HeroSection`.
+    at div (/Users/ferryhinardi/Workspace/personal-web/src/components/__tests__/Header.test.tsx:13:13)
+    at div
+    at HeroSection (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:499:24)
+    at header
+    at Header (/Users/ferryhinardi/Workspace/personal-web/src/components/Header.tsx:22:19)
+    at ThemeProvider (/Users/ferryhinardi/Workspace/personal-web/src/contexts/ThemeContext.tsx:10:26)
+    at Router (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:6594:13)
+    at BrowserRouter (file:///Users/ferryhinardi/Workspace/personal-web/node_modules/.pnpm/react-router@7.13.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs:9830:3)
+
+ [32m✓[39m src/components/__tests__/Header.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 62[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/Resume.test.tsx [2m([22m[2m50 tests[22m[2m)[22m[32m 161[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/Portfolio.test.tsx [2m([22m[2m63 tests[22m[2m)[22m[32m 246[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/CommandPalette.test.tsx [2m([22m[2m35 tests[22m[2m)[22m[32m 259[2mms[22m[39m
+ [32m✓[39m src/components/__tests__/Contact.test.tsx [2m([22m[2m22 tests[22m[2m)[22m[33m 522[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m      Tests [22m [1m[32m261 passed[39m[22m[90m (261)[39m
+[2m   Start at [22m 06:49:28
+[2m   Duration [22m 1.36s[2m (transform 1.64s, setup 2.46s, import 2.31s, tests 1.67s, environment 3.98s)[22m
+
