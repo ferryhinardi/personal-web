@@ -11,7 +11,7 @@ import {Button} from '@/components/ui/button';
 import {SectionTransition} from '@/components/ui/section-transition';
 import {TiltCard} from '@/components/ui/tilt-card';
 import {staggerContainer, staggerItem, viewportOptions} from '@/utils/animations';
-import {sendWebhookNotifications, getWebhookConfig, trackFormSubmission} from '@/utils/webhooks';
+import {trackFormSubmission} from '@/utils/webhooks';
 
 interface ContactProps {
   data?: MainData;
@@ -104,13 +104,14 @@ export default function Contact({ data }: ContactProps) {
     
     // If Formspree submission succeeded, send webhook notifications
     if (state.succeeded) {
-      // Send to configured webhooks (Slack, Discord, Telegram)
       try {
-        const webhookConfig = getWebhookConfig();
-        await sendWebhookNotifications(formData, webhookConfig);
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(formData),
+        });
       } catch (error) {
-        console.error('Webhook notification failed:', error);
-        // Don't block user experience if webhooks fail
+        console.error('Server notification failed:', error);
       }
 
       // Track analytics
