@@ -840,7 +840,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Message: `fix(a11y): add focus trap to CommandPalette modal`
   - Files: `src/components/CommandPalette.tsx`, `src/components/__tests__/CommandPalette.test.tsx`
 
-- [ ] 12. Add Page Test — LinksPage
+- [x] 12. Add Page Test — LinksPage
 
   **What to do**:
   - Create `src/pages/__tests__/LinksPage.test.tsx`
