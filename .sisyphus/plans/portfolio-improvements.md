@@ -885,7 +885,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Message: `test(pages): add smoke tests for LinksPage`
   - Files: `src/pages/__tests__/LinksPage.test.tsx`
 
-- [ ] 13. Integrate axe Automated Accessibility Testing
+- [x] 13. Integrate axe Automated Accessibility Testing
 
   **What to do**:
   - Install `vitest-axe` or `jest-axe` (check which works with vitest)

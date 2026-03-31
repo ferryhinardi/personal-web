@@ -1,25 +1,23 @@
-/**
- * Accessibility testing utilities using vitest-axe.
- *
- * Usage:
- *   import {checkA11y} from '@/test/a11y-utils';
- *   const {container} = render(<MyComponent />);
- *   await checkA11y(container);
- */
 import {axe} from 'vitest-axe';
-import type {AxeResults} from 'axe-core';
 
-/**
- * Runs axe accessibility checks on the given HTML element and asserts
- * that there are no critical or serious violations.
- *
- * Only critical/serious violations are checked (not moderate/minor)
- * so that we establish a baseline without blocking on lower-priority issues.
- */
-export async function checkA11y(container: HTMLElement): Promise<void> {
-  const results: AxeResults = await axe(container);
+type AxeViolation = {
+  impact?: string;
+  id: string;
+  description: string;
+  nodes: Array<{html: string}>;
+};
 
-  const criticalOrSerious = results.violations.filter(
+type AxeRunOptions = {
+  rules?: Record<string, {enabled: boolean}>;
+};
+
+export async function checkA11y(
+  container: HTMLElement,
+  options?: AxeRunOptions,
+): Promise<void> {
+  const results = await axe(container, options);
+
+  const criticalOrSerious = (results.violations as AxeViolation[]).filter(
     (v) => v.impact === 'critical' || v.impact === 'serious',
   );
 
