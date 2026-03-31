@@ -1,4 +1,4 @@
-import {useState, useMemo, useCallback} from 'react';
+import {useState, useEffect, useMemo, useCallback} from 'react';
 import {motion} from 'framer-motion';
 import {
   Award,
@@ -16,6 +16,7 @@ import {Card, CardContent} from '@/components/ui/card';
 import {Badge} from '@/components/ui/badge';
 import {Skeleton} from '@/components/ui/skeleton';
 import {ErrorDisplay} from '@/components/ui/error';
+import {useFetch} from '@/hooks/useFetch';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
 interface Achievement {
@@ -232,24 +233,11 @@ function Pagination({
 }
 
 export default function AchievementsPage() {
-  const [data, setData] = useState<AchievementsData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const {data, loading, error} = useFetch<AchievementsData>('/data/achievements.json');
   const [filter, setFilter] = useState<FilterType>('all');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetch('/data/achievements.json')
-      .then((res) => res.json())
-      .then(setData)
-      .catch((err) => {
-        setError(err instanceof Error ? err : new Error(String(err)));
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  // Reset page when filter or search changes
   useEffect(() => {
     setPage(1);
   }, [filter, search]);

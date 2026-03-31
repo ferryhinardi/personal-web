@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
 import {
   ChevronDown,
@@ -14,6 +14,7 @@ import SEOHead from '@/components/SEOHead';
 import {Card, CardContent} from '@/components/ui/card';
 import {Skeleton} from '@/components/ui/skeleton';
 import {ErrorDisplay} from '@/components/ui/error';
+import {useFetch} from '@/hooks/useFetch';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
 interface UsesItem {
@@ -133,19 +134,7 @@ function UsesLoadingSkeleton() {
 }
 
 export default function UsesPage() {
-  const [data, setData] = useState<UsesData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    fetch('/data/uses.json')
-      .then((res) => res.json())
-      .then(setData)
-      .catch((err) => {
-        setError(err instanceof Error ? err : new Error(String(err)));
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const {data, loading, error} = useFetch<UsesData>('/data/uses.json');
 
   return (
     <PageLayout

@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import {motion} from 'framer-motion';
 import {Plus, RefreshCw, Bug, Trash2} from 'lucide-react';
 import PageLayout from '@/layouts/PageLayout';
@@ -6,6 +5,7 @@ import SEOHead from '@/components/SEOHead';
 import {Badge} from '@/components/ui/badge';
 import {Skeleton} from '@/components/ui/skeleton';
 import {ErrorDisplay} from '@/components/ui/error';
+import {useFetch} from '@/hooks/useFetch';
 import {staggerContainer, staggerItem} from '@/utils/animations';
 
 type ChangeType = 'added' | 'changed' | 'fixed' | 'removed';
@@ -163,19 +163,7 @@ function ChangelogLoadingSkeleton() {
 }
 
 export default function ChangelogPage() {
-  const [data, setData] = useState<ChangelogData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    fetch('/data/changelog.json')
-      .then((res) => res.json())
-      .then(setData)
-      .catch((err) => {
-        setError(err instanceof Error ? err : new Error(String(err)));
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const {data, loading, error} = useFetch<ChangelogData>('/data/changelog.json');
 
   return (
     <PageLayout

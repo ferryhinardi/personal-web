@@ -277,3 +277,19 @@ This maintains type safety by explicitly declaring only the property you need.
 ### Test Count
 - 261 existing + 3 new a11y tests = 264... wait, full suite shows 271
 - Actual: 271 total tests passing after T13
+
+## T17: useFetch Migration Pattern (2026-03-31)
+
+### Pages migrated
+- LinksPage: kept `useResumeData` for resumeData, removed `useState`+`useEffect` imports
+- AchievementsPage: kept `useEffect` for page-reset on filter/search; kept `useState` for UI state
+- ChangelogPage: removed all `useState`+`useEffect` imports (no other state needed)
+- UsesPage: kept `useState` import (used by `CategorySection` sub-component accordion), removed `useEffect`
+
+### Key gotcha
+When a page has multiple `useEffect` calls, removing one without checking others causes broken code.
+AchievementsPage had TWO useEffects: (1) fetch data, (2) reset page on filter/search change.
+Only the fetch useEffect should be removed; the page-reset useEffect stays.
+
+### Import discipline
+Check all imports when removing `useState`/`useEffect` — sub-components in the same file may still need them.
