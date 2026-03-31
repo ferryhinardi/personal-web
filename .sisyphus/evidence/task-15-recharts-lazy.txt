@@ -1,0 +1,77 @@
+# Task 15: Lazy-load Recharts for Dashboard Pages
+
+## Objective
+Wrap recharts imports in 3 dashboard components with React.lazy() + Suspense + Skeleton fallback so recharts is split into a separate lazy-loaded bundle chunk.
+
+## Changes Made
+
+### 1. CodingStats Component
+- **File**: `src/components/dashboard/CodingStats.tsx`
+- **Change**: Extracted recharts rendering into `CodingStatsCharts.tsx`
+- **New file**: `src/components/dashboard/CodingStatsCharts.tsx`
+- **Pattern**: React.lazy() + Suspense with Skeleton fallback
+- **Status**: ✓ Working
+
+### 2. ProjectMetrics Component
+- **File**: `src/components/ui/project-metrics.tsx`
+- **Change**: Extracted recharts rendering into `ProjectMetricsCharts.tsx`
+- **New file**: `src/components/ui/ProjectMetricsCharts.tsx`
+- **Pattern**: React.lazy() + Suspense with Skeleton fallback (grid with 4 loading skeletons)
+- **Status**: ✓ Working
+
+### 3. SkillsRadar Component
+- **File**: `src/components/ui/skills-radar.tsx`
+- **Change**: Extracted recharts rendering into `SkillsRadarChart.tsx`
+- **New file**: `src/components/ui/SkillsRadarChart.tsx`
+- **Pattern**: React.lazy() + Suspense with Skeleton fallback
+- **Status**: ✓ Working
+
+## Build Output
+
+### Lazy-loaded Chunks Created
+- `CodingStatsCharts-DRRkRS1-.js` (2.06 kB gzipped)
+- `SkillsRadarChart-C1Hnc68x.js` (1.48 kB gzipped)
+- `ProjectMetricsCharts-Bmcnm96w.js` (3.99 kB gzipped)
+
+### Main Charts Chunk
+- `charts-D43cOivz.js` (403.76 kB uncompressed, 112.49 kB gzipped)
+
+### Build Status
+- ✓ TypeScript compile: clean
+- ✓ Vite build: success (5.88s)
+- ✓ No errors, no warnings
+
+## Test Results
+- ✓ All 271 tests pass
+- ✓ Test Files: 15 passed
+- ✓ No test regressions
+- ✓ Duration: 1.45s
+
+## Implementation Details
+
+### Suspension Pattern
+All three components follow this pattern:
+```tsx
+<Suspense
+  fallback={<Skeleton />}
+>
+  <LazyComponent />
+</Suspense>
+```
+
+### Data Flow
+- Parent component aggregates/prepares data
+- Data passed as props to lazy component
+- Lazy component renders recharts (only loaded on demand)
+
+### TypeScript
+- All new components are fully typed
+- Props interfaces defined for lazy components
+- No `as any` type casts
+
+## Verification
+✓ Build succeeds: `pnpm build` → exit 0
+✓ Tests pass: `pnpm test -- --run` → 271 tests pass
+✓ Recharts in separate chunks (visible in build output)
+✓ No regressions in existing tests
+✓ Dashboard pages still render charts correctly
