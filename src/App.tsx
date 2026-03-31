@@ -31,30 +31,30 @@ const Contact = lazy(() => import('@components/Contact'));
 function App() {
   const { data: resumeData, loading, error } = useResumeData();
 
-  useEffect(() => {
-    // Defer Google Analytics initialization to improve initial load performance
-    // Wait for page to be fully loaded before initializing GA
-    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
-    
-    if (measurementId) {
-      // Defer GA loading after page load completes
-      if (document.readyState === 'complete') {
-        // Page already loaded, defer by 2 seconds
-        setTimeout(() => {
-          initGA(measurementId);
-          logPageView();
-        }, 2000);
-      } else {
-        // Wait for page to load, then defer by 2 seconds
-        window.addEventListener('load', () => {
-          setTimeout(() => {
-            initGA(measurementId);
-            logPageView();
-          }, 2000);
-        });
-      }
-    }
-  }, []);
+   useEffect(() => {
+     // Defer Google Analytics initialization to improve initial load performance
+     // Wait for page to be fully loaded before initializing GA
+     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+     
+     if (measurementId) {
+       // Defer GA loading after page load completes
+       if (document.readyState === 'complete') {
+         // Page already loaded, defer by 2 seconds
+         setTimeout(async () => {
+           await initGA(measurementId);
+           await logPageView();
+         }, 2000);
+       } else {
+         // Wait for page to load, then defer by 2 seconds
+         window.addEventListener('load', () => {
+           setTimeout(async () => {
+             await initGA(measurementId);
+             await logPageView();
+           }, 2000);
+         });
+       }
+     }
+   }, []);
 
   if (loading) {
     return <Loading fullScreen message="Loading your portfolio..." />;

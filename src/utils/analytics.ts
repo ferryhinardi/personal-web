@@ -1,14 +1,15 @@
-import ReactGA from 'react-ga4';
-
-export const initGA = (measurementId: string) => {
+export const initGA = async (measurementId: string) => {
+  const {default: ReactGA} = await import('react-ga4');
   ReactGA.initialize(measurementId);
 };
 
-export const logPageView = () => {
+export const logPageView = async () => {
+  const {default: ReactGA} = await import('react-ga4');
   ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
 };
 
-export const logEvent = (category: string, action: string, label?: string) => {
+export const logEvent = async (category: string, action: string, label?: string) => {
+  const {default: ReactGA} = await import('react-ga4');
   ReactGA.event({
     category,
     action,
