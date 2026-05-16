@@ -124,23 +124,26 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                 ))}
 
                 {/* Page links */}
-                {pageLinks.slice(0, 3).map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      location.pathname === item.href
-                        ? isScrolled
-                          ? 'text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-white/10'
-                          : 'text-cyan-400 bg-white/10'
-                        : isScrolled
-                          ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white/80 dark:hover:text-white dark:hover:bg-white/5'
-                          : 'text-white/80 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {pageLinks.slice(0, 4).map((item) => {
+                  const linkClass = `px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    location.pathname === item.href
+                      ? isScrolled
+                        ? 'text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-white/10'
+                        : 'text-cyan-400 bg-white/10'
+                      : isScrolled
+                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white/80 dark:hover:text-white dark:hover:bg-white/5'
+                        : 'text-white/80 hover:text-white hover:bg-white/5'
+                  }`;
+                  return item.isStatic ? (
+                    <a key={item.href} href={item.href} className={linkClass}>
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link key={item.href} to={item.href} className={linkClass}>
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </nav>
               
               {/* Theme Picker (replaces dark mode toggle) */}
@@ -251,27 +254,37 @@ export default function Header({ data, showContactInfo = false }: HeaderProps) {
                     {pageLinks.map((item) => {
                       const IconComponent = item.icon;
                       const isActive = location.pathname === item.href;
+                      const mobileLinkClass = `flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
+                        isActive ? 'text-cyan-400 bg-white/10' : 'text-white/80 hover:text-white'
+                      }`;
 
                       return (
                         <motion.div key={item.href}>
-                          <Link
-                            to={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={`flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium transition-colors relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
-                              isActive
-                                ? 'text-cyan-400 bg-white/10'
-                                : 'text-white/80 hover:text-white'
-                            }`}
-                          >
-                            {isActive && (
-                              <motion.div
-                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-400 rounded-r-full"
-                                initial={false}
-                              />
-                            )}
-                            <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
-                            <span>{item.label}</span>
-                          </Link>
+                          {item.isStatic ? (
+                            <a
+                              href={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className={mobileLinkClass}
+                            >
+                              <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
+                              <span>{item.label}</span>
+                            </a>
+                          ) : (
+                            <Link
+                              to={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className={mobileLinkClass}
+                            >
+                              {isActive && (
+                                <motion.div
+                                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-400 rounded-r-full"
+                                  initial={false}
+                                />
+                              )}
+                              <IconComponent className={`h-5 w-5 ${isActive ? 'text-cyan-400' : 'text-white/60'}`} />
+                              <span>{item.label}</span>
+                            </Link>
+                          )}
                         </motion.div>
                       );
                     })}

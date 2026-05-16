@@ -10,6 +10,7 @@ import {
   Wrench,
   History,
   Link2,
+  Map,
 } from 'lucide-react';
 import type {LucideIcon} from 'lucide-react';
 
@@ -21,6 +22,8 @@ export interface NavItem {
   isSection?: boolean;
   /** Whether this navigates to a separate page route */
   isPage?: boolean;
+  /** Whether this links to a static asset (bypasses React Router) */
+  isStatic?: boolean;
   /** Keywords for command palette search */
   keywords?: string[];
 }
@@ -90,6 +93,13 @@ export const pageLinks: NavItem[] = [
     icon: Award,
     isPage: true,
     keywords: ['certificates', 'badges', 'awards', 'accomplishments'],
+  },
+  {
+    label: 'KL Trip',
+    href: '/kl-trip-plan.html',
+    icon: Map,
+    isStatic: true,
+    keywords: ['kuala lumpur', 'malaysia', 'travel', 'trip', 'plan', 'itinerary'],
   },
   {
     label: 'Uses',

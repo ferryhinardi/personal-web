@@ -89,7 +89,9 @@ export default function CommandPalette() {
           id: `page-${item.href.replace('/', '')}`,
           label: item.label,
           icon: <IconComponent className="h-4 w-4" />,
-          action: () => handlePageClick(item.href),
+          action: item.isStatic
+            ? () => { window.location.href = item.href; setIsOpen(false); }
+            : () => handlePageClick(item.href),
           category: 'pages' as const,
           keywords: item.keywords,
         };
