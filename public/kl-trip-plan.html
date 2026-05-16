@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KL Trip Plan · Ferry · May 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1a1714;
+  --paper: #f5f0e8;
+  --paper2: #ede7d9;
+  --warm: #c8956a;
+  --warm-dark: #9e6840;
+  --warm-pale: #f0dece;
+  --red: #b84a3a;
+  --green: #3a6b4a;
+  --blue: #2e4f7a;
+  --gold: #b8922a;
+  --muted: #7a6f62;
+  --border: #d8cfc0;
+  --white: #fdfaf5;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 56px 0 40px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
+  animation: fadeIn 0.9s ease both;
+}
+
+.stamp {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--red);
+  padding: 4px 10px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 10vw, 72px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--warm-dark);
+}
+
+.header-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.flight-strip {
+  display: flex;
+  gap: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  overflow: hidden;
+  border-radius: 2px;
+  flex-wrap: wrap;
+}
+
+.flight-leg {
+  padding: 10px 16px;
+  border-right: 1px solid #333;
+  flex: 1;
+  min-width: 120px;
+}
+
+.flight-leg:last-child { border-right: none; }
+
+.flight-leg .route {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--warm);
+}
+
+.flight-leg .time {
+  color: #aaa;
+  margin-top: 2px;
+}
+
+.flight-leg .dir {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* ── SECTION TABS ── */
+.section-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  animation: fadeIn 0.6s 0.2s ease both;
+}
+
+.section-nav::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: all 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-weight: 400;
+}
+
+.tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--warm-dark);
+  background: var(--paper2);
+}
+
+.tab:hover:not(.active) { color: var(--ink); background: rgba(0,0,0,0.03); }
+
+/* ── PANELS ── */
+.panel { display: none; animation: fadeIn 0.4s ease both; }
+.panel.active { display: block; }
+
+/* ── DAY CARD ── */
+.day-section {
+  border-bottom: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+.day-section:last-child { border-bottom: none; }
+
+.day-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.day-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--border);
+}
+
+.day-meta {}
+
+.day-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.day-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── ACTIVITY ROW ── */
+.activity {
+  display: grid;
+  grid-template-columns: 56px 28px 1fr;
+  gap: 0 12px;
+  padding: 10px 0;
+  align-items: start;
+}
+
+.act-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--warm-dark);
+  padding-top: 3px;
+  text-align: right;
+  letter-spacing: 0.05em;
+}
+
+.act-icon {
+  font-size: 14px;
+  padding-top: 2px;
+  text-align: center;
+}
+
+.act-body {}
+
+.act-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.act-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.act-desc strong { color: var(--ink); font-weight: 500; }
+
+.act-transport {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  background: var(--paper2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2px 8px;
+  color: var(--muted);
+}
+
+.act-transport.grab { border-color: #00b14f; color: #00b14f; background: #f0faf4; }
+.act-transport.mrt  { border-color: var(--blue); color: var(--blue); background: #f0f4fa; }
+.act-transport.walk { border-color: var(--muted); color: var(--muted); }
+.act-transport.klia { border-color: var(--red); color: var(--red); background: #faf0f0; }
+
+.divider-line {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 4px 0 4px 96px;
+}
+
+/* ── APPS PANEL ── */
+.apps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 28px 0;
+}
+
+@media (max-width: 500px) { .apps-grid { grid-template-columns: 1fr; } }
+
+.app-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.app-card:hover { border-color: var(--warm); transform: translateY(-2px); }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.app-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.app-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.app-category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.app-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.app-priority {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.priority-must { background: #fdecea; color: var(--red); }
+.priority-rec  { background: #edf5f0; color: var(--green); }
+.priority-opt  { background: var(--paper2); color: var(--muted); }
+
+/* ── PACKING PANEL ── */
+.pack-section {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.pack-section:last-child { border-bottom: none; }
+
+.pack-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pack-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+
+@media (max-width: 480px) { .pack-list { grid-template-columns: 1fr; } }
+
+.pack-item {
+  font-size: 13px;
+  color: var(--ink);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--paper2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pack-item::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 2px;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.pack-item.checked { color: var(--muted); text-decoration: line-through; }
+.pack-item.checked::before {
+  background: var(--green);
+  border-color: var(--green);
+  content: '✓';
+  color: white;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.pack-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── TIPS PANEL ── */
+.tip-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warm-dark);
+  border-radius: 0 4px 4px 0;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  animation: fadeIn 0.4s ease both;
+}
+
+.tip-card strong { color: var(--ink); font-weight: 500; }
+
+.tip-card.warning { border-left-color: var(--red); }
+.tip-card.money   { border-left-color: var(--gold); }
+.tip-card.info    { border-left-color: var(--blue); }
+
+.tip-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tip-card .tip-label { color: var(--warm-dark); }
+.tip-card.warning .tip-label { color: var(--red); }
+.tip-card.money .tip-label { color: var(--gold); }
+.tip-card.info .tip-label { color: var(--blue); }
+
+/* ── BUDGET BOX ── */
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 20px 0;
+}
+
+.budget-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.budget-table td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--paper2);
+  color: var(--ink);
+  vertical-align: top;
+}
+
+.budget-table td:last-child {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--warm-dark);
+}
+
+.budget-table tr:last-child td {
+  border-bottom: 2px solid var(--ink);
+  font-weight: 500;
+  padding-top: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="stamp">Solo Trip · Singapore Airlines</div>
+    <h1>Kuala<br><em>Lumpur</em></h1>
+    <div class="header-sub">19–22 May 2025 · Kingston Hotel 8, Bukit Bintang</div>
+
+    <div class="flight-strip">
+      <div class="flight-leg">
+        <div class="dir">Pergi</div>
+        <div class="route">CGK → SIN</div>
+        <div class="time">09:25 → 12:15</div>
+      </div>
+      <div class="flight-leg">
+        <div class="dir">Transit</div>
+        <div class="route">SIN → KUL</div>
+        <div class="time">14:30 → 15:45</div>
+      </div>
+      <div class="flight-leg">
+        <div class="dir">Pulang</div>
+        <div class="route">KUL → SIN</div>
+        <div class="time">10:25 → 11:45</div>
+      </div>
+      <div class="flight-leg">
+        <div class="dir">Transit</div>
+        <div class="route">SIN → CGK</div>
+        <div class="time">12:35 → 13:25</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="section-nav">
+    <button class="tab active" onclick="switchTab('itinerary', this)">📅 Itinerary</button>
+    <button class="tab" onclick="switchTab('apps', this)">📱 Aplikasi</button>
+    <button class="tab" onclick="switchTab('packing', this)">🎒 Perlengkapan</button>
+    <button class="tab" onclick="switchTab('tips', this)">💡 Tips & Budget</button>
+  </div>
+
+  <!-- ══ PANEL: ITINERARY ══ -->
+  <div id="panel-itinerary" class="panel active">
+
+    <!-- DAY 1 -->
+    <div class="day-section">
+      <div class="day-label">
+        <div class="day-num">01</div>
+        <div class="day-meta">
+          <div class="day-title">Tiba di KL — Orientasi Bukit Bintang</div>
+          <div class="day-date">Selasa, 19 May 2025</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="act-time">05:00</div>
+        <div class="act-icon">🏠</div>
+        <div class="act-body">
+          <div class="act-name">Berangkat dari Rumah ke CGK</div>
+          <div class="act-desc">Check-in CGK paling lambat <strong>07:00</strong> (2 jam sebelum boarding). Siapkan passport + e-tiket.</div>
+          <div class="act-transport grab">🚗 Grab dari rumah</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">09:25</div>
+        <div class="act-icon">✈️</div>
+        <div class="act-body">
+          <div class="act-name">Boarding CGK → SIN (SQ)</div>
+          <div class="act-desc">Tiba Changi jam <strong>12:15</strong>. Transit ~2 jam 15 menit. Changi T3 → T2/T1 naik Sky Train gratis di dalam bandara.</div>
+          <div class="act-transport klia">✈️ Singapore Airlines</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">14:30</div>
+        <div class="act-icon">✈️</div>
+        <div class="act-body">
+          <div class="act-name">Boarding SIN → KUL (SQ)</div>
+          <div class="act-desc">Tiba KLIA jam <strong>15:45</strong>. Imigrasi Malaysia — antrian bisa 15–30 menit.</div>
+          <div class="act-transport klia">✈️ Singapore Airlines</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">16:30</div>
+        <div class="act-icon">🚄</div>
+        <div class="act-body">
+          <div class="act-name">KLIA → KL Sentral via KLIA Ekspres</div>
+          <div class="act-desc">Kereta ekspres langsung, <strong>28 menit</strong>, berangkat tiap 15–20 menit. Tiket <strong>RM 35–55</strong> (beli di mesin/app). Jauh lebih cepat dan nyaman dari taksi.</div>
+          <div class="act-transport klia">🚄 KLIA Ekspres</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">17:20</div>
+        <div class="act-icon">🚗</div>
+        <div class="act-body">
+          <div class="act-name">KL Sentral → Kingston Hotel 8</div>
+          <div class="act-desc">Grab dari KL Sentral ke Bukit Bintang ~<strong>15 menit</strong>, sekitar <strong>RM 10–15</strong>. Check-in hotel, bersih-bersih.</div>
+          <div class="act-transport grab">🚗 Grab</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">19:30</div>
+        <div class="act-icon">🍜</div>
+        <div class="act-body">
+          <div class="act-name">Makan Malam: Jalan Alor</div>
+          <div class="act-desc">5–10 menit jalan kaki dari Bukit Bintang. Coba <strong>char kway teow, BBQ chicken wing, hokkien mee, coconut shake</strong>. Budget <strong>RM 25–40</strong>.</div>
+          <div class="act-transport walk">🚶 Jalan kaki ~8 menit</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">21:00</div>
+        <div class="act-icon">🚶</div>
+        <div class="act-body">
+          <div class="act-name">Bintang Walk → KLCC Elevated Walkway</div>
+          <div class="act-desc">Jalan santai di trotoar lebar Jalan Bukit Bintang yang ramai di malam hari. Lanjut ke jembatan pejalan kaki elevated ber-AC yang menghubungkan Pavilion ke KLCC — gratis, pemandangan kota dari atas bagus.</div>
+          <div class="act-transport walk">🚶 Jalan kaki dari hotel</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">21:30</div>
+        <div class="act-icon">⛲</div>
+        <div class="act-body">
+          <div class="act-name">KLCC Park — Lake Symphony Fountain Show</div>
+          <div class="act-desc">Taman 50 hektar gratis di samping Petronas Twin Towers. Nonton <strong>Lake Symphony</strong> — pertunjukan air mancur, cahaya, dan musik. Show jam <strong>20:00, 21:00, dan 22:00</strong> setiap hari. View Petronas yang terang di malam hari. <strong>Gratis.</strong></div>
+          <div class="act-transport mrt">🚇 MRT ke KLCC Station · RM 2</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">22:30</div>
+        <div class="act-icon">🏠</div>
+        <div class="act-body">
+          <div class="act-name">Balik Hotel</div>
+          <div class="act-desc">MRT atau Grab dari KLCC ke Bukit Bintang. Hari pertama yang panjang — istirahat yang cukup!</div>
+          <div class="act-transport mrt">🚇 MRT · RM 2 atau Grab ~RM 8</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-section">
+      <div class="day-label">
+        <div class="day-num">02</div>
+        <div class="day-meta">
+          <div class="day-title">Petronas + Cafe Hopping + Chinatown</div>
+          <div class="day-date">Rabu, 20 May 2025</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="act-time">08:30</div>
+        <div class="act-icon">☕</div>
+        <div class="act-body">
+          <div class="act-name">Sarapan + Cafe: Pulp by Papa Palheta</div>
+          <div class="act-desc">Specialty coffee terbaik KL. Kopi single origin, pastry, suasana ruko lama yang terawat. Buka dari jam 8. <strong>RM 20–30</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 10</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">10:00</div>
+        <div class="act-icon">🏙</div>
+        <div class="act-body">
+          <div class="act-name">Petronas Twin Towers — Skybridge & Observation Deck</div>
+          <div class="act-desc">Tiket <strong>RM 80</strong> — <strong>beli online</strong> di petronastwintowers.com.my sehari sebelum atau pagi hari. Skybridge lt. 41–42, Observation Deck lt. 86. Datang tepat waktu sesuai slot.</div>
+          <div class="act-transport mrt">🚇 MRT ke KLCC Station</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">12:30</div>
+        <div class="act-icon">🍛</div>
+        <div class="act-body">
+          <div class="act-name">Lunch: Nasi Kandar Pelita (KLCC)</div>
+          <div class="act-desc">Restoran nasi kandar legendaris dekat KLCC. Makan siang autentik dengan kari, ayam goreng rempah, dan teh tarik. <strong>RM 18–28</strong>.</div>
+          <div class="act-transport walk">🚶 Jalan kaki dari KLCC</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">14:00</div>
+        <div class="act-icon">🛍</div>
+        <div class="act-body">
+          <div class="act-name">Shopping: Suria KLCC → Pavilion KL</div>
+          <div class="act-desc">Suria KLCC untuk brand premium dan oleh-oleh di Tanamera Coffee (kopi Malaysia). Lanjut Pavilion untuk fashion dan brand regional menarik. Budget sesuai kantong.</div>
+          <div class="act-transport mrt">🚇 MRT KLCC → Bukit Bintang</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">16:30</div>
+        <div class="act-icon">☕</div>
+        <div class="act-body">
+          <div class="act-name">Cafe: Merchant's Lane</div>
+          <div class="act-desc">Cafe ikonik di ruko 3 lantai dengan konsep hidden door di Pudu. Instagram-worthy dan enak. Kopi, dessert, suasana unik. <strong>RM 20–35</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 8</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">18:30</div>
+        <div class="act-icon">🥟</div>
+        <div class="act-body">
+          <div class="act-name">Explore Petaling Street & Dinner Chinatown</div>
+          <div class="act-desc">Pasar Petaling di sore hari — cari souvenir. Makan malam di hawker sekitar: <strong>prawn noodle, curry laksa, chee cheong fun</strong>. <strong>RM 20–30</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 10</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">21:00</div>
+        <div class="act-icon">🏠</div>
+        <div class="act-body">
+          <div class="act-name">Balik Hotel — Istirahat</div>
+          <div class="act-desc">Besok hari terakhir penuh sebelum flight pagi.</div>
+          <div class="act-transport grab">🚗 Grab ke hotel</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-section">
+      <div class="day-label">
+        <div class="day-num">03</div>
+        <div class="day-meta">
+          <div class="day-title">Bangsar + Belanja Oleh-oleh + Central Market</div>
+          <div class="day-date">Kamis, 21 May 2025</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="act-time">09:00</div>
+        <div class="act-icon">🥞</div>
+        <div class="act-body">
+          <div class="act-name">Brunch: Bangsar</div>
+          <div class="act-desc"><strong>Sitka</strong> atau <strong>The Breakfast Thieves</strong> di Bangsar untuk brunch yang proper. Area hijau dan rapi, suasana santai. <strong>RM 30–50</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 12</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">11:00</div>
+        <div class="act-icon">🛍</div>
+        <div class="act-body">
+          <div class="act-name">Boutique Shopping: Bangsar Telawi</div>
+          <div class="act-desc">Toko independen untuk <strong>brand fashion lokal Malaysia, batik modern, craft</strong>. Lebih kurated dan unik dibanding mall. Cocok untuk oleh-oleh personal.</div>
+          <div class="act-transport walk">🚶 Jalan kaki di Telawi Street</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">13:00</div>
+        <div class="act-icon">🏛</div>
+        <div class="act-body">
+          <div class="act-name">Central Market (Pasar Seni) — Oleh-oleh Serius</div>
+          <div class="act-desc">Art deco building untuk oleh-oleh berkualitas: <strong>batik, pewter Royal Selangor, kerajinan tangan, kopi & teh Malaysia</strong>. Harga lebih fair dari Petaling. Budget <strong>RM 50–150</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 12</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">15:00</div>
+        <div class="act-icon">☕</div>
+        <div class="act-body">
+          <div class="act-name">Cafe Terakhir: VCR (Pudu)</div>
+          <div class="act-desc">Salah satu cafe paling dicintai di KL. Kopi artisanal dan dessert yang legendaris. Spot untuk nulis jurnal atau sekadar duduk menikmati hari terakhir. <strong>RM 20–30</strong>.</div>
+          <div class="act-transport grab">🚗 Grab ~RM 7</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">17:30</div>
+        <div class="act-icon">🛒</div>
+        <div class="act-body">
+          <div class="act-name">Last Shopping: Fahrenheit 88 / MITSUI Outlet</div>
+          <div class="act-desc">Fahrenheit 88 di Bukit Bintang (jalan kaki dari hotel) untuk fashion lokal terjangkau. Atau belanja snack & makanan kemasan di supermarket untuk dibawa pulang.</div>
+          <div class="act-transport walk">🚶 Jalan kaki</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">19:30</div>
+        <div class="act-icon">🍽</div>
+        <div class="act-body">
+          <div class="act-name">Dinner Terakhir: Lucky Garden Hawker atau Imbi Market</div>
+          <div class="act-desc">Tutup trip dengan makan malam hawker yang proper. <strong>Lucky Garden</strong> di Bangsar (lebih ramai, lebih pilihan) atau <strong>Imbi Market</strong> yang dekat dari hotel.</div>
+          <div class="act-transport grab">🚗 Grab</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">21:30</div>
+        <div class="act-icon">🧳</div>
+        <div class="act-body">
+          <div class="act-name">Packing & Persiapan Checkout</div>
+          <div class="act-desc">Set alarm jam <strong>05:30</strong>. Siapkan semua barang bawaan. Flight jam 10:25 → harus di KLIA jam <strong>08:00</strong> → berangkat dari hotel jam <strong>06:30</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 - PULANG -->
+    <div class="day-section">
+      <div class="day-label">
+        <div class="day-num">04</div>
+        <div class="day-meta">
+          <div class="day-title">Checkout & Pulang</div>
+          <div class="day-date">Jumat, 22 May 2025 — Departure Day</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="act-time">05:30</div>
+        <div class="act-icon">⏰</div>
+        <div class="act-body">
+          <div class="act-name">Bangun & Siap</div>
+          <div class="act-desc">Sarapan di hotel atau beli takeaway di 7-Eleven / mamak stall sekitar yang buka pagi.</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">06:30</div>
+        <div class="act-icon">🚗</div>
+        <div class="act-body">
+          <div class="act-name">Checkout Hotel → KL Sentral</div>
+          <div class="act-desc">Grab dari Bukit Bintang ke KL Sentral ~<strong>15 menit, RM 12–18</strong>. Pesan Grab dari kamar sebelum turun.</div>
+          <div class="act-transport grab">🚗 Grab ke KL Sentral</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">07:00</div>
+        <div class="act-icon">🚄</div>
+        <div class="act-body">
+          <div class="act-name">KL Sentral → KLIA via Ekspres</div>
+          <div class="act-desc">KLIA Ekspres dari KL Sentral, <strong>28 menit</strong>. Tiba KLIA ~07:28, siap check-in sebelum jam 08:00.</div>
+          <div class="act-transport klia">🚄 KLIA Ekspres · RM 35–55</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">08:00</div>
+        <div class="act-icon">🛂</div>
+        <div class="act-body">
+          <div class="act-name">Check-in & Imigrasi KLIA</div>
+          <div class="act-desc">Counter SQ di KLIA Main Terminal. Imigrasi Malaysia exit bisa antre — sisakan waktu. Duty free kalau ada yang mau dibeli.</div>
+          <div class="act-transport klia">✈️ SQ KUL → SIN 10:25</div>
+        </div>
+      </div>
+      <hr class="divider-line">
+
+      <div class="activity">
+        <div class="act-time">12:35</div>
+        <div class="act-icon">🏠</div>
+        <div class="act-body">
+          <div class="act-name">Boarding SIN → CGK · Tiba 13:25</div>
+          <div class="act-desc">Tiba CGK jam 13:25. Welcome back! 🇮🇩</div>
+          <div class="act-transport klia">✈️ Singapore Airlines</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ PANEL: APPS ══ -->
+  <div id="panel-apps" class="panel">
+    <div class="apps-grid" style="padding-top: 28px;">
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#00b14f22">🚗</div>
+          <div>
+            <div class="app-name">Grab</div>
+            <div class="app-category">Transport · Bayar</div>
+          </div>
+        </div>
+        <div class="app-desc">Taksi online utama di KL. Juga bisa untuk GrabFood dan GrabPay. Daftarkan nomor Malaysia atau pakai nomor Indonesia — bisa langsung jalan.</div>
+        <span class="app-priority priority-must">Wajib Download</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#1a56db22">🚇</div>
+          <div>
+            <div class="app-name">MyRapid / Moovit</div>
+            <div class="app-category">MRT · LRT · Bus</div>
+          </div>
+        </div>
+        <div class="app-desc">Navigasi MRT dan LRT KL. Moovit lebih akurat untuk real-time. Pakai untuk ke KLCC, Bangsar, dan area yang ada stasiun MRT.</div>
+        <span class="app-priority priority-must">Wajib Download</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#34a85322">🗺</div>
+          <div>
+            <div class="app-name">Google Maps</div>
+            <div class="app-category">Navigasi · Review</div>
+          </div>
+        </div>
+        <div class="app-desc">Download offline map KL sebelum berangkat. Berguna untuk navigasi jalan kaki, cek jam buka tempat makan, dan baca review cepat.</div>
+        <span class="app-priority priority-must">Wajib Download</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#ff600022">🎟</div>
+          <div>
+            <div class="app-name">Klook / KKday</div>
+            <div class="app-category">Tiket Atraksi</div>
+          </div>
+        </div>
+        <div class="app-desc">Beli tiket Petronas Twin Towers lewat sini — lebih mudah, bisa pilih slot waktu. Biasanya harga sama atau lebih murah dari counter.</div>
+        <span class="app-priority priority-must">Wajib Download</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#0052cc22">💱</div>
+          <div>
+            <div class="app-name">Wise / XE Currency</div>
+            <div class="app-category">Kurs Mata Uang</div>
+          </div>
+        </div>
+        <div class="app-desc">Cek kurs IDR ke MYR secara real-time. Wise juga bisa dipakai untuk transfer uang antar negara kalau butuh top up dompet digital.</div>
+        <span class="app-priority priority-rec">Sangat Dianjurkan</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#e53e3e22">🍽</div>
+          <div>
+            <div class="app-name">Foodpanda / GrabFood</div>
+            <div class="app-category">Pesan Antar Makanan</div>
+          </div>
+        </div>
+        <div class="app-desc">Backup kalau hujan lebat atau terlalu capek untuk keluar malam. Delivery di KL sangat cepat dan banyak pilihan makanan lokal.</div>
+        <span class="app-priority priority-rec">Sangat Dianjurkan</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#7c3aed22">🌐</div>
+          <div>
+            <div class="app-name">Google Translate</div>
+            <div class="app-category">Bahasa</div>
+          </div>
+        </div>
+        <div class="app-desc">Download offline untuk Bahasa Melayu. Berguna di warung lokal yang menu-nya belum tentu ada bahasa Inggris, walau sebenarnya sangat mirip BI.</div>
+        <span class="app-priority priority-opt">Opsional</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon" style="background:#00838f22">🏨</div>
+          <div>
+            <div class="app-name">Agoda / Booking.com</div>
+            <div class="app-category">Akomodasi</div>
+          </div>
+        </div>
+        <div class="app-desc">Sudah booking Kingston Hotel 8. Simpan konfirmasi di app — berguna saat check-in dan kalau imigrasi nanya alamat hotel.</div>
+        <span class="app-priority priority-opt">Sudah Dimiliki</span>
+      </div>
+
+    </div>
+
+    <div style="padding: 0 0 20px; font-size: 12px; color: var(--muted);">
+      💡 <strong style="color:var(--ink)">Pro tip:</strong> Beli <strong>SIM card Digi atau Maxis</strong> di KLIA setibanya (RM 30–50 untuk 15–30GB). Atau aktifkan roaming Telkomsel sebelum berangkat jika tidak mau repot ganti SIM.
+    </div>
+  </div>
+
+  <!-- ══ PANEL: PACKING ══ -->
+  <div id="panel-packing" class="panel">
+
+    <div class="pack-section">
+      <div class="pack-title">📄 Dokumen Wajib</div>
+      <ul class="pack-list" id="pack-dokumen">
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Passport (berlaku min. 6 bulan)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">E-tiket pesawat (SQ)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Konfirmasi hotel Kingston Hotel 8</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Kartu ATM / Visa / Mastercard</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Asuransi perjalanan (opsional)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Screenshot itinerary ini 😄</li>
+      </ul>
+    </div>
+
+    <div class="pack-section">
+      <div class="pack-title">🌦 Pakaian (3 Malam)</div>
+      <ul class="pack-list">
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Baju kasual 3–4 stel</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Celana/rok 2–3 pcs</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Jaket ringan / cardigan</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Payung lipat kecil</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Sepatu nyaman (banyak jalan!)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Sandal untuk di hotel</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Kaos kaki 3–4 pasang</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Pakaian dalam secukupnya</li>
+      </ul>
+      <p class="pack-note" style="margin-top:8px">⚠️ KL panas & lembab (~32°C siang), tapi AC di mall sangat dingin. Jaket wajib bawa.</p>
+    </div>
+
+    <div class="pack-section">
+      <div class="pack-title">💊 Kesehatan & Kebersihan</div>
+      <ul class="pack-list">
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Obat maag / antasida</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Obat diare (Diapet/Imodium)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Paracetamol / Ibuprofen</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Obat alergi (jika perlu)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Sunscreen SPF 50+</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Hand sanitizer</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Masker (2–3 pcs)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Toiletries (sampo, sabun, dll)</li>
+      </ul>
+    </div>
+
+    <div class="pack-section">
+      <div class="pack-title">🔌 Elektronik & Gadget</div>
+      <ul class="pack-list">
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Smartphone + charger</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Powerbank (min. 10.000 mAh)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Adapter colokan (Malaysia pakai tipe G / 3 pin)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Earphone / headphone</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Kamera / action cam (opsional)</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Kabel data cadangan</li>
+      </ul>
+      <p class="pack-note" style="margin-top:8px">⚠️ Malaysia pakai <strong>colokan tipe G (3 pin persegi)</strong> — beda dengan Indonesia! Bawa adapter atau beli di Daiso/hardware store KL.</p>
+    </div>
+
+    <div class="pack-section">
+      <div class="pack-title">💰 Uang & Pembayaran</div>
+      <ul class="pack-list">
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Rupiah untuk tukar ke RM</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Kartu debit/kredit Visa/Mastercard</li>
+        <li class="pack-item" onclick="this.classList.toggle('checked')">Siapkan RM tunai RM 200–300 untuk hari pertama</li>
+      </ul>
+      <p class="pack-note" style="margin-top:8px">💡 Tukar uang di <strong>money changer resmi di Bukit Bintang</strong> (bukan di bandara) untuk rate terbaik. Rate bandara biasanya 5–10% lebih buruk.</p>
+    </div>
+
+  </div>
+
+  <!-- ══ PANEL: TIPS & BUDGET ══ -->
+  <div id="panel-tips" class="panel">
+
+    <div style="padding-top: 28px;">
+
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Pengeluaran</th>
+            <th style="text-align:right">Estimasi Total (3 malam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Tiket pesawat (SQ CGK-SIN-KUL PP)</td><td>± IDR 4–6 juta</td></tr>
+          <tr><td>KLIA Ekspres PP (× 2)</td><td>RM 70–110</td></tr>
+          <tr><td>Hotel Kingston 3 malam</td><td>IDR 1.5–2.4 juta</td></tr>
+          <tr><td>Makan (3 hari × RM 80–120)</td><td>RM 240–360</td></tr>
+          <tr><td>Transport Grab + MRT</td><td>RM 80–120</td></tr>
+          <tr><td>Tiket Petronas Towers</td><td>RM 80</td></tr>
+          <tr><td>Cafe hopping (3 hari)</td><td>RM 120–180</td></tr>
+          <tr><td>Shopping & oleh-oleh</td><td>Bebas 😄</td></tr>
+          <tr><td><strong>Total (non-shopping)</strong></td><td><strong>±RM 600–850 + tiket</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-card">
+        <div class="tip-label">Transport</div>
+        <strong>Selalu gunakan Grab</strong> untuk perjalanan dalam kota — hindari taksi konvensional yang tidak argo. MRT/LRT lebih murah (RM 1.5–3.5) untuk rute yang tersedia, terutama KLCC dan Bangsar.
+      </div>
+
+      <div class="tip-card warning">
+        <div class="tip-label">⚠️ Colokan Listrik</div>
+        Malaysia menggunakan <strong>tipe G (3 pin persegi UK)</strong>. Berbeda dari Indonesia! Bawa adapter atau beli di Daiso/ACE Hardware KL dengan harga RM 5–10.
+      </div>
+
+      <div class="tip-card money">
+        <div class="tip-label">💰 Tukar Uang</div>
+        Tukar di <strong>money changer di area Bukit Bintang atau Masjid India</strong> — rate jauh lebih baik dari bandara atau hotel. Cek rate real-time di app XE Currency sebelum transaksi.
+      </div>
+
+      <div class="tip-card warning">
+        <div class="tip-label">🌧 Cuaca</div>
+        Mei adalah musim hujan KL. <strong>Hujan lebat biasanya sore hari (15:00–18:00)</strong>. Jadwalkan aktivitas outdoor di pagi hari, dan selalu bawa payung lipat.
+      </div>
+
+      <div class="tip-card info">
+        <div class="tip-label">🕌 Budaya</div>
+        Berpakaian sopan saat mengunjungi Masjid atau area konservatif. Melayu, Chinese, dan Indian hidup berdampingan — hormati semua budaya. Bahasa Melayu sangat mirip BI, komunikasi mudah.
+      </div>
+
+      <div class="tip-card info">
+        <div class="tip-label">🦟 Kesehatan</div>
+        Dengue ada di KL. Pakai <strong>lotion anti-nyamuk</strong> terutama di malam hari outdoor. Air keran tidak langsung minum — beli air mineral atau isi ulang di hotel.
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-label">📱 Koneksi Internet</div>
+        Beli SIM card <strong>Digi atau Maxis</strong> di KLIA sesampainya (RM 30–50 untuk 15–30GB, 14–30 hari). Lebih hemat dari roaming. Atau aktifkan paket roaming Telkomsel sebelum berangkat.
+      </div>
+
+      <div class="tip-card money">
+        <div class="tip-label">🍜 Food Tip</div>
+        <strong>Mamak stall</strong> (warung Indian-Muslim) buka 24 jam dan sangat murah (RM 5–15). Teh tarik dan roti canai di mamak adalah pengalaman wajib. Halal food sangat mudah ditemukan di mana saja.
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(name, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
