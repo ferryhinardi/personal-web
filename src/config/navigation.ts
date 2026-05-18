@@ -95,13 +95,6 @@ export const pageLinks: NavItem[] = [
     keywords: ['certificates', 'badges', 'awards', 'accomplishments'],
   },
   {
-    label: 'KL Trip',
-    href: '/kl-trip-plan.html',
-    icon: Map,
-    isStatic: true,
-    keywords: ['kuala lumpur', 'malaysia', 'travel', 'trip', 'plan', 'itinerary'],
-  },
-  {
     label: 'Uses',
     href: '/uses',
     icon: Wrench,
