@@ -10,7 +10,6 @@ import {
   Wrench,
   History,
   Link2,
-  Map,
 } from 'lucide-react';
 import type {LucideIcon} from 'lucide-react';
 
