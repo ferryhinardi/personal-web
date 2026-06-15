@@ -1,15 +1,52 @@
-/* Print Resume Styles */
+/* Print Resume Styles — matches the 2026 resume template */
 .print-resume {
   max-width: 210mm;
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px 32px;
   background: white;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Arial, Helvetica, 'Segoe UI', sans-serif;
   color: #1a1a1a;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-/* Old header styles removed - now using .print-contact-main layout */
+/* Header */
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.print-header-text {
+  flex: 1;
+}
+
+.print-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2px 0;
+  letter-spacing: 0.2px;
+}
+
+.print-title {
+  font-size: 13px;
+  color: #2563eb;
+  margin: 0 0 8px 0;
+  font-weight: 400;
+}
+
+.print-contact-line {
+  font-size: 10.5px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.print-contact-line .dot {
+  margin: 0 6px;
+  color: #94a3b8;
+}
 
 /* QR Code */
 .print-qr-code {
@@ -23,133 +60,56 @@
   font-size: 8px;
   color: #64748b;
   margin: 0;
-  font-family: Arial, sans-serif;
   text-align: center;
-}
-
-/* Contact Information Section */
-.print-contact-section {
-  text-align: center;
-}
-
-.print-contact-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.print-contact-text {
-  flex: 1;
-  text-align: center;
-}
-
-.print-contact-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #0f172a;
-  margin: 0 0 6px 0;
-}
-
-.print-contact-title {
-  font-size: 14px;
-  color: #0369a1;
-  margin: 0 0 10px 0;
-  font-weight: 500;
-}
-
-.print-contact-details {
-  font-size: 11px;
-  color: #475569;
-  font-family: Arial, sans-serif;
-  margin-bottom: 6px;
-}
-
-.print-contact-details .separator {
-  margin: 0 8px;
-  color: #cbd5e1;
-}
-
-.print-contact-social {
-  font-size: 10px;
-  color: #475569;
-  font-family: Arial, sans-serif;
-}
-
-.print-contact-social .separator {
-  margin: 0 8px;
-  color: #cbd5e1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* Sections */
 .print-section {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   page-break-inside: avoid;
 }
 
-.print-contact-no-border {
-  margin-bottom: 16px;
-}
-
 .print-section-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #0369a1;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 12px 0;
+  letter-spacing: 0.8px;
+  margin: 0 0 10px 0;
   padding-bottom: 4px;
-  border-bottom: 1px solid #cbd5e1;
-  font-family: Arial, sans-serif;
+  border-bottom: 1px solid #d1d5db;
 }
 
 /* Summary */
 .print-summary {
-  font-size: 11px;
-  line-height: 1.5;
+  font-size: 10.5px;
+  line-height: 1.55;
   color: #334155;
-  text-align: justify;
   margin: 0;
 }
 
 /* Entry */
 .print-entry {
-  margin-bottom: 14px;
-  padding-left: 4px;
-  border-left: 2px solid #e2e8f0;
-  padding-left: 12px;
+  margin-bottom: 12px;
 }
 
-.print-entry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 6px;
-  gap: 16px;
+.print-entry:last-child {
+  margin-bottom: 0;
 }
 
 .print-entry-title {
-  font-size: 12px;
-  font-weight: bold;
-  color: #0f172a;
-  margin: 0 0 4px 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1px 0;
 }
 
-.print-entry-subtitle {
-  font-size: 11px;
-  color: #0369a1;
-  margin: 0;
-  font-weight: 500;
-}
-
-.print-date {
+.print-entry-meta {
   font-size: 10px;
   color: #64748b;
-  white-space: nowrap;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  padding: 2px 8px;
-  border-radius: 4px;
+  margin: 0 0 4px 0;
 }
 
 .print-description {
@@ -157,27 +117,55 @@
   line-height: 1.5;
   color: #475569;
   margin: 0;
-  text-align: justify;
 }
 
-/* Skills Grid */
+/* Bullet lists (experience highlights, projects) */
+.print-bullets {
+  margin: 0;
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.print-bullets li {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #475569;
+  margin-bottom: 2px;
+}
+
+.print-bullets li strong {
+  color: #1a1a1a;
+}
+
+/* Skills Grid — 3 columns like the template */
 .print-skills-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .print-skill {
   font-size: 10px;
-  color: #0f172a;
-  padding: 4px 8px;
-  background: #f1f5f9;
-  border-left: 2px solid #0369a1;
-  border-radius: 2px;
+  color: #334155;
+  padding-left: 12px;
+  position: relative;
 }
 
-.print-skill-name {
-  font-weight: 500;
+.print-skill::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+}
+
+/* Languages */
+.print-language {
+  font-size: 10px;
+  color: #334155;
+  margin: 0 0 2px 0;
 }
 
 /* Controls (hidden in print) */
@@ -204,12 +192,12 @@
 }
 
 .print-btn {
-  background: #0369a1;
+  background: #2563eb;
   color: white;
 }
 
 .print-btn:hover {
-  background: #0284c7;
+  background: #1d4ed8;
 }
 
 .home-btn {
@@ -234,9 +222,8 @@
 @media print {
   .print-resume {
     margin: 0;
-    padding: 12mm 15mm 20mm 15mm; /* Add bottom padding for page numbers */
+    padding: 12mm 14mm 16mm 14mm;
     max-width: 100%;
-    counter-reset: page;
   }
 
   .no-print {
@@ -248,78 +235,28 @@
     margin: 0;
   }
 
-  /* Page numbers */
-  .print-resume::after {
-    content: "Page " counter(page) " of 2";
-    position: fixed;
-    bottom: 8mm;
-    right: 15mm;
-    font-size: 9px;
-    color: #64748b;
-    font-family: Arial, sans-serif;
-  }
-
-  /* Ensure page breaks work correctly */
-  .print-section {
-    page-break-inside: avoid;
-  }
-
+  .print-section,
   .print-entry {
     page-break-inside: avoid;
   }
 
-  /* Adjust spacing for print */
-  .print-section {
-    margin-bottom: 12px;
-  }
-
-  .print-entry {
-    margin-bottom: 8px;
-  }
-
-  /* Reduce font sizes slightly for print */
-  .print-contact-name {
-    font-size: 16px;
-  }
-
-  .print-contact-title {
-    font-size: 12px;
+  .print-name {
+    font-size: 24px;
   }
 
   .print-section-title {
     font-size: 12px;
   }
 
-  .print-summary {
-    font-size: 10px;
-  }
-
-  .print-entry-title {
-    font-size: 11px;
-  }
-
-  .print-entry-subtitle {
-    font-size: 10px;
-  }
-
+  .print-summary,
+  .print-bullets li,
   .print-description {
-    font-size: 9px;
-    line-height: 1.4;
+    font-size: 9.5px;
   }
 
-  .print-date {
-    font-size: 9px;
-  }
-
-  .print-skill {
-    font-size: 9px;
-  }
-
-  /* Ensure no background colors in print */
-  .print-date,
-  .print-skill {
-    background: transparent !important;
-    border: 1px solid #cbd5e1;
+  .print-skill,
+  .print-language {
+    font-size: 9.5px;
   }
 }
 

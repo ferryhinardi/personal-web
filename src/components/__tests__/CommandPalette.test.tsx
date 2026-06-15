@@ -523,7 +523,7 @@ describe('CommandPalette', () => {
 
       await waitFor(() => {
         expect(openSpy).toHaveBeenCalledWith(
-          '/Ferry-Hinardi-Resume-2025.pdf',
+          '/Ferry-Hinardi-Resume-2026.pdf',
           '_blank',
         );
       });

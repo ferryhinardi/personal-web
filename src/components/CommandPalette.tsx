@@ -134,7 +134,7 @@ export default function CommandPalette() {
         label: 'Download Resume',
         icon: <Download className="h-4 w-4" />,
         action: () => {
-          window.open('/Ferry-Hinardi-Resume-2025.pdf', '_blank');
+          window.open('/Ferry-Hinardi-Resume-2026.pdf', '_blank');
           setIsOpen(false);
         },
         category: 'action',

@@ -38,6 +38,8 @@ export interface Work {
   title: string;
   years: string;
   description: string;
+  location?: string;
+  highlights?: string[];
 }
 
 export interface Skill {
@@ -45,11 +47,18 @@ export interface Skill {
   level: string;
 }
 
+export interface Language {
+  name: string;
+  level: string;
+}
+
 export interface ResumeSection {
   skillmessage: string;
+  summary?: string;
   education: Education[];
   work: Work[];
   skills: Skill[];
+  languages?: Language[];
 }
 
 export interface ProjectMetrics {

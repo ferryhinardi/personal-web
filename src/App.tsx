@@ -96,10 +96,10 @@ function AppContent({ resumeData }: { resumeData: ResumeData }) {
             name: 'Ferry Hinardi',
             url: 'https://ferryhinardi.com',
             image: 'https://ferryhinardi.com/images/profilepic.jpg',
-            jobTitle: 'Software Engineer',
+            jobTitle: 'Senior Fullstack Engineer',
             worksFor: {
               '@type': 'Organization',
-              name: 'Traveloka',
+              name: 'PayMongo',
             },
             alumniOf: {
               '@type': 'EducationalOrganization',
@@ -111,9 +111,13 @@ function AppContent({ resumeData }: { resumeData: ResumeData }) {
               'JavaScript',
               'Next.js',
               'React Native',
+              'Golang',
               'GraphQL',
               'AWS',
               'GitHub Actions',
+              'AI Agents',
+              'LLM',
+              'Generative AI',
             ],
             sameAs: [
               resumeData.main?.social?.find((s: Social) => s.name === 'linkedin')?.url,

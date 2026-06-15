@@ -1,10 +1,10 @@
 {
   "main": {
     "name": "Ferry Hinardi",
-    "occupation": "Software Engineer - Web Developer",
-    "description": "Transforming ideas into elegant digital experiences. 5+ years crafting high-performance web applications with React.js, TypeScript, and modern web technologies.",
+    "occupation": "Senior Fullstack Engineer",
+    "description": "Transforming ideas into elegant digital experiences. 9+ years crafting high-performance web applications and payment products with React.js, Next.js, TypeScript, Golang, and AI-powered tooling.",
     "image": "profilepic.jpg",
-    "bio": "I'm a passionate software engineer who loves turning complex problems into elegant solutions. With over 5 years of experience, I've had the privilege of working on projects that impact millions of users daily. My expertise lies in building lightning-fast, user-centric web applications using React.js, TypeScript, and Next.js. From architecting scalable e-commerce platforms to optimizing performance that directly boosts revenue, I thrive on challenges that push the boundaries of what's possible. I've contributed to exciting projects like <a href='http://jaztip.com'>Jaztip</a> - Indonesia's social-commerce marketplace, <a href='https://www.maideasy.my'>Maideasy</a> - revolutionizing home services booking, and Ryna - empowering co-living experiences. When I'm not coding, you'll find me exploring new technologies, contributing to open source, or mentoring fellow developers.",
+    "bio": "I'm a passionate fullstack engineer who loves turning complex problems into elegant solutions. With over nine years of experience across e-commerce, travel-tech, and fintech, I've had the privilege of working on products that impact millions of users daily. Currently, I'm building payment infrastructure at PayMongo—powering merchants across the Philippines and Southeast Asia—working across the stack with React.js, Next.js, and Golang, running infrastructure on AWS, and weaving AI agents and LLM tooling into the products I ship. Previously, I drove web innovation at Traveloka, one of Southeast Asia's leading travel platforms, and contributed to exciting projects like <a href='http://jaztip.com'>Jaztip</a> - Indonesia's social-commerce marketplace, <a href='https://www.maideasy.my'>Maideasy</a> - revolutionizing home services booking, and Ryna - empowering co-living experiences. When I'm not coding, you'll find me exploring generative AI, sharpening my AI-assisted development workflow, or mentoring fellow developers.",
     "contactmessage": "Whether you have a challenging project, an innovative idea, or just want to say hello—I'd love to hear from you. Let's build something extraordinary together.",
     "email": "hinardi93@gmail.com",
     "phone": "+6281958020882",
@@ -15,7 +15,7 @@
       "zip": "15331"
     },
     "website": "http://www.ferryhinardi.com",
-    "resumedownload": "/Ferry-Hinardi-Resume-2025.pdf",
+    "resumedownload": "/Ferry-Hinardi-Resume-2026.pdf",
     "social": [
       {
         "name": "facebook",
@@ -45,7 +45,8 @@
     ]
   },
   "resume": {
-    "skillmessage": "I believe in mastering the fundamentals while staying ahead of the curve. My toolkit spans the entire modern web development ecosystem—from crafting pixel-perfect UIs with React and TypeScript to architecting cloud-native solutions on AWS. Every line of code I write is driven by performance, scalability, and user delight.",
+    "skillmessage": "I believe in mastering the fundamentals while staying ahead of the curve. My toolkit spans the entire modern web development ecosystem—from crafting pixel-perfect UIs with React and TypeScript to architecting cloud-native solutions on AWS and building AI-powered features with LLMs and agents. Every line of code I write is driven by performance, scalability, and user delight.",
+    "summary": "Highly skilled software engineering professional with over nine years of experience in software design, development, and integration, offering advanced expertise in React.js, Next.js, TypeScript, and React Native. Strong background in building e-commerce, travel-tech, and fintech applications, with a growing focus on AI agents, LLM integration, and AI-assisted development. Proven track record of writing clean, reliable code and developing scalable, high-performance systems.",
     "education": [
       {
         "school": "Bina Nusantara University",
@@ -56,82 +57,163 @@
     ],
     "work": [
       {
+        "company": "PayMongo",
+        "title": "Senior Software Engineer",
+        "years": "Jun 2026 - Present",
+        "location": "Remote",
+        "description": "Building the payment infrastructure powering merchants across the Philippines and Southeast Asia. As part of the Payment Channels team, driving development of PayMongo's Invoicing product—enabling merchants to create, send, and track professional invoices and collect payments seamlessly through PayMongo's checkout, expanding the platform into B2B billing and recurring service payments. Building developer-facing APIs, SDKs, and integration tooling, working across the full stack with React.js and Next.js on the frontend and Golang on the backend, managing AWS infrastructure and deployments, and embracing AI-assisted development with Claude to ship faster without compromising quality.",
+        "highlights": [
+          "Develop payment infrastructure powering merchants across the Philippines and Southeast Asia.",
+          "Lead development of the Invoicing product on the Payment Channels team—merchants create, send, and track professional invoices and collect payment through PayMongo's checkout.",
+          "Build and improve developer-facing APIs, SDKs, and integration tooling.",
+          "Engineer full-stack features across React.js / Next.js and Golang, and manage AWS infrastructure and deployments.",
+          "Accelerate delivery with AI-assisted development (Anthropic Claude), shipping reliable, scalable solutions faster."
+        ]
+      },
+      {
         "company": "Traveloka",
         "title": "Software Engineer - Web Developer",
-        "years": "2020 - Present",
-        "description": "Driving innovation at one of Southeast Asia's leading travel platforms. Spearheaded the flight booking form redesign that significantly increased revenue—translating to substantial business impact. Architected a custom debugging tool that slashed issue resolution time by 30%, saving countless engineering hours. Currently maintaining performance excellence across Transport Products (Flights, Trains, Bus) and orchestrating seamless integrations with global metasearch giants like Google Flights, Skyscanner, KAYAK, Wego, and Naver."
+        "years": "2020 - May 2026",
+        "location": "Tangerang",
+        "description": "Drove innovation at one of Southeast Asia's leading travel platforms. Spearheaded the flight booking form redesign that achieved a 10.16% increase in net revenue. Architected a custom debugging tool that slashed issue resolution time by 30%, saving countless engineering hours. Maintained performance excellence across Transport Products (Flights, Trains, Bus) and orchestrated seamless integrations with global metasearch giants like Google Flights, Skyscanner, KAYAK, Wego, Travelko, and Naver.",
+        "highlights": [
+          "Led frontend development for the flight booking form redesign, achieving a 10.16% increase in net revenue.",
+          "Maintained and optimized web performance for Transport Products (Flights, Trains, Bus & Travel).",
+          "Developed a debugging tool for the metasearch booking flow, reducing issue resolution time by 30%.",
+          "Designed reusable frontend code for distributed cloud-based environments and improved booking-flow price accuracy via airline checkout API integration.",
+          "Integrated metasearch flight flows with Google Flights, Skyscanner, KAYAK, Wego, Travelko, and Naver."
+        ]
       },
       {
         "company": "PT Trinusa Travelindo (Traveloka)",
         "title": "Software Engineer - React Native Developer",
         "years": "2019 - 2020",
-        "description": "Pioneered Traveloka's revolutionary Visa product from concept to launch, empowering travelers to apply for visas to Japan, Australia, China, and India—all from their mobile devices. Built a seamless cross-platform experience using React Native and React.js, handling the complete user journey from document scheduling to doorstep visa delivery. This product opened new revenue streams and simplified what used to be a tedious process for thousands of users."
+        "location": "Jakarta",
+        "description": "Pioneered Traveloka's revolutionary Visa product from concept to launch, empowering travelers to apply for visas to Japan, Australia, China, and India—all from their mobile devices. Built a seamless cross-platform experience using React Native and React.js, handling the complete user journey from document scheduling to doorstep visa delivery. This product opened new revenue streams and simplified what used to be a tedious process for thousands of users.",
+        "highlights": [
+          "Developed a new Visa product supporting JP, AU, CH, and IN markets.",
+          "Built and maintained the mobile application in React Native.",
+          "Implemented end-to-end user flows from document pickup to visa delivery."
+        ]
       },
       {
         "company": "PT. Global Prima Solusindo",
         "title": "Software Engineer Developer",
         "years": "2018 - 2019",
-        "description": "Architected and delivered a comprehensive education platform that bridges students, teachers, and parents in one unified ecosystem. Took ownership of the entire tech stack—from designing a robust GraphQL backend to building intuitive cross-platform applications. Established technical documentation standards that became the foundation for team knowledge sharing and faster onboarding. This role sharpened my full-stack capabilities and taught me the art of building scalable, maintainable systems."
+        "location": "Jakarta",
+        "description": "Architected and delivered a comprehensive education platform that bridges students, teachers, and parents in one unified ecosystem. Took ownership of the entire tech stack—from designing a robust GraphQL backend to building intuitive cross-platform applications. Established technical documentation standards that became the foundation for team knowledge sharing and faster onboarding. This role sharpened my full-stack capabilities and taught me the art of building scalable, maintainable systems.",
+        "highlights": [
+          "Owned the full SDLC for an education platform serving students, teachers, and parents.",
+          "Architected the GraphQL backend.",
+          "Developed desktop and mobile applications."
+        ]
       },
       {
         "company": "PT Salestock Indonesia (Sorabel)",
         "title": "Software Engineer - React Developer",
         "years": "2016 - 2018",
-        "description": "Built the backbone of Sorabel's operations—a sophisticated Warehouse Management System (WMS) using React.js that streamlined the entire fulfillment pipeline from purchase orders to final delivery. Simultaneously enhanced the customer-facing mobile app with React Native, crafting delightful shopping experiences including feed views, seamless checkout flows, secure payments, and review systems. This dual focus taught me the importance of building for both internal efficiency and customer satisfaction."
+        "location": "Jakarta",
+        "description": "Built the backbone of Sorabel's operations—a sophisticated Warehouse Management System (WMS) using React.js that streamlined the entire fulfillment pipeline from purchase orders to final delivery. Simultaneously enhanced the customer-facing mobile app with React Native, crafting delightful shopping experiences including feed views, seamless checkout flows, secure payments, and review systems. This dual focus taught me the importance of building for both internal efficiency and customer satisfaction.",
+        "highlights": [
+          "Built the Warehouse Management System UI in React.js (purchase order, QC, barcode, delivery).",
+          "Developed customer-facing e-commerce features in React Native (feed, checkout, payment, reviews)."
+        ]
       },
       {
         "company": "PT Suzuki Indomobil",
         "title": "Software Engineer",
         "years": "2015 - 2016",
-        "description": "Launched my professional journey tackling enterprise-scale challenges in the automotive industry. Debugged complex hardware-software integration issues, ensuring rock-solid system reliability. Analyzed legacy systems and transformed user requirements into modern web and database solutions. This foundational experience taught me the discipline of writing production-grade code and the importance of thorough system analysis."
+        "location": "Jakarta",
+        "description": "Launched my professional journey tackling enterprise-scale challenges in the automotive industry. Debugged complex hardware-software integration issues, ensuring rock-solid system reliability. Analyzed legacy systems and transformed user requirements into modern web and database solutions. This foundational experience taught me the discipline of writing production-grade code and the importance of thorough system analysis.",
+        "highlights": [
+          "Delivered complex software engineering projects involving hardware/software compatibility and web applications."
+        ]
       },
       {
         "company": "Bina Nusantara",
         "title": "Front End Engineer",
         "years": "2013 - 2015",
-        "description": "Where it all began—my first dive into the world of web development. Transformed static designs into living, breathing websites using HTML, CSS, JavaScript, and jQuery. Mastered the art of translating design mockups into pixel-perfect, interactive experiences while learning the fundamentals of AJAX and JSON. This role ignited my passion for frontend development and set me on the path to becoming the engineer I am today."
+        "location": "Jakarta",
+        "description": "Where it all began—my first dive into the world of web development. Transformed static designs into living, breathing websites using HTML, CSS, JavaScript, and jQuery. Mastered the art of translating design mockups into pixel-perfect, interactive experiences while learning the fundamentals of AJAX and JSON. This role ignited my passion for frontend development and set me on the path to becoming the engineer I am today.",
+        "highlights": [
+          "Built responsive websites with HTML, CSS, JavaScript, and jQuery."
+        ]
       }
     ],
     "skills": [
       {
-        "name": "React.js",
+        "name": "React.js / Next.js",
         "level": "95%"
       },
       {
-        "name": "TypeScript",
-        "level": "90%"
-      },
-      {
-        "name": "Next.js",
-        "level": "85%"
+        "name": "TypeScript / JavaScript",
+        "level": "92%"
       },
       {
         "name": "React Native",
         "level": "85%"
       },
       {
-        "name": "JavaScript",
-        "level": "95%"
-      },
-      {
-        "name": "GitHub Actions",
-        "level": "75%"
-      },
-      {
-        "name": "AWS (S3, CloudFront, ECS)",
+        "name": "Golang",
         "level": "70%"
       },
       {
-        "name": "GraphQL",
+        "name": "GraphQL / Node.js",
+        "level": "80%"
+      },
+      {
+        "name": "AI Agents / LLM / RAG",
+        "level": "85%"
+      },
+      {
+        "name": "Generative AI / Prompt Engineering",
+        "level": "85%"
+      },
+      {
+        "name": "Anthropic Claude / MCP",
+        "level": "85%"
+      },
+      {
+        "name": "LangChain / AI Orchestration",
         "level": "75%"
+      },
+      {
+        "name": "GitHub Copilot",
+        "level": "85%"
+      },
+      {
+        "name": "GitHub Actions / CI-CD",
+        "level": "80%"
+      },
+      {
+        "name": "AWS (Lambda, IAM, S3, ECS)",
+        "level": "78%"
+      },
+      {
+        "name": "MLOps / Data Pipelines",
+        "level": "65%"
+      },
+      {
+        "name": "Web Performance Optimization",
+        "level": "90%"
+      },
+      {
+        "name": "Software Architecture",
+        "level": "85%"
       },
       {
         "name": "Figma",
         "level": "65%"
+      }
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "level": "Professional Working Proficiency"
       },
       {
-        "name": "HTML5 & CSS",
-        "level": "90%"
+        "name": "Bahasa Indonesia",
+        "level": "Native"
       }
     ]
   },
