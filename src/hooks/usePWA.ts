@@ -15,7 +15,13 @@ export function usePWA() {
       });
 
       wb.register()
-        .then(() => wb.update())
+        .then(async () => {
+          const registration = await navigator.serviceWorker.getRegistration();
+          if (registration?.waiting) {
+            wb.messageSkipWaiting();
+          }
+          await wb.update();
+        })
         .catch((error) => {
           console.warn('PWA registration failed:', error);
         });
