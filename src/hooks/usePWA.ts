@@ -6,15 +6,6 @@ export function usePWA() {
     if ('serviceWorker' in navigator) {
       const wb = new Workbox('/sw.js');
 
-      wb.addEventListener('installed', (event) => {
-        if (event.isUpdate) {
-          // Show update notification
-          if (window.confirm('New version available! Reload to update?')) {
-            window.location.reload();
-          }
-        }
-      });
-
       wb.addEventListener('waiting', () => {
         wb.messageSkipWaiting();
       });
@@ -24,9 +15,7 @@ export function usePWA() {
       });
 
       wb.register()
-        .then(() => {
-          console.log('✅ Service Worker registered successfully');
-        })
+        .then(() => wb.update())
         .catch((error) => {
           console.warn('PWA registration failed:', error);
         });

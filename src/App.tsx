@@ -2,13 +2,33 @@ import {useEffect} from 'react';
 import {Helmet} from 'react-helmet-async';
 import {useResumeData} from '@/hooks/useResumeData';
 import {initGA, logPageView} from '@/utils/analytics';
-import Loading from '@components/ui/loading';
-import ErrorDisplay from '@components/ui/error';
 import HomePage from '@/pages/HomePage';
-import type {ResumeData, Social} from '@/types/resume.types';
+import type {MainData, ResumeData, Social} from '@/types/resume.types';
+
+const homeFallback: MainData = {
+  name: 'Ferry Hinardi',
+  occupation: 'Senior Software Engineer',
+  description: '',
+  image: 'profilepic.jpg',
+  bio: '',
+  contactmessage: '',
+  email: 'hinardi93@gmail.com',
+  phone: '',
+  address: {street: '', city: 'Tangerang', state: 'Banten', zip: ''},
+  website: 'https://ferryhinardi.com',
+  resumedownload: '/Ferry-Hinardi-Resume-2026.pdf',
+  social: [
+    {name: 'github', url: 'https://github.com/ferryhinardi', className: ''},
+    {
+      name: 'linkedin',
+      url: 'https://www.linkedin.com/in/ferryhinardi',
+      className: '',
+    },
+  ],
+};
 
 function App() {
-  const {data: resumeData, loading, error} = useResumeData();
+  const {data: resumeData, error} = useResumeData();
 
   useEffect(() => {
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
@@ -30,32 +50,17 @@ function App() {
     }
   }, []);
 
-  if (loading) {
-    return <Loading fullScreen message="Loading your portfolio..." />;
-  }
-
-  if (error) {
-    return (
-      <ErrorDisplay
-        error={error}
-        fullScreen
-        onRetry={() => window.location.reload()}
-        showDetails={true}
-      />
-    );
-  }
-
-  if (!resumeData) {
-    return null;
-  }
-
-  return <AppContent resumeData={resumeData} />;
-}
-
-function AppContent({resumeData}: {resumeData: ResumeData}) {
   return (
     <>
-      <Helmet>
+      {resumeData && !error ? <PersonJsonLd resumeData={resumeData} /> : null}
+      <HomePage data={resumeData?.main ?? homeFallback} />
+    </>
+  );
+}
+
+function PersonJsonLd({resumeData}: {resumeData: ResumeData}) {
+  return (
+    <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
@@ -101,9 +106,7 @@ function AppContent({resumeData}: {resumeData: ResumeData}) {
             },
           })}
         </script>
-      </Helmet>
-      <HomePage data={resumeData.main} />
-    </>
+    </Helmet>
   );
 }
 

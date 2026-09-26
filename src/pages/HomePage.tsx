@@ -18,6 +18,7 @@ interface Project {
   image: string;
   href: string;
   tone: 'blue' | 'violet' | 'green';
+  crop?: boolean;
 }
 
 const projects: Project[] = [
@@ -46,6 +47,7 @@ const projects: Project[] = [
     image: '/images/portfolio/supertool.png',
     href: 'https://supertool.id/',
     tone: 'violet',
+    crop: true,
   },
   {
     eyebrow: 'Maideasy',
@@ -59,6 +61,7 @@ const projects: Project[] = [
     image: '/images/portfolio/maideasy.png',
     href: 'https://www.maideasy.my',
     tone: 'green',
+    crop: true,
   },
 ];
 
@@ -264,7 +267,11 @@ export default function HomePage({data}: HomePageProps) {
               key={project.title}>
               <div className="project-visual">
                 <span className="project-number">0{index + 1}</span>
-                <img src={project.image} alt="" />
+                <img
+                  src={project.image}
+                  alt=""
+                  className={project.crop ? 'is-cropped' : undefined}
+                />
                 <div className="result-badge">
                   <strong>{project.result}</strong>
                   <span>{project.resultLabel}</span>
@@ -295,7 +302,7 @@ export default function HomePage({data}: HomePageProps) {
         <div className="experience-intro">
           <span className="section-kicker">Experience</span>
           <h2 className="section-title">
-            A decade spent making hard things feel simple.
+            Nine years spent making hard things feel simple.
           </h2>
           <p>
             I work across product, design, and engineering to turn ambiguity

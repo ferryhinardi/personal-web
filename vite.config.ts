@@ -21,8 +21,8 @@ export default defineConfig({
         name: 'Ferry Hinardi - Software Engineer',
         short_name: 'Ferry Hinardi',
         description: 'Software Engineer specializing in React.js, TypeScript, and Next.js. Building high-performance web applications.',
-        theme_color: '#000000',
-        background_color: '#ffffff',
+        theme_color: '#f4f2ea',
+        background_color: '#f4f2ea',
         display: 'standalone',
         scope: '/',
         start_url: '/',
@@ -47,14 +47,14 @@ export default defineConfig({
         categories: ['portfolio', 'professional', 'developer'],
         shortcuts: [
           {
-            name: 'Portfolio',
-            url: '/#portfolio',
-            description: 'View my projects'
+            name: 'Work',
+            url: '/#work',
+            description: 'View selected work'
           },
           {
-            name: 'Resume',
-            url: '/#resume',
-            description: 'View my experience'
+            name: 'Experience',
+            url: '/#experience',
+            description: 'View experience'
           },
           {
             name: 'Contact',
@@ -64,6 +64,9 @@ export default defineConfig({
         ]
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,webp,svg,woff,woff2}'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB limit
         runtimeCaching: [
