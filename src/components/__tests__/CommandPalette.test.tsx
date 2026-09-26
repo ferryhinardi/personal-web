@@ -183,10 +183,9 @@ describe('CommandPalette', () => {
       fireEvent.keyDown(window, {key: 'k', metaKey: true});
 
       await waitFor(() => {
-        expect(screen.getByText('Home')).toBeInTheDocument();
+        expect(screen.getByText('Work')).toBeInTheDocument();
+        expect(screen.getByText('Experience')).toBeInTheDocument();
         expect(screen.getByText('About')).toBeInTheDocument();
-        expect(screen.getByText('Resume')).toBeInTheDocument();
-        expect(screen.getByText('Works')).toBeInTheDocument();
         expect(screen.getByText('Contact')).toBeInTheDocument();
       });
     });
@@ -245,7 +244,7 @@ describe('CommandPalette', () => {
 
       await waitFor(() => {
         expect(screen.getByText('Open GitHub')).toBeInTheDocument();
-        expect(screen.queryByText('Home')).not.toBeInTheDocument();
+        expect(screen.queryByText('Work')).not.toBeInTheDocument();
         expect(screen.queryByText('About')).not.toBeInTheDocument();
       });
     });
@@ -265,8 +264,8 @@ describe('CommandPalette', () => {
       fireEvent.change(input, {target: {value: 'portfolio'}});
 
       await waitFor(() => {
-        expect(screen.getByText('Works')).toBeInTheDocument();
-        expect(screen.queryByText('Home')).not.toBeInTheDocument();
+        expect(screen.getByText('Work')).toBeInTheDocument();
+        expect(screen.queryByText('About')).not.toBeInTheDocument();
       });
     });
 
@@ -400,7 +399,7 @@ describe('CommandPalette', () => {
     it('executes navigation command on Enter', async () => {
       // Create a mock element to scroll to
       const mockElement = document.createElement('div');
-      mockElement.id = 'home';
+      mockElement.id = 'work';
       document.body.appendChild(mockElement);
 
       render(<BrowserRouter><CommandPalette /></BrowserRouter>);

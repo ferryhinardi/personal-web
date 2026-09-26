@@ -112,11 +112,9 @@ describe('Header Component', () => {
 
   it('renders navigation links', () => {
     renderWithRouter(<Header data={mockData} />);
-    // The nav has: Home, About, Resume, Works, Contact
-    expect(screen.getAllByText('Home').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Work').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Experience').length).toBeGreaterThan(0);
     expect(screen.getAllByText('About').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Resume').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Works').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
   });
 
