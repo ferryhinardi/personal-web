@@ -277,13 +277,15 @@ export default function HomePage({data}: HomePageProps) {
               <div className="project-visual is-shot">
                 <span className="project-number">0{index + 1}</span>
                 <img src={project.image} alt={project.imageAlt} />
-                <div className="result-badge">
-                  <strong>{project.result}</strong>
-                  <span>{project.resultLabel}</span>
-                </div>
               </div>
               <div className="project-content">
-                <span className="project-eyebrow">{project.eyebrow}</span>
+                <div className="project-kicker">
+                  <span className="project-eyebrow">{project.eyebrow}</span>
+                  <div className="result-badge">
+                    <strong>{project.result}</strong>
+                    <span>{project.resultLabel}</span>
+                  </div>
+                </div>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
                 <div className="project-meta">
