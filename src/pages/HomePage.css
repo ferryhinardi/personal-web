@@ -408,6 +408,7 @@ body:has(.home) [aria-label="Open command palette"] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
+  align-items: start;
 }
 
 .home .project-card {
@@ -485,12 +486,17 @@ body:has(.home) [aria-label="Open command palette"] {
   object-position: center center;
 }
 
-.home .project-violet .project-visual.is-shot img {
-  object-position: 68% center;
+.home .project-violet .project-visual.is-shot {
+  aspect-ratio: 1600 / 538;
 }
 
+.home .project-green .project-visual.is-shot {
+  aspect-ratio: 1600 / 826;
+}
+
+.home .project-violet .project-visual.is-shot img,
 .home .project-green .project-visual.is-shot img {
-  object-position: right center;
+  object-position: center center;
 }
 
 .home .project-visual.is-shot .project-number {
