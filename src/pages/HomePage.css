@@ -208,11 +208,22 @@ body:has(.home) [aria-label="Open command palette"] {
 .home .section-kicker {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  gap: 0.35rem var(--space-2);
   font-size: var(--body-sm);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.home .status-place {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.home .status-sep {
+  color: var(--ink-soft);
 }
 
 .home .status-dot {
@@ -263,6 +274,7 @@ body:has(.home) [aria-label="Open command palette"] {
 .home .impact-strip span {
   color: var(--ink-soft);
   font-size: var(--body-sm);
+  text-wrap: balance;
 }
 
 .home .hero-actions {

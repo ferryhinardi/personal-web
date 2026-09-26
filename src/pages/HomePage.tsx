@@ -127,7 +127,7 @@ const highlights = [
   {value: '9+', label: 'Years shipping products'},
   {value: '10.16%', label: 'Revenue lift at Traveloka'},
   {value: '30%', label: 'Faster issue resolution'},
-  {value: '4 markets', label: 'Visa product: JP, AU, CN, IN'},
+  {value: '4 markets', label: 'Visa: JP, AU, CN, IN'},
 ];
 
 function Arrow() {
@@ -201,8 +201,16 @@ export default function HomePage({data}: HomePageProps) {
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="status-line">
-              <span className="status-dot" />
-              Based in Indonesia · Working globally
+              <span className="status-place">
+                <span className="status-dot" />
+                Based in Indonesia
+              </span>
+              <span className="status-place">
+                <span className="status-sep" aria-hidden="true">
+                  ·
+                </span>
+                Working globally
+              </span>
             </p>
             <h1 className="hero-title">
               Engineering digital products that move businesses forward.
