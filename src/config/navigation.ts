@@ -1,5 +1,4 @@
 import {
-  Home,
   User,
   FileText,
   Briefcase,
@@ -32,11 +31,18 @@ export interface NavItem {
  */
 export const mainSections: NavItem[] = [
   {
-    label: 'Home',
-    href: '#home',
-    icon: Home,
+    label: 'Work',
+    href: '#work',
+    icon: Briefcase,
     isSection: true,
-    keywords: ['top', 'start', 'beginning'],
+    keywords: ['portfolio', 'projects', 'showcase', 'case studies'],
+  },
+  {
+    label: 'Experience',
+    href: '#experience',
+    icon: FileText,
+    isSection: true,
+    keywords: ['resume', 'cv', 'work history', 'jobs'],
   },
   {
     label: 'About',
@@ -44,20 +50,6 @@ export const mainSections: NavItem[] = [
     icon: User,
     isSection: true,
     keywords: ['bio', 'me', 'profile', 'introduction'],
-  },
-  {
-    label: 'Resume',
-    href: '#resume',
-    icon: FileText,
-    isSection: true,
-    keywords: ['cv', 'experience', 'work history', 'skills', 'education'],
-  },
-  {
-    label: 'Works',
-    href: '#portfolio',
-    icon: Briefcase,
-    isSection: true,
-    keywords: ['portfolio', 'projects', 'showcase'],
   },
   {
     label: 'Contact',
