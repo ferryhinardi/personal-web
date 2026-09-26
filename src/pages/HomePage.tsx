@@ -16,9 +16,9 @@ interface Project {
   role: string;
   stack: string;
   image: string;
+  imageAlt: string;
   href: string;
   tone: 'blue' | 'violet' | 'green';
-  crop?: boolean;
 }
 
 const projects: Project[] = [
@@ -31,23 +31,24 @@ const projects: Project[] = [
     resultLabel: 'net revenue',
     role: 'Frontend Lead',
     stack: 'React · TypeScript · GraphQL',
-    image: '/images/portfolio/traveloka-owl-icon.png',
+    image: '/images/portfolio/traveloka-flight.webp',
+    imageAlt: 'Traveloka flight search from Jakarta to Singapore',
     href: 'https://www.traveloka.com/en-id/flight',
     tone: 'blue',
   },
   {
     eyebrow: 'Supertool.id',
-    title: 'Fifty developer tools. One focused workspace.',
+    title: 'One hundred tools. One focused workspace.',
     description:
       'Designed and built a privacy-first toolkit for everyday developer tasks, from data formatting to image optimization.',
-    result: '50+',
-    resultLabel: 'tools shipped',
+    result: '111',
+    resultLabel: 'free tools',
     role: 'Solo creator',
     stack: 'Next.js · TypeScript · Vercel',
-    image: '/images/portfolio/supertool.png',
+    image: '/images/portfolio/supertool-home.webp',
+    imageAlt: 'Supertool home, with the JSON formatter open',
     href: 'https://supertool.id/',
     tone: 'violet',
-    crop: true,
   },
   {
     eyebrow: 'Maideasy',
@@ -58,10 +59,10 @@ const projects: Project[] = [
     resultLabel: 'booking flow',
     role: 'Mobile engineer',
     stack: 'React Native · Firebase · GraphQL',
-    image: '/images/portfolio/maideasy.png',
+    image: '/images/portfolio/maideasy-home.webp',
+    imageAlt: 'Maideasy app booking a home cleaning',
     href: 'https://www.maideasy.my',
     tone: 'green',
-    crop: true,
   },
 ];
 
@@ -273,13 +274,9 @@ export default function HomePage({data}: HomePageProps) {
                 index === 0 ? 'featured' : ''
               }`}
               key={project.title}>
-              <div className="project-visual">
+              <div className="project-visual is-shot">
                 <span className="project-number">0{index + 1}</span>
-                <img
-                  src={project.image}
-                  alt=""
-                  className={project.crop ? 'is-cropped' : undefined}
-                />
+                <img src={project.image} alt={project.imageAlt} />
                 <div className="result-badge">
                   <strong>{project.result}</strong>
                   <span>{project.resultLabel}</span>

@@ -424,7 +424,8 @@ body:has(.home) [aria-label="Open command palette"] {
   grid-column: 1 / -1;
   grid-template-columns: 1.1fr 0.9fr;
   grid-template-rows: none;
-  min-height: 34rem;
+  align-items: start;
+  min-height: 0;
 }
 
 .home .project-visual {
@@ -456,19 +457,39 @@ body:has(.home) [aria-label="Open command palette"] {
   border-radius: 50%;
 }
 
-.home .project-visual img {
-  position: relative;
-  z-index: 1;
-  width: 11rem;
-  height: 11rem;
-  object-fit: contain;
-  object-position: center;
-  filter: drop-shadow(0 1rem 1.5rem rgba(16, 28, 25, 0.14));
+.home .project-visual.is-shot::before {
+  content: none;
 }
 
-.home .project-visual img.is-cropped {
+.home .project-visual.is-shot {
+  background: var(--ink);
+}
+
+.home .project-visual.is-shot img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 1.25rem;
+  object-position: center top;
+}
+
+.home .project-card.featured .project-visual.is-shot {
+  aspect-ratio: 2.45 / 1;
+  min-height: 0;
+}
+
+.home .project-card.featured .project-visual.is-shot img {
+  object-position: center center;
+}
+
+.home .project-visual.is-shot .project-number {
+  z-index: 2;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--paper-bright);
+  color: var(--ink);
 }
 
 .home .project-number {
